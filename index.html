@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nissanka AI Advisory | Practical AI adoption for business teams</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --midnight: #0B1120;
+            --azure: #0284C7;
+            --slate: #64748B;
+            --silver: #CBD5E1;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: var(--midnight); scroll-behavior: smooth; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .nav-blur { backdrop-filter: blur(12px); background-color: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #E2E8F0; }
+        input[type="range"] { accent-color: var(--azure); }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur py-4 transition-all">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="font-serif text-2xl font-bold text-[#0B1120] tracking-tight">Nissanka <span class="text-[#0284C7]">AI</span></span>
+                <span class="text-[10px] uppercase tracking-[0.2em] text-[#64748B] border-l border-slate-300 pl-2 hidden sm:block">Advisory</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                <a href="#how-i-help" class="hover:text-[#0284C7] transition-colors">How I Help</a>
+                <a href="#practical-value" class="hover:text-[#0284C7] transition-colors">Practical Value</a>
+                <a href="#about" class="hover:text-[#0284C7] transition-colors">About</a>
+            </div>
+            <a href="#contact" class="bg-[#0284C7] text-white px-5 py-2 text-sm font-medium rounded-sm hover:bg-[#0B1120] transition-colors">Book a Call</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-40 pb-20 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-6xl font-serif font-bold leading-tight mb-6 text-[#0B1120]">
+                    Practical AI adoption <br>
+                    <span class="text-[#0284C7]">for business teams.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 font-light mb-10 leading-relaxed max-w-2xl">
+                    Helping Finance, HR and leadership teams use tools like Claude, ChatGPT and Copilot safely, confidently and effectively in day-to-day work.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="bg-[#0284C7] text-white px-8 py-4 text-sm font-medium rounded-sm hover:bg-[#0B1120] transition-all">Book a discovery call</a>
+                    <a href="#how-i-help" class="bg-white text-slate-700 border border-slate-300 px-8 py-4 text-sm font-medium rounded-sm hover:bg-slate-50 transition-all">View services</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section: Why this matters (The Problem) -->
+    <section class="py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-4">Why This Matters</h2>
+            <p class="text-2xl md:text-3xl font-serif text-[#0B1120] leading-snug mb-8">
+                Many organisations now have access to powerful AI tools. <br>
+                <span class="text-slate-500">The challenge is knowing how to use them well.</span>
+            </p>
+            
+            <div class="prose prose-lg text-slate-600">
+                <p class="mb-6">
+                    Without the right guidance, teams either underuse the tools, use them inconsistently, or take unnecessary risks with sensitive information. Good AI adoption is not about giving people another system. It is about helping them understand where AI can save time, improve quality and support better decisions, while keeping the right boundaries in place.
+                </p>
+                <p class="font-medium text-[#0B1120] mb-4">Teams often need help with:</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm list-disc pl-5">
+                    <li>knowing where to start</li>
+                    <li>using prompts well</li>
+                    <li>protecting sensitive data</li>
+                    <li>identifying real use cases</li>
+                    <li>avoiding poor quality outputs</li>
+                    <li>turning experiments into better ways of working</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: How I help -->
+    <section id="how-i-help" class="py-24 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-4">How I Help</h2>
+            <h3 class="text-3xl md:text-4xl font-serif font-bold mb-16 text-[#0B1120]">Simple, structured adoption.</h3>
+            
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="switchTier(1)" id="btn-tier-1" class="tier-btn active px-6 py-3 rounded-full border border-[#0284C7] bg-[#0284C7] text-white text-sm font-medium transition-all">Practical AI Training</button>
+                <button onclick="switchTier(2)" id="btn-tier-2" class="tier-btn px-6 py-3 rounded-full border border-slate-300 text-slate-600 hover:border-[#0284C7] hover:text-[#0284C7] text-sm font-medium transition-all">Safe Use & Governance</button>
+                <button onclick="switchTier(3)" id="btn-tier-3" class="tier-btn px-6 py-3 rounded-full border border-slate-300 text-slate-600 hover:border-[#0284C7] hover:text-[#0284C7] text-sm font-medium transition-all">Use Case Discovery</button>
+            </div>
+
+            <div id="tier-content" class="max-w-4xl mx-auto bg-slate-50 p-10 rounded-sm border border-slate-200 text-left min-h-[300px]">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Who I work with -->
+    <section class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-4">Who I work with</h2>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+                    Nissanka AI Advisory works with teams and leaders who want to use AI safely and practically in real work, not just experiment with tools.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-8 border border-slate-200 rounded-sm shadow-sm hover:shadow-md transition-shadow">
+                    <h4 class="font-bold text-[#0B1120] mb-3 text-lg">Finance teams</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Using Claude, ChatGPT or Copilot for reporting, briefing notes, audit preparation, financial commentary and document-heavy work.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 border border-slate-200 rounded-sm shadow-sm hover:shadow-md transition-shadow">
+                    <h4 class="font-bold text-[#0B1120] mb-3 text-lg">HR and People teams</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Exploring AI adoption, workforce intelligence, people analytics, HR technology and safe use of employee-related information.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 border border-slate-200 rounded-sm shadow-sm hover:shadow-md transition-shadow">
+                    <h4 class="font-bold text-[#0B1120] mb-3 text-lg">Leadership teams</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Looking for practical guidance on where AI can create value, what risks need managing and how to build confidence across the organisation.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 border border-slate-200 rounded-sm shadow-sm hover:shadow-md transition-shadow lg:col-span-2 lg:w-2/3 lg:mx-auto">
+                    <h4 class="font-bold text-[#0B1120] mb-3 text-lg">Public sector and regulated environments</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Teams that need clear guardrails before scaling AI, especially where confidentiality, governance and trust matter.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 border border-slate-200 rounded-sm shadow-sm hover:shadow-md transition-shadow lg:col-span-2 lg:w-2/3 lg:mx-auto lg:-ml-0">
+                    <h4 class="font-bold text-[#0B1120] mb-3 text-lg">Teams with manual work and reporting pressure</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Functions looking to reduce repetitive drafting, summarising, formatting and analysis tasks without compromising quality or control.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Practical Value (Calculator) -->
+    <section id="practical-value" class="py-24 bg-[#0B1120] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-4">Practical Value</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold mb-6">Estimate where AI could save time</h3>
+                    <p class="text-[#CBD5E1] mb-8 leading-relaxed">
+                        Identify potential administrative recovery. By training teams to use tools like Claude for drafting, summarizing, and data formatting, organisations can reallocate hours back to high-value analytical work.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-white">Team Size (Attending Training)</label>
+                            <input type="range" id="input-staff" min="1" max="50" value="10" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-xs font-bold mt-2 text-[#0284C7]"><span id="val-staff">10</span> Staff</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-white">Manual Hours Saved via AI (Weekly per person)</label>
+                            <input type="range" id="input-hours" min="1" max="20" value="4" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-xs font-bold mt-2 text-[#0284C7]"><span id="val-hours">4</span> Hours</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-white">Average Hourly Rate (£)</label>
+                            <input type="number" id="input-rate" value="35" class="w-full bg-transparent border-b border-slate-600 focus:border-[#0284C7] outline-none py-2 text-xl font-bold text-white">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-10 text-[#0B1120] rounded-sm shadow-xl relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Estimated Annual Recovery</h4>
+                        <div class="text-5xl font-serif font-bold mb-4 text-[#0B1120]">£<span id="result-savings">0</span></div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            A simple estimate of the time that could be released if AI is used well for repetitive drafting, summarising, formatting and analysis tasks.
+                        </p>
+                        <ul class="space-y-3 text-sm border-t border-slate-200 pt-6 mb-6">
+                            <li class="flex justify-between">
+                                <span class="text-slate-600">Total Hours Recovered:</span> 
+                                <span id="result-hours" class="font-bold">0</span>
+                            </li>
+                        </ul>
+                        <p class="text-[10px] text-slate-400 italic">
+                            *This is a simple estimate for discussion purposes. Actual savings depend on process, adoption, governance and usage quality.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: First Step -->
+    <section class="py-20 bg-[#0284C7] text-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-serif font-bold mb-6">AI Discovery Call</h2>
+            <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+                A simple one-hour conversation to understand your current landscape. No heavy commitment. Just a practical conversation.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-10 bg-white/10 p-8 rounded-sm">
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start"><span class="mr-2">✓</span> what AI tools you have</li>
+                    <li class="flex items-start"><span class="mr-2">✓</span> how teams are using them today</li>
+                    <li class="flex items-start"><span class="mr-2">✓</span> where the pain points are</li>
+                </ul>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start"><span class="mr-2">✓</span> what data risks need managing</li>
+                    <li class="flex items-start"><span class="mr-2">✓</span> which use cases are worth exploring</li>
+                    <li class="flex items-start"><span class="mr-2">✓</span> what support would be most useful</li>
+                </ul>
+            </div>
+            <a href="#contact" class="bg-white text-[#0B1120] px-8 py-3 text-sm font-medium rounded-sm hover:bg-slate-100 transition-colors inline-block">Request a discovery call</a>
+        </div>
+    </section>
+
+    <!-- Section: Experience behind the advice -->
+    <section class="py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-6 text-center md:text-left">Experience behind the advice</h2>
+            
+            <div class="prose prose-lg text-slate-600 mb-12 max-w-none">
+                <p class="text-2xl md:text-3xl font-serif text-[#0B1120] leading-snug mb-6">
+                    Nissanka AI Advisory is led by Gishan Nissanka, who has spent 20 years helping large organisations use data, technology and AI to improve decision-making, reduce manual work and build trusted ways of working.
+                </p>
+                <p class="text-lg">
+                    His experience includes leadership roles across Vodafone, EY, Worldline and Nscale, with work spanning AI adoption, analytics, data governance, HR technology and transformation.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-slate-200 pt-12">
+                <div>
+                    <h4 class="font-bold text-[#0B1120] mb-2 text-lg">AI adoption and transformation</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Led practical AI adoption work across business functions, including training, use case development, governance and adoption planning.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-[#0B1120] mb-2 text-lg">Data, analytics and decision support</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Built workforce intelligence, analytics and reporting capabilities used by senior leaders in complex global organisations.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-[#0B1120] mb-2 text-lg">Governance and safe use</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Experienced in helping teams work with sensitive data, improve data quality and build trusted ways of working.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: About Founder -->
+    <section id="about" class="py-24 bg-white border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-slate-50 border border-slate-200 p-10 md:p-16 rounded-sm flex flex-col md:flex-row items-center gap-12 text-left">
+                <img src="Gishan-Nissanka.jpg" onerror="this.src='https://placehold.co/400x400/CBD5E1/64748B?text=GN'" alt="Gishan Nissanka" class="w-48 h-48 md:w-56 md:h-56 rounded-sm object-cover grayscale flex-shrink-0 shadow-sm border border-slate-200">
+                <div>
+                    <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-2">About</h2>
+                    <h4 class="text-3xl font-serif font-bold mb-6 text-[#0B1120]">Gishan Nissanka</h4>
+                    
+                    <div class="space-y-4 text-slate-600 text-sm leading-relaxed">
+                        <p>
+                            Gishan Nissanka is an AI adoption, people analytics and transformation advisor with 20 years’ experience across Vodafone, EY, Worldline and Nscale.
+                        </p>
+                        <p>
+                            His work has focused on helping large organisations improve how they use data, technology and AI to make better decisions, reduce manual effort and build more trusted ways of working.
+                        </p>
+                        <p>
+                            Through Nissanka AI Advisory, Gishan helps business teams use AI safely and practically, starting with real use cases, clear guidance and simple adoption support.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Contact -->
+    <section id="contact" class="py-24 bg-slate-50">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-[#0B1120]">Let’s start with a short conversation</h2>
+            <p class="text-slate-600 mb-12 leading-relaxed">
+                A one-hour discovery call is usually the best first step. We can understand what tools you have, what the team is trying to achieve, and where AI could help safely and practically.
+            </p>
+            
+            <form action="https://formsubmit.co/gishan@nissanka.co.uk" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                <!-- Replace with your actual live domain URL -->
+                <input type="hidden" name="_next" value="https://nissanka-ai.co.uk/">
+                <input type="hidden" name="_subject" value="New Discovery Call Request: Nissanka AI Advisory">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <input type="text" name="name" placeholder="Full Name" required class="bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm">
+                <input type="email" name="email" placeholder="Work Email" required class="bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm">
+                <input type="text" name="company" placeholder="Organisation Name" required class="md:col-span-2 bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm">
+                <textarea name="message" rows="4" placeholder="Briefly describe what you'd like to discuss..." class="md:col-span-2 bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm"></textarea>
+                <div class="md:col-span-2">
+                    <button type="submit" class="w-full bg-[#0284C7] text-white py-4 font-medium hover:bg-[#0B1120] transition-all rounded-sm">Request a discovery call</button>
+                    <p class="text-xs text-slate-500 mt-4 text-center">
+                        Any discussion is treated confidentially. The first conversation is focused on understanding your needs and will not require sharing sensitive data.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-[#0B1120] border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-slate-400">
+            <p>Nissanka AI Advisory. Practical AI adoption for business teams.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Practical Value Calculator Logic
+        const inputStaff = document.getElementById('input-staff');
+        const inputHours = document.getElementById('input-hours');
+        const inputRate = document.getElementById('input-rate');
+        const valStaff = document.getElementById('val-staff');
+        const valHours = document.getElementById('val-hours');
+        const resultSavings = document.getElementById('result-savings');
+        const resultHours = document.getElementById('result-hours');
+
+        function calculateROI() {
+            const staff = parseInt(inputStaff.value);
+            const hours = parseInt(inputHours.value);
+            const rate = parseFloat(inputRate.value) || 0;
+
+            const weeklyHours = staff * hours;
+            const annualHours = weeklyHours * 48; // Assuming 48 working weeks
+            const annualSavings = annualHours * rate;
+
+            valStaff.innerText = staff;
+            valHours.innerText = hours;
+            resultHours.innerText = annualHours.toLocaleString();
+            resultSavings.innerText = Math.round(annualSavings).toLocaleString();
+        }
+
+        [inputStaff, inputHours, inputRate].forEach(input => {
+            input.addEventListener('input', calculateROI);
+        });
+        calculateROI();
+
+        // New 'How I Help' Content Management
+        const tiers = {
+            1: {
+                title: "Practical AI Training",
+                desc: "Hands-on sessions that show teams how to use AI in real work. Focused on real tasks, not theory.",
+                bullets: ["prompting basics", "report drafting", "document summarisation", "meeting notes", "finance commentary", "briefing papers", "quality checking AI outputs"]
+            },
+            2: {
+                title: "Safe Use and Governance",
+                desc: "Simple guidance on responsible use, data sensitivity, confidentiality, human review and team guardrails.",
+                bullets: ["what not to put into AI tools", "data sensitivity", "human review", "confidentiality", "approval points", "risk levels", "team guardrails"]
+            },
+            3: {
+                title: "Use Case Discovery and Adoption",
+                desc: "Workshops or interviews to identify where AI can reduce manual effort, improve quality and support better workflows.",
+                bullets: ["use case workshops", "prompt libraries & templates", "adoption roadmap", "quick wins", "workflow improvement", "leadership briefing"]
+            }
+        };
+
+        function switchTier(num) {
+            const content = tiers[num];
+            document.getElementById('tier-content').innerHTML = `
+                <h4 class="text-2xl font-serif font-bold text-[#0B1120] mb-3">${content.title}</h4>
+                <p class="text-slate-600 mb-8 leading-relaxed">${content.desc}</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    ${content.bullets.map(b => `<div class="flex items-start text-sm text-slate-700"><span class="text-[#0284C7] mr-2">✓</span> ${b}</div>`).join('')}
+                </div>
+            `;
+            
+            // Reset buttons
+            document.querySelectorAll('.tier-btn').forEach(btn => {
+                btn.classList.remove('bg-[#0284C7]', 'text-white', 'border-[#0284C7]');
+                btn.classList.add('bg-transparent', 'text-slate-600', 'border-slate-300');
+            });
+            // Activate selected
+            const activeBtn = document.getElementById(`btn-tier-${num}`);
+            activeBtn.classList.remove('bg-transparent', 'text-slate-600', 'border-slate-300');
+            activeBtn.classList.add('bg-[#0284C7]', 'text-white', 'border-[#0284C7]');
+        }
+        
+        // Initialize the first tab
+        switchTier(1); 
+    </script>
+</body>
+</html>
