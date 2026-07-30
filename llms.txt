@@ -1,0 +1,26 @@
+# Nissanka AI Advisory
+
+> Nissanka AI Advisory helps Finance, HR, and leadership teams use generative AI tools (such as Claude, ChatGPT, and Copilot) safely, confidently, and effectively in day-to-day work. The consultancy focuses on practical AI adoption, not just tool experimentation.
+
+## About the Founder
+Gishan Nissanka is the founder and principal advisor. He is an AI adoption, people analytics, and transformation advisor with 20 years of experience across Vodafone, EY, Worldline, and Nscale. His work focuses on helping large organizations improve how they use data, technology, and AI to make better decisions, reduce manual effort, and build trusted ways of working.
+
+## Core Services
+Nissanka AI Advisory provides simple, structured adoption through three main areas:
+
+*   **Practical AI Training:** Hands-on sessions showing teams how to use AI for real tasks (e.g., prompting basics, report drafting, document summarisation, finance commentary, briefing papers, and quality checking AI outputs).
+*   **Safe Use & Governance:** Guidance on responsible use, data sensitivity, confidentiality, human review, approval points, risk levels, and establishing team guardrails.
+*   **Use Case Discovery and Adoption:** Workshops and interviews to identify where AI reduces manual effort and improves quality. Outputs include prompt libraries, adoption roadmaps, quick wins, and workflow improvements.
+
+## Target Audience (Who We Work With)
+*   **Finance teams:** For reporting, briefing notes, audit preparation, and financial commentary.
+*   **HR and People teams:** For workforce intelligence, people analytics, and safe handling of employee-related data.
+*   **Leadership teams:** For guidance on value creation, risk management, and building organizational confidence.
+*   **Public sector and regulated environments:** Teams requiring strict guardrails, confidentiality, and governance.
+*   **Teams with manual work:** Functions looking to reduce repetitive drafting, formatting, and analysis without losing control.
+
+## Key Links
+*   [Nissanka AI Advisory Home](https://nissanka.co.uk/): Main overview of services and value proposition.
+*   [About Gishan Nissanka](https://nissanka.co.uk/#about): Background and expertise.
+*   [Book a Discovery Call](https://nissanka.co.uk/#contact): Contact section to arrange a one-hour initial consultation.
+*   [Privacy & Cookie Policy](https://nissanka.co.uk/privacy.html): UK GDPR compliant data and privacy information.
