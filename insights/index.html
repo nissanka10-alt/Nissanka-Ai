@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practical AI Insights & Guides | Nissanka AI Advisory</title>
     <meta name="description" content="Clear, practical guidance to help organisations use AI safely, identify valuable use cases and turn experimentation into measurable adoption.">
+    <link rel="canonical" href="https://nissanka.co.uk/insights/">
+    <meta property="og:title" content="Practical AI Insights & Guides | Nissanka AI Advisory">
+    <meta property="og:description" content="Clear, practical guidance to help organisations use AI safely, identify valuable use cases and turn experimentation into measurable adoption.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nissanka.co.uk/insights/">
+    <meta property="og:image" content="https://nissanka.co.uk/Gishan-Nissanka.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nissanka.co.uk/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Insights",
+          "item": "https://nissanka.co.uk/insights/"
+        }
+      ]
+    }
+    </script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -17,9 +43,10 @@
     </style>
 </head>
 <body class="antialiased text-slate-800">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:text-[#0B1120]">Skip to main content</a>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 nav-blur py-4 transition-all">
+    <nav aria-label="Primary navigation" class="fixed w-full z-50 nav-blur py-4 transition-all">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <a href="https://nissanka.co.uk/" class="flex items-center space-x-2">
                 <span class="font-serif text-2xl font-bold text-[#0B1120] tracking-tight">NISSANKA <span class="text-[#0284C7]">AI</span></span>
@@ -31,13 +58,31 @@
                 <a href="https://nissanka.co.uk/insights/" class="text-[#0284C7] font-bold transition-colors">Insights</a>
                 <a href="https://nissanka.co.uk/#about" class="hover:text-[#0284C7] transition-colors">About</a>
             </div>
-            <a href="https://nissanka.co.uk/#contact" class="bg-[#0284C7] text-white px-5 py-2 text-sm font-medium rounded-sm hover:bg-[#0B1120] transition-colors">Book a Call</a>
+            <a href="https://nissanka.co.uk/#contact" class="hidden md:inline-block bg-[#0284C7] text-white px-5 py-2 text-sm font-medium rounded-sm hover:bg-[#0B1120] transition-colors">Book a Call</a>
+            <details class="relative md:hidden">
+                <summary class="cursor-pointer list-none border border-slate-300 px-4 py-2 text-sm font-medium rounded-sm">Menu</summary>
+                <div class="absolute right-0 mt-3 w-52 bg-white border border-slate-200 shadow-lg p-4 flex flex-col gap-3 text-sm">
+                    <a href="https://nissanka.co.uk/#how-i-help">How I Help</a>
+                    <a href="https://nissanka.co.uk/#practical-value">Practical Value</a>
+                    <a href="https://nissanka.co.uk/insights/" aria-current="page" class="font-semibold text-[#0284C7]">Insights</a>
+                    <a href="https://nissanka.co.uk/#about">About</a>
+                    <a href="https://nissanka.co.uk/#contact" class="font-semibold text-[#0284C7]">Book a Call</a>
+                </div>
+            </details>
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Header Section -->
     <header class="pt-40 pb-16 bg-white border-b border-slate-200">
         <div class="max-w-4xl mx-auto px-6 text-center">
+            <nav aria-label="Breadcrumb" class="mb-6 text-sm text-slate-500">
+                <ol class="flex flex-wrap justify-center gap-2">
+                    <li><a href="https://nissanka.co.uk/" class="hover:text-[#0284C7]">Home</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li aria-current="page">Insights</li>
+                </ol>
+            </nav>
             <span class="text-xs font-bold text-[#0284C7] uppercase tracking-widest block mb-3">Knowledge Base</span>
             <h1 class="text-4xl md:text-5xl font-serif font-bold text-[#0B1120] mb-6">
                 Practical AI Insights
@@ -73,6 +118,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="py-8 bg-[#0B1120] text-slate-400 text-xs text-center border-t border-slate-800">

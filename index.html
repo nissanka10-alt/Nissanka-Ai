@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nissanka AI Advisory | Practical AI adoption for business teams</title>
+    <meta name="description" content="Practical guidance for Finance, HR and leadership teams adopting AI safely, confidently and effectively.">
+    <link rel="canonical" href="https://nissanka.co.uk/">
+    <meta property="og:title" content="Nissanka AI Advisory | Practical AI adoption for business teams">
+    <meta property="og:description" content="Practical guidance for Finance, HR and leadership teams adopting AI safely, confidently and effectively.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nissanka.co.uk/">
+    <meta property="og:image" content="https://nissanka.co.uk/Gishan-Nissanka.jpg">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -23,24 +30,36 @@
     </style>
 </head>
 <body class="antialiased text-slate-800">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:text-[#0B1120]">Skip to main content</a>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 nav-blur py-4 transition-all">
+    <nav aria-label="Primary navigation" class="fixed w-full z-50 nav-blur py-4 transition-all">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
+            <a href="/" class="flex items-center space-x-2" aria-label="Nissanka AI Advisory home">
                 <span class="font-serif text-2xl font-bold text-[#0B1120] tracking-tight">NISSANKA <span class="text-[#0284C7]">AI</span></span>
                 <span class="text-[10px] uppercase tracking-[0.2em] text-[#64748B] border-l border-slate-300 pl-2 hidden sm:block">Advisory</span>
-            </div>
+            </a>
             <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
     <a href="#how-i-help" class="hover:text-[#0284C7] transition-colors">How I Help</a>
     <a href="#practical-value" class="hover:text-[#0284C7] transition-colors">Practical Value</a>
    <a href="/insights/" class="hover:text-[#0284C7] transition-colors">Insights</a>
     <a href="#about" class="hover:text-[#0284C7] transition-colors">About</a>
 </div>
-            <a href="#contact" class="bg-[#0284C7] text-white px-5 py-2 text-sm font-medium rounded-sm hover:bg-[#0B1120] transition-colors">Book a Call</a>
+            <a href="#contact" class="hidden md:inline-block bg-[#0284C7] text-white px-5 py-2 text-sm font-medium rounded-sm hover:bg-[#0B1120] transition-colors">Book a Call</a>
+            <details class="relative md:hidden">
+                <summary class="cursor-pointer list-none border border-slate-300 px-4 py-2 text-sm font-medium rounded-sm">Menu</summary>
+                <div class="absolute right-0 mt-3 w-52 bg-white border border-slate-200 shadow-lg p-4 flex flex-col gap-3 text-sm">
+                    <a href="#how-i-help">How I Help</a>
+                    <a href="#practical-value">Practical Value</a>
+                    <a href="/insights/">Insights</a>
+                    <a href="#about">About</a>
+                    <a href="#contact" class="font-semibold text-[#0284C7]">Book a Call</a>
+                </div>
+            </details>
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <header class="pt-40 pb-20 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-6">
@@ -93,9 +112,9 @@
             <h3 class="text-3xl md:text-4xl font-serif font-bold mb-16 text-[#0B1120]">Simple, structured adoption.</h3>
             
             <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button onclick="switchTier(1)" id="btn-tier-1" class="tier-btn active px-6 py-3 rounded-full border border-[#0284C7] bg-[#0284C7] text-white text-sm font-medium transition-all">Practical AI Training</button>
-                <button onclick="switchTier(2)" id="btn-tier-2" class="tier-btn px-6 py-3 rounded-full border border-slate-300 text-slate-600 hover:border-[#0284C7] hover:text-[#0284C7] text-sm font-medium transition-all">Safe Use & Governance</button>
-                <button onclick="switchTier(3)" id="btn-tier-3" class="tier-btn px-6 py-3 rounded-full border border-slate-300 text-slate-600 hover:border-[#0284C7] hover:text-[#0284C7] text-sm font-medium transition-all">Use Case Discovery</button>
+                <button type="button" onclick="switchTier(1)" id="btn-tier-1" aria-pressed="true" class="tier-btn active px-6 py-3 rounded-full border border-[#0284C7] bg-[#0284C7] text-white text-sm font-medium transition-all">Practical AI Training</button>
+                <button type="button" onclick="switchTier(2)" id="btn-tier-2" aria-pressed="false" class="tier-btn px-6 py-3 rounded-full border border-slate-300 text-slate-600 hover:border-[#0284C7] hover:text-[#0284C7] text-sm font-medium transition-all">Safe Use & Governance</button>
+                <button type="button" onclick="switchTier(3)" id="btn-tier-3" aria-pressed="false" class="tier-btn px-6 py-3 rounded-full border border-slate-300 text-slate-600 hover:border-[#0284C7] hover:text-[#0284C7] text-sm font-medium transition-all">Use Case Discovery</button>
             </div>
 
             <div id="tier-content" class="max-w-4xl mx-auto bg-slate-50 p-10 rounded-sm border border-slate-200 text-left min-h-[300px]">
@@ -190,7 +209,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
                 <div class="space-y-8 bg-slate-50 p-8 rounded-sm border border-slate-200">
                     <div>
-                        <label class="block text-sm font-medium text-[#0B1120] mb-2 flex justify-between">
+                        <label for="input-staff" class="block text-sm font-medium text-[#0B1120] mb-2 flex justify-between">
                             <span>Team Size (People)</span>
                             <span id="val-staff" class="font-bold text-[#0284C7]">10</span>
                         </label>
@@ -198,7 +217,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-[#0B1120] mb-2 flex justify-between">
+                        <label for="input-hours" class="block text-sm font-medium text-[#0B1120] mb-2 flex justify-between">
                             <span>Target Hours Saved / Person / Week</span>
                             <span id="val-hours" class="font-bold text-[#0284C7]">2</span>
                         </label>
@@ -206,7 +225,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-[#0B1120] mb-2">Estimated Hourly Cost (£)</label>
+                        <label for="input-rate" class="block text-sm font-medium text-[#0B1120] mb-2">Estimated Hourly Cost (£)</label>
                         <input type="number" id="input-rate" value="45" class="w-full bg-white border border-slate-300 p-3 rounded-sm text-sm outline-none focus:border-[#0284C7]">
                     </div>
                 </div>
@@ -331,10 +350,22 @@
                 <input type="hidden" name="_subject" value="New Discovery Call Request: Nissanka AI Advisory">
                 <input type="hidden" name="_captcha" value="false">
                 
-                <input type="text" name="name" placeholder="Full Name" required class="bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm">
-                <input type="email" name="email" placeholder="Work Email" required class="bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm">
-                <input type="text" name="company" placeholder="Organisation Name" required class="md:col-span-2 bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm">
-                <textarea name="message" rows="4" placeholder="Briefly describe what you'd like to discuss..." class="md:col-span-2 bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm"></textarea>
+                <div>
+                    <label for="contact-name" class="block text-sm font-medium text-[#0B1120] mb-2">Full name</label>
+                    <input id="contact-name" type="text" name="name" autocomplete="name" required class="w-full bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm">
+                </div>
+                <div>
+                    <label for="contact-email" class="block text-sm font-medium text-[#0B1120] mb-2">Work email</label>
+                    <input id="contact-email" type="email" name="email" autocomplete="email" required class="w-full bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm">
+                </div>
+                <div class="md:col-span-2">
+                    <label for="contact-company" class="block text-sm font-medium text-[#0B1120] mb-2">Organisation name</label>
+                    <input id="contact-company" type="text" name="company" autocomplete="organization" required class="w-full bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm">
+                </div>
+                <div class="md:col-span-2">
+                    <label for="contact-message" class="block text-sm font-medium text-[#0B1120] mb-2">What would you like to discuss?</label>
+                    <textarea id="contact-message" name="message" rows="4" class="w-full bg-white border border-slate-300 p-3 rounded-sm outline-none focus:border-[#0284C7] text-sm"></textarea>
+                </div>
                 <div class="md:col-span-2">
                     <button type="submit" class="w-full bg-[#0284C7] text-white py-4 font-medium hover:bg-[#0B1120] transition-all rounded-sm">Request a discovery call</button>
                     <p class="text-xs text-slate-500 mt-4 text-center">
@@ -344,6 +375,8 @@
             </form>
         </div>
     </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="py-8 bg-[#0B1120] text-slate-400 text-xs text-center border-t border-slate-800">
@@ -418,12 +451,14 @@
             
             // Reset buttons
             document.querySelectorAll('.tier-btn').forEach(btn => {
+                btn.setAttribute('aria-pressed', 'false');
                 btn.classList.remove('bg-[#0284C7]', 'text-white', 'border-[#0284C7]');
                 btn.classList.add('bg-transparent', 'text-slate-600', 'border-slate-300');
             });
             // Activate selected
             const activeBtn = document.getElementById(`btn-tier-${num}`);
             if (activeBtn) {
+                activeBtn.setAttribute('aria-pressed', 'true');
                 activeBtn.classList.remove('bg-transparent', 'text-slate-600', 'border-slate-300');
                 activeBtn.classList.add('bg-[#0284C7]', 'text-white', 'border-[#0284C7]');
             }
