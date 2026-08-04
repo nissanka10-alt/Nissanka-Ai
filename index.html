@@ -107,18 +107,26 @@
 
     <!-- Section: How I help -->
     <section id="how-i-help" class="py-24 bg-white border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-6 text-center">
+        <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-4">How I Help</h2>
-            <h3 class="text-3xl md:text-4xl font-serif font-bold mb-16 text-[#0B1120]">Simple, structured adoption.</h3>
-            
-            <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button type="button" onclick="switchTier(1)" id="btn-tier-1" aria-pressed="true" class="tier-btn active px-6 py-3 rounded-full border border-[#0284C7] bg-[#0284C7] text-white text-sm font-medium transition-all">Practical AI Training</button>
-                <button type="button" onclick="switchTier(2)" id="btn-tier-2" aria-pressed="false" class="tier-btn px-6 py-3 rounded-full border border-slate-300 text-slate-600 hover:border-[#0284C7] hover:text-[#0284C7] text-sm font-medium transition-all">Safe Use & Governance</button>
-                <button type="button" onclick="switchTier(3)" id="btn-tier-3" aria-pressed="false" class="tier-btn px-6 py-3 rounded-full border border-slate-300 text-slate-600 hover:border-[#0284C7] hover:text-[#0284C7] text-sm font-medium transition-all">Use Case Discovery</button>
-            </div>
-
-            <div id="tier-content" class="max-w-4xl mx-auto bg-slate-50 p-10 rounded-sm border border-slate-200 text-left min-h-[300px]">
-                <!-- Content injected via JS -->
+            <h3 class="text-3xl md:text-4xl font-serif font-bold mb-5 text-[#0B1120]">Practical AI support built around real business needs</h3>
+            <p class="text-slate-600 leading-relaxed max-w-3xl mb-12">Whether your organisation is trying to build employee confidence, establish safer ways of working or identify where AI can create genuine value, the starting point should be practical and proportionate.</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <article class="bg-slate-50 border border-slate-200 p-8 rounded-sm flex flex-col">
+                    <h4 class="text-2xl font-serif font-bold text-[#0B1120] mb-4">AI Governance &amp; Safe Use</h4>
+                    <div class="text-slate-600 leading-relaxed space-y-4 mb-8"><p>Put clear, workable guardrails around how employees use generative AI without creating unnecessary barriers to adoption.</p><p>From acceptable-use guidance and data boundaries to ownership, risk assessment and employee communication.</p></div>
+                    <a href="/services/ai-governance/" class="mt-auto text-[#0284C7] font-semibold hover:underline">Explore AI governance support <span aria-hidden="true">→</span></a>
+                </article>
+                <article class="bg-slate-50 border border-slate-200 p-8 rounded-sm flex flex-col">
+                    <h4 class="text-2xl font-serif font-bold text-[#0B1120] mb-4">Practical AI Training &amp; Adoption</h4>
+                    <div class="text-slate-600 leading-relaxed space-y-4 mb-8"><p>Help employees and leaders use ChatGPT, Claude and Copilot confidently in real work—not just understand the technology.</p><p>Role-based training, practical use cases and adoption support designed to improve capability, quality and everyday productivity.</p></div>
+                    <a href="/services/practical-ai-training/" class="mt-auto text-[#0284C7] font-semibold hover:underline">Explore AI training and adoption <span aria-hidden="true">→</span></a>
+                </article>
+                <article class="bg-slate-50 border border-slate-200 p-8 rounded-sm flex flex-col">
+                    <h4 class="text-2xl font-serif font-bold text-[#0B1120] mb-4">AI Use-Case Discovery &amp; Prioritisation</h4>
+                    <div class="text-slate-600 leading-relaxed space-y-4 mb-8"><p>Identify the business problems where AI can deliver meaningful value and determine which opportunities are worth pursuing first.</p><p>A structured approach to workflow discovery, value assessment, risk, feasibility and pilot prioritisation.</p></div>
+                    <a href="/services/ai-use-case-discovery/" class="mt-auto text-[#0284C7] font-semibold hover:underline">Explore AI use-case discovery <span aria-hidden="true">→</span></a>
+                </article>
             </div>
         </div>
     </section>
@@ -420,52 +428,6 @@
             calculateROI();
         }
 
-        // 'How I Help' Content Management
-        const tiers = {
-            1: {
-                title: "Practical AI Training",
-                desc: "Hands-on sessions that show teams how to use AI in real work. Focused on real tasks, not theory.",
-                bullets: ["prompting basics", "report drafting", "document summarisation", "meeting notes", "finance commentary", "briefing papers", "quality checking AI outputs"]
-            },
-            2: {
-                title: "Safe Use and Governance",
-                desc: "Simple guidance on responsible use, data sensitivity, confidentiality, human review and team guardrails.",
-                bullets: ["what not to put into AI tools", "data sensitivity", "human review", "confidentiality", "approval points", "risk levels", "team guardrails"]
-            },
-            3: {
-                title: "Use Case Discovery and Adoption",
-                desc: "Workshops or interviews to identify where AI can reduce manual effort, improve quality and support better workflows.",
-                bullets: ["use case workshops", "prompt libraries & templates", "adoption roadmap", "quick wins", "workflow improvement", "leadership briefing"]
-            }
-        };
-
-        function switchTier(num) {
-            const content = tiers[num];
-            document.getElementById('tier-content').innerHTML = `
-                <h4 class="text-2xl font-serif font-bold text-[#0B1120] mb-3">${content.title}</h4>
-                <p class="text-slate-600 mb-8 leading-relaxed">${content.desc}</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    ${content.bullets.map(b => `<div class="flex items-start text-sm text-slate-700"><span class="text-[#0284C7] mr-2">✓</span> ${b}</div>`).join('')}
-                </div>
-            `;
-            
-            // Reset buttons
-            document.querySelectorAll('.tier-btn').forEach(btn => {
-                btn.setAttribute('aria-pressed', 'false');
-                btn.classList.remove('bg-[#0284C7]', 'text-white', 'border-[#0284C7]');
-                btn.classList.add('bg-transparent', 'text-slate-600', 'border-slate-300');
-            });
-            // Activate selected
-            const activeBtn = document.getElementById(`btn-tier-${num}`);
-            if (activeBtn) {
-                activeBtn.setAttribute('aria-pressed', 'true');
-                activeBtn.classList.remove('bg-transparent', 'text-slate-600', 'border-slate-300');
-                activeBtn.classList.add('bg-[#0284C7]', 'text-white', 'border-[#0284C7]');
-            }
-        }
-        
-        // Initialize the first tab
-        switchTier(1); 
     </script>
 </body>
 </html>
