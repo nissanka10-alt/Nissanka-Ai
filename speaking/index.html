@@ -3,393 +3,192 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Executive biography of Gishan Nissanka, enterprise AI and digital transformation leader and Founder of Nissanka AI Advisory.">
-  <title>Gishan Nissanka | Enterprise AI &amp; Digital Transformation Leader</title>
+  <title>Gishan Nissanka | Enterprise AI & Digital Transformation Speaker</title>
+  <meta name="description" content="Gishan Nissanka speaks on practical enterprise AI adoption, responsible AI, workforce intelligence and digital transformation.">
+  <link rel="canonical" href="https://nissanka.co.uk/speaking/">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --midnight: #0B1120;
       --azure: #0284C7;
       --slate: #64748B;
-      --body-text: #475569;
       --silver: #CBD5E1;
-      --border: #E2E8F0;
-      --background: #F8FAFC;
-      --white: #FFFFFF;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
+    body {
+      font-family: "Inter", sans-serif;
+      background: #F8FAFC;
+      color: var(--midnight);
       scroll-behavior: smooth;
     }
-
-    body {
-      background: var(--background);
-      color: var(--midnight);
-      font-family: "Inter", sans-serif;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .skip-link {
-      position: fixed;
-      top: -4rem;
-      left: 1rem;
-      z-index: 200;
-      background: var(--white);
-      color: var(--midnight);
-      padding: 0.75rem 1rem;
-      border: 1px solid var(--border);
-      text-decoration: none;
-    }
-
-    .skip-link:focus {
-      top: 1rem;
-    }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      padding: 1.25rem 5%;
-      background: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid var(--border);
+    .font-serif { font-family: "Playfair Display", serif; }
+    .nav-blur {
       backdrop-filter: blur(12px);
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      color: var(--midnight);
-      font-family: "Playfair Display", serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .azure-text {
-      color: var(--azure);
-      margin-left: 0.32rem;
-    }
-
-    .nav-subtitle {
-      margin-left: 0.55rem;
-      padding-left: 0.55rem;
-      border-left: 1px solid var(--silver);
-      color: var(--slate);
-      font-family: "Inter", sans-serif;
-      font-size: 0.625rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      color: var(--slate);
-      font-size: 0.875rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      color: var(--azure);
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: minmax(240px, 1fr) minmax(0, 2.5fr);
-      gap: 3rem;
-      width: min(1100px, 90%);
-      margin: 4rem auto;
-    }
-
-    .profile-sidebar {
-      position: sticky;
-      top: 7rem;
-      align-self: start;
-      padding: 2.5rem 2rem;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-      text-align: center;
-    }
-
-    .profile-image {
-      display: block;
-      width: 100%;
-      max-width: 180px;
-      aspect-ratio: 1;
-      margin: 0 auto 1.5rem;
-      border: 1px solid var(--silver);
-      border-radius: 2px;
-      filter: grayscale(100%);
-      object-fit: cover;
-    }
-
-    .profile-sidebar h1 {
-      margin-bottom: 0.35rem;
-      color: var(--midnight);
-      font-family: "Playfair Display", serif;
-      font-size: 1.75rem;
-      line-height: 1.2;
-    }
-
-    .profile-headline {
-      margin-bottom: 0.65rem;
-      color: var(--midnight);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      line-height: 1.45;
-      text-transform: uppercase;
-    }
-
-    .profile-role {
-      margin-bottom: 2rem;
-      color: var(--slate);
-      font-size: 0.875rem;
-      line-height: 1.5;
-    }
-
-    .btn {
-      display: block;
-      width: 100%;
-      margin-bottom: 0.75rem;
-      padding: 0.75rem;
-      border: 1px solid transparent;
-      border-radius: 2px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    }
-
-    .btn-primary {
-      background: var(--azure);
-      border-color: var(--azure);
-      color: var(--white);
-    }
-
-    .btn-primary:hover,
-    .btn-primary:focus-visible {
-      background: var(--midnight);
-      border-color: var(--midnight);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border-color: var(--silver);
-      color: var(--slate);
-    }
-
-    .btn-outline:hover,
-    .btn-outline:focus-visible {
-      background: var(--background);
-      border-color: var(--slate);
-      color: var(--midnight);
-    }
-
-    .bio-content h2 {
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--silver);
-      color: var(--midnight);
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2rem, 4vw, 2.5rem);
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .bio-content p {
-      margin-bottom: 1.5rem;
-      color: var(--body-text);
-      font-size: 1rem;
-    }
-
-    .bio-content p:first-of-type {
-      color: var(--midnight);
-      font-size: 1.08rem;
-    }
-
-    @media (max-width: 900px) {
-      .navbar {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 0.9rem;
-        padding: 1rem 5%;
-      }
-
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 0.75rem 1.25rem;
-      }
-
-      .container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        margin: 2rem auto;
-      }
-
-      .profile-sidebar {
-        position: static;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-subtitle {
-        display: none;
-      }
-
-      .profile-sidebar {
-        padding: 2rem 1.5rem;
-      }
-    }
-
-    @page {
-      size: A4;
-      margin: 15mm 16mm;
-    }
-
-    @media print {
-      body {
-        background: var(--white);
-        color: #000000;
-        font-size: 10pt;
-        line-height: 1.48;
-      }
-
-      .skip-link,
-      .navbar,
-      .action-buttons {
-        display: none !important;
-      }
-
-      .container {
-        display: grid;
-        grid-template-columns: 46mm 1fr;
-        gap: 10mm;
-        width: 100%;
-        margin: 0;
-      }
-
-      .profile-sidebar {
-        position: static;
-        padding: 6mm;
-        border-color: #D9E0E7;
-        box-shadow: none;
-        break-inside: avoid;
-      }
-
-      .profile-image {
-        max-width: 34mm;
-        margin-bottom: 5mm;
-      }
-
-      .profile-sidebar h1 {
-        font-size: 16pt;
-      }
-
-      .profile-headline {
-        font-size: 7.8pt;
-      }
-
-      .profile-role {
-        margin-bottom: 0;
-        font-size: 8.5pt;
-      }
-
-      .bio-content h2 {
-        margin-bottom: 6mm;
-        padding-bottom: 3mm;
-        font-size: 22pt;
-      }
-
-      .bio-content p,
-      .bio-content p:first-of-type {
-        margin-bottom: 4mm;
-        color: #263442;
-        font-size: 9.5pt;
-        orphans: 3;
-        widows: 3;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #E2E8F0;
     }
   </style>
 </head>
 
-<body>
-  <a class="skip-link" href="#biography">Skip to biography</a>
+<body class="antialiased text-slate-800">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:text-[#0B1120]">
+    Skip to main content
+  </a>
 
-  <nav class="navbar" aria-label="Profile navigation">
-    <a href="https://nissanka.co.uk/" class="nav-logo" aria-label="Nissanka AI Advisory home">
-      NISSANKA <span class="azure-text">AI</span><span class="nav-subtitle">Advisory</span>
-    </a>
-    <div class="nav-links">
-      <a href="https://nissanka.co.uk/" target="_blank" rel="noopener noreferrer">Company website</a>
-      <a href="https://www.linkedin.com/in/gishan-nissanka-3907645/" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>
+  <nav aria-label="Primary navigation" class="fixed w-full z-50 nav-blur py-4">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+      <a href="/" class="flex items-center space-x-2" aria-label="Nissanka AI Advisory home">
+        <span class="font-serif text-2xl font-bold text-[#0B1120] tracking-tight">
+          NISSANKA <span class="text-[#0284C7]">AI</span>
+        </span>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-[#64748B] border-l border-slate-300 pl-2 hidden sm:block">Advisory</span>
+      </a>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
+        <a href="/#how-i-help" class="hover:text-[#0284C7] transition-colors">How I Help</a>
+        <a href="/insights/" class="hover:text-[#0284C7] transition-colors">Insights</a>
+        <a href="/#about" class="hover:text-[#0284C7] transition-colors">About</a>
+        <a href="/speaking/" aria-current="page" class="text-[#0284C7]">Speaking</a>
+      </div>
+
+      <a href="#speaking-enquiry" class="hidden md:inline-block bg-[#0284C7] text-white px-5 py-2 text-sm font-medium rounded-sm hover:bg-[#0B1120] transition-colors">
+        Speaking enquiry
+      </a>
+
+      <details class="relative md:hidden">
+        <summary class="cursor-pointer list-none border border-slate-300 px-4 py-2 text-sm font-medium rounded-sm">Menu</summary>
+        <div class="absolute right-0 mt-3 w-52 bg-white border border-slate-200 shadow-lg p-4 flex flex-col gap-3 text-sm">
+          <a href="/#how-i-help">How I Help</a>
+          <a href="/insights/">Insights</a>
+          <a href="/#about">About</a>
+          <a href="/speaking/" class="font-semibold text-[#0284C7]">Speaking</a>
+          <a href="#speaking-enquiry" class="font-semibold text-[#0284C7]">Speaking enquiry</a>
+        </div>
+      </details>
     </div>
   </nav>
 
-  <main class="container" id="biography">
-    <aside class="profile-sidebar" aria-label="Gishan Nissanka profile summary">
-      <img src="https://nissanka.co.uk/Gishan-Nissanka.jpg" alt="Portrait of Gishan Nissanka" class="profile-image">
-      <h1>Gishan Nissanka</h1>
-      <p class="profile-headline">Enterprise AI &amp; Digital Transformation Leader</p>
-      <p class="profile-role">Founder, Nissanka AI Advisory</p>
+  <main id="main-content">
+    <header class="pt-40 pb-20 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_280px] gap-14 items-center">
+        <div class="max-w-4xl">
+          <p class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-5">Speaking</p>
+          <h1 class="text-4xl md:text-6xl font-serif font-bold leading-tight mb-6 text-[#0B1120]">
+            Enterprise AI is not only a technology shift.
+            <span class="block text-[#0284C7]">It changes how organisations work.</span>
+          </h1>
+          <p class="text-lg md:text-xl text-slate-600 font-light leading-relaxed max-w-3xl mb-9">
+            Gishan Nissanka speaks about practical AI adoption, workforce intelligence and the leadership choices required to turn new technology into trusted organisational capability.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#speaking-enquiry" class="bg-[#0284C7] text-white px-8 py-4 text-sm font-medium rounded-sm hover:bg-[#0B1120] transition-colors">Discuss a speaking engagement</a>
+            <a href="#biography" class="bg-white text-slate-700 border border-slate-300 px-8 py-4 text-sm font-medium rounded-sm hover:bg-slate-50 transition-colors">Read executive biography</a>
+          </div>
+        </div>
 
-      <div class="action-buttons">
-        <a href="https://www.linkedin.com/in/gishan-nissanka-3907645/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Connect on LinkedIn</a>
-        <a href="https://nissanka.co.uk/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Visit Nissanka AI Advisory</a>
+        <div class="hidden lg:block">
+          <img src="/Gishan-Nissanka.jpg" alt="Gishan Nissanka" class="w-full aspect-square object-cover grayscale rounded-sm border border-slate-200 shadow-sm">
+          <p class="text-xs text-slate-500 mt-4 leading-relaxed">Enterprise AI &amp; Digital Transformation Leader<br>Founder, Nissanka AI Advisory</p>
+        </div>
       </div>
-    </aside>
+    </header>
 
-    <article class="bio-content">
-      <h2>Executive Biography</h2>
+    <section class="py-20 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl mb-12">
+          <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-4">Speaking themes</h2>
+          <p class="text-3xl md:text-4xl font-serif font-bold text-[#0B1120] leading-tight">Practical questions facing leaders now</p>
+        </div>
 
-      <p>Gishan Nissanka is an enterprise AI and digital transformation leader with 20 years of international experience helping large, complex organisations turn technology, data and AI into practical organisational capability. His career spans Vodafone, Ernst &amp; Young, Worldline and Nscale, where he has led work across enterprise platforms, data strategy, analytics, responsible AI, operating models and workforce intelligence.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="bg-white border border-slate-200 p-8 rounded-sm">
+            <h3 class="text-2xl font-serif font-bold text-[#0B1120] mb-4">From AI access to AI adoption</h3>
+            <p class="text-slate-600 leading-relaxed">Why giving employees access to AI rarely changes performance on its own, and what leaders must do to build confidence, capability and sustained use.</p>
+          </article>
 
-      <p>Gishan is the Founder of Nissanka AI Advisory, where he advises executive teams on AI readiness, responsible adoption and the redesign of work around human-AI collaboration. He develops practical transformation roadmaps connecting business value, governance, operating models, leadership behaviour and workforce capability. His work increasingly focuses on the organisational and human side of digital transformation, including the leadership, skills and operating-model changes required to translate AI investment into sustainable value. This perspective is particularly relevant to Sri Lanka as it works to build a more inclusive and resilient digital economy.</p>
+          <article class="bg-white border border-slate-200 p-8 rounded-sm">
+            <h3 class="text-2xl font-serif font-bold text-[#0B1120] mb-4">The human side of enterprise AI</h3>
+            <p class="text-slate-600 leading-relaxed">How AI changes tasks, decisions, skills and operating models, and why workforce transformation must be designed alongside the technology.</p>
+          </article>
 
-      <p>Prior to establishing Nissanka AI Advisory, Gishan served as Director of People Technology &amp; Analytics at Nscale, where he established the technology, data and governance foundations required to support rapid international growth. Before joining Nscale, he was Head of People Intelligence at Worldline, a global financial technology organisation. There, he led data, analytics, workforce planning and AI transformation for more than 20,000 employees across over 50 countries. His work included establishing a People Analytics Centre of Excellence in India and leading a GenAI adoption programme that achieved full adoption across the leadership population in scope.</p>
+          <article class="bg-white border border-slate-200 p-8 rounded-sm">
+            <h3 class="text-2xl font-serif font-bold text-[#0B1120] mb-4">Responsible AI people will use</h3>
+            <p class="text-slate-600 leading-relaxed">How organisations can put sensible guardrails around AI without creating fear, blocking useful experimentation or reducing trust.</p>
+          </article>
 
-      <p>Gishan spent seven years at Ernst &amp; Young Global in leadership roles spanning people analytics consulting, digital talent, data architecture and global transformation. Working across seven regions and a wider organisational footprint of 145 countries, he built virtual centres of excellence and led EY Insights, a global self-service decision platform used by more than 1,000 users. He also led PX360, an AI and machine-learning-enabled platform supporting predictive workforce and risk analysis.</p>
+          <article class="bg-white border border-slate-200 p-8 rounded-sm">
+            <h3 class="text-2xl font-serif font-bold text-[#0B1120] mb-4">Workforce intelligence in the age of AI</h3>
+            <p class="text-slate-600 leading-relaxed">Moving beyond headcount reporting to understand skills, work, capacity and the choices leaders need to make about future capability.</p>
+          </article>
 
-      <p>He began his transformation career at Vodafone Group, working across data analytics, HR systems and global reporting. He defined the reporting strategy for a 91,000-employee organisation spanning 21 operating companies and later led the HR technology integration for Vodafone's EUR 7 billion acquisition of Kabel Deutschland, covering approximately 4,000 employees across 13 locations.</p>
+          <article class="bg-white border border-slate-200 p-8 rounded-sm">
+            <h3 class="text-2xl font-serif font-bold text-[#0B1120] mb-4">Why AI cannot fix weak foundations</h3>
+            <p class="text-slate-600 leading-relaxed">What happens when organisations add AI to fragmented data, unclear ownership and broken workflows, and how to establish a credible starting point.</p>
+          </article>
 
-      <p>Alongside his corporate and advisory work, Gishan is an experienced international speaker on enterprise AI adoption, AI ethics, workforce intelligence and organisational transformation. He has contributed to conferences, panel discussions and leadership sessions in the UK and internationally. His speaking experience includes the Chief AI Officer Summit UK, TechEx London and Amsterdam, CWI Dubai, CDAO UK, People Analytics World and the CIPD Annual Conference.</p>
+          <article class="bg-white border border-slate-200 p-8 rounded-sm">
+            <h3 class="text-2xl font-serif font-bold text-[#0B1120] mb-4">Human-centred digital transformation</h3>
+            <p class="text-slate-600 leading-relaxed">A perspective for organisations and developing economies seeking productivity and digital progress without losing inclusion, trust or human judgement.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-      <p>Gishan has also contributed to executive education as a Guest Lecturer at University College London and previously worked as an Associate Lecturer on the International MBA programme at Buckinghamshire New University. Through these roles, he has connected academic thinking with the practical realities of enterprise implementation and organisational change.</p>
+    <section class="py-20 bg-white border-b border-slate-200">
+      <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-[0.8fr_2fr] gap-12">
+        <div>
+          <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-4">Experience</h2>
+          <p class="text-3xl font-serif font-bold text-[#0B1120] leading-tight">Speaking grounded in delivery</p>
+        </div>
+        <div class="space-y-6 text-slate-600 leading-relaxed">
+          <p>Gishan has contributed to conferences, panel discussions, executive briefings and leadership sessions in the UK and internationally. His speaking experience includes the Chief AI Officer Summit UK, TechEx London and Amsterdam, CWI Dubai, CDAO UK, People Analytics World and the CIPD Annual Conference.</p>
+          <p>He has also contributed to executive education as a Guest Lecturer at University College London and previously worked as an Associate Lecturer on the International MBA programme at Buckinghamshire New University.</p>
+          <p>His sessions draw on 20 years of transformation experience across Vodafone, EY, Worldline and Nscale, combining strategic perspective with the realities of implementation, governance, adoption and organisational change.</p>
+        </div>
+      </div>
+    </section>
 
-      <p>He completed the Artificial Intelligence Programme at the University of Oxford and the Ethics of AI programme at the London School of Economics. He holds an MSc in Business Information Technology from Buckinghamshire New University, an MBA from Buckinghamshire Business School and a Postgraduate Diploma in Marketing from the Chartered Institute of Marketing.</p>
-    </article>
+    <section id="biography" class="py-20 bg-slate-50 border-b border-slate-200 scroll-mt-24">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-sm font-bold text-[#0284C7] uppercase tracking-widest mb-4">Executive biography</h2>
+        <h3 class="text-3xl md:text-4xl font-serif font-bold text-[#0B1120] mb-10">Gishan Nissanka</h3>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-5 text-slate-600 leading-relaxed">
+          <p>Gishan Nissanka is an enterprise AI and digital transformation leader with 20 years of international experience helping large, complex organisations turn technology, data and AI into practical organisational capability. His career spans Vodafone, Ernst &amp; Young, Worldline and Nscale, where he has led work across enterprise platforms, data strategy, analytics, responsible AI, operating models and workforce intelligence.</p>
+
+          <p>Gishan is the Founder of Nissanka AI Advisory, where he advises executive teams on AI readiness, responsible adoption and the redesign of work around human-AI collaboration. He develops practical transformation roadmaps connecting business value, governance, operating models, leadership behaviour and workforce capability.</p>
+
+          <p>At Worldline, he led data, analytics, workforce planning and AI transformation for more than 20,000 employees across over 50 countries. His work included establishing a People Analytics Centre of Excellence in India and leading a GenAI adoption programme that achieved full adoption across the leadership population in scope.</p>
+
+          <p>During seven years at EY Global, he held leadership roles across people analytics consulting, digital talent, data architecture and global transformation. He led EY Insights, a global self-service decision platform used by more than 1,000 users, alongside an AI-enabled workforce risk platform.</p>
+
+          <p>Earlier at Vodafone Group, he defined reporting strategy for a 91,000-employee organisation spanning 21 operating companies and led the HR technology integration for Vodafone's EUR 7 billion acquisition of Kabel Deutschland.</p>
+
+          <p>Gishan completed the Artificial Intelligence Programme at the University of Oxford and the Ethics of AI programme at the London School of Economics. He holds an MSc in Business Information Technology, an MBA and a Postgraduate Diploma in Marketing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="speaking-enquiry" class="py-24 bg-[#0B1120] text-white scroll-mt-24">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <p class="text-sm font-bold text-[#38BDF8] uppercase tracking-widest mb-4">Speaking enquiries</p>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">Looking for a practical enterprise AI perspective?</h2>
+        <p class="text-slate-300 leading-relaxed mb-9">Gishan is available for conferences, leadership forums, panel discussions, executive briefings and academic events in the UK and internationally.</p>
+        <a href="mailto:nissanka10@gmail.com?subject=Speaking%20enquiry" class="inline-block bg-[#0284C7] text-white px-8 py-4 text-sm font-medium rounded-sm hover:bg-white hover:text-[#0B1120] transition-colors">Contact Gishan</a>
+      </div>
+    </section>
   </main>
+
+  <footer class="bg-white border-t border-slate-200 py-8">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between gap-4 text-sm text-slate-500">
+      <p>&copy; 2026 Nissanka AI Advisory</p>
+      <div class="flex gap-6">
+        <a href="https://nissanka.co.uk/" class="hover:text-[#0284C7]">Home</a>
+        <a href="https://www.linkedin.com/in/gishan-nissanka-3907645/" target="_blank" rel="noopener noreferrer" class="hover:text-[#0284C7]">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
