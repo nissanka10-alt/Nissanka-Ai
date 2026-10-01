@@ -1,11 +1,301 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import PageIntro from "../../../components/PageIntro.astro";
+import PillarHero from "../../../components/PillarHero.astro";
+import "../../../styles/advisory-pages.css";
 
 const title = "AI Strategy & Transformation | Nissanka Advisory";
-const description = "Practical support for AI opportunity, readiness, governance, prioritisation and adoption.";
+const description = "Practical AI strategy, governance, use-case prioritisation and adoption support for organisations moving from experimentation towards responsible scale.";
+
+const coreAreas = [
+    {
+        number: "01",
+        title: "AI Opportunity & Readiness",
+        copy: "Understand where AI can create value and what the organisation is ready to pursue.",
+    },
+    {
+        number: "02",
+        title: "Governance",
+        copy: "Establish proportionate guardrails, decision rights, accountability and acceptable-use practices.",
+    },
+    {
+        number: "03",
+        title: "Use-Case Prioritisation",
+        copy: "Focus investment and attention on opportunities with credible value, feasibility and organisational readiness.",
+    },
+    {
+        number: "04",
+        title: "Adoption & Training",
+        copy: "Help leaders and teams use AI safely, confidently and practically in real work.",
+    },
+];
+
+const stages = ["Experiment", "Prioritise", "Govern", "Adopt", "Scale"];
+
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Service",
+            "@id": "https://nissanka.co.uk/advisory/ai-strategy/#service",
+            name: "AI Strategy & Transformation",
+            description,
+            url: "https://nissanka.co.uk/advisory/ai-strategy/",
+            provider: { "@type": "Organization", name: "Nissanka Advisory", url: "https://nissanka.co.uk/" },
+        },
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+                { "@type": "ListItem", position: 2, name: "Advisory", item: "https://nissanka.co.uk/advisory/" },
+                { "@type": "ListItem", position: 3, name: "AI Strategy & Transformation", item: "https://nissanka.co.uk/advisory/ai-strategy/" },
+            ],
+        },
+    ],
+};
 ---
 
-<BaseLayout {title} {description} path="/advisory/ai-strategy/">
-    <PageIntro label="Advisory / 01" heading="AI Strategy & Transformation" intro={description} breadcrumbs={[{ label: "Home", href: "/" }, { label: "Advisory", href: "/advisory/" }, { label: "AI Strategy" }]} />
+<BaseLayout {title} {description} path="/advisory/ai-strategy/" {structuredData}>
+    <PillarHero
+        label="01 / AI Strategy & Transformation"
+        heading="Move from AI activity to organisational direction."
+        breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Advisory", href: "/advisory/" },
+            { label: "AI Strategy & Transformation" },
+        ]}
+        primaryHref="/ai-review/"
+        primaryText="Start with an AI Review"
+        secondaryHref="#approach"
+        secondaryText="Explore the approach"
+    >
+        <p>AI tools are already entering organisations faster than most operating models, policies and leadership practices can adapt.</p>
+        <p>Nissanka Advisory helps organisations decide where AI can create meaningful value, what needs stronger foundations and how to move from experimentation towards responsible adoption.</p>
+    </PillarHero>
+
+    <section class="pillar-section editorial-statement" aria-labelledby="strategy-statement-title">
+        <div class="shell editorial-statement__grid">
+            <div class="editorial-statement__title">
+                <p class="system-label">02 / A necessary distinction</p>
+                <h2 id="strategy-statement-title">AI adoption is not the same as AI transformation.</h2>
+            </div>
+            <div class="editorial-statement__copy">
+                <p class="lead-copy">Introducing tools can change individual tasks. Transformation changes how work, decisions and organisational capability operate together.</p>
+                <p>The difference is direction: a clear view of what matters, what the organisation is ready for and what needs to change around the technology.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="approach" class="pillar-section strategy-start" aria-labelledby="strategy-start-title">
+        <div class="shell section-split">
+            <div>
+                <p class="system-label">03 / Where the work starts</p>
+                <h2 id="strategy-start-title">Start with clarity, not technology.</h2>
+            </div>
+            <div class="section-copy review-entry">
+                <p class="review-entry__name">AI Opportunity & Readiness Review</p>
+                <p>The preferred entry point brings current AI activity, valuable opportunities, organisational readiness, risks and dependencies into one practical view.</p>
+                <p>It creates a basis for agreeing priorities before the organisation invests further.</p>
+                <a class="text-link" href="/ai-review/">Explore the AI Opportunity & Readiness Review <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="pillar-section core-section" aria-labelledby="strategy-core-title">
+        <div class="shell">
+            <div class="core-heading">
+                <p class="system-label">04 / Core areas</p>
+                <h2 id="strategy-core-title">Build direction around the work that matters.</h2>
+            </div>
+            <ol class="strategy-areas">
+                {coreAreas.map((area, index) => (
+                    <li class:list={{ "strategy-area--offset": index % 2 === 1 }}>
+                        <p class="area-number">{area.number}</p>
+                        <div>
+                            <h3>{area.title}</h3>
+                            <p>{area.copy}</p>
+                        </div>
+                    </li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <section class="pillar-section scale-section" aria-labelledby="scale-title">
+        <div class="shell">
+            <div class="section-split scale-intro">
+                <div>
+                    <p class="system-label">05 / From pilot to scale</p>
+                    <h2 id="scale-title">The challenge is rarely the first AI pilot.</h2>
+                </div>
+                <div class="section-copy">
+                    <p>The harder work is deciding which experiments matter, how they connect to real workflows, what should be governed centrally and what people need in order to adopt AI responsibly.</p>
+                </div>
+            </div>
+            <ol class="scale-sequence" aria-label="Path from experiment to scale">
+                {stages.map((stage, index) => (
+                    <li><span>{String(index + 1).padStart(2, "0")}</span>{stage}</li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <section class="pillar-section" aria-labelledby="strategy-connect-title">
+        <div class="shell">
+            <div class="connection-heading">
+                <p class="system-label">06 / This connects to</p>
+                <h2 id="strategy-connect-title">AI decisions reshape people and leadership decisions.</h2>
+            </div>
+            <div class="connection-list">
+                <article>
+                    <h3>Workforce Intelligence</h3>
+                    <p>AI changes work, skills, capacity and workforce decisions.</p>
+                    <a class="text-link" href="/advisory/workforce-intelligence/">Explore Workforce Intelligence <span aria-hidden="true">→</span></a>
+                </article>
+                <article>
+                    <h3>Leadership Readiness</h3>
+                    <p>Leaders need to make decisions, explain change and handle difficult conversations as work evolves.</p>
+                    <a class="text-link" href="/advisory/leadership-readiness/">Explore Leadership Readiness <span aria-hidden="true">→</span></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="advisory-final" aria-labelledby="strategy-final-title">
+        <div class="shell advisory-final__grid">
+            <div>
+                <p class="system-label">07 / Start</p>
+                <h2 id="strategy-final-title">Not sure which AI opportunity deserves attention first?</h2>
+            </div>
+            <div>
+                <p class="advisory-final__copy">Start with a practical review of where AI can create value, what needs attention and what makes sense to do next.</p>
+                <a class="cta-inverse" href="/ai-review/">Start with an AI Review</a>
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    .review-entry {
+        padding-top: 1.5rem;
+        border-top: var(--border-architectural);
+    }
+
+    .review-entry__name {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .core-heading {
+        max-width: 50rem;
+    }
+
+    .strategy-areas {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: clamp(3rem, 7vw, 6rem) var(--grid-gap);
+        margin: clamp(4rem, 8vw, 7rem) 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .strategy-areas li {
+        grid-column: 1 / span 5;
+        display: grid;
+        grid-template-columns: 3rem 1fr;
+        gap: 1rem;
+    }
+
+    .strategy-areas .strategy-area--offset {
+        grid-column: 7 / span 5;
+    }
+
+    .area-number {
+        margin: 0;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+    }
+
+    .strategy-areas h3 {
+        margin: 0 0 1rem;
+        font-size: 1.4rem;
+        letter-spacing: -0.025em;
+        text-transform: uppercase;
+    }
+
+    .strategy-areas li div p {
+        margin: 0;
+    }
+
+    .scale-section {
+        background: var(--colour-obsidian);
+        color: var(--colour-white);
+    }
+
+    .scale-sequence {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin: clamp(4rem, 8vw, 7rem) 0 0;
+        padding: 0;
+        border-top: 1px solid var(--colour-white);
+        list-style: none;
+    }
+
+    .scale-sequence li {
+        min-height: 10rem;
+        padding: 1.25rem;
+        border-left: 1px solid var(--colour-white);
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .scale-sequence li:first-child {
+        border-left: 0;
+    }
+
+    .scale-sequence span {
+        display: block;
+        margin-bottom: 3rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 400;
+    }
+
+    @media (max-width: 52rem) {
+        .strategy-areas li,
+        .strategy-areas .strategy-area--offset {
+            grid-column: span 6;
+        }
+
+        .scale-sequence {
+            grid-template-columns: 1fr;
+        }
+
+        .scale-sequence li {
+            min-height: auto;
+            border-top: 1px solid var(--colour-white);
+            border-left: 0;
+        }
+
+        .scale-sequence li:first-child {
+            border-top: 0;
+        }
+
+        .scale-sequence span {
+            margin-bottom: 1rem;
+        }
+    }
+
+    @media (max-width: 38rem) {
+        .strategy-areas {
+            grid-template-columns: 1fr;
+        }
+
+        .strategy-areas li,
+        .strategy-areas .strategy-area--offset {
+            grid-column: 1;
+        }
+    }
+</style>

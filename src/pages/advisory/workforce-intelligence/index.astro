@@ -1,11 +1,364 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import PageIntro from "../../../components/PageIntro.astro";
+import PillarHero from "../../../components/PillarHero.astro";
+import "../../../styles/advisory-pages.css";
 
 const title = "Workforce Intelligence | Nissanka Advisory";
-const description = "People data, skills, workforce planning and operating-model insight for clearer organisational decisions.";
+const description = "Turn people, skills and workforce data into better decisions about capability, capacity, workforce planning and how work is organised.";
+
+const territories = [
+    {
+        label: "People Data & Analytics",
+        copy: "Move from fragmented reporting towards trusted workforce information and decision-relevant insight.",
+    },
+    {
+        label: "Skills & Workforce Planning",
+        copy: "Understand capability, skills, capacity and future workforce requirements.",
+    },
+    {
+        label: "AI-Enabled Operating Models",
+        copy: "Explore how AI changes tasks, roles, workflows, decision rights and the shape of work.",
+    },
+];
+
+const questions = [
+    "Where is critical capability concentrated?",
+    "Which skills are becoming more important?",
+    "Where are capacity constraints emerging?",
+    "What work could change through AI or automation?",
+    "Where should the organisation build, buy, borrow or redesign capability?",
+    "How should roles and operating models evolve?",
+];
+
+const decisionStages = ["Data", "Insight", "Interpretation", "Decision", "Action"];
+const aiQuestions = [
+    "which tasks change",
+    "which capabilities become more valuable",
+    "where judgement remains critical",
+    "how roles may evolve",
+    "what skills need to be built",
+    "how capacity may shift",
+];
+
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Service",
+            "@id": "https://nissanka.co.uk/advisory/workforce-intelligence/#service",
+            name: "Workforce Intelligence",
+            description,
+            url: "https://nissanka.co.uk/advisory/workforce-intelligence/",
+            provider: { "@type": "Organization", name: "Nissanka Advisory", url: "https://nissanka.co.uk/" },
+        },
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+                { "@type": "ListItem", position: 2, name: "Advisory", item: "https://nissanka.co.uk/advisory/" },
+                { "@type": "ListItem", position: 3, name: "Workforce Intelligence", item: "https://nissanka.co.uk/advisory/workforce-intelligence/" },
+            ],
+        },
+    ],
+};
 ---
 
-<BaseLayout {title} {description} path="/advisory/workforce-intelligence/">
-    <PageIntro label="Advisory / 02" heading="Workforce Intelligence" intro={description} breadcrumbs={[{ label: "Home", href: "/" }, { label: "Advisory", href: "/advisory/" }, { label: "Workforce Intelligence" }]} />
+<BaseLayout {title} {description} path="/advisory/workforce-intelligence/" {structuredData}>
+    <PillarHero
+        label="01 / Workforce Intelligence"
+        heading="Know your workforce before you redesign it."
+        breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Advisory", href: "/advisory/" },
+            { label: "Workforce Intelligence" },
+        ]}
+        primaryHref="mailto:gishan@nissanka.co.uk?subject=Workforce%20intelligence%20challenge"
+        primaryText="Discuss a workforce challenge"
+        secondaryHref="#areas"
+        secondaryText="Explore the areas below"
+    >
+        <p>Workforce Intelligence connects people, skills, work and organisational data so leaders can make better decisions about capability, capacity and how work should change.</p>
+        <p class="hero-emphasis">The aim is not more reporting. It is better organisational decisions.</p>
+    </PillarHero>
+
+    <section class="pillar-section editorial-statement workforce-statement" aria-labelledby="workforce-statement-title">
+        <div class="shell editorial-statement__grid">
+            <div class="editorial-statement__title">
+                <p class="system-label">02 / From reporting to decisions</p>
+                <h2 id="workforce-statement-title">Data is useful.<br />Decision intelligence is better.</h2>
+            </div>
+            <div class="editorial-statement__copy">
+                <p class="lead-copy">Dashboards can describe what has happened.</p>
+                <p>Workforce Intelligence should help leaders understand what matters, what may change and what decisions need to be made next.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="areas" class="pillar-section territory-section" aria-labelledby="territory-title">
+        <div class="shell">
+            <div class="territory-heading">
+                <p class="system-label">03 / Core territory</p>
+                <h2 id="territory-title">People, skills, work, capacity and decisions.</h2>
+            </div>
+            <div class="territory-list">
+                {territories.map((territory, index) => (
+                    <article>
+                        <p class="territory-number">0{index + 1}</p>
+                        <h3>{territory.label}</h3>
+                        <p>{territory.copy}</p>
+                    </article>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="pillar-section question-section" aria-labelledby="question-title">
+        <div class="shell">
+            <p class="system-label">04 / Better questions</p>
+            <h2 id="question-title">Questions Workforce Intelligence should answer.</h2>
+            <ol class="question-list">
+                {questions.map((question, index) => (
+                    <li><span>{String(index + 1).padStart(2, "0")}</span><p>{question}</p></li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <section class="pillar-section decision-section" aria-labelledby="decision-title">
+        <div class="shell">
+            <div class="section-split">
+                <div>
+                    <p class="system-label">05 / From data to decision</p>
+                    <h2 id="decision-title">Information creates value when it changes a decision.</h2>
+                </div>
+                <div class="section-copy">
+                    <p>The value is created when workforce information changes a real organisational decision.</p>
+                </div>
+            </div>
+            <ol class="decision-flow" aria-label="Progression from workforce data to action">
+                {decisionStages.map((stage) => <li>{stage}</li>)}
+            </ol>
+        </div>
+    </section>
+
+    <section class="pillar-section ai-workforce-section" aria-labelledby="ai-workforce-title">
+        <div class="shell ai-workforce-layout">
+            <div class="ai-workforce-lead">
+                <p class="system-label">06 / AI + Workforce</p>
+                <h2 id="ai-workforce-title">AI changes the workforce question.</h2>
+                <p class="lead-copy">The question is not simply how many tasks AI can automate.</p>
+            </div>
+            <ul class="ai-question-list">
+                {aiQuestions.map((question) => <li>{question}</li>)}
+            </ul>
+        </div>
+    </section>
+
+    <section class="pillar-section" aria-labelledby="workforce-connect-title">
+        <div class="shell">
+            <div class="connection-heading">
+                <p class="system-label">07 / This connects to</p>
+                <h2 id="workforce-connect-title">Insight needs direction and leadership.</h2>
+            </div>
+            <div class="connection-list">
+                <article>
+                    <h3>AI Strategy & Transformation</h3>
+                    <p>AI opportunity decisions should reflect workforce reality.</p>
+                    <a class="text-link" href="/advisory/ai-strategy/">Explore AI Strategy & Transformation <span aria-hidden="true">→</span></a>
+                </article>
+                <article>
+                    <h3>Leadership Readiness</h3>
+                    <p>Leaders need the judgement and conversations required to translate workforce insight into change.</p>
+                    <a class="text-link" href="/advisory/leadership-readiness/">Explore Leadership Readiness <span aria-hidden="true">→</span></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="advisory-final" aria-labelledby="workforce-final-title">
+        <div class="shell advisory-final__grid">
+            <div>
+                <p class="system-label">08 / Start</p>
+                <h2 id="workforce-final-title">Better workforce decisions start with better questions.</h2>
+            </div>
+            <div>
+                <p class="advisory-final__copy">Bring a workforce question, a difficult decision or an area where the existing information is not enough.</p>
+                <a class="cta-inverse" href="mailto:gishan@nissanka.co.uk?subject=Workforce%20intelligence%20challenge">Discuss a workforce challenge</a>
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    :global(.hero-emphasis) {
+        font-weight: 700;
+    }
+
+    .territory-heading {
+        max-width: 48rem;
+    }
+
+    .territory-list {
+        margin-top: clamp(4rem, 8vw, 7rem);
+    }
+
+    .territory-list article {
+        display: grid;
+        grid-template-columns: minmax(4rem, 1fr) minmax(15rem, 4fr) minmax(18rem, 6fr);
+        gap: var(--grid-gap);
+        align-items: baseline;
+        padding-block: 2.5rem;
+        border-top: var(--border-architectural);
+    }
+
+    .territory-number {
+        margin: 0;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+    }
+
+    .territory-list h3 {
+        margin: 0;
+        font-size: 1.35rem;
+        letter-spacing: -0.025em;
+        text-transform: uppercase;
+    }
+
+    .territory-list article > p:last-child {
+        margin: 0;
+    }
+
+    .question-section {
+        background: var(--colour-paper);
+    }
+
+    .question-section h2 {
+        max-width: 14ch;
+    }
+
+    .question-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(3rem, 7vw, 6rem) var(--grid-gap);
+        margin: clamp(5rem, 10vw, 8rem) 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .question-list li {
+        display: grid;
+        grid-template-columns: 2.5rem 1fr;
+        gap: 1rem;
+    }
+
+    .question-list span {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+    }
+
+    .question-list p {
+        max-width: 22ch;
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        font-weight: 900;
+        letter-spacing: -0.035em;
+        line-height: 1.08;
+    }
+
+    .decision-flow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        margin: clamp(4rem, 8vw, 7rem) 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .decision-flow li {
+        display: flex;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .decision-flow li:not(:last-child)::after {
+        margin-inline: clamp(1rem, 3vw, 2.5rem);
+        content: "→";
+        font-size: 1.25rem;
+    }
+
+    .ai-workforce-layout {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+    }
+
+    .ai-workforce-lead {
+        grid-column: 1 / span 6;
+    }
+
+    .ai-question-list {
+        grid-column: 8 / -1;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .ai-question-list li {
+        padding-block: 1rem;
+        border-top: var(--border-architectural);
+        font-size: 1.125rem;
+    }
+
+    .ai-question-list li::before {
+        margin-right: 1rem;
+        content: "—";
+    }
+
+    @media (max-width: 52rem) {
+        .territory-list article {
+            grid-template-columns: 3rem minmax(0, 1fr);
+        }
+
+        .territory-list article > p:last-child {
+            grid-column: 2;
+            margin-top: 0.75rem;
+        }
+
+        .ai-workforce-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .ai-workforce-lead,
+        .ai-question-list {
+            grid-column: 1;
+        }
+
+        .ai-question-list {
+            margin-top: 3rem;
+        }
+    }
+
+    @media (max-width: 38rem) {
+        .question-list {
+            grid-template-columns: 1fr;
+        }
+
+        .decision-flow {
+            display: grid;
+        }
+
+        .decision-flow li {
+            padding-block: 1rem;
+            border-top: var(--border-architectural);
+        }
+
+        .decision-flow li:not(:last-child)::after {
+            margin-left: auto;
+        }
+    }
+</style>

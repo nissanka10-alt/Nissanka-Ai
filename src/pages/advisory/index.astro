@@ -1,11 +1,225 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import PageIntro from "../../components/PageIntro.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Cta from "../../components/Cta.astro";
+import "../../styles/advisory-pages.css";
 
 const title = "Advisory | Nissanka Advisory";
-const description = "Advisory support connecting AI strategy, workforce intelligence and leadership readiness.";
+const description = "AI strategy, workforce intelligence and leadership readiness considered together to support better organisational decisions.";
+
+const pathways = [
+    {
+        number: "01",
+        title: "AI Strategy & Transformation",
+        copy: "Decide where AI can create value, strengthen the foundations for responsible adoption and move from experimentation towards organisational direction.",
+        href: "/advisory/ai-strategy/",
+        linkText: "Explore AI Strategy & Transformation",
+    },
+    {
+        number: "02",
+        title: "Workforce Intelligence",
+        copy: "Connect people, skills, work and capacity so workforce information supports real organisational decisions.",
+        href: "/advisory/workforce-intelligence/",
+        linkText: "Explore Workforce Intelligence",
+    },
+    {
+        number: "03",
+        title: "Leadership Readiness",
+        copy: "Prepare leaders for the decisions, conversations and behavioural shifts required as AI changes work and organisations.",
+        href: "/advisory/leadership-readiness/",
+        linkText: "Explore Leadership Readiness",
+    },
+];
+
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebPage",
+            "@id": "https://nissanka.co.uk/advisory/#webpage",
+            url: "https://nissanka.co.uk/advisory/",
+            name: title,
+            description,
+        },
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+                { "@type": "ListItem", position: 2, name: "Advisory", item: "https://nissanka.co.uk/advisory/" },
+            ],
+        },
+    ],
+};
 ---
 
-<BaseLayout {title} {description} path="/advisory/">
-    <PageIntro label="Advisory" heading="AI, people and work considered together" intro={description} breadcrumbs={[{ label: "Home", href: "/" }, { label: "Advisory" }]} />
+<BaseLayout {title} {description} path="/advisory/" {structuredData}>
+    <section class="advisory-hero" aria-labelledby="advisory-title">
+        <div class="shell">
+            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Advisory" }]} />
+            <p class="system-label">01 / Advisory</p>
+            <div class="advisory-hero__grid">
+                <h1 id="advisory-title">Three lenses. One organisational challenge.</h1>
+                <div class="advisory-hero__copy">
+                    <p>AI transformation changes technology, work and leadership at the same time.</p>
+                    <p>Nissanka Advisory works across three connected areas: AI Strategy & Transformation, Workforce Intelligence and Leadership Readiness.</p>
+                    <Cta href="/ai-review/">Start with an AI Review</Cta>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pathway-section" aria-labelledby="pathway-title">
+        <div class="shell">
+            <div class="pathway-intro">
+                <p class="system-label">02 / Connected advisory</p>
+                <h2 id="pathway-title">AI, people and work considered together.</h2>
+                <p>Each lens addresses a different part of the same organisational decision. The right starting point depends on the question leaders need to answer.</p>
+            </div>
+            <ol class="pathway-list">
+                {pathways.map((pathway) => (
+                    <li>
+                        <p class="pathway-number">{pathway.number}</p>
+                        <div>
+                            <h3>{pathway.title}</h3>
+                            <p>{pathway.copy}</p>
+                            <a class="text-link" href={pathway.href}>{pathway.linkText} <span aria-hidden="true">→</span></a>
+                        </div>
+                    </li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <section class="advisory-final" aria-labelledby="advisory-start-title">
+        <div class="shell advisory-final__grid">
+            <div>
+                <p class="system-label">03 / Where to start</p>
+                <h2 id="advisory-start-title">Start with the question, not the solution.</h2>
+            </div>
+            <div>
+                <p class="advisory-final__copy">The AI Opportunity & Readiness Review creates a practical view of where AI can help, what the organisation is ready for and what should happen next.</p>
+                <a class="cta-inverse" href="/ai-review/">Start with an AI Review</a>
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    .advisory-hero {
+        padding-block: 2rem clamp(6rem, 11vw, 10rem);
+        border-bottom: var(--border-architectural);
+    }
+
+    .advisory-hero :global(.breadcrumbs) {
+        margin-bottom: clamp(5rem, 10vw, 9rem);
+    }
+
+    .advisory-hero__grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+        align-items: end;
+        margin-top: 1.5rem;
+    }
+
+    h1 {
+        grid-column: 1 / span 7;
+        max-width: 11ch;
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(3.75rem, 6vw, 5rem);
+        letter-spacing: -0.045em;
+        line-height: 0.98;
+    }
+
+    .advisory-hero__copy {
+        grid-column: 9 / -1;
+    }
+
+    .advisory-hero__copy p {
+        margin: 0;
+    }
+
+    .advisory-hero__copy p + p {
+        margin-top: 1.25rem;
+    }
+
+    .advisory-hero__copy :global(.cta) {
+        margin-top: 2rem;
+    }
+
+    .pathway-section {
+        padding-block: clamp(5rem, 9vw, 8rem);
+        border-bottom: var(--border-architectural);
+    }
+
+    .pathway-intro {
+        max-width: 52rem;
+    }
+
+    .pathway-intro h2 {
+        max-width: 13ch;
+        margin: 1.5rem 0 2rem;
+        font-size: clamp(2.75rem, 4.5vw, 3.75rem);
+        letter-spacing: -0.04em;
+    }
+
+    .pathway-intro > p:last-child {
+        max-width: 43rem;
+        margin: 0;
+        font-size: 1.125rem;
+    }
+
+    .pathway-list {
+        margin: clamp(4rem, 8vw, 7rem) 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .pathway-list li {
+        display: grid;
+        grid-template-columns: minmax(4rem, 2fr) minmax(0, 10fr);
+        gap: var(--grid-gap);
+        padding-block: clamp(2rem, 5vw, 4rem);
+        border-top: var(--border-architectural);
+    }
+
+    .pathway-number {
+        margin: 0;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+    }
+
+    .pathway-list h3 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        letter-spacing: -0.035em;
+    }
+
+    .pathway-list li > div > p {
+        max-width: 47rem;
+        margin: 0;
+    }
+
+    @media (max-width: 52rem) {
+        .advisory-hero__grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        h1,
+        .advisory-hero__copy {
+            grid-column: 1;
+        }
+
+        .advisory-hero__copy {
+            max-width: 42rem;
+            margin-top: 3rem;
+        }
+    }
+
+    @media (max-width: 32rem) {
+        .pathway-list li {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

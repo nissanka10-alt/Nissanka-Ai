@@ -1,0 +1,122 @@
+---
+import Breadcrumbs from "./Breadcrumbs.astro";
+import Cta from "./Cta.astro";
+
+interface Props {
+    label: string;
+    heading: string;
+    breadcrumbs: Array<{ label: string; href?: string }>;
+    primaryHref: string;
+    primaryText: string;
+    secondaryHref: string;
+    secondaryText: string;
+}
+
+const {
+    label,
+    heading,
+    breadcrumbs,
+    primaryHref,
+    primaryText,
+    secondaryHref,
+    secondaryText,
+} = Astro.props;
+---
+
+<section class="pillar-hero" aria-labelledby="pillar-title">
+    <div class="shell">
+        <Breadcrumbs items={breadcrumbs} />
+        <div class="pillar-hero__grid">
+            <div class="pillar-hero__main">
+                <p class="system-label">{label}</p>
+                <h1 id="pillar-title">{heading}</h1>
+            </div>
+            <div class="pillar-hero__support">
+                <slot />
+                <div class="pillar-hero__actions" aria-label="Page introduction actions">
+                    <Cta href={primaryHref}>{primaryText}</Cta>
+                    <Cta href={secondaryHref} variant="secondary">{secondaryText}</Cta>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .pillar-hero {
+        padding-block: 2rem clamp(5rem, 9vw, 8rem);
+        border-bottom: var(--border-architectural);
+    }
+
+    .pillar-hero :global(.breadcrumbs) {
+        margin-bottom: clamp(4rem, 8vw, 7rem);
+    }
+
+    .pillar-hero__grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+        align-items: end;
+    }
+
+    .pillar-hero__main {
+        grid-column: 1 / span 7;
+    }
+
+    .pillar-hero__support {
+        grid-column: 9 / -1;
+    }
+
+    h1 {
+        max-width: 12ch;
+        margin: 1.5rem 0 0;
+        font-size: clamp(3.25rem, 5vw, 4rem);
+        font-weight: 900;
+        letter-spacing: -0.05em;
+        line-height: 0.98;
+    }
+
+    .pillar-hero__support :global(p) {
+        margin: 0;
+        font-size: 1.125rem;
+        line-height: 1.65;
+    }
+
+    .pillar-hero__support :global(p + p) {
+        margin-top: 1.25rem;
+    }
+
+    .pillar-hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    @media (max-width: 52rem) {
+        .pillar-hero__grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .pillar-hero__main,
+        .pillar-hero__support {
+            grid-column: 1;
+        }
+
+        .pillar-hero__support {
+            max-width: 42rem;
+            margin-top: 3rem;
+        }
+    }
+
+    @media (max-width: 30rem) {
+        .pillar-hero__actions,
+        .pillar-hero__actions :global(.cta) {
+            width: 100%;
+        }
+
+        .pillar-hero__actions :global(.cta) {
+            text-align: center;
+        }
+    }
+</style>

@@ -1,11 +1,401 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import PageIntro from "../../../components/PageIntro.astro";
+import PillarHero from "../../../components/PillarHero.astro";
+import "../../../styles/advisory-pages.css";
 
 const title = "Leadership Readiness | Nissanka Advisory";
-const description = "Prepare leaders for critical conversations, AI-enabled change and better organisational decisions.";
+const description = "Prepare leaders for the decisions, conversations and behavioural shifts required as AI changes work, roles and organisations.";
+
+const coreAreas = [
+    {
+        title: "Critical Conversation Readiness",
+        copy: "Prepare leaders for difficult, high-stakes conversations where judgement, clarity and empathy matter.",
+    },
+    {
+        title: "Leading AI-Enabled Change",
+        copy: "Help leaders translate AI strategy into credible organisational change.",
+    },
+    {
+        title: "Leadership Insights & Measurement",
+        copy: "Use evidence and feedback to understand leadership readiness, behaviour and development needs.",
+    },
+    {
+        title: "Leadership Coaching",
+        copy: "Where individual coaching is appropriate, connect leaders with specialist external coaching support.",
+    },
+];
+
+const conversationContexts = [
+    "role or workflow change",
+    "performance expectations",
+    "AI adoption",
+    "uncertainty about skills",
+    "team resistance",
+    "changing responsibilities",
+    "workforce redesign",
+];
+
+const changeQuestions = [
+    "Why change",
+    "What changes",
+    "What does not",
+    "What people need to learn",
+    "Who makes which decisions",
+    "How concerns are handled",
+];
+
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Service",
+            "@id": "https://nissanka.co.uk/advisory/leadership-readiness/#service",
+            name: "Leadership Readiness",
+            description,
+            url: "https://nissanka.co.uk/advisory/leadership-readiness/",
+            provider: { "@type": "Organization", name: "Nissanka Advisory", url: "https://nissanka.co.uk/" },
+        },
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+                { "@type": "ListItem", position: 2, name: "Advisory", item: "https://nissanka.co.uk/advisory/" },
+                { "@type": "ListItem", position: 3, name: "Leadership Readiness", item: "https://nissanka.co.uk/advisory/leadership-readiness/" },
+            ],
+        },
+    ],
+};
 ---
 
-<BaseLayout {title} {description} path="/advisory/leadership-readiness/">
-    <PageIntro label="Advisory / 03" heading="Leadership Readiness" intro={description} breadcrumbs={[{ label: "Home", href: "/" }, { label: "Advisory", href: "/advisory/" }, { label: "Leadership Readiness" }]} />
+<BaseLayout {title} {description} path="/advisory/leadership-readiness/" {structuredData}>
+    <PillarHero
+        label="01 / Leadership Readiness"
+        heading="AI changes the conversation leaders need to have."
+        breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Advisory", href: "/advisory/" },
+            { label: "Leadership Readiness" },
+        ]}
+        primaryHref="mailto:gishan@nissanka.co.uk?subject=Leadership%20readiness"
+        primaryText="Discuss leadership readiness"
+        secondaryHref="#areas"
+        secondaryText="Explore the areas below"
+    >
+        <p>Transformation becomes real when leaders have to explain change, make decisions with incomplete information and handle the human consequences of new ways of working.</p>
+        <p>Leadership Readiness focuses on the judgement, conversations and behaviours required to lead through AI-enabled change.</p>
+    </PillarHero>
+
+    <section class="pillar-section editorial-statement leadership-statement" aria-labelledby="leadership-statement-title">
+        <div class="shell editorial-statement__grid">
+            <div class="editorial-statement__title">
+                <p class="system-label">02 / Readiness</p>
+                <h2 id="leadership-statement-title">Knowing the answer is not the same as being ready for the conversation.</h2>
+            </div>
+            <div class="editorial-statement__copy">
+                <p>Leaders may understand the strategy and still struggle with conversations about role change, performance, uncertainty, skills, expectations or adoption.</p>
+                <p class="lead-copy">Readiness is visible in how leaders make the decision human, clear and credible.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="areas" class="pillar-section leadership-areas" aria-labelledby="leadership-areas-title">
+        <div class="shell">
+            <p class="system-label">03 / Core areas</p>
+            <h2 id="leadership-areas-title">Prepare for the moments where leadership becomes visible.</h2>
+            <div class="leadership-area-list">
+                {coreAreas.map((area, index) => (
+                    <article class:list={{ "leadership-area--right": index % 2 === 1 }}>
+                        <p class="area-number">0{index + 1}</p>
+                        <h3>{area.title}</h3>
+                        <p>{area.copy}</p>
+                    </article>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="pillar-section conversation-section" aria-labelledby="conversation-title">
+        <div class="shell conversation-layout">
+            <div class="conversation-lead">
+                <p class="system-label">04 / Critical conversations</p>
+                <h2 id="conversation-title">The difficult part often happens after the announcement.</h2>
+                <p>Leadership judgement matters when broad organisational direction becomes a conversation with a person or team.</p>
+            </div>
+            <div class="conversation-contexts">
+                <p class="system-label">Conversation contexts may include</p>
+                <ul>
+                    {conversationContexts.map((context) => <li>{context}</li>)}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="pillar-section change-section" aria-labelledby="change-title">
+        <div class="shell">
+            <div class="section-split">
+                <div>
+                    <p class="system-label">05 / Leading change</p>
+                    <h2 id="change-title">Leadership behaviour shapes whether AI adoption becomes real.</h2>
+                </div>
+                <div class="section-copy">
+                    <p>Leaders need to create clarity around the questions people will use to make sense of change.</p>
+                </div>
+            </div>
+            <ol class="change-questions">
+                {changeQuestions.map((question, index) => (
+                    <li><span>{String(index + 1).padStart(2, "0")}</span>{question}</li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <section class="pillar-section coaching-section" aria-labelledby="coaching-title">
+        <div class="shell coaching-layout">
+            <div>
+                <p class="system-label">06 / Leadership coaching</p>
+                <h2 id="coaching-title">External specialist coaching support.</h2>
+            </div>
+            <div class="coaching-copy">
+                <p class="coaching-provider">Kasia Nissanka Coaching</p>
+                <blockquote>“Calm, clear, and deeply human coaching for leaders and professionals. Uncover the patterns beneath the surface so you can feel grounded, overcome mental blocks, and make choices that truly fit the life you want to build.”</blockquote>
+                <p>This is an external coaching service provided independently from Nissanka Advisory.</p>
+                <a class="text-link" href="https://www.kasianissanka.co.uk/" target="_blank" rel="noopener noreferrer">Visit Kasia Nissanka Coaching <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="pillar-section" aria-labelledby="leadership-connect-title">
+        <div class="shell">
+            <div class="connection-heading">
+                <p class="system-label">07 / This connects to</p>
+                <h2 id="leadership-connect-title">Direction, insight and leadership reinforce one another.</h2>
+                <p>AI Strategy & Transformation gives direction. Workforce Intelligence provides organisational insight. Leadership Readiness helps leaders turn those decisions into conversations and behaviour.</p>
+            </div>
+            <div class="connection-list">
+                <article>
+                    <h3>AI Strategy & Transformation</h3>
+                    <p>Connect leadership decisions and communication to a practical direction for AI.</p>
+                    <a class="text-link" href="/advisory/ai-strategy/">Explore AI Strategy & Transformation <span aria-hidden="true">→</span></a>
+                </article>
+                <article>
+                    <h3>Workforce Intelligence</h3>
+                    <p>Ground leadership conversations in evidence about people, skills, work and capacity.</p>
+                    <a class="text-link" href="/advisory/workforce-intelligence/">Explore Workforce Intelligence <span aria-hidden="true">→</span></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="advisory-final" aria-labelledby="leadership-final-title">
+        <div class="shell advisory-final__grid">
+            <div>
+                <p class="system-label">08 / Start</p>
+                <h2 id="leadership-final-title">Change becomes real in the conversations leaders have.</h2>
+            </div>
+            <div>
+                <p class="advisory-final__copy">Explore the decisions, conversations or behaviours leaders need to be ready for.</p>
+                <a class="cta-inverse" href="mailto:gishan@nissanka.co.uk?subject=Leadership%20readiness">Discuss leadership readiness</a>
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    .leadership-areas > .shell > h2 {
+        max-width: 15ch;
+    }
+
+    .leadership-area-list {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: clamp(3rem, 7vw, 6rem) var(--grid-gap);
+        margin-top: clamp(5rem, 9vw, 8rem);
+    }
+
+    .leadership-area-list article {
+        grid-column: 1 / span 5;
+    }
+
+    .leadership-area-list .leadership-area--right {
+        grid-column: 8 / -1;
+    }
+
+    .area-number {
+        margin: 0 0 1.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+    }
+
+    .leadership-area-list h3 {
+        margin-bottom: 1rem;
+        font-size: 1.45rem;
+        letter-spacing: -0.025em;
+        text-transform: uppercase;
+    }
+
+    .leadership-area-list article > p:last-child {
+        margin: 0;
+    }
+
+    .conversation-section {
+        background: var(--colour-obsidian);
+        color: var(--colour-white);
+    }
+
+    .conversation-layout {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+    }
+
+    .conversation-lead {
+        grid-column: 1 / span 7;
+    }
+
+    .conversation-lead > p:last-child {
+        max-width: 40rem;
+        margin-top: 2rem;
+    }
+
+    .conversation-contexts {
+        grid-column: 9 / -1;
+        align-self: end;
+    }
+
+    .conversation-contexts ul {
+        margin: 2rem 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .conversation-contexts li {
+        padding-block: 0.75rem;
+        border-top: 1px solid var(--colour-white);
+    }
+
+    .change-questions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0 var(--grid-gap);
+        margin: clamp(4rem, 8vw, 7rem) 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .change-questions li {
+        min-height: 9rem;
+        padding: 1.25rem 0;
+        border-top: var(--border-architectural);
+        font-size: 1.125rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .change-questions span {
+        display: block;
+        margin-bottom: 2rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 400;
+    }
+
+    .coaching-section {
+        background: var(--colour-paper);
+    }
+
+    .coaching-layout {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+    }
+
+    .coaching-layout > :first-child {
+        grid-column: 1 / span 5;
+    }
+
+    .coaching-copy {
+        grid-column: 7 / -1;
+    }
+
+    .coaching-provider {
+        margin: 0;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    blockquote {
+        margin: 2rem 0;
+        font-family: var(--font-display);
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.2;
+    }
+
+    .coaching-copy > p:not(.coaching-provider) {
+        max-width: 36rem;
+    }
+
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .connection-heading > p:last-child {
+        max-width: 49rem;
+        margin: 2rem 0 0;
+    }
+
+    @media (max-width: 52rem) {
+        .conversation-layout,
+        .coaching-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .conversation-lead,
+        .conversation-contexts,
+        .coaching-layout > :first-child,
+        .coaching-copy {
+            grid-column: 1;
+        }
+
+        .conversation-contexts,
+        .coaching-copy {
+            margin-top: 3rem;
+        }
+
+        .leadership-area-list article,
+        .leadership-area-list .leadership-area--right {
+            grid-column: span 6;
+        }
+
+        .change-questions {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 38rem) {
+        .leadership-area-list {
+            grid-template-columns: 1fr;
+        }
+
+        .leadership-area-list article,
+        .leadership-area-list .leadership-area--right {
+            grid-column: 1;
+        }
+
+        .change-questions {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
