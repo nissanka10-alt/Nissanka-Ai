@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+
+const title = "Privacy | Nissanka Advisory";
+const description = "Privacy information for the Nissanka Advisory website.";
+---
+
+<BaseLayout {title} {description} path="/privacy/">
+    <PageIntro label="Legal" heading="Privacy" intro="The existing Privacy & Cookie Policy remains available while its Astro migration is prepared." breadcrumbs={[{ label: "Home", href: "/" }, { label: "Privacy" }]}>
+        <p><a href="/privacy.html">Read the current Privacy &amp; Cookie Policy</a>.</p>
+    </PageIntro>
+</BaseLayout>

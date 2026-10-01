@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageIntro from "../../../components/PageIntro.astro";
+
+const title = "AI Strategy & Transformation | Nissanka Advisory";
+const description = "Practical support for AI opportunity, readiness, governance, prioritisation and adoption.";
+---
+
+<BaseLayout {title} {description} path="/advisory/ai-strategy/">
+    <PageIntro label="Advisory / 01" heading="AI Strategy & Transformation" intro={description} breadcrumbs={[{ label: "Home", href: "/" }, { label: "Advisory", href: "/advisory/" }, { label: "AI Strategy" }]} />
+</BaseLayout>

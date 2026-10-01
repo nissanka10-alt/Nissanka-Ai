@@ -1,0 +1,35 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SeoHead from "../components/SeoHead.astro";
+import StructuredData from "../components/StructuredData.astro";
+import "../styles/global.css";
+
+interface Props {
+    title: string;
+    description: string;
+    path: string;
+    structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const { title, description, path, structuredData } = Astro.props;
+const canonical = new URL(path, Astro.site);
+---
+
+<!doctype html>
+<html lang="en-GB">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <SeoHead {title} {description} {canonical} />
+        {structuredData && <StructuredData data={structuredData} />}
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">Skip to main content</a>
+        <Header />
+        <main id="main-content">
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>

@@ -1,0 +1,55 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<footer class="site-footer">
+    <div class="shell site-footer__grid">
+        <div>
+            <Logo inverted />
+            <p>Nissanka Advisory is a trading name of Nissanka Group Ltd, a private limited company incorporated in England and Wales. Company No. 17486709.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+            <a href="/advisory/">Advisory</a>
+            <a href="/ideas/">Ideas</a>
+            <a href="/speaking/">Speaking</a>
+            <a href="/privacy/">Privacy</a>
+        </nav>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        padding-block: 4rem;
+        background: var(--colour-obsidian);
+        color: var(--colour-white);
+    }
+
+    .site-footer__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr);
+        gap: 3rem;
+    }
+
+    p {
+        max-width: 44rem;
+        margin: 2rem 0 0;
+        color: #c7c7c7;
+        font-size: 0.875rem;
+    }
+
+    nav {
+        display: grid;
+        align-content: start;
+        gap: 0.75rem;
+    }
+
+    nav a {
+        text-underline-offset: 0.3em;
+    }
+
+    @media (max-width: 42rem) {
+        .site-footer__grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

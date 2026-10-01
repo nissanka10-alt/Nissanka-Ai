@@ -1,0 +1,96 @@
+---
+interface Props {
+    inverted?: boolean;
+}
+
+const { inverted = false } = Astro.props;
+---
+
+<a class:list={["brand", { "brand--inverted": inverted }]} href="/" aria-label="Nissanka Advisory home">
+    <span class="brand__stamp" aria-hidden="true"><span>N</span></span>
+    <span class="brand__wordmark">NISSANKA</span>
+</a>
+
+<style>
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        color: var(--colour-black);
+        text-decoration: none;
+    }
+
+    .brand__stamp {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        place-items: center;
+        border: 1px solid var(--colour-black);
+        background: var(--colour-black);
+        color: var(--colour-white);
+    }
+
+    .brand__stamp span {
+        font-family: var(--font-display);
+        font-size: 2.15rem;
+        font-weight: 900;
+        line-height: 1;
+        -webkit-text-stroke: 0.018em currentColor;
+        paint-order: stroke fill;
+    }
+
+    .brand__wordmark {
+        padding: 0.4rem 0.45rem 0.4rem 0.75rem;
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        line-height: 1;
+    }
+
+    .brand:hover .brand__stamp,
+    .brand:focus-visible .brand__stamp {
+        background: var(--colour-white);
+        color: var(--colour-black);
+    }
+
+    .brand:hover .brand__wordmark,
+    .brand:focus-visible .brand__wordmark {
+        background: var(--colour-black);
+        color: var(--colour-white);
+    }
+
+    .brand--inverted {
+        color: var(--colour-white);
+    }
+
+    .brand--inverted .brand__stamp {
+        border-color: var(--colour-white);
+        background: var(--colour-white);
+        color: var(--colour-black);
+    }
+
+    .brand--inverted:hover .brand__stamp,
+    .brand--inverted:focus-visible .brand__stamp {
+        background: var(--colour-black);
+        color: var(--colour-white);
+    }
+
+    .brand--inverted:hover .brand__wordmark,
+    .brand--inverted:focus-visible .brand__wordmark {
+        background: var(--colour-white);
+        color: var(--colour-black);
+    }
+
+    .brand,
+    .brand * {
+        transition: none;
+    }
+
+    @media (max-width: 28rem) {
+        .brand__wordmark {
+            display: none;
+        }
+    }
+</style>

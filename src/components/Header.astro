@@ -1,0 +1,76 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<header class="site-header">
+    <div class="shell site-header__inner">
+        <Logo />
+        <nav aria-label="Primary navigation">
+            <a href="/advisory/">Advisory</a>
+            <a href="/ideas/">Ideas</a>
+            <a href="/speaking/">Speaking</a>
+            <a href="/about/">About</a>
+            <a class="site-header__cta" href="/ai-review/">Start with an AI Review</a>
+        </nav>
+    </div>
+</header>
+
+<style>
+    .site-header {
+        border-bottom: var(--border-architectural);
+        background: var(--colour-white);
+    }
+
+    .site-header__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        min-height: 5rem;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    nav a {
+        text-decoration: none;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.35em;
+    }
+
+    .site-header__cta {
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--colour-black);
+        background: var(--colour-black);
+        color: var(--colour-white);
+    }
+
+    .site-header__cta:hover {
+        background: var(--colour-white);
+        color: var(--colour-black);
+        text-decoration: none;
+    }
+
+    @media (max-width: 60rem) {
+        .site-header__inner {
+            align-items: flex-start;
+            flex-direction: column;
+            padding-block: 1rem;
+        }
+
+        nav {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 0.75rem 1rem;
+        }
+    }
+</style>

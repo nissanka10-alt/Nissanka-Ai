@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+
+const title = "Ideas | Nissanka Advisory";
+const description = "Ideas about AI, judgement, work, workforce intelligence and leadership.";
+---
+
+<BaseLayout {title} {description} path="/ideas/">
+    <PageIntro label="Ideas" heading="The Work AI Cannot Do" intro="AI can do the task. It cannot own the work." display breadcrumbs={[{ label: "Home", href: "/" }, { label: "Ideas" }]} />
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+interface Props {
+    heading?: string;
+}
+
+const { heading = "Tell us what you would like to discuss" } = Astro.props;
+---
+
+<section aria-labelledby="enquiry-heading">
+    <h2 id="enquiry-heading">{heading}</h2>
+    <p>This form structure is prepared for the redesign. It is not connected to a submission service yet.</p>
+    <form data-form-shell>
+        <label for="enquiry-name">Name</label>
+        <input id="enquiry-name" name="name" type="text" autocomplete="name" />
+        <label for="enquiry-email">Work email</label>
+        <input id="enquiry-email" name="email" type="email" autocomplete="email" />
+        <label for="enquiry-type">Enquiry type</label>
+        <select id="enquiry-type" name="enquiry-type">
+            <option value="ai-review">AI Opportunity &amp; Readiness Review</option>
+            <option value="advisory">Advisory challenge</option>
+            <option value="speaking">Speaking enquiry</option>
+        </select>
+        <label for="enquiry-message">What would you like to discuss?</label>
+        <textarea id="enquiry-message" name="message" rows="6"></textarea>
+        <button type="button" disabled>Submission not yet enabled</button>
+    </form>
+</section>
+
+<style>
+    form {
+        display: grid;
+        gap: 0.75rem;
+        max-width: 40rem;
+    }
+
+    label {
+        font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+        min-height: 3rem;
+        padding: 0.75rem;
+        border: var(--border-architectural);
+        background: var(--colour-white);
+        color: var(--colour-black);
+        font: inherit;
+        box-shadow: none;
+    }
+</style>

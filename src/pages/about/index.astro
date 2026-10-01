@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+
+const title = "About Gishan Nissanka | Nissanka Advisory";
+const description = "Gishan Nissanka is an enterprise AI and digital transformation leader with 20 years of international experience.";
+---
+
+<BaseLayout {title} {description} path="/about/">
+    <PageIntro label="About" heading="Gishan Nissanka" intro={description} breadcrumbs={[{ label: "Home", href: "/" }, { label: "About" }]}>
+        <p><a href="/profile/">View the current executive profile</a>.</p>
+    </PageIntro>
+</BaseLayout>

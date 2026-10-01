@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Cta from "../components/Cta.astro";
+
+const title = "Nissanka AI Advisory | AI adoption, workforce intelligence and automation for better business decisions";
+const description = "Nissanka AI Advisory helps organisations connect AI, workforce data and technology, so leaders can make clearer decisions, adopt AI safely and reduce manual work.";
+---
+
+<BaseLayout {title} {description} path="/">
+    <section class="section">
+        <div class="shell reading-width">
+            <p class="eyebrow">Nissanka Advisory</p>
+            <h1>AI adoption and workforce intelligence for better business decisions.</h1>
+            <p class="lede">{description}</p>
+            <p><Cta href="/ai-review/">Start with an AI Review</Cta></p>
+        </div>
+    </section>
+</BaseLayout>

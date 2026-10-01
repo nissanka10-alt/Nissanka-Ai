@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+
+const title = "AI Opportunity & Readiness Review | Nissanka Advisory";
+const description = "A practical review of where AI can create meaningful value, what needs attention first and which opportunities are worth pursuing.";
+const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "AI Opportunity & Readiness Review",
+    description,
+    url: "https://nissanka.co.uk/ai-review/",
+};
+---
+
+<BaseLayout {title} {description} path="/ai-review/" {structuredData}>
+    <PageIntro label="AI Opportunity & Readiness Review" heading="Find where AI can create meaningful value" intro={description} breadcrumbs={[{ label: "Home", href: "/" }, { label: "AI Review" }]} />
+</BaseLayout>
