@@ -6,13 +6,22 @@ const title = "AI Opportunity & Readiness Review | Nissanka Advisory";
 const description = "Identify where AI can create meaningful value, understand organisational readiness and agree practical priorities, ownership and next steps.";
 
 const usefulSituations = [
-    "AI activity is already happening, but there is no clear organisational view.",
-    "Leaders have many ideas but no consistent way to prioritise them.",
-    "Different teams are experimenting independently.",
-    "There is uncertainty about governance, data or risk.",
-    "AI tools are available, but adoption remains inconsistent.",
-    "Leadership wants a practical starting point before committing to a larger programme.",
-    "The organisation needs to understand how AI may affect work, skills and workforce decisions.",
+    {
+        title: "Too many AI ideas. No shared priorities.",
+        copy: "Leaders have opportunities to consider, but no consistent way to decide which ones are worth pursuing first.",
+    },
+    {
+        title: "AI activity is already happening. Visibility is limited.",
+        copy: "Different teams may be experimenting independently, making it difficult to see what is being used and where attention is needed.",
+    },
+    {
+        title: "Leaders want to move forward without creating unnecessary risk.",
+        copy: "There are questions about governance, data, adoption or capability that need to be understood before committing further.",
+    },
+    {
+        title: "The organisation needs to understand how work may change.",
+        copy: "AI may affect tasks, skills, roles and workforce decisions, but the practical implications are not yet clear.",
+    },
 ];
 
 const readinessAreas = [
@@ -116,17 +125,20 @@ const advisoryAreas = [
     {
         title: "AI Strategy & Transformation",
         href: "/advisory/ai-strategy/",
-        items: ["governance", "use-case development", "practical adoption", "training"],
+        copy: "Shape practical governance, develop priority use cases and support responsible adoption and training.",
+        linkText: "Explore AI Strategy",
     },
     {
         title: "Workforce Intelligence",
         href: "/advisory/workforce-intelligence/",
-        items: ["people data and analytics", "skills", "workforce planning", "AI-enabled operating models"],
+        copy: "Connect people data, skills and workforce planning to decisions about AI-enabled work and operating models.",
+        linkText: "Explore Workforce Intelligence",
     },
     {
         title: "Leadership Readiness",
         href: "/advisory/leadership-readiness/",
-        items: ["leading AI-enabled change", "critical conversation readiness", "leadership insights and measurement"],
+        copy: "Prepare leaders for AI-enabled change, critical conversations and the insights needed to guide progress.",
+        linkText: "Explore Leadership Readiness",
     },
 ];
 
@@ -221,20 +233,18 @@ const structuredData = {
     <section class="review-section" aria-labelledby="the-review-title">
         <div class="shell">
             <p class="system-label">02 / The review</p>
-            <div class="review-split">
+            <div class="review-intro">
+                <div class="review-intro__statement">
+                    <h2 id="the-review-title">Clarity before commitment.</h2>
+                    <p class="review-lens-line">Value / Readiness / Risk / Priorities</p>
+                </div>
                 <div class="review-prose">
-                    <h2 id="the-review-title">A structured conversation about where AI can genuinely help.</h2>
-                    <p class="lead-copy">The AI Opportunity &amp; Readiness Review is designed to create clarity before organisations invest further in AI.</p>
+                    <p class="review-intro__heading">A structured conversation about where AI can genuinely help.</p>
+                    <p>The AI Opportunity &amp; Readiness Review is designed to create clarity before organisations invest further in AI.</p>
                     <p>It brings together the questions that are often considered separately: where AI is already being used, where work could improve, which opportunities are realistic, what risks need attention and whether the organisation is ready to scale.</p>
                     <p>The Review is not a technical inspection or a compliance exercise.</p>
                     <p>It is a collaborative process designed to help leadership teams make better decisions about what to pursue, what to prepare for and what to leave alone.</p>
                 </div>
-                <ul class="review-lenses" aria-label="Review lenses">
-                    <li>Value</li>
-                    <li>Readiness</li>
-                    <li>Risk</li>
-                    <li>Priorities</li>
-                </ul>
             </div>
         </div>
     </section>
@@ -245,14 +255,14 @@ const structuredData = {
             <div class="section-heading">
                 <h2 id="useful-title">Useful when the organisation has more questions than answers.</h2>
             </div>
-            <ul class="situation-list">
-                {usefulSituations.map((situation, index) => (
-                    <li>
-                        <span>{String(index + 1).padStart(2, "0")}</span>
-                        <p>{situation}</p>
-                    </li>
+            <div class="situation-list">
+                {usefulSituations.map((situation) => (
+                    <article>
+                        <h3>{situation.title}</h3>
+                        <p>{situation.copy}</p>
+                    </article>
                 ))}
-            </ul>
+            </div>
         </div>
     </section>
 
@@ -300,31 +310,33 @@ const structuredData = {
             <div class="section-heading">
                 <h2 id="outputs-title">Clear enough to act on.</h2>
             </div>
-            <div class="outputs-grid">
+            <ol class="output-sequence">
                 {outputs.map((output, index) => (
-                    <article class="output">
+                    <li class="output">
                         <p class="structural-number">{String(index + 1).padStart(2, "0")}</p>
                         <h3>{output.title}</h3>
                         <p>{output.copy}</p>
-                    </article>
+                    </li>
                 ))}
-            </div>
+            </ol>
         </div>
     </section>
 
     <section class="review-section value-section" aria-labelledby="value-title">
         <div class="shell">
             <p class="system-label">07 / The value</p>
-            <div class="review-split">
-                <div class="review-prose">
+            <div class="value-editorial">
+                <div>
                     <h2 id="value-title">Better decisions before bigger investment.</h2>
+                </div>
+                <div class="value-editorial__copy">
                     <p class="lead-copy">The value of the Review is not another AI strategy document.</p>
                     <p>It is a shared understanding of where the organisation stands, where AI can genuinely help and what should happen next.</p>
                 </div>
-                <ul class="outcome-list">
-                    {valueOutcomes.map((outcome) => <li>{outcome}</li>)}
-                </ul>
             </div>
+            <ul class="outcome-list">
+                {valueOutcomes.map((outcome) => <li>{outcome}</li>)}
+            </ul>
         </div>
     </section>
 
@@ -355,13 +367,11 @@ const structuredData = {
                 <p>The client should be able to use the Review independently. Where further support is useful, Nissanka Advisory may support connected areas through its wider <a href="/advisory/">advisory work</a>.</p>
             </div>
             <div class="next-grid">
-                {advisoryAreas.map((area, index) => (
+                {advisoryAreas.map((area) => (
                     <article class="next-area">
-                        <p class="structural-number">{String(index + 1).padStart(2, "0")}</p>
-                        <h3><a href={area.href}>{area.title}</a></h3>
-                        <ul>
-                            {area.items.map((item) => <li>{item}</li>)}
-                        </ul>
+                        <h3>{area.title}</h3>
+                        <p>{area.copy}</p>
+                        <a class="text-link" href={area.href}>{area.linkText} <span aria-hidden="true">→</span></a>
                     </article>
                 ))}
             </div>
@@ -404,7 +414,6 @@ const structuredData = {
 
 <style>
     .review-hero,
-    .review-section,
     .review-final {
         border-bottom: var(--border-architectural);
     }
@@ -419,6 +428,8 @@ const structuredData = {
 
     .review-hero__grid,
     .review-split,
+    .review-intro,
+    .value-editorial,
     .faq-layout,
     .review-final__grid,
     .section-heading--with-copy {
@@ -542,27 +553,43 @@ const structuredData = {
         margin: 1.5rem 0 0;
     }
 
-    .lead-copy {
-        font-size: 1.125rem;
-        line-height: 1.65;
+    .review-intro__statement {
+        grid-column: 1 / span 7;
     }
 
-    .review-lenses {
+    .review-intro > .review-prose {
+        grid-column: 9 / -1;
         align-self: end;
-        margin: 0;
-        padding: 0;
-        border-bottom: var(--border-architectural);
-        list-style: none;
     }
 
-    .review-lenses li {
-        padding: 1rem 0;
-        border-top: var(--border-architectural);
+    .review-intro__statement h2 {
+        max-width: 11ch;
+        font-family: var(--font-display);
+        font-size: clamp(3.25rem, 5vw, 4.5rem);
+        font-weight: 900;
+        letter-spacing: -0.045em;
+        line-height: 1;
+    }
+
+    .review-intro__heading {
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.3;
+    }
+
+    .review-lens-line {
+        margin: 5rem 0 0;
         font-family: var(--font-mono);
         font-size: 0.75rem;
         font-weight: 700;
         letter-spacing: 0.12em;
         text-transform: uppercase;
+    }
+
+    .lead-copy {
+        font-size: 1.125rem;
+        line-height: 1.65;
     }
 
     .section-heading {
@@ -587,22 +614,15 @@ const structuredData = {
     }
 
     .situation-list {
-        margin: 0;
-        padding: 0;
-        border-bottom: var(--border-architectural);
-        list-style: none;
-    }
-
-    .situation-list li {
         display: grid;
-        grid-template-columns: minmax(3rem, 1fr) minmax(0, 11fr);
-        gap: var(--grid-gap);
-        align-items: start;
-        padding-block: 1.35rem;
-        border-top: var(--border-architectural);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(3rem, 7vw, 7rem) var(--grid-gap);
     }
 
-    .situation-list span,
+    .situation-list article {
+        max-width: 31rem;
+    }
+
     .structural-number,
     .process-step__label {
         font-family: var(--font-mono);
@@ -611,9 +631,19 @@ const structuredData = {
         text-transform: uppercase;
     }
 
+    .situation-list h3 {
+        margin: 0 0 1.25rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+        text-transform: uppercase;
+    }
+
     .situation-list p {
-        max-width: 52rem;
+        max-width: 29rem;
         margin: 0;
+        line-height: 1.65;
     }
 
     .readiness-grid {
@@ -695,7 +725,6 @@ const structuredData = {
     }
 
     .process-step ul,
-    .next-area ul,
     .working-list ul,
     .outcome-list {
         margin: 0;
@@ -704,7 +733,6 @@ const structuredData = {
     }
 
     .process-step li,
-    .next-area li,
     .working-list li,
     .outcome-list li {
         padding-block: 0.55rem;
@@ -712,69 +740,133 @@ const structuredData = {
         font-size: 0.875rem;
     }
 
-    .outputs-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        border-block: var(--border-architectural);
+    .output-sequence {
+        margin: 0;
+        padding: 0;
+        list-style: none;
     }
 
     .output {
-        min-height: 17rem;
-        padding: 1.5rem;
-    }
-
-    .output:nth-child(even) {
-        border-left: var(--border-architectural);
-    }
-
-    .output:nth-child(n + 3) {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+        align-items: start;
+        padding-block: clamp(2rem, 5vw, 4rem);
         border-top: var(--border-architectural);
     }
 
-    .output h3 {
-        margin-top: 3.5rem;
-    }
-
-    .outcome-list,
-    .working-list {
-        align-self: end;
+    .output:last-child {
         border-bottom: var(--border-architectural);
     }
 
-    .outcome-list li,
+    .output > .structural-number {
+        grid-column: 1;
+    }
+
+    .output h3 {
+        grid-column: 3 / span 4;
+        margin: 0;
+    }
+
+    .output > p:last-child {
+        grid-column: 8 / -1;
+        font-size: 1.0625rem;
+        line-height: 1.65;
+    }
+
+    .value-editorial > :first-child {
+        grid-column: 1 / span 8;
+    }
+
+    .value-editorial__copy {
+        grid-column: 9 / -1;
+        align-self: end;
+    }
+
+    .value-section .value-editorial h2 {
+        max-width: 13ch;
+        font-family: var(--font-display);
+        font-size: clamp(3.25rem, 5vw, 4.5rem);
+        font-weight: 900;
+        letter-spacing: -0.045em;
+        line-height: 1;
+    }
+
+    .value-editorial__copy p {
+        margin: 0 0 1.5rem;
+    }
+
+    .outcome-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem var(--grid-gap);
+        margin-top: clamp(4rem, 8vw, 7rem);
+    }
+
+    .outcome-list li {
+        position: relative;
+        padding: 0 0 0 1.5rem;
+        border: 0;
+        font-size: 1rem;
+    }
+
+    .outcome-list li::before {
+        position: absolute;
+        left: 0;
+        content: "—";
+        font-family: var(--font-mono);
+    }
+
+    .working-list {
+        align-self: end;
+    }
+
+    .working-list ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem 1.5rem;
+        margin-top: 2.5rem;
+    }
+
     .working-list li {
-        padding-block: 0.85rem;
-        border-color: var(--colour-black);
+        position: relative;
+        padding: 0 0 0 1.25rem;
+        border: 0;
+        font-size: 0.95rem;
+    }
+
+    .working-list li::before {
+        position: absolute;
+        left: 0;
+        content: "—";
     }
 
     .working-list > .system-label {
-        padding-block: 1rem;
+        padding-top: 1rem;
         border-top: var(--border-architectural);
     }
 
     .next-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(2.5rem, 5vw, 5rem);
         margin-top: 4rem;
-        border-block: var(--border-architectural);
     }
 
     .next-area {
         min-width: 0;
-        padding: 1.5rem;
-    }
-
-    .next-area + .next-area {
-        border-left: var(--border-architectural);
+        padding-top: 1.5rem;
+        border-top: var(--border-architectural);
     }
 
     .next-area h3 {
         max-width: 18rem;
-        margin-top: 3.5rem;
+        margin: 0 0 1.25rem;
     }
 
-    .next-area h3 a {
-        text-underline-offset: 0.25em;
+    .next-area > p {
+        margin: 0 0 2rem;
+        line-height: 1.65;
     }
 
     .faq-layout > :first-child {
@@ -892,6 +984,8 @@ const structuredData = {
 
         .review-hero__grid,
         .review-split,
+        .review-intro,
+        .value-editorial,
         .faq-layout,
         .review-final__grid,
         .section-heading--with-copy {
@@ -902,6 +996,10 @@ const structuredData = {
         .review-hero__support,
         .review-split > :first-child,
         .review-split > :last-child,
+        .review-intro__statement,
+        .review-intro > .review-prose,
+        .value-editorial > :first-child,
+        .value-editorial__copy,
         .faq-layout > :first-child,
         .faq-layout > :last-child,
         .review-final__grid > :first-child,
@@ -913,6 +1011,8 @@ const structuredData = {
 
         .review-hero__support,
         .review-split > :last-child,
+        .review-intro > .review-prose,
+        .value-editorial__copy,
         .faq-layout > :last-child,
         .review-final__grid > :last-child,
         .section-heading--with-copy > p {
@@ -932,23 +1032,31 @@ const structuredData = {
             font-size: clamp(2.25rem, 10vw, 2.75rem);
         }
 
+        .review-intro__statement h2,
+        .value-section .value-editorial h2 {
+            font-size: clamp(2.75rem, 12vw, 3.25rem);
+        }
+
+        .review-lens-line {
+            margin-top: 3rem;
+        }
+
         .section-heading {
             margin-bottom: 2.5rem;
         }
 
-        .situation-list li {
-            grid-template-columns: 2rem minmax(0, 1fr);
+        .situation-list {
+            grid-template-columns: 1fr;
+            gap: 3.5rem;
         }
 
         .readiness-grid,
         .process-grid,
-        .outputs-grid,
         .next-grid {
             grid-template-columns: 1fr;
         }
 
-        .readiness-area,
-        .output {
+        .readiness-area {
             min-height: 0;
             padding: 1.5rem 0;
         }
@@ -957,27 +1065,46 @@ const structuredData = {
         .readiness-area:nth-child(3),
         .readiness-area:nth-child(5),
         .readiness-area:nth-child(6),
-        .output:nth-child(even),
-        .next-area + .next-area,
         .process-step + .process-step {
             border-left: 0;
         }
 
         .readiness-area + .readiness-area,
-        .output + .output,
-        .next-area + .next-area,
         .process-step + .process-step {
             border-top: var(--border-architectural);
         }
 
-        .readiness-area h3,
-        .output h3 {
+        .readiness-area h3 {
             margin-top: 2.5rem;
+        }
+
+        .output {
+            grid-template-columns: 2rem minmax(0, 1fr);
+            padding-block: 2.5rem;
+        }
+
+        .output > .structural-number {
+            grid-column: 1;
+            grid-row: 1 / span 2;
+        }
+
+        .output h3,
+        .output > p:last-child {
+            grid-column: 2;
+        }
+
+        .output > p:last-child {
+            margin-top: 0.5rem;
+        }
+
+        .outcome-list,
+        .working-list ul {
+            grid-template-columns: 1fr;
         }
 
         .process-step,
         .next-area {
-            padding: 1.5rem 0;
+            padding: 1.5rem 0 0;
         }
 
         .process-step__copy {
