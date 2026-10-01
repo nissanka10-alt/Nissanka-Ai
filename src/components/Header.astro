@@ -25,15 +25,15 @@ import Logo from "./Logo.astro";
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 2rem;
-        min-height: 5rem;
+        gap: 1.5rem;
+        min-height: 6rem;
     }
 
     nav {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap: 1.5rem;
+        gap: 1.35rem;
         font-size: 0.875rem;
         font-weight: 600;
     }
@@ -60,7 +60,7 @@ import Logo from "./Logo.astro";
         text-decoration: none;
     }
 
-    @media (max-width: 60rem) {
+    @media (max-width: 68rem) {
         .site-header__inner {
             align-items: flex-start;
             flex-direction: column;
@@ -71,6 +71,36 @@ import Logo from "./Logo.astro";
             justify-content: flex-start;
             flex-wrap: wrap;
             gap: 0.75rem 1rem;
+        }
+    }
+
+    @media (max-width: 36rem) {
+        .site-header__inner {
+            gap: 1rem;
+        }
+
+        nav {
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0;
+            border-top: var(--border-architectural);
+        }
+
+        nav a {
+            padding-block: 0.7rem;
+            border-bottom: var(--border-architectural);
+        }
+
+        nav a:nth-child(even):not(.site-header__cta) {
+            padding-left: 1rem;
+            border-left: var(--border-architectural);
+        }
+
+        .site-header__cta {
+            grid-column: 1 / -1;
+            margin-top: 0.75rem;
+            text-align: center;
         }
     }
 </style>

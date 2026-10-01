@@ -12,6 +12,7 @@
     --border-architectural: 1px solid var(--colour-black);
     --content-width: 80rem;
     --reading-width: 48rem;
+    --grid-gap: clamp(1.25rem, 2.5vw, 2rem);
     --space-1: 0.5rem;
     --space-2: 1rem;
     --space-3: 1.5rem;
@@ -38,7 +39,9 @@ html {
 body {
     margin: 0;
     min-width: 20rem;
+    overflow-x: clip;
     background: var(--colour-white);
+    font-size: 1.0625rem;
     line-height: 1.6;
 }
 
@@ -58,6 +61,15 @@ textarea:focus-visible {
 img {
     display: block;
     max-width: 100%;
+}
+
+p,
+li,
+h1,
+h2,
+h3,
+a {
+    overflow-wrap: break-word;
 }
 
 .shell {
@@ -89,6 +101,16 @@ img {
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.system-label {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
     text-transform: uppercase;
 }
 
@@ -145,6 +167,10 @@ h2 {
 }
 
 @media (max-width: 52rem) {
+    body {
+        font-size: 1rem;
+    }
+
     .grid {
         grid-template-columns: 1fr;
     }

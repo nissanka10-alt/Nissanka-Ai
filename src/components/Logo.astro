@@ -15,7 +15,7 @@ const { inverted = false } = Astro.props;
     .brand {
         display: inline-flex;
         align-items: center;
-        gap: 1rem;
+        gap: 0.75rem;
         color: var(--colour-black);
         text-decoration: none;
     }
@@ -41,9 +41,9 @@ const { inverted = false } = Astro.props;
     }
 
     .brand__wordmark {
-        padding: 0.4rem 0.45rem 0.4rem 0.75rem;
+        padding: 0.3rem 0.25rem 0.3rem 0.55rem;
         font-family: var(--font-sans);
-        font-size: 0.8rem;
+        font-size: 1.8125rem;
         font-weight: 600;
         letter-spacing: 0.3em;
         line-height: 1;
@@ -88,9 +88,9 @@ const { inverted = false } = Astro.props;
         transition: none;
     }
 
-    @media (max-width: 28rem) {
+    @media (max-width: 36rem) {
         .brand__wordmark {
-            display: none;
+            font-size: 1.375rem;
         }
     }
 </style>
