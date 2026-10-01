@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import paWorldImage from "../assets/editorial/pa-world-2025.jpg";
 
 const title = "Nissanka Advisory | AI, Workforce & Leadership Advisory";
 const description = "Nissanka Advisory helps organisations identify valuable AI opportunities, strengthen workforce intelligence and prepare leaders for AI-enabled change.";
@@ -190,18 +192,29 @@ const events = [
     <section class="home-section speaking-section" aria-labelledby="speaking-title">
         <div class="shell">
             <p class="system-label">07 / Speaking</p>
-            <div class="editorial-split editorial-split--dark">
-                <div>
+            <div class="speaking-layout">
+                <figure class="speaking-image">
+                    <Image
+                        src={paWorldImage}
+                        alt="Speaker presenting to an audience at a conference."
+                        widths={[480, 720, 960, 1200]}
+                        sizes="(max-width: 64rem) calc(100vw - 2rem), 58vw"
+                        format="webp"
+                        quality={82}
+                        loading="lazy"
+                    />
+                </figure>
+                <div class="speaking-content">
                     <h2 id="speaking-title">Ideas designed for the room.</h2>
                     <p class="lead-copy">Keynotes, leadership sessions and executive conversations on AI, workforce intelligence and how work changes.</p>
                     <p>More than 50 keynotes, presentations and leadership sessions.</p>
                     <a class="text-link" href="/speaking/">Explore Speaking <span aria-hidden="true">→</span></a>
-                </div>
-                <div class="event-list">
-                    <p class="system-label">Selected previous events</p>
-                    <ul>
-                        {events.map((event) => <li>{event}</li>)}
-                    </ul>
+                    <div class="event-list">
+                        <p class="system-label">Selected previous events</p>
+                        <ul>
+                            {events.map((event) => <li>{event}</li>)}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -604,8 +617,31 @@ const events = [
         color: var(--colour-white);
     }
 
-    .editorial-split--dark > :first-child {
-        padding-right: 2rem;
+    .speaking-layout {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+        align-items: start;
+        margin-top: 2.5rem;
+    }
+
+    .speaking-image {
+        grid-column: 1 / span 7;
+        min-width: 0;
+        margin: 0;
+        overflow: hidden;
+        aspect-ratio: 5 / 4;
+    }
+
+    .speaking-image :global(img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 38%;
+    }
+
+    .speaking-content {
+        grid-column: 9 / -1;
     }
 
     .speaking-section h2 {
@@ -622,6 +658,7 @@ const events = [
     }
 
     .event-list {
+        margin-top: 4rem;
         border-top: 1px solid var(--colour-white);
     }
 
@@ -667,6 +704,23 @@ const events = [
 
         .pillar h3 {
             margin-top: 3rem;
+        }
+
+        .speaking-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .speaking-image,
+        .speaking-content {
+            grid-column: 1;
+        }
+
+        .speaking-image {
+            aspect-ratio: 16 / 10;
+        }
+
+        .speaking-content {
+            margin-top: 2rem;
         }
 
         .method-grid {
@@ -811,10 +865,6 @@ const events = [
 
         .ideas-copy {
             margin-top: 2rem;
-        }
-
-        .editorial-split--dark > :first-child {
-            padding-right: 0;
         }
 
         .event-list {
