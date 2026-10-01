@@ -1,0 +1,123 @@
+.editorial-page-hero,
+.editorial-section,
+.editorial-final {
+    border-bottom: var(--border-architectural);
+}
+
+.editorial-page-hero {
+    padding-block: 2rem clamp(6rem, 11vw, 10rem);
+}
+
+.editorial-page-hero .breadcrumbs {
+    margin-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+.editorial-section,
+.editorial-final {
+    padding-block: clamp(5rem, 9vw, 8rem);
+}
+
+.editorial-section h2,
+.editorial-final h2 {
+    max-width: 17ch;
+    margin: 1.5rem 0 0;
+    font-size: clamp(2.5rem, 4vw, 3.25rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+}
+
+.editorial-grid,
+.editorial-split,
+.editorial-final__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--grid-gap);
+}
+
+.editorial-split > :first-child,
+.editorial-final__grid > :first-child {
+    grid-column: 1 / span 7;
+}
+
+.editorial-split > :last-child,
+.editorial-final__grid > :last-child {
+    grid-column: 9 / -1;
+    align-self: end;
+}
+
+.editorial-paper {
+    background: var(--colour-paper);
+}
+
+.editorial-dark,
+.editorial-final {
+    background: var(--colour-obsidian);
+    color: var(--colour-white);
+}
+
+.display-statement {
+    font-family: var(--font-display);
+    font-size: clamp(3.25rem, 5vw, 4.75rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1;
+}
+
+.lead-copy {
+    font-size: 1.125rem;
+    line-height: 1.65;
+}
+
+.text-link {
+    display: inline-block;
+    margin-top: 1.75rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-underline-offset: 0.35em;
+}
+
+.editorial-final__copy {
+    margin: 0 0 2rem;
+    font-size: 1.125rem;
+}
+
+.cta-inverse {
+    display: inline-flex;
+    min-height: 3.25rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.1rem;
+    border: 1px solid var(--colour-white);
+    background: var(--colour-white);
+    color: var(--colour-black);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.cta-inverse:hover,
+.cta-inverse:focus-visible {
+    background: var(--colour-black);
+    color: var(--colour-white);
+}
+
+@media (max-width: 52rem) {
+    .editorial-grid,
+    .editorial-split,
+    .editorial-final__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .editorial-split > :first-child,
+    .editorial-split > :last-child,
+    .editorial-final__grid > :first-child,
+    .editorial-final__grid > :last-child {
+        grid-column: 1;
+    }
+
+    .editorial-split > :last-child,
+    .editorial-final__grid > :last-child {
+        margin-top: 3rem;
+    }
+}
