@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { featuredInsight, formatInsightDate, insightGeographies, insightTopics } from "../../data/insights";
+
+const title = "Insights | Nissanka Advisory";
+const description = "Research, frameworks and practical perspectives on AI adoption, workforce intelligence, leadership, governance and the future of work.";
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        { "@type": "CollectionPage", "@id": "https://nissanka.co.uk/insights/#webpage", url: "https://nissanka.co.uk/insights/", name: title, description },
+        { "@type": "BreadcrumbList", itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+            { "@type": "ListItem", position: 2, name: "Insights", item: "https://nissanka.co.uk/insights/" },
+        ] },
+    ],
+};
+---
+
+<BaseLayout {title} {description} path="/insights/" {structuredData}>
+    <section class="insights-hero" aria-labelledby="insights-title"><div class="shell"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Insights" }]} /><p class="system-label">01 / Insights</p><div class="hero-grid"><h1 id="insights-title">Ideas become useful when they change a decision.</h1><p>Research, frameworks and practical perspectives for leaders navigating AI, workforce change and organisational transformation.</p></div></div></section>
+
+    <section class="discovery" aria-labelledby="discovery-title"><div class="shell"><p class="system-label">02 / Discover</p><h2 id="discovery-title">A growing library organised for useful discovery.</h2><div class="taxonomy"><nav aria-label="Insight topics"><p>Topic</p><ul>{insightTopics.map((topic) => <li><a href="#published-insights">{topic}</a></li>)}</ul></nav><div aria-label="Available geography metadata"><p>Geography</p><ul><li><span>All</span></li>{insightGeographies.map((geography) => <li><span>{geography}</span></li>)}</ul></div></div><p class="taxonomy-note">Topic and geography labels are publishing metadata. Dedicated filters will be introduced when the library contains enough material to make them useful.</p></div></section>
+
+    <section id="published-insights" class="featured" aria-labelledby="featured-title"><div class="shell"><p class="system-label">03 / Featured insight</p><article class="featured-grid"><div class="featured-meta"><p>{featuredInsight.format}</p><p>{featuredInsight.topic}</p><p>{featuredInsight.geography}</p><p>{featuredInsight.readTime}</p><p>Published {formatInsightDate(featuredInsight.published)}</p>{featuredInsight.updated && <p>Updated {formatInsightDate(featuredInsight.updated)}</p>}</div><div><h2 id="featured-title">{featuredInsight.title}</h2><p>{featuredInsight.summary}</p><p class="author">By <a href="/about/">{featuredInsight.author}</a></p><a class="text-link" href={`/insights/${featuredInsight.slug}/`}>Read the full insight <span aria-hidden="true">→</span></a></div></article></div></section>
+
+    <section class="library-note"><div class="shell"><p class="system-label">04 / The library</p><p class="library-statement">The library will grow through published work—not placeholders.</p><p>Future articles, research notes, frameworks and guides will appear here when they are ready.</p><a href="/ideas/">Explore the broader Ideas platform <span aria-hidden="true">→</span></a></div></section>
+</BaseLayout>
+
+<style>
+    .insights-hero,.discovery,.featured,.library-note{padding-block:clamp(5rem,9vw,8rem);border-bottom:var(--border-architectural)}.insights-hero{padding-top:2rem;background:var(--colour-paper)}.insights-hero :global(.breadcrumbs){margin-bottom:clamp(4rem,8vw,7rem)}.hero-grid,.featured-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap);align-items:end;margin-top:2rem}.hero-grid h1{grid-column:1/span 7;max-width:12ch;margin:0;font-family:var(--font-display);font-size:clamp(3.75rem,6vw,5.5rem);letter-spacing:-.05em;line-height:.96}.hero-grid>p{grid-column:9/-1;margin:0;font-size:1.125rem}.discovery h2{max-width:16ch;margin:1.5rem 0 0;font-size:clamp(2.5rem,4vw,3.25rem);letter-spacing:-.04em}.taxonomy{display:grid;grid-template-columns:2fr 1fr;gap:clamp(3rem,8vw,8rem);margin-top:5rem}.taxonomy p,.featured-meta p{margin:0;font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase}.taxonomy ul{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin:1.5rem 0 0;padding:1.25rem 0 0;border-top:var(--border-architectural);list-style:none}.taxonomy a{text-underline-offset:.3em}.taxonomy-note{max-width:48rem;margin:3rem 0 0;color:#555;font-size:.875rem}.featured-meta{grid-column:1/span 3;align-self:start}.featured-meta p{padding:.65rem 0;border-top:var(--border-architectural)}.featured-grid>div:last-child{grid-column:5/-1}.featured h2{max-width:19ch;margin:0;font-family:var(--font-display);font-size:clamp(3rem,5vw,4.75rem);font-weight:900;letter-spacing:-.045em;line-height:1}.featured-grid>div:last-child>p{max-width:45rem}.author{font-size:.875rem}.text-link{display:inline-block;margin-top:1.5rem;font-weight:700;text-underline-offset:.35em}.library-note{background:var(--colour-obsidian);color:white}.library-note .shell{max-width:60rem}.library-statement{margin:2rem 0 1.5rem;font-family:var(--font-display);font-size:clamp(2.5rem,4vw,4rem);font-weight:900;line-height:1}.library-note a{display:inline-block;margin-top:1.5rem;font-weight:700;text-underline-offset:.35em}
+    @media(max-width:52rem){.hero-grid,.featured-grid{grid-template-columns:minmax(0,1fr)}.hero-grid h1,.hero-grid>p,.featured-meta,.featured-grid>div:last-child{grid-column:1}.hero-grid>p,.featured-grid>div:last-child{margin-top:3rem}.taxonomy{grid-template-columns:1fr}}
+</style>

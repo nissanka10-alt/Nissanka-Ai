@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import ArticleUtilities from "../../../components/ArticleUtilities.astro";
+import { formatInsightDate, insights } from "../../../data/insights";
+import legacyArticle from "../../../../insights/safe-ai-at-work/index.html?raw";
+
+const insight = insights.find((item) => item.slug === "safe-ai-at-work")!;
+const title = "Using AI Safely at Work | Nissanka Advisory";
+const description = insight.summary;
+const extracted = legacyArticle.match(/<!-- Introduction -->([\s\S]*?)<!-- Conclusion & CTA -->/)?.[1] ?? "";
+const articleBody = extracted.replace(/<!--([\s\S]*?)-->/g, "").replace(/\sclass="[^"]*"/g, "");
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Article",
+            "@id": "https://nissanka.co.uk/insights/safe-ai-at-work/#article",
+            headline: insight.title,
+            description,
+            url: "https://nissanka.co.uk/insights/safe-ai-at-work/",
+            datePublished: insight.published,
+            dateModified: insight.updated,
+            author: { "@type": "Person", "@id": "https://nissanka.co.uk/#gishan-nissanka", name: insight.author, url: "https://nissanka.co.uk/about/" },
+            publisher: { "@type": "Organization", name: "Nissanka Advisory", url: "https://nissanka.co.uk/" },
+            about: [insight.topic, insight.geography],
+        },
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+                { "@type": "ListItem", position: 2, name: "Insights", item: "https://nissanka.co.uk/insights/" },
+                { "@type": "ListItem", position: 3, name: insight.title, item: "https://nissanka.co.uk/insights/safe-ai-at-work/" },
+            ],
+        },
+    ],
+};
+---
+
+<BaseLayout {title} {description} path="/insights/safe-ai-at-work/" {structuredData}>
+    <article class="insight-article">
+        <header class="article-header"><div class="shell"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Insights", href: "/insights/" }, { label: "Safe AI at Work" }]} /><p class="system-label">{insight.format} / {insight.topic}</p><h1>{insight.title}</h1><p class="summary">{insight.summary}</p><dl class="article-meta"><div><dt>Topic</dt><dd>{insight.topic}</dd></div><div><dt>Geography</dt><dd>{insight.geography}</dd></div><div><dt>Published</dt><dd><time datetime={insight.published}>{formatInsightDate(insight.published)}</time></dd></div>{insight.updated && <div><dt>Updated</dt><dd><time datetime={insight.updated}>{formatInsightDate(insight.updated)}</time></dd></div>}<div><dt>Read time</dt><dd>{insight.readTime}</dd></div></dl><p class="author-line">By <a href="/about/">{insight.author}</a> — People Technology and AI Transformation leader.</p><ArticleUtilities title={insight.title} url="/insights/safe-ai-at-work/" /></div></header>
+
+        <div class="article-body shell" set:html={articleBody}></div>
+
+        {insight.references && <section class="references" aria-labelledby="references-title"><div class="reading-shell"><p class="system-label">Sources</p><h2 id="references-title">Sources & References</h2><ol>{insight.references.map((reference) => <li><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}<span class="visually-hidden"> (opens in a new tab)</span></a></li>)}</ol></div></section>}
+
+        <section class="author-note" aria-labelledby="author-title"><div class="reading-shell"><p class="system-label">Author</p><h2 id="author-title">Gishan Nissanka</h2><p>Gishan works across AI transformation, workforce intelligence, people technology and organisational decision-making.</p><a href="/about/">About Gishan <span aria-hidden="true">→</span></a></div></section>
+
+        <section class="article-path" aria-labelledby="path-title"><div class="shell path-grid"><div><p class="system-label">Where this leads</p><h2 id="path-title">Turn safe-use questions into practical organisational decisions.</h2></div><div><p>Explore the connected advisory work or start with a structured review of opportunity, readiness and priorities.</p>{insight.advisoryPath && <a href={insight.advisoryPath.href}>{insight.advisoryPath.label} <span aria-hidden="true">→</span></a>}<a href="/ai-review/">Explore the AI Opportunity & Readiness Review <span aria-hidden="true">→</span></a></div></div></section>
+    </article>
+</BaseLayout>
+
+<style>
+    .article-header{padding-block:2rem clamp(4rem,8vw,7rem);background:var(--colour-paper);border-bottom:var(--border-architectural)}.article-header :global(.breadcrumbs){margin-bottom:clamp(3rem,7vw,6rem)}.article-header>.shell{max-width:64rem}.article-header h1{max-width:15ch;margin:1.5rem 0 2rem;font-family:var(--font-display);font-size:clamp(3.5rem,6vw,5.5rem);letter-spacing:-.05em;line-height:.96}.summary{max-width:48rem;font-size:1.2rem}.article-meta{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1rem;margin:3rem 0 0;padding:1.25rem 0;border-block:var(--border-architectural)}.article-meta div{min-width:0}.article-meta dt{font-family:var(--font-mono);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.article-meta dd{margin:.5rem 0 0;font-size:.85rem}.author-line{margin:2rem 0}.author-line a{font-weight:700;text-underline-offset:.3em}.article-body{max-width:48rem;padding-block:clamp(4rem,8vw,7rem)}.article-body :global(>div+div){margin-top:clamp(3rem,7vw,5rem)}.article-body :global(h2){margin:0 0 1.5rem;font-size:clamp(1.75rem,3vw,2.35rem);letter-spacing:-.03em;scroll-margin-top:2rem}.article-body :global(h3){margin:2rem 0 .75rem;font-size:1.2rem}.article-body :global(p){margin:1.15rem 0}.article-body :global(ul),.article-body :global(ol){padding-left:1.4rem}.article-body :global(li+li){margin-top:.55rem}.article-body :global(a){text-underline-offset:.3em}.article-body :global(>div:nth-child(2)){padding:1.5rem;border:var(--border-architectural);background:var(--colour-paper)}.article-body :global(>div:nth-child(2) h2){font-family:var(--font-mono);font-size:.75rem;text-transform:uppercase}.article-body :global(.font-mono){font-family:var(--font-mono)}.article-body :global(.italic),.article-body :global(em){font-style:italic}.reading-shell{width:min(calc(100% - 2rem),48rem);margin-inline:auto}.references,.author-note{padding-block:clamp(4rem,8vw,6rem);border-top:var(--border-architectural)}.references{background:var(--colour-paper)}.references h2,.author-note h2{margin:1.5rem 0 2rem;font-size:2.25rem}.references ol{margin:0;padding-left:1.4rem}.references li+li{margin-top:1rem}.references a,.author-note a,.article-path a{text-underline-offset:.3em}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.article-path{padding-block:clamp(5rem,9vw,8rem);background:var(--colour-obsidian);color:white}.path-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap)}.path-grid>div:first-child{grid-column:1/span 7}.path-grid>div:last-child{grid-column:9/-1}.article-path h2{max-width:15ch;margin:1.5rem 0 0;font-size:clamp(2.5rem,4vw,3.25rem)}.path-grid>div:last-child a{display:block;margin-top:1.5rem;font-weight:700}
+    @media(max-width:52rem){.article-meta{grid-template-columns:repeat(2,minmax(0,1fr))}.path-grid{grid-template-columns:minmax(0,1fr)}.path-grid>div:first-child,.path-grid>div:last-child{grid-column:1}.path-grid>div:last-child{margin-top:3rem}}
+    @media(max-width:30rem){.article-meta{grid-template-columns:1fr}.article-header h1{font-size:clamp(3rem,14vw,4rem)}}
+    @media print{
+        :global(.site-header),:global(.site-footer),.article-header :global(.breadcrumbs),.article-header :global(.article-utilities),.article-path{display:none!important}
+        :global(body){background:white!important;color:black!important;font-size:11pt}
+        .article-header{display:block!important;padding:0 0 1.5rem!important;background:white!important;border:0!important}.article-header h1{font-size:28pt}.article-meta{grid-template-columns:repeat(5,1fr)}.article-body,.reading-shell{max-width:none;width:100%;padding-inline:0}.article-body :global(h2){break-after:avoid}.article-body :global(a){color:black;text-decoration:none}.references{background:white;break-before:page}.author-note{break-inside:avoid}@page{margin:18mm}
+    }
+</style>

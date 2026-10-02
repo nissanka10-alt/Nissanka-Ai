@@ -1,0 +1,37 @@
+---
+interface Props { title: string; url: string; }
+const { title, url } = Astro.props;
+const absoluteUrl = new URL(url, Astro.site).toString();
+const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(absoluteUrl)}`;
+const emailUrl = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(absoluteUrl)}`;
+---
+
+<nav class="article-utilities" aria-label="Article utilities" data-article-utilities data-url={absoluteUrl}>
+    <p>Share / Save</p>
+    <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+    <a href={emailUrl}>Email</a>
+    <button type="button" data-copy-link>Copy link</button>
+    <button type="button" data-print>Print / Save as PDF</button>
+    <span class="utility-status" aria-live="polite"></span>
+</nav>
+
+<script>
+    document.querySelectorAll<HTMLElement>("[data-article-utilities]").forEach((utilities) => {
+        const copyButton = utilities.querySelector<HTMLButtonElement>("[data-copy-link]");
+        const printButton = utilities.querySelector<HTMLButtonElement>("[data-print]");
+        const status = utilities.querySelector<HTMLElement>(".utility-status");
+        copyButton?.addEventListener("click", async () => {
+            await navigator.clipboard.writeText(utilities.dataset.url ?? window.location.href);
+            if (status) status.textContent = "Link copied.";
+        });
+        printButton?.addEventListener("click", () => window.print());
+    });
+</script>
+
+<style>
+    .article-utilities { display:flex; flex-wrap:wrap; gap:.75rem 1.25rem; align-items:center; padding-block:1.25rem; border-block:var(--border-architectural); font-size:.8rem; }
+    .article-utilities p { margin:0; font-family:var(--font-mono); font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+    .article-utilities a,.article-utilities button { padding:0; border:0; background:none; color:inherit; font:inherit; text-decoration:underline; text-underline-offset:.3em; cursor:pointer; }
+    .utility-status { min-width:5rem; font-size:.75rem; }
+    .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+</style>
