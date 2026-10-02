@@ -1,10 +1,10 @@
 ---
 import Breadcrumbs from "./Breadcrumbs.astro";
-import type { ToolResource } from "../data/tools";
+import type { PublishedToolResource } from "../data/tools";
 import { formatToolDate } from "../data/tools";
 
 interface Props {
-    resource: ToolResource;
+    resource: PublishedToolResource;
 }
 
 const { resource } = Astro.props;

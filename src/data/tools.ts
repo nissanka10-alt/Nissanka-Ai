@@ -59,11 +59,17 @@ export interface InteractiveToolArchitecture {
     optionalEmail: boolean;
 }
 
-export interface ToolResource {
+export interface AssessmentProvision {
+    dimensions?: string[];
+    scoringApproved: boolean;
+    resultBandsApproved: boolean;
+}
+
+interface ToolResourceBase {
     title: string;
     slug: string;
-    summary: string;
-    description: string;
+    summary?: string;
+    description?: string;
     type: ToolType;
     topic: ToolTopic;
     geography: ToolGeography[];
@@ -71,7 +77,7 @@ export interface ToolResource {
     version?: string;
     published?: string;
     updated?: string;
-    access: ToolAccessType;
+    access?: ToolAccessType;
     status: ToolStatus;
     download?: ToolDownload;
     gate?: ToolGate;
@@ -81,10 +87,57 @@ export interface ToolResource {
     advisoryPath?: ToolAdvisoryPath;
     relatedInsight?: ToolInsightLink;
     featured: boolean;
+    assessment?: AssessmentProvision;
 }
 
-// Resources are added only after their content, access route and supporting files are approved.
-export const toolResources: ToolResource[] = [];
+export interface PublishedToolResource extends ToolResourceBase {
+    status: "Published";
+    summary: string;
+    description: string;
+    access: ToolAccessType;
+}
+
+export interface DraftToolResource extends ToolResourceBase {
+    status: "Draft";
+}
+
+export type ToolResource = PublishedToolResource | DraftToolResource;
+
+export const toolRecords: ToolResource[] = [
+    {
+        title: "Sri Lanka PDPA Organisational Readiness Check",
+        slug: "sri-lanka-pdpa-organisational-readiness-check",
+        type: "Assessment",
+        topic: "Governance",
+        geography: ["Sri Lanka"],
+        audience: [],
+        access: "Interactive",
+        status: "Draft",
+        featured: false,
+        assessment: {
+            dimensions: ["Governance", "Know Your Data", "People & Rights", "Technology & Third Parties", "Risk & Change", "Cross-Border Data"],
+            scoringApproved: false,
+            resultBandsApproved: false,
+        },
+    },
+    {
+        title: "Workforce Intelligence Readiness Check",
+        slug: "workforce-intelligence-readiness-check",
+        type: "Assessment",
+        topic: "Workforce Intelligence",
+        geography: ["Global"],
+        audience: [],
+        status: "Draft",
+        featured: false,
+        assessment: {
+            scoringApproved: false,
+            resultBandsApproved: false,
+        },
+    },
+];
+
+// Public listings and routes must consume this filtered collection, never toolRecords.
+export const toolResources = toolRecords.filter((resource): resource is PublishedToolResource => resource.status === "Published");
 
 export function formatToolDate(value: string): string {
     return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`));

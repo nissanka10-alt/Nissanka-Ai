@@ -1,0 +1,276 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { insights } from "../../data/insights";
+import { sriLankaThemes } from "../../data/regions";
+import { toolResources } from "../../data/tools";
+
+const title = "Sri Lanka | AI, Data & Workforce | Nissanka Advisory";
+const description = "Research, practical guidance and tools for Sri Lankan leaders navigating AI, data protection, workforce intelligence and organisational change.";
+const publishedRegionalInsights = insights.filter((insight) => insight.geography === "Sri Lanka");
+const publishedRegionalTools = toolResources.filter((resource) => resource.geography.includes("Sri Lanka"));
+const hasPublishedRegionalContent = publishedRegionalInsights.length > 0 || publishedRegionalTools.length > 0;
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": "https://nissanka.co.uk/sri-lanka/#webpage",
+            url: "https://nissanka.co.uk/sri-lanka/",
+            name: title,
+            description,
+        },
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+                { "@type": "ListItem", position: 2, name: "Sri Lanka", item: "https://nissanka.co.uk/sri-lanka/" },
+            ],
+        },
+    ],
+};
+---
+
+<BaseLayout {title} {description} path="/sri-lanka/" {structuredData}>
+    <section class="regional-hero" aria-labelledby="regional-title">
+        <div class="shell">
+            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Sri Lanka" }]} />
+            <p class="system-label">Sri Lanka</p>
+            <div class="regional-hero__grid">
+                <h1 id="regional-title">AI, data and workforce.</h1>
+                <p>Practical perspectives for Sri Lankan leaders navigating AI adoption, data protection, workforce intelligence and organisational change.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="regional-intro" aria-labelledby="regional-intro-title">
+        <div class="shell regional-intro__grid">
+            <div>
+                <p class="system-label">Regional perspective</p>
+                <h2 id="regional-intro-title">Local context. Connected thinking.</h2>
+            </div>
+            <p>This hub brings together Nissanka Advisory thinking that is relevant to organisations in Sri Lanka. It connects local questions about data, work and AI with the wider Ideas, Insights and Advisory platforms.</p>
+        </div>
+    </section>
+
+    <section class="regional-themes" aria-labelledby="themes-title">
+        <div class="shell">
+            <p class="system-label">Themes</p>
+            <h2 id="themes-title">Three connected areas.</h2>
+            <div class="theme-list">
+                {sriLankaThemes.map((theme) => (
+                    <article>
+                        <h3>{theme.name}</h3>
+                        <p>{theme.description}</p>
+                    </article>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    {hasPublishedRegionalContent && (
+        <section class="regional-library" aria-labelledby="regional-library-title">
+            <div class="shell">
+                <p class="system-label">Published in Sri Lanka</p>
+                <h2 id="regional-library-title">Regional insights and resources.</h2>
+                {publishedRegionalInsights.map((insight) => (
+                    <article>
+                        <p>{insight.format} / {insight.topic}</p>
+                        <h3><a href={`/insights/${insight.slug}/`}>{insight.title}</a></h3>
+                        <p>{insight.summary}</p>
+                    </article>
+                ))}
+                {publishedRegionalTools.map((resource) => (
+                    <article>
+                        <p>{resource.type} / {resource.topic}</p>
+                        <h3><a href={`/tools/${resource.slug}/`}>{resource.title}</a></h3>
+                        <p>{resource.summary}</p>
+                    </article>
+                ))}
+            </div>
+        </section>
+    )}
+
+    <section class="regional-pathways" aria-labelledby="pathways-title">
+        <div class="shell regional-pathways__grid">
+            <div>
+                <p class="system-label">Where this leads</p>
+                <h2 id="pathways-title">From perspective to practical decisions.</h2>
+            </div>
+            <div>
+                <p>Research and practical guidance can help frame the questions. Advisory helps organisations work through them.</p>
+                <a href="/insights/">Explore Insights <span aria-hidden="true">→</span></a>
+                <a href="/advisory/">Explore Advisory <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .regional-hero,
+    .regional-intro,
+    .regional-themes,
+    .regional-library,
+    .regional-pathways {
+        padding-block: clamp(5rem, 9vw, 8rem);
+        border-bottom: var(--border-architectural);
+    }
+
+    .regional-hero {
+        padding-top: 2rem;
+        background: var(--colour-paper);
+    }
+
+    .regional-hero :global(.breadcrumbs) {
+        margin-bottom: clamp(4rem, 8vw, 7rem);
+    }
+
+    .regional-hero__grid,
+    .regional-intro__grid,
+    .regional-pathways__grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+        align-items: end;
+        margin-top: 1.5rem;
+    }
+
+    .regional-hero h1 {
+        grid-column: 1 / span 7;
+        max-width: 10ch;
+        margin: 0;
+        font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
+        font-size: clamp(3.75rem, 6vw, 5.5rem);
+        letter-spacing: normal;
+        line-height: 0.96;
+    }
+
+    .regional-hero__grid > p {
+        grid-column: 9 / -1;
+        margin: 0;
+        font-size: 1.125rem;
+    }
+
+    .regional-intro__grid {
+        align-items: start;
+    }
+
+    .regional-intro__grid > div {
+        grid-column: 1 / span 5;
+    }
+
+    .regional-intro__grid > p {
+        grid-column: 7 / -1;
+        max-width: 39rem;
+        margin: 0;
+        font-size: 1.125rem;
+    }
+
+    .regional-intro h2,
+    .regional-themes > .shell > h2,
+    .regional-library h2,
+    .regional-pathways h2 {
+        max-width: 15ch;
+        margin: 1.5rem 0 0;
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
+        line-height: 1.04;
+    }
+
+    .regional-themes {
+        background: var(--colour-obsidian);
+        color: var(--colour-white);
+    }
+
+    .theme-list {
+        margin-top: clamp(4rem, 8vw, 7rem);
+    }
+
+    .theme-list article {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: var(--grid-gap);
+        padding-block: clamp(2rem, 4vw, 3.5rem);
+        border-top: 1px solid #555;
+    }
+
+    .theme-list h3 {
+        margin: 0;
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        text-transform: uppercase;
+    }
+
+    .theme-list p {
+        max-width: 38rem;
+        margin: 0;
+    }
+
+    .regional-library article {
+        padding-block: 2.5rem;
+        border-top: var(--border-architectural);
+    }
+
+    .regional-library article:first-of-type {
+        margin-top: 4rem;
+    }
+
+    .regional-library article > p:first-child {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+    }
+
+    .regional-pathways {
+        border-bottom: 0;
+    }
+
+    .regional-pathways__grid > div:first-child {
+        grid-column: 1 / span 6;
+    }
+
+    .regional-pathways__grid > div:last-child {
+        grid-column: 8 / -1;
+    }
+
+    .regional-pathways__grid > div:last-child p {
+        margin: 0 0 2rem;
+    }
+
+    .regional-pathways a {
+        display: block;
+        width: fit-content;
+        margin-top: 1rem;
+        font-weight: 700;
+        text-underline-offset: 0.35em;
+    }
+
+    @media (max-width: 52rem) {
+        .regional-hero__grid,
+        .regional-intro__grid,
+        .regional-pathways__grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .regional-hero h1,
+        .regional-hero__grid > p,
+        .regional-intro__grid > div,
+        .regional-intro__grid > p,
+        .regional-pathways__grid > div:first-child,
+        .regional-pathways__grid > div:last-child {
+            grid-column: 1;
+        }
+
+        .regional-hero__grid > p,
+        .regional-intro__grid > p,
+        .regional-pathways__grid > div:last-child {
+            margin-top: 3rem;
+        }
+    }
+
+    @media (max-width: 38rem) {
+        .theme-list article {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+</style>
