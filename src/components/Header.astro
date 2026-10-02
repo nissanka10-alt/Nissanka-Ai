@@ -1,13 +1,38 @@
 ---
 import Logo from "./Logo.astro";
+
+const advisoryLinks = [
+    { label: "AI Opportunity & Readiness Review", mobileLabel: "AI Review", href: "/ai-review/" },
+    { label: "AI Strategy & Transformation", mobileLabel: "AI Strategy", href: "/advisory/ai-strategy/" },
+    { label: "Workforce Intelligence", href: "/advisory/workforce-intelligence/" },
+    { label: "Leadership Readiness", href: "/advisory/leadership-readiness/" },
+];
+
+const ideasLinks = [
+    { label: "Insights", href: "/insights/", enabled: true },
+    { label: "The Work AI Cannot Do", href: "/ideas/", enabled: true },
+    { label: "Tools & Frameworks", href: "/tools/", enabled: false },
+].filter((item) => item.enabled);
 ---
 
 <header class="site-header">
     <div class="shell site-header__inner">
         <Logo />
         <nav aria-label="Primary navigation">
-            <a href="/advisory/">Advisory</a>
-            <a href="/ideas/">Ideas</a>
+            <details class="nav-group">
+                <summary>Advisory</summary>
+                <ul>
+                    {advisoryLinks.map((item) => (
+                        <li><a href={item.href}><span class:list={{ "desktop-label": item.mobileLabel }}>{item.label}</span>{item.mobileLabel && <span class="mobile-label">{item.mobileLabel}</span>}</a></li>
+                    ))}
+                </ul>
+            </details>
+            <details class="nav-group">
+                <summary>Ideas</summary>
+                <ul>
+                    {ideasLinks.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+                </ul>
+            </details>
             <a href="/speaking/">Speaking</a>
             <a href="/about/">About</a>
             <a class="site-header__cta" href="/ai-review/">Start with an AI Review</a>
@@ -42,9 +67,69 @@ import Logo from "./Logo.astro";
         text-decoration: none;
     }
 
-    nav a:hover {
+    nav a:hover,
+    .nav-group summary:hover {
         text-decoration: underline;
         text-underline-offset: 0.35em;
+    }
+
+    .nav-group {
+        position: relative;
+    }
+
+    .nav-group summary {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .nav-group summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .nav-group summary::after {
+        content: "+";
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 400;
+    }
+
+    .nav-group[open] summary::after {
+        content: "−";
+    }
+
+    .nav-group summary:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 0.35rem;
+    }
+
+    .nav-group ul {
+        position: absolute;
+        z-index: 10;
+        top: calc(100% + 1rem);
+        left: -1rem;
+        width: max-content;
+        min-width: 17rem;
+        margin: 0;
+        padding: 0.5rem 1rem;
+        border: var(--border-architectural);
+        background: var(--colour-white);
+        list-style: none;
+    }
+
+    .nav-group li + li {
+        border-top: var(--border-architectural);
+    }
+
+    .nav-group li a {
+        display: block;
+        padding-block: 0.8rem;
+    }
+
+    .mobile-label {
+        display: none;
     }
 
     .site-header__cta {
@@ -71,6 +156,22 @@ import Logo from "./Logo.astro";
             justify-content: flex-start;
             flex-wrap: wrap;
             gap: 0.75rem 1rem;
+            width: 100%;
+        }
+
+        .nav-group ul {
+            position: static;
+            width: auto;
+            min-width: 0;
+            margin-top: 0.75rem;
+        }
+
+        .desktop-label {
+            display: none;
+        }
+
+        .mobile-label {
+            display: inline;
         }
     }
 
@@ -82,23 +183,26 @@ import Logo from "./Logo.astro";
         nav {
             display: grid;
             width: 100%;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: minmax(0, 1fr);
             gap: 0;
             border-top: var(--border-architectural);
         }
 
-        nav a {
+        nav > a,
+        .nav-group summary {
             padding-block: 0.7rem;
             border-bottom: var(--border-architectural);
         }
 
-        nav a:nth-child(even):not(.site-header__cta) {
-            padding-left: 1rem;
-            border-left: var(--border-architectural);
+        .nav-group ul {
+            margin-top: 0;
+            border-top: 0;
+            border-right: 0;
+            border-left: 0;
+            padding-inline: 1rem;
         }
 
         .site-header__cta {
-            grid-column: 1 / -1;
             margin-top: 0.75rem;
             text-align: center;
         }
