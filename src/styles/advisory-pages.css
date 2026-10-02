@@ -42,9 +42,11 @@
 .editorial-statement h2 {
     max-width: 12ch;
     font-family: var(--font-display);
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
     font-size: clamp(3.25rem, 5vw, 4.75rem);
     font-weight: 900;
-    letter-spacing: -0.045em;
+    letter-spacing: normal;
     line-height: 1;
 }
 

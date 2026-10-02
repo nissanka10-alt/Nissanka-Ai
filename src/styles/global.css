@@ -134,6 +134,9 @@ h2 {
 
 .display {
     font-family: var(--font-display);
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+    letter-spacing: normal;
 }
 
 .lede {

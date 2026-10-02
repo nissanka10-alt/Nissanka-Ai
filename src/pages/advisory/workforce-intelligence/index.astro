@@ -65,7 +65,7 @@ const structuredData = {
 
 <BaseLayout {title} {description} path="/advisory/workforce-intelligence/" {structuredData}>
     <PillarHero
-        label="01 / Workforce Intelligence"
+        label="Workforce Intelligence"
         heading="Know your workforce before you redesign it."
         breadcrumbs={[
             { label: "Home", href: "/" },
@@ -84,7 +84,7 @@ const structuredData = {
     <section class="pillar-section editorial-statement workforce-statement" aria-labelledby="workforce-statement-title">
         <div class="shell editorial-statement__grid">
             <div class="editorial-statement__title">
-                <p class="system-label">02 / From reporting to decisions</p>
+                <p class="system-label">From reporting to decisions</p>
                 <h2 id="workforce-statement-title">Data is useful.<br />Decision intelligence is better.</h2>
             </div>
             <div class="editorial-statement__copy">
@@ -97,7 +97,7 @@ const structuredData = {
     <section id="areas" class="pillar-section territory-section" aria-labelledby="territory-title">
         <div class="shell">
             <div class="territory-heading">
-                <p class="system-label">03 / Core territory</p>
+                <p class="system-label">Core territory</p>
                 <h2 id="territory-title">People, skills, work, capacity and decisions.</h2>
             </div>
             <div class="territory-list">
@@ -114,7 +114,7 @@ const structuredData = {
 
     <section class="pillar-section question-section" aria-labelledby="question-title">
         <div class="shell">
-            <p class="system-label">04 / Better questions</p>
+            <p class="system-label">Better questions</p>
             <h2 id="question-title">Questions Workforce Intelligence should answer.</h2>
             <ol class="question-list">
                 {questions.map((question, index) => (
@@ -128,7 +128,7 @@ const structuredData = {
         <div class="shell">
             <div class="section-split">
                 <div>
-                    <p class="system-label">05 / From data to decision</p>
+                    <p class="system-label">From data to decision</p>
                     <h2 id="decision-title">Information creates value when it changes a decision.</h2>
                 </div>
                 <div class="section-copy">
@@ -144,7 +144,7 @@ const structuredData = {
     <section class="pillar-section ai-workforce-section" aria-labelledby="ai-workforce-title">
         <div class="shell ai-workforce-layout">
             <div class="ai-workforce-lead">
-                <p class="system-label">06 / AI + Workforce</p>
+                <p class="system-label">AI + Workforce</p>
                 <h2 id="ai-workforce-title">AI changes the workforce question.</h2>
                 <p class="lead-copy">The question is not simply how many tasks AI can automate.</p>
             </div>
@@ -157,7 +157,7 @@ const structuredData = {
     <section class="pillar-section" aria-labelledby="workforce-connect-title">
         <div class="shell">
             <div class="connection-heading">
-                <p class="system-label">07 / This connects to</p>
+                <p class="system-label">This connects to</p>
                 <h2 id="workforce-connect-title">Insight needs direction and leadership.</h2>
             </div>
             <div class="connection-list">
@@ -178,7 +178,7 @@ const structuredData = {
     <section class="advisory-final" aria-labelledby="workforce-final-title">
         <div class="shell advisory-final__grid">
             <div>
-                <p class="system-label">08 / Start</p>
+                <p class="system-label">Start</p>
                 <h2 id="workforce-final-title">Better workforce decisions start with better questions.</h2>
             </div>
             <div>
@@ -260,9 +260,11 @@ const structuredData = {
         max-width: 22ch;
         margin: 0;
         font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
         font-size: clamp(2rem, 3.5vw, 3rem);
         font-weight: 900;
-        letter-spacing: -0.035em;
+        letter-spacing: normal;
         line-height: 1.08;
     }
 
@@ -316,7 +318,7 @@ const structuredData = {
 
     .ai-question-list li::before {
         margin-right: 1rem;
-        content: "—";
+        content: "•";
     }
 
     @media (max-width: 52rem) {

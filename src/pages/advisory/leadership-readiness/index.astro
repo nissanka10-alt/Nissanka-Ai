@@ -69,7 +69,7 @@ const structuredData = {
 
 <BaseLayout {title} {description} path="/advisory/leadership-readiness/" {structuredData}>
     <PillarHero
-        label="01 / Leadership Readiness"
+        label="Leadership Readiness"
         heading="AI changes the conversation leaders need to have."
         breadcrumbs={[
             { label: "Home", href: "/" },
@@ -88,7 +88,7 @@ const structuredData = {
     <section class="pillar-section editorial-statement leadership-statement" aria-labelledby="leadership-statement-title">
         <div class="shell editorial-statement__grid">
             <div class="editorial-statement__title">
-                <p class="system-label">02 / Readiness</p>
+                <p class="system-label">Readiness</p>
                 <h2 id="leadership-statement-title">Knowing the answer is not the same as being ready for the conversation.</h2>
             </div>
             <div class="editorial-statement__copy">
@@ -100,7 +100,7 @@ const structuredData = {
 
     <section id="areas" class="pillar-section leadership-areas" aria-labelledby="leadership-areas-title">
         <div class="shell">
-            <p class="system-label">03 / Core areas</p>
+            <p class="system-label">Core areas</p>
             <h2 id="leadership-areas-title">Prepare for the moments where leadership becomes visible.</h2>
             <div class="leadership-area-list">
                 {coreAreas.map((area, index) => (
@@ -117,7 +117,7 @@ const structuredData = {
     <section class="pillar-section conversation-section" aria-labelledby="conversation-title">
         <div class="shell conversation-layout">
             <div class="conversation-lead">
-                <p class="system-label">04 / Critical conversations</p>
+                <p class="system-label">Critical conversations</p>
                 <h2 id="conversation-title">The difficult part often happens after the announcement.</h2>
                 <p>Leadership judgement matters when broad organisational direction becomes a conversation with a person or team.</p>
             </div>
@@ -134,7 +134,7 @@ const structuredData = {
         <div class="shell">
             <div class="section-split">
                 <div>
-                    <p class="system-label">05 / Leading change</p>
+                    <p class="system-label">Leading change</p>
                     <h2 id="change-title">Leadership behaviour shapes whether AI adoption becomes real.</h2>
                 </div>
                 <div class="section-copy">
@@ -152,7 +152,7 @@ const structuredData = {
     <section class="pillar-section coaching-section" aria-labelledby="coaching-title">
         <div class="shell coaching-layout">
             <div>
-                <p class="system-label">06 / Leadership coaching</p>
+                <p class="system-label">Leadership coaching</p>
                 <h2 id="coaching-title">External specialist coaching support.</h2>
             </div>
             <div class="coaching-copy">
@@ -167,7 +167,7 @@ const structuredData = {
     <section class="pillar-section" aria-labelledby="leadership-connect-title">
         <div class="shell">
             <div class="connection-heading">
-                <p class="system-label">07 / This connects to</p>
+                <p class="system-label">This connects to</p>
                 <h2 id="leadership-connect-title">Direction, insight and leadership reinforce one another.</h2>
                 <p>AI Strategy & Transformation gives direction. Workforce Intelligence provides organisational insight. Leadership Readiness helps leaders turn those decisions into conversations and behaviour.</p>
             </div>
@@ -189,7 +189,7 @@ const structuredData = {
     <section class="advisory-final" aria-labelledby="leadership-final-title">
         <div class="shell advisory-final__grid">
             <div>
-                <p class="system-label">08 / Start</p>
+                <p class="system-label">Start</p>
                 <h2 id="leadership-final-title">Change becomes real in the conversations leaders have.</h2>
             </div>
             <div>
@@ -329,9 +329,11 @@ const structuredData = {
     blockquote {
         margin: 2rem 0;
         font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
         font-size: clamp(1.75rem, 3vw, 2.5rem);
         font-weight: 900;
-        letter-spacing: -0.03em;
+        letter-spacing: normal;
         line-height: 1.2;
     }
 

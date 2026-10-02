@@ -56,7 +56,7 @@ const structuredData = {
     <section class="advisory-hero" aria-labelledby="advisory-title">
         <div class="shell">
             <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Advisory" }]} />
-            <p class="system-label">01 / Advisory</p>
+            <p class="system-label">Advisory</p>
             <div class="advisory-hero__grid">
                 <h1 id="advisory-title">Three lenses. One organisational challenge.</h1>
                 <div class="advisory-hero__copy">
@@ -71,7 +71,7 @@ const structuredData = {
     <section class="pathway-section" aria-labelledby="pathway-title">
         <div class="shell">
             <div class="pathway-intro">
-                <p class="system-label">02 / Connected advisory</p>
+                <p class="system-label">Connected advisory</p>
                 <h2 id="pathway-title">AI, people and work considered together.</h2>
                 <p>Each lens addresses a different part of the same organisational decision. The right starting point depends on the question leaders need to answer.</p>
             </div>
@@ -93,7 +93,7 @@ const structuredData = {
     <section class="advisory-final" aria-labelledby="advisory-start-title">
         <div class="shell advisory-final__grid">
             <div>
-                <p class="system-label">03 / Where to start</p>
+                <p class="system-label">Where to start</p>
                 <h2 id="advisory-start-title">Start with the question, not the solution.</h2>
             </div>
             <div>
@@ -127,8 +127,10 @@ const structuredData = {
         max-width: 11ch;
         margin: 0;
         font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
         font-size: clamp(3.75rem, 6vw, 5rem);
-        letter-spacing: -0.045em;
+        letter-spacing: normal;
         line-height: 0.98;
     }
 

@@ -215,7 +215,7 @@ const structuredData = {
             <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "AI Opportunity & Readiness Review" }]} />
             <div class="review-hero__grid">
                 <div class="review-hero__main">
-                    <p class="system-label">01 / AI Opportunity &amp; Readiness Review</p>
+                    <p class="system-label">AI Opportunity &amp; Readiness Review</p>
                     <h1 id="review-title">Know where to start with AI.</h1>
                     <p class="review-hero__statement">A practical, collaborative review to understand where AI can create meaningful value, what needs attention first and which opportunities are worth pursuing.</p>
                 </div>
@@ -232,7 +232,7 @@ const structuredData = {
 
     <section class="review-section" aria-labelledby="the-review-title">
         <div class="shell">
-            <p class="system-label">02 / The review</p>
+            <p class="system-label">The review</p>
             <div class="review-intro">
                 <div class="review-intro__statement">
                     <h2 id="the-review-title">Clarity before commitment.</h2>
@@ -251,7 +251,7 @@ const structuredData = {
 
     <section class="review-section useful-section" aria-labelledby="useful-title">
         <div class="shell">
-            <p class="system-label">03 / When to use it</p>
+            <p class="system-label">When to use it</p>
             <div class="section-heading">
                 <h2 id="useful-title">Useful when the organisation has more questions than answers.</h2>
             </div>
@@ -268,7 +268,7 @@ const structuredData = {
 
     <section class="review-section readiness-section" aria-labelledby="readiness-title">
         <div class="shell">
-            <p class="system-label">04 / Readiness</p>
+            <p class="system-label">Readiness</p>
             <div class="section-heading">
                 <h2 id="readiness-title">AI readiness is more than technology.</h2>
             </div>
@@ -286,7 +286,7 @@ const structuredData = {
 
     <section id="how-it-works" class="review-section process-section" aria-labelledby="process-title">
         <div class="shell">
-            <p class="system-label">05 / How it works</p>
+            <p class="system-label">How it works</p>
             <div class="section-heading">
                 <h2 id="process-title">From uncertainty to a practical direction.</h2>
             </div>
@@ -306,7 +306,7 @@ const structuredData = {
 
     <section class="review-section outputs-section" aria-labelledby="outputs-title">
         <div class="shell">
-            <p class="system-label">06 / Outputs</p>
+            <p class="system-label">Outputs</p>
             <div class="section-heading">
                 <h2 id="outputs-title">Clear enough to act on.</h2>
             </div>
@@ -324,7 +324,7 @@ const structuredData = {
 
     <section class="review-section value-section" aria-labelledby="value-title">
         <div class="shell">
-            <p class="system-label">07 / The value</p>
+            <p class="system-label">The value</p>
             <div class="value-editorial">
                 <div>
                     <h2 id="value-title">Better decisions before bigger investment.</h2>
@@ -342,7 +342,7 @@ const structuredData = {
 
     <section class="review-section working-section" aria-labelledby="working-title">
         <div class="shell">
-            <p class="system-label">08 / How we work</p>
+            <p class="system-label">How we work</p>
             <div class="review-split">
                 <div class="review-prose">
                     <h2 id="working-title">Focused, collaborative and proportionate.</h2>
@@ -361,7 +361,7 @@ const structuredData = {
 
     <section class="review-section next-section" aria-labelledby="next-title">
         <div class="shell">
-            <p class="system-label">09 / What comes next</p>
+            <p class="system-label">What comes next</p>
             <div class="section-heading section-heading--with-copy">
                 <h2 id="next-title">The Review is a starting point, not a dependency.</h2>
                 <p>The client should be able to use the Review independently. Where further support is useful, Nissanka Advisory may support connected areas through its wider <a href="/advisory/">advisory work</a>.</p>
@@ -381,7 +381,7 @@ const structuredData = {
     <section class="review-section faq-section" aria-labelledby="faq-title">
         <div class="shell faq-layout">
             <div>
-                <p class="system-label">10 / Questions</p>
+                <p class="system-label">Questions</p>
                 <h2 id="faq-title">Common questions.</h2>
             </div>
             <div class="faq-list">
@@ -398,7 +398,7 @@ const structuredData = {
     <section class="review-final" aria-labelledby="start-title">
         <div class="shell review-final__grid">
             <div>
-                <p class="system-label">11 / Start</p>
+                <p class="system-label">Start</p>
                 <h2 id="start-title">Start with clarity.</h2>
             </div>
             <div>
@@ -565,9 +565,11 @@ const structuredData = {
     .review-intro__statement h2 {
         max-width: 11ch;
         font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
         font-size: clamp(3.25rem, 5vw, 4.5rem);
         font-weight: 900;
-        letter-spacing: -0.045em;
+        letter-spacing: normal;
         line-height: 1;
     }
 
@@ -786,9 +788,11 @@ const structuredData = {
     .value-section .value-editorial h2 {
         max-width: 13ch;
         font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
         font-size: clamp(3.25rem, 5vw, 4.5rem);
         font-weight: 900;
-        letter-spacing: -0.045em;
+        letter-spacing: normal;
         line-height: 1;
     }
 
@@ -813,7 +817,7 @@ const structuredData = {
     .outcome-list li::before {
         position: absolute;
         left: 0;
-        content: "—";
+        content: "•";
         font-family: var(--font-mono);
     }
 
@@ -838,7 +842,7 @@ const structuredData = {
     .working-list li::before {
         position: absolute;
         left: 0;
-        content: "—";
+        content: "•";
     }
 
     .working-list > .system-label {
