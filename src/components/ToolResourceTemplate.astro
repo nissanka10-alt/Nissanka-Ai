@@ -1,0 +1,47 @@
+---
+import Breadcrumbs from "./Breadcrumbs.astro";
+import type { ToolResource } from "../data/tools";
+import { formatToolDate } from "../data/tools";
+
+interface Props {
+    resource: ToolResource;
+}
+
+const { resource } = Astro.props;
+const canDownload = resource.status === "Published" && resource.access === "Open" && resource.download;
+---
+
+<article class="tool-resource" aria-labelledby="tool-resource-title">
+    <div class="shell">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Tools", href: "/tools/" }, { label: resource.title }]} />
+        <p class="system-label">{resource.type} / {resource.geography.join(" · ")}</p>
+        <header class="tool-resource__header">
+            <h1 id="tool-resource-title">{resource.title}</h1>
+            <p>{resource.summary}</p>
+        </header>
+
+        <dl class="tool-resource__metadata">
+            <div><dt>Topic</dt><dd>{resource.topic}</dd></div>
+            <div><dt>Geography</dt><dd>{resource.geography.join(", ")}</dd></div>
+            <div><dt>Audience</dt><dd>{resource.audience.join(", ")}</dd></div>
+            <div><dt>Access</dt><dd>{resource.access}</dd></div>
+            {resource.version && <div><dt>Version</dt><dd>{resource.version}</dd></div>}
+            {resource.updated && <div><dt>Updated</dt><dd>{formatToolDate(resource.updated)}</dd></div>}
+        </dl>
+
+        <div class="tool-resource__body">
+            <section aria-labelledby="resource-description"><h2 id="resource-description">About this resource</h2><p>{resource.description}</p></section>
+            {Astro.slots.has("how-to-use") && <section aria-labelledby="resource-use"><h2 id="resource-use">How to use it</h2><slot name="how-to-use" /></section>}
+            {resource.disclaimer && <aside aria-labelledby="resource-disclaimer"><h2 id="resource-disclaimer">Important information</h2><p>{resource.disclaimer}</p></aside>}
+            {canDownload && <section aria-label="Download resource"><a class="cta" href={resource.download.file} download>{resource.download.label}</a><p>{resource.download.fileType}{resource.version ? ` · Version ${resource.version}` : ""}</p></section>}
+            {resource.advisoryPath && <section aria-labelledby="resource-next-step"><h2 id="resource-next-step">Where this can lead</h2><a href={resource.advisoryPath.href}>{resource.advisoryPath.label} <span aria-hidden="true">→</span></a></section>}
+            {resource.relatedInsight && <section aria-labelledby="resource-related-insight"><h2 id="resource-related-insight">Related insight</h2><a href={resource.relatedInsight.href}>{resource.relatedInsight.label} <span aria-hidden="true">→</span></a></section>}
+        </div>
+    </div>
+</article>
+
+<style>
+    .tool-resource{padding-block:2rem clamp(5rem,9vw,8rem)}.tool-resource :global(.breadcrumbs){margin-bottom:clamp(4rem,8vw,7rem)}.tool-resource__header{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap);align-items:end;margin-top:1.5rem}.tool-resource__header h1{grid-column:1/span 7;margin:0;font-size:clamp(3rem,5vw,4.5rem);letter-spacing:-.045em;line-height:1}.tool-resource__header p{grid-column:9/-1;margin:0;font-size:1.125rem}.tool-resource__metadata{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--grid-gap);margin:4rem 0 0;padding-top:1.25rem;border-top:var(--border-architectural)}.tool-resource__metadata div{min-width:0}.tool-resource__metadata dt{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase}.tool-resource__metadata dd{margin:.5rem 0 0;overflow-wrap:anywhere}.tool-resource__body{max-width:50rem;margin:clamp(5rem,9vw,8rem) auto 0}.tool-resource__body section,.tool-resource__body aside{padding-block:2.5rem;border-top:var(--border-architectural)}.tool-resource__body h2{margin:0 0 1rem;font-size:clamp(1.75rem,3vw,2.5rem)}.tool-resource__body p{margin:0}.tool-resource__body a{text-underline-offset:.35em}
+    @media(max-width:52rem){.tool-resource__header{grid-template-columns:1fr}.tool-resource__header h1,.tool-resource__header p{grid-column:1}.tool-resource__header p{margin-top:2rem}.tool-resource__metadata{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:2rem}}
+    @media(max-width:30rem){.tool-resource__metadata{grid-template-columns:1fr}}
+</style>
