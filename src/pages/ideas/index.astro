@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { featuredInsight } from "../../data/insights";
 import "../../styles/editorial-pages.css";
 
 const title = "Ideas | Nissanka Advisory";
-const description = "Ideas on AI, judgement, workforce intelligence, leadership and how organisations redesign work in the age of AI.";
+const description = "Ideas on AI, judgement, workforce intelligence, leadership and the future of work from Nissanka Advisory.";
 
 const themes = [
     ["Judgement", "Where human interpretation, accountability and context remain essential."],
@@ -34,25 +35,49 @@ const structuredData = {
                 <h1 id="ideas-title">The Work AI Cannot Do</h1>
                 <div class="ideas-hero__copy">
                     <p class="ideas-thesis">AI can do the task.<br />It cannot own the work.</p>
-                    <p>A developing body of ideas about judgement, workforce intelligence, leadership and the design of human-AI work.</p>
+                    <p>This is the overarching point of view behind Nissanka Advisory’s thinking on judgement, work, leadership and workforce intelligence.</p>
+                    <p>The question is not only what AI can do. The more useful question is what changes when AI becomes part of everyday work.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="editorial-section" aria-labelledby="question-title">
-        <div class="shell editorial-split">
-            <div><p class="system-label">02 / The question</p><h2 id="question-title">The interesting question is not what AI can do.</h2></div>
-            <div class="question-copy">
-                <p class="lead-copy">The more useful question is what changes when AI becomes part of everyday work.</p>
-                <p>Which decisions remain human? Which skills become more valuable? How do roles change? Where does judgement matter? How do leaders redesign work rather than simply automate tasks?</p>
+    <section class="editorial-section platform-section" aria-labelledby="platform-title">
+        <div class="shell platform-layout">
+            <div>
+                <p class="platform-name">The Work AI Cannot Do</p>
+                <h2 id="platform-title">A body of ideas about the work that remains human.</h2>
+            </div>
+            <div>
+                <p class="lead-copy">A body of ideas exploring what happens when AI can perform more tasks but organisations still depend on human judgement, accountability, interpretation and leadership.</p>
+                <p>The platform connects questions about judgement, skills, work design, workforce intelligence, decision-making, leadership and human-AI collaboration.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="editorial-section illusion-section" aria-labelledby="illusion-title">
+        <div class="shell illusion-layout">
+            <div>
+                <p class="system-label">02 / AI Illusion</p>
+                <h2 id="illusion-title">AI Illusion</h2>
+                <p class="illusion-standfirst">A recurring series challenging the assumptions organisations make about AI, productivity and work.</p>
+            </div>
+            <div class="illusion-copy">
+                <p>AI Illusion examines the gap between what AI appears to make possible and what organisations actually need to change in order to create value.</p>
+                <ul aria-label="Assumptions explored by AI Illusion">
+                    <li>Automation equals transformation.</li>
+                    <li>Usage equals adoption.</li>
+                    <li>Efficiency equals better decisions.</li>
+                    <li>More technology means less need for judgement.</li>
+                    <li>AI capability automatically creates organisational capability.</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section class="editorial-section editorial-paper" aria-labelledby="themes-title">
         <div class="shell">
-            <p class="system-label">03 / Themes</p>
+            <p class="system-label">03 / Under the platform</p>
             <h2 id="themes-title">Four connected lines of enquiry.</h2>
             <div class="theme-sequence">
                 {themes.map((theme, index) => <article><p class="theme-number">0{index + 1}</p><h3>{theme[0]}</h3><p>{theme[1]}</p></article>)}
@@ -61,30 +86,34 @@ const structuredData = {
     </section>
 
     <section class="editorial-section featured-article" aria-labelledby="featured-title">
+        <div class="shell insights-intro">
+            <p class="system-label">04 / Insights</p>
+            <p class="insights-distinction"><strong>AI Illusion</strong> questions assumptions.<br /><strong>Insights</strong> goes deeper into research, frameworks and practical guidance.</p>
+        </div>
         <div class="shell featured-layout">
-            <div><p class="system-label">04 / Featured article</p><p class="article-kicker">Practical AI adoption</p></div>
+            <div><p class="article-kicker">Featured insight</p><p class="article-topic">{featuredInsight.topic}</p></div>
             <article>
-                <h2 id="featured-title">Using AI Safely at Work: What Every Employee and HR Leader Actually Needs to Know</h2>
-                <p>A practical guide to protecting sensitive information, choosing approved tools and building useful governance around everyday AI use.</p>
+                <h2 id="featured-title">{featuredInsight.title}</h2>
+                <p>{featuredInsight.summary}</p>
                 <div class="featured-links">
-                    <a class="text-link" href="/insights/safe-ai-at-work/">Read the practical guide to using AI safely at work <span aria-hidden="true">→</span></a>
+                    <a class="text-link" href={`/insights/${featuredInsight.slug}/`}>Read the practical guide to using AI safely at work <span aria-hidden="true">→</span></a>
                     <a class="text-link" href="/insights/">Explore all Insights <span aria-hidden="true">→</span></a>
                 </div>
             </article>
         </div>
     </section>
 
-    <section class="editorial-section advisory-transition" aria-labelledby="advisory-transition-title">
+    <section class="editorial-section speaking-transition" aria-labelledby="speaking-transition-title">
         <div class="shell editorial-split">
-            <div><p class="system-label">05 / From ideas to decisions</p><h2 id="advisory-transition-title">Ideas should help readers think differently.</h2></div>
-            <div><p>Advisory helps organisations turn those questions into practical decisions.</p><a class="text-link" href="/advisory/">Explore Advisory <span aria-hidden="true">→</span></a></div>
+            <div><p class="system-label">05 / In the room</p><h2 id="speaking-transition-title">Ideas do not have to stay on the page.</h2></div>
+            <div><p>The Work AI Cannot Do also provides a platform for keynotes, leadership sessions and executive conversations.</p><a class="text-link" href="/speaking/">Explore Speaking <span aria-hidden="true">→</span></a></div>
         </div>
     </section>
 
-    <section class="editorial-final" aria-labelledby="ideas-final-title">
+    <section class="editorial-final" aria-labelledby="advisory-transition-title">
         <div class="shell editorial-final__grid">
-            <div><p class="system-label">06 / In the room</p><h2 id="ideas-final-title">The work changes.<br />Judgement still matters.</h2></div>
-            <div><p class="editorial-final__copy">Explore how these ideas become keynotes, leadership sessions and executive conversations.</p><a class="cta-inverse" href="/speaking/">Explore Speaking <span aria-hidden="true">→</span></a></div>
+            <div><p class="system-label">06 / From ideas to decisions</p><h2 id="advisory-transition-title">Ideas explore the questions.</h2></div>
+            <div><p class="editorial-final__copy">Advisory helps organisations work through them.</p><a class="cta-inverse" href="/advisory/">Explore Advisory <span aria-hidden="true">→</span></a></div>
         </div>
     </section>
 </BaseLayout>
@@ -95,20 +124,39 @@ const structuredData = {
     h1 { grid-column:1/span 7; max-width:10ch; margin:0; font-family:var(--font-display); font-size:clamp(4rem,7vw,6.5rem); line-height:.92; letter-spacing:-.05em; }
     .ideas-hero__copy { grid-column:9/-1; }
     .ideas-thesis { margin:0 0 2rem; font-family:var(--font-display); font-size:clamp(2rem,3.5vw,3rem); font-weight:900; line-height:1.05; }
-    .ideas-hero__copy > p:last-child { margin:0; }
-    .question-copy p { margin:0; }
-    .question-copy p + p { margin-top:1.5rem; }
+    .ideas-hero__copy > p:not(.ideas-thesis) { margin:0; }
+    .ideas-hero__copy > p + p { margin-top:1.25rem; }
+    .platform-layout,.illusion-layout { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--grid-gap); }
+    .platform-layout>div:first-child { grid-column:1/span 7; }
+    .platform-layout>div:last-child { grid-column:9/-1; align-self:end; }
+    .platform-name { margin:0 0 2rem; font-family:var(--font-mono); font-size:.75rem; text-transform:uppercase; }
+    .platform-section h2 { max-width:13ch; margin:2rem 0 0; font-family:var(--font-display); font-size:clamp(3rem,5vw,4.75rem); font-weight:900; line-height:1; }
+    .platform-layout>div:last-child p { margin:0; }
+    .platform-layout>div:last-child p+p { margin-top:1.5rem; }
+    .illusion-section { background:var(--colour-obsidian); color:var(--colour-white); }
+    .illusion-layout>div:first-child { grid-column:1/span 5; }
+    .illusion-copy { grid-column:7/-1; }
+    .illusion-section h2 { margin-top:2rem; font-family:var(--font-display); font-size:clamp(4rem,7vw,6.5rem); font-weight:900; letter-spacing:-.05em; }
+    .illusion-standfirst { max-width:29rem; margin:2rem 0 0; font-size:1.125rem; }
+    .illusion-copy>p { max-width:38rem; margin:0; font-size:1.125rem; }
+    .illusion-copy ul { margin:3rem 0 0; padding:0; list-style:none; }
+    .illusion-copy li { max-width:28ch; margin-top:1.25rem; font-family:var(--font-display); font-size:clamp(1.75rem,3vw,2.75rem); font-weight:900; line-height:1.05; }
     .theme-sequence { margin-top:clamp(4rem,8vw,7rem); }
     .theme-sequence article { display:grid; grid-template-columns:minmax(3rem,1fr) minmax(12rem,4fr) minmax(18rem,6fr); gap:var(--grid-gap); padding-block:2.5rem; border-top:var(--border-architectural); }
     .theme-number,.article-kicker { margin:0; font-family:var(--font-mono); font-size:.75rem; text-transform:uppercase; }
     .theme-sequence h3 { margin:0; font-size:1.4rem; text-transform:uppercase; }
     .theme-sequence article>p:last-child { margin:0; }
+    .insights-intro { margin-bottom:clamp(4rem,8vw,7rem); }
+    .insights-distinction { max-width:18ch; margin:2rem 0 0; font-family:var(--font-display); font-size:clamp(2.75rem,5vw,4.5rem); font-weight:900; line-height:1; }
+    .insights-distinction strong { font-family:var(--font-mono); font-size:.25em; font-weight:700; letter-spacing:.06em; text-transform:uppercase; vertical-align:middle; }
     .featured-layout { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--grid-gap); }
     .featured-layout>div { grid-column:1/span 3; }
     .featured-layout article { grid-column:5/-1; }
     .featured-layout h2 { max-width:20ch; margin-top:0; font-family:var(--font-display); font-size:clamp(3rem,5vw,4.5rem); font-weight:900; }
     .featured-layout article>p { max-width:42rem; }
+    .article-topic { margin:1rem 0 0; font-size:.875rem; }
     .featured-links { display:flex; flex-wrap:wrap; gap:1rem 2rem; margin-top:1.5rem; }
-    @media(max-width:52rem){ .ideas-hero__grid,.featured-layout{grid-template-columns:minmax(0,1fr)} h1,.ideas-hero__copy,.featured-layout>div,.featured-layout article{grid-column:1} .ideas-hero__copy,.featured-layout article{margin-top:3rem} .theme-sequence article{grid-template-columns:3rem 1fr}.theme-sequence article>p:last-child{grid-column:2} }
+    .speaking-transition { background:var(--colour-paper); }
+    @media(max-width:52rem){ .ideas-hero__grid,.platform-layout,.illusion-layout,.featured-layout{grid-template-columns:minmax(0,1fr)} h1,.ideas-hero__copy,.platform-layout>div:first-child,.platform-layout>div:last-child,.illusion-layout>div:first-child,.illusion-copy,.featured-layout>div,.featured-layout article{grid-column:1} .ideas-hero__copy,.platform-layout>div:last-child,.illusion-copy,.featured-layout article{margin-top:3rem} .theme-sequence article{grid-template-columns:3rem 1fr}.theme-sequence article>p:last-child{grid-column:2} }
     @media(max-width:34rem){ h1{font-size:clamp(3.5rem,16vw,4.5rem)} .theme-sequence article{grid-template-columns:1fr}.theme-sequence article>p:last-child{grid-column:1} }
 </style>
