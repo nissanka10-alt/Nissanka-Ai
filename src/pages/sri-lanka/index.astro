@@ -73,13 +73,21 @@ const structuredData = {
             <div class="shell">
                 <p class="system-label">Published in Sri Lanka</p>
                 <h2 id="regional-library-title">Regional insights and resources.</h2>
-                {publishedRegionalInsights.map((insight) => (
-                    <article>
-                        <p>{insight.format} / {insight.topic}</p>
-                        <h3><a href={`/insights/${insight.slug}/`}>{insight.title}</a></h3>
-                        <p>{insight.summary}</p>
-                    </article>
-                ))}
+                {sriLankaThemes.map((theme) => {
+                    const themeInsights = publishedRegionalInsights.filter((insight) => insight.theme === theme.name);
+                    if (themeInsights.length === 0) return null;
+                    return <div class="regional-library__theme">
+                        <h3>{theme.name}</h3>
+                        {themeInsights.map((insight) => (
+                            <article>
+                                <p>{insight.format} / {insight.topic} / {insight.geography}</p>
+                                <h4><a href={`/insights/${insight.slug}/`}>{insight.title}</a></h4>
+                                {insight.subtitle && <p class="regional-library__subtitle">{insight.subtitle}</p>}
+                                <p>{insight.summary}</p>
+                            </article>
+                        ))}
+                    </div>;
+                })}
                 {publishedRegionalTools.map((resource) => (
                     <article>
                         <p>{resource.type} / {resource.topic}</p>
@@ -212,7 +220,30 @@ const structuredData = {
     }
 
     .regional-library article:first-of-type {
+        margin-top: 1.5rem;
+    }
+
+    .regional-library__theme {
         margin-top: 4rem;
+    }
+
+    .regional-library__theme > h3 {
+        margin: 0;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .regional-library article h4 {
+        margin: 0.75rem 0 1rem;
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        line-height: 1;
+    }
+
+    .regional-library__subtitle {
+        font-weight: 700;
     }
 
     .regional-library article > p:first-child {

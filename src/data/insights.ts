@@ -73,7 +73,7 @@ export interface PublishedInsight extends InsightBase {
     summary: string;
     published: string;
     author: string;
-    readTime: string;
+    readTime?: string;
 }
 
 export interface DraftInsight extends InsightBase {
@@ -108,16 +108,35 @@ export const insightRecords: Insight[] = [
     },
     {
         title: "PDPA for CHROs",
-        subtitle: "What Sri Lankan HR leaders need to prepare for",
+        subtitle: "What Sri Lankan HR leaders need to prepare before 1 January 2027",
         slug: "pdpa-for-chros",
+        summary: "A practical guide to the employee-data, governance, technology and leadership questions Sri Lankan CHROs should address before key provisions of the PDPA come into operation.",
+        published: "2026-10-03",
+        updated: "2026-10-03",
+        author: "Gishan Nissanka",
         topic: "Governance",
         geography: "Sri Lanka",
         theme: "Data & Trust",
-        audience: [],
+        audience: ["CHROs", "HR leaders", "Business leaders"],
         format: "Guide",
         featured: false,
-        status: "Draft",
-        regulatory: { jurisdiction: "Sri Lanka" },
+        status: "Published",
+        download: {
+            file: "/resources/sri-lanka/pdpa-for-chros-infographic.png",
+            label: "Download the PDPA for CHROs infographic",
+        },
+        references: [
+            { label: "Personal Data Protection Act, No. 9 of 2022 — Data Protection Authority of Sri Lanka", url: "https://www.dpa.gov.lk/acts/Data%20Protection%20Act%20SL%20-%20English%20(2).pdf" },
+            { label: "Personal Data Protection (Amendment) Act, No. 22 of 2025", url: "https://documents.gov.lk/view/acts/2025/10/22-2025_E.pdf" },
+            { label: "Extraordinary Gazette No. 2498/16 — 22 July 2026", url: "https://www.documents.gov.lk/view/egz/egz_2026.html" },
+            { label: "Data Protection Authority of Sri Lanka", url: "https://www.dpa.gov.lk/" },
+        ],
+        advisoryPath: { label: "Explore AI Strategy & Transformation", href: "/advisory/ai-strategy/" },
+        regulatory: {
+            jurisdiction: "Sri Lanka",
+            reviewStatus: "Published",
+            disclaimer: "This guide is intended to support practical organisational thinking and does not constitute legal advice. Organisations should obtain appropriate legal advice on their specific obligations under Sri Lankan law.",
+        },
     },
     {
         title: "What Sri Lankan Companies Can Learn From GDPR",
