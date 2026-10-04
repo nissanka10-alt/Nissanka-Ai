@@ -1,0 +1,108 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { contactHref } from "../../config/practices";
+import { insights } from "../../data/insights";
+import { toolResources } from "../../data/tools";
+
+const title = "Buckinghamshire Business Advisory | AI, Workforce & Leadership | Nissanka Advisory";
+const description = "Practical AI, workforce intelligence and leadership advice for SMEs and growing businesses across Buckinghamshire.";
+const publishedLocalInsights = insights.filter((insight) => insight.status === "Published" && insight.geography === "UK" && insight.region === "Buckinghamshire");
+const publishedLocalTools = toolResources.filter((resource) => resource.status === "Published" && resource.geography.includes("UK") && resource.region === "Buckinghamshire");
+
+const questions = [
+    "Where can AI genuinely save time?",
+    "Which tools are worth investing in?",
+    "How do we use AI safely?",
+    "Do we understand the people and skills we have?",
+    "Where are we losing capacity?",
+    "How do leaders manage change without a large transformation team?",
+];
+
+const themes = [
+    { label: "AI for growing businesses", heading: "Find useful AI opportunities before buying more technology.", copy: "Understand where AI could save time or improve work, then set clear priorities and proportionate governance before investing further.", areas: ["AI Opportunity & Readiness", "Practical automation opportunities", "Proportionate AI governance", "Adoption and training", "Use-case prioritisation"], href: "/ai-review/", cta: "Start with an AI Review" },
+    { label: "People & workforce", heading: "Use the workforce information you already have to make better decisions.", copy: "Build a clearer view of people, skills and capacity without assuming a growing business needs an enterprise-scale analytics programme.", areas: ["People data", "Workforce visibility", "Skills and capacity", "Retention and workforce planning", "Reducing spreadsheet dependency"], href: "/advisory/workforce-intelligence/", cta: "Explore Workforce Intelligence" },
+    { label: "Leadership & growth", heading: "Help leaders manage growth, change and difficult decisions.", copy: "Strengthen the judgement and confidence leaders need as roles, expectations and ways of working change.", areas: ["Leadership development", "Leadership coaching", "Leading AI-enabled change", "Critical conversations", "Decision-making"], href: "/advisory/leadership/", cta: "Explore Leadership Advisory & Development" },
+];
+
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        { "@type": "CollectionPage", "@id": "https://nissanka.co.uk/buckinghamshire/#webpage", url: "https://nissanka.co.uk/buckinghamshire/", name: title, description },
+        { "@type": "BreadcrumbList", itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+            { "@type": "ListItem", position: 2, name: "Buckinghamshire", item: "https://nissanka.co.uk/buckinghamshire/" },
+        ] },
+    ],
+};
+---
+
+<BaseLayout {title} {description} path="/buckinghamshire/" {structuredData}>
+    <section class="market-hero" aria-labelledby="market-title">
+        <div class="shell">
+            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Buckinghamshire" }]} />
+            <p class="system-label">Buckinghamshire</p>
+            <div class="hero-grid">
+                <h1 id="market-title">Practical change for growing businesses.</h1>
+                <p>AI, workforce intelligence and leadership support for Buckinghamshire organisations that want practical improvement without unnecessary complexity.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="market-intro" aria-labelledby="market-intro-title">
+        <div class="shell intro-grid">
+            <div><p class="system-label">Local relevance</p><h2 id="market-intro-title">The questions are strategic. The response can still be practical.</h2></div>
+            <div><p>Smaller and growing businesses often face many of the same questions as larger organisations, but without a large transformation team or the need for unnecessary complexity.</p><p>Nissanka Advisory combines international and enterprise experience with practical support shaped around the scale, priorities and commercial reality of a growing business.</p></div>
+        </div>
+        <div class="shell question-list" aria-label="Common strategic questions for growing businesses">{questions.map((question) => <p>{question}</p>)}</div>
+    </section>
+
+    <section class="market-themes" aria-labelledby="themes-title">
+        <div class="shell">
+            <p class="system-label">Three areas of support</p>
+            <h2 id="themes-title">Where practical advice can help.</h2>
+            <div class="theme-list">
+                {themes.map((theme) => <article><div class="theme-heading"><p class="system-label">{theme.label}</p><h3>{theme.heading}</h3></div><div class="theme-copy"><p>{theme.copy}</p><ul>{theme.areas.map((area) => <li>{area}</li>)}</ul><a href={theme.href}>{theme.cta} <span aria-hidden="true">→</span></a></div></article>)}
+            </div>
+        </div>
+    </section>
+
+    <section class="useful-now" aria-labelledby="useful-now-title">
+        <div class="shell useful-grid">
+            <div><p class="system-label">Useful now</p><h2 id="useful-now-title">Start with a useful question.</h2></div>
+            <div><p>Existing Nissanka Advisory guidance and services can help Buckinghamshire businesses think through AI use, workforce decisions and leadership change. They remain wider resources, not locally produced claims or research.</p><a href="/insights/safe-ai-at-work/">Using AI Safely at Work <span aria-hidden="true">→</span></a><a href="/ai-review/">AI Opportunity &amp; Readiness Review <span aria-hidden="true">→</span></a></div>
+        </div>
+    </section>
+
+    {(publishedLocalInsights.length > 0 || publishedLocalTools.length > 0) && <section class="local-library" aria-labelledby="local-library-title"><div class="shell"><p class="system-label">Published for Buckinghamshire</p><h2 id="local-library-title">Local insights and practical resources.</h2>{publishedLocalInsights.map((insight) => <article><p>{insight.format} / {insight.topic}</p><h3><a href={`/insights/${insight.slug}/`}>{insight.title}</a></h3><p>{insight.summary}</p></article>)}{publishedLocalTools.map((resource) => <article><p>{resource.type} / {resource.topic}</p><h3><a href={`/tools/${resource.slug}/`}>{resource.title}</a></h3><p>{resource.summary}</p></article>)}</div></section>}
+
+    <section class="market-cta" aria-labelledby="market-cta-title">
+        <div class="shell cta-grid"><div><p class="system-label">A practical starting point</p><h2 id="market-cta-title">What is worth doing next?</h2></div><div><p>Start with a conversation about the change your business is considering, the information you already have and the decisions that matter most.</p><a class="button button--inverse" href={contactHref}>Start a Conversation</a></div></div>
+    </section>
+</BaseLayout>
+
+<style>
+    .market-hero,.market-intro,.market-themes,.useful-now,.local-library,.market-cta{padding-block:clamp(5rem,9vw,8rem);border-bottom:var(--border-architectural)}
+    .market-hero{padding-top:2rem;background:var(--colour-paper)}
+    .market-hero :global(.breadcrumbs){margin-bottom:clamp(4rem,8vw,7rem)}
+    .hero-grid,.intro-grid,.useful-grid,.cta-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap);align-items:end;margin-top:1.5rem}
+    .hero-grid h1{grid-column:1/span 7;max-width:12ch;margin:0;font-family:var(--font-display);font-feature-settings:"kern" 1;font-kerning:normal;font-size:clamp(3.75rem,6vw,5.5rem);letter-spacing:normal;line-height:.96}
+    .hero-grid>p{grid-column:9/-1;margin:0;font-size:1.125rem}
+    .intro-grid,.useful-grid,.cta-grid{align-items:start}
+    .intro-grid>div:first-child,.useful-grid>div:first-child,.cta-grid>div:first-child{grid-column:1/span 6}
+    .intro-grid>div:last-child,.useful-grid>div:last-child,.cta-grid>div:last-child{grid-column:8/-1}
+    h2{max-width:15ch;margin:1.5rem 0 0;font-size:clamp(2.5rem,4vw,3.5rem);line-height:1.04}
+    .intro-grid>div:last-child p:first-child,.useful-grid>div:last-child>p,.cta-grid>div:last-child>p{margin-top:0}
+    .question-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--grid-gap);margin-top:clamp(4rem,8vw,7rem)}
+    .question-list p{margin:0;padding-block:1.5rem;border-top:var(--border-architectural);font-size:clamp(1.25rem,2vw,1.75rem);font-weight:700;line-height:1.2}
+    .market-themes{background:var(--colour-obsidian);color:var(--colour-white)}
+    .theme-list{margin-top:clamp(4rem,8vw,7rem)}
+    .theme-list article{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap);padding-block:clamp(2.5rem,5vw,4rem);border-top:1px solid #555}
+    .theme-heading{grid-column:1/span 6}.theme-heading h3{max-width:18ch;margin:1.5rem 0 0;font-size:clamp(1.75rem,3vw,2.6rem);line-height:1.06}.theme-copy{grid-column:8/-1}.theme-copy>p{margin-top:0}
+    .theme-copy ul{margin:2rem 0;padding:0;list-style:none;font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase}.theme-copy li{padding-block:.55rem;border-top:1px solid #555}
+    .theme-copy a,.useful-now a{display:block;width:fit-content;margin-top:1rem;font-weight:700;text-underline-offset:.35em}.useful-now{background:var(--colour-paper)}
+    .local-library article{padding-block:2.5rem;border-top:var(--border-architectural)}.local-library article>p:first-child{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase}.local-library h3{margin:1rem 0;font-size:clamp(1.75rem,3vw,2.5rem)}
+    .market-cta{border-bottom:0;background:var(--colour-black);color:var(--colour-white)}.market-cta .button{margin-top:1.5rem}
+    @media(max-width:52rem){.hero-grid,.intro-grid,.useful-grid,.cta-grid,.theme-list article{grid-template-columns:minmax(0,1fr)}.hero-grid h1,.hero-grid>p,.intro-grid>div:first-child,.intro-grid>div:last-child,.useful-grid>div:first-child,.useful-grid>div:last-child,.cta-grid>div:first-child,.cta-grid>div:last-child,.theme-heading,.theme-copy{grid-column:1}.hero-grid>p,.intro-grid>div:last-child,.useful-grid>div:last-child,.cta-grid>div:last-child,.theme-copy{margin-top:3rem}}
+    @media(max-width:38rem){.question-list{grid-template-columns:minmax(0,1fr)}.hero-grid h1{font-size:clamp(2.8rem,13vw,3.5rem)}}
+</style>

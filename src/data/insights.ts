@@ -3,12 +3,14 @@ export const insightGeographies = ["Global", "UK", "Sri Lanka"] as const;
 export const insightFormats = ["Article", "Research Note", "White Paper", "Research", "Framework", "Guide"] as const;
 export const insightStatuses = ["Draft", "Published"] as const;
 export const regionalThemes = ["Data & Trust", "Workforce & Growth", "AI & Transformation"] as const;
+export const insightRegions = ["Buckinghamshire"] as const;
 
 export type InsightTopic = (typeof insightTopics)[number];
 export type InsightGeography = (typeof insightGeographies)[number];
 export type InsightFormat = (typeof insightFormats)[number];
 export type InsightStatus = (typeof insightStatuses)[number];
 export type RegionalTheme = (typeof regionalThemes)[number];
+export type InsightRegion = (typeof insightRegions)[number];
 
 export interface InsightDownload {
     file: string;
@@ -26,6 +28,8 @@ export interface InsightResearchMetadata {
     sampleSize?: string;
     fieldworkDates?: string;
     respondentProfile?: string;
+    businessSize?: string;
+    sector?: string;
     findings?: string[];
     limitations?: string;
 }
@@ -54,6 +58,7 @@ interface InsightBase {
     topic: InsightTopic;
     secondaryTopics?: InsightTopic[];
     geography: InsightGeography;
+    region?: InsightRegion;
     theme?: RegionalTheme;
     audience: string[];
     format: InsightFormat;
@@ -184,6 +189,63 @@ export const insightRecords: Insight[] = [
         topic: "Workforce Intelligence",
         geography: "Sri Lanka",
         theme: "Workforce & Growth",
+        audience: [],
+        format: "Research",
+        featured: false,
+        status: "Draft",
+        research: {},
+        longForm: {},
+    },
+    {
+        title: "Where Should a Buckinghamshire SME Start With AI?",
+        slug: "where-should-a-buckinghamshire-sme-start-with-ai",
+        topic: "AI & Adoption",
+        geography: "UK",
+        region: "Buckinghamshire",
+        audience: [],
+        format: "Guide",
+        featured: false,
+        status: "Draft",
+    },
+    {
+        title: "AI Governance for SMEs Without a Compliance Department",
+        slug: "ai-governance-for-smes-without-a-compliance-department",
+        topic: "Governance",
+        geography: "UK",
+        region: "Buckinghamshire",
+        audience: [],
+        format: "Guide",
+        featured: false,
+        status: "Draft",
+    },
+    {
+        title: "When Does a Growing Business Need Better Workforce Data?",
+        slug: "when-does-a-growing-business-need-better-workforce-data",
+        topic: "Workforce Intelligence",
+        geography: "UK",
+        region: "Buckinghamshire",
+        audience: [],
+        format: "Article",
+        featured: false,
+        status: "Draft",
+    },
+    {
+        title: "AI Adoption Without a Large Transformation Budget",
+        slug: "ai-adoption-without-a-large-transformation-budget",
+        topic: "AI & Adoption",
+        geography: "UK",
+        region: "Buckinghamshire",
+        audience: [],
+        format: "Article",
+        featured: false,
+        status: "Draft",
+    },
+    {
+        title: "Buckinghamshire SME AI Pulse 2026",
+        slug: "buckinghamshire-sme-ai-pulse-2026",
+        topic: "AI & Adoption",
+        geography: "UK",
+        region: "Buckinghamshire",
         audience: [],
         format: "Research",
         featured: false,

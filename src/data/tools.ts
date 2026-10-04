@@ -3,12 +3,14 @@ export const toolAccessTypes = ["Open", "Email Required", "Interactive"] as cons
 export const toolStatuses = ["Draft", "Beta", "Published"] as const;
 export const toolTopics = ["AI & Adoption", "Workforce Intelligence", "Leadership", "Governance", "Future of Work", "Data Governance"] as const;
 export const toolGeographies = ["Global", "UK", "Sri Lanka"] as const;
+export const toolRegions = ["Buckinghamshire"] as const;
 
 export type ToolType = (typeof toolTypes)[number];
 export type ToolAccessType = (typeof toolAccessTypes)[number];
 export type ToolStatus = (typeof toolStatuses)[number];
 export type ToolTopic = (typeof toolTopics)[number];
 export type ToolGeography = (typeof toolGeographies)[number];
+export type ToolRegion = (typeof toolRegions)[number];
 
 export interface ToolDownload {
     file: string;
@@ -73,6 +75,7 @@ interface ToolResourceBase {
     type: ToolType;
     topic: ToolTopic;
     geography: ToolGeography[];
+    region?: ToolRegion;
     audience: string[];
     version?: string;
     published?: string;
@@ -127,6 +130,22 @@ export const toolRecords: ToolResource[] = [
         topic: "Workforce Intelligence",
         geography: ["Global"],
         audience: [],
+        status: "Draft",
+        featured: false,
+        assessment: {
+            scoringApproved: false,
+            resultBandsApproved: false,
+        },
+    },
+    {
+        title: "Buckinghamshire SME AI Readiness Check",
+        slug: "buckinghamshire-sme-ai-readiness-check",
+        type: "Assessment",
+        topic: "AI & Adoption",
+        geography: ["UK"],
+        region: "Buckinghamshire",
+        audience: [],
+        access: "Interactive",
         status: "Draft",
         featured: false,
         assessment: {

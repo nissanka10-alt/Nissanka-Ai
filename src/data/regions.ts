@@ -26,3 +26,10 @@ export const sriLankaNavigationProvision = [
     { location: "Footer", enabled: false },
     { location: "Ideas", enabled: false },
 ] as const;
+
+export const marketRegions = ["Buckinghamshire"] as const;
+
+export const buckinghamshireFutureProvision = {
+    events: ["Roundtables", "Executive briefings", "Local workshops", "Community events"],
+    enabled: false,
+} as const;
