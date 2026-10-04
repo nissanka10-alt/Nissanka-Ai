@@ -104,7 +104,7 @@ export const insightRecords: Insight[] = [
             { label: "Microsoft — Enterprise data protection in Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/enterprise-data-protection" },
             { label: "NCSC — Guidelines for secure AI system development", url: "https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development/introduction" },
         ],
-        advisoryPath: { label: "Explore AI Strategy & Transformation", href: "/advisory/ai-strategy/" },
+        advisoryPath: { label: "Explore AI & Transformation", href: "/advisory/ai-strategy/" },
     },
     {
         title: "PDPA for CHROs",
@@ -131,7 +131,7 @@ export const insightRecords: Insight[] = [
             { label: "Extraordinary Gazette No. 2498/16 — 22 July 2026", url: "https://www.documents.gov.lk/view/egz/egz_2026.html" },
             { label: "Data Protection Authority of Sri Lanka", url: "https://www.dpa.gov.lk/" },
         ],
-        advisoryPath: { label: "Explore AI Strategy & Transformation", href: "/advisory/ai-strategy/" },
+        advisoryPath: { label: "Explore AI & Transformation", href: "/advisory/ai-strategy/" },
         regulatory: {
             jurisdiction: "Sri Lanka",
             reviewStatus: "Published",

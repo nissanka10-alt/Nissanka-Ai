@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PillarHero from "../../../components/PillarHero.astro";
 import "../../../styles/advisory-pages.css";
 
-const title = "AI Strategy & Transformation | Nissanka Advisory";
+const title = "AI & Transformation | Nissanka Advisory";
 const description = "Practical AI strategy, governance, use-case prioritisation and adoption support for organisations moving from experimentation towards responsible scale.";
 
 const coreAreas = [
@@ -37,7 +37,7 @@ const structuredData = {
         {
             "@type": "Service",
             "@id": "https://nissanka.co.uk/advisory/ai-strategy/#service",
-            name: "AI Strategy & Transformation",
+            name: "AI & Transformation",
             description,
             url: "https://nissanka.co.uk/advisory/ai-strategy/",
             provider: { "@type": "Organization", name: "Nissanka Advisory", url: "https://nissanka.co.uk/" },
@@ -46,8 +46,8 @@ const structuredData = {
             "@type": "BreadcrumbList",
             itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
-                { "@type": "ListItem", position: 2, name: "Advisory", item: "https://nissanka.co.uk/advisory/" },
-                { "@type": "ListItem", position: 3, name: "AI Strategy & Transformation", item: "https://nissanka.co.uk/advisory/ai-strategy/" },
+                { "@type": "ListItem", position: 2, name: "What We Do", item: "https://nissanka.co.uk/advisory/" },
+                { "@type": "ListItem", position: 3, name: "AI & Transformation", item: "https://nissanka.co.uk/advisory/ai-strategy/" },
             ],
         },
     ],
@@ -56,12 +56,12 @@ const structuredData = {
 
 <BaseLayout {title} {description} path="/advisory/ai-strategy/" {structuredData}>
     <PillarHero
-        label="AI Strategy & Transformation"
+        label="AI & Transformation"
         heading="Move from AI activity to organisational direction."
         breadcrumbs={[
             { label: "Home", href: "/" },
-            { label: "Advisory", href: "/advisory/" },
-            { label: "AI Strategy & Transformation" },
+            { label: "What We Do", href: "/advisory/" },
+            { label: "AI & Transformation" },
         ]}
         primaryHref="/ai-review/"
         primaryText="Start with an AI Review"
@@ -152,9 +152,9 @@ const structuredData = {
                     <a class="text-link" href="/advisory/workforce-intelligence/">Explore Workforce Intelligence <span aria-hidden="true">→</span></a>
                 </article>
                 <article>
-                    <h3>Leadership Readiness</h3>
+                    <h3>Leadership Advisory & Development</h3>
                     <p>Leaders need to make decisions, explain change and handle difficult conversations as work evolves.</p>
-                    <a class="text-link" href="/advisory/leadership-readiness/">Explore Leadership Readiness <span aria-hidden="true">→</span></a>
+                    <a class="text-link" href="/advisory/leadership/">Explore Leadership Advisory & Development <span aria-hidden="true">→</span></a>
                 </article>
             </div>
         </div>

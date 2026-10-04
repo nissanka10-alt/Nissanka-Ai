@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PillarHero from "../../../components/PillarHero.astro";
+import { contactHref, nissankaCoaching } from "../../../config/practices";
+import "../../../styles/advisory-pages.css";
+
+const title = "Leadership Advisory & Development | Nissanka Advisory";
+const description = "Leadership advisory, development and coaching for organisations leading through technological and organisational change.";
+const capabilities = [
+    { title: "Leadership Development", copy: "Develop judgement, decision-making, confidence and capability for environments where technology, work and expectations are changing quickly.", href: "/advisory/leadership/development/", link: "Explore Leadership Development" },
+    { title: "Leadership Coaching", copy: "Create dedicated space for leaders navigating complexity, growth, change and consequential decisions.", href: "/advisory/leadership/coaching/", link: "Explore Leadership Coaching" },
+    { title: "Critical Conversation Readiness", copy: "Prepare leaders for difficult, high-stakes conversations where judgement, clarity and empathy matter." },
+    { title: "Leading AI-Enabled Change", copy: "Help leaders translate changing roles, expectations and human-AI work into credible organisational change." },
+    { title: "Leadership Insights & Measurement", copy: "Use evidence and feedback to understand leadership capability and improve leadership decisions." },
+];
+const structuredData = { "@context": "https://schema.org", "@graph": [
+    { "@type": "Service", "@id": "https://nissanka.co.uk/advisory/leadership/#service", name: "Leadership Advisory & Development", description, url: "https://nissanka.co.uk/advisory/leadership/", provider: { "@type": "Organization", name: "Nissanka Advisory", url: "https://nissanka.co.uk/" } },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" }, { "@type": "ListItem", position: 2, name: "What We Do", item: "https://nissanka.co.uk/advisory/" }, { "@type": "ListItem", position: 3, name: "Leadership Advisory & Development", item: "https://nissanka.co.uk/advisory/leadership/" }] },
+] };
+---
+
+<BaseLayout {title} {description} path="/advisory/leadership/" {structuredData}>
+    <PillarHero label="Leadership Advisory & Development" heading="Leadership becomes more important, not less, when work changes." breadcrumbs={[{ label: "Home", href: "/" }, { label: "What We Do", href: "/advisory/" }, { label: "Leadership Advisory & Development" }]} primaryHref={contactHref} primaryText="Start a Conversation" secondaryHref="#capabilities" secondaryText="Explore the practice">
+        <p>Nissanka Advisory helps leaders and organisations build the judgement, confidence and capability needed to navigate change, make difficult decisions and lead people through uncertainty.</p>
+        <p>The practice brings leadership advice, development, coaching and evidence together around the situations leaders actually face.</p>
+    </PillarHero>
+
+    <section class="pillar-section editorial-statement" aria-labelledby="statement-title"><div class="shell editorial-statement__grid"><div class="editorial-statement__title"><p class="system-label">Leadership in practice</p><h2 id="statement-title">Knowing the answer is not the same as being ready for the conversation.</h2></div><div class="editorial-statement__copy"><p>Leaders may understand the strategy and still struggle with decisions about role change, performance, uncertainty, skills, expectations or adoption.</p><p class="lead-copy">Leadership becomes visible in how those decisions are made human, clear and credible.</p></div></div></section>
+
+    <section id="capabilities" class="pillar-section capabilities" aria-labelledby="capabilities-title"><div class="shell"><p class="system-label">Capabilities</p><h2 id="capabilities-title">Build capability around consequential work.</h2><div class="capability-list">{capabilities.map((capability, index) => <article class:list={{ offset: index % 2 === 1 }}><p class="capability-number">{String(index + 1).padStart(2, "0")}</p><h3>{capability.title}</h3><p>{capability.copy}</p>{capability.href && <a class="text-link" href={capability.href}>{capability.link} <span aria-hidden="true">→</span></a>}</article>)}</div></div></section>
+
+    <section class="pillar-section human-section" aria-labelledby="conversation-title"><div class="shell section-split"><div><p class="system-label">Critical conversations</p><h2 id="conversation-title">The difficult part often happens after the announcement.</h2></div><div class="section-copy"><p>Leadership judgement matters when organisational direction becomes a conversation about changing roles, expectations, skills, performance, adoption or uncertainty.</p><p>Preparing for those moments helps leaders combine clarity with empathy without avoiding difficult decisions.</p></div></div></section>
+
+    <section class="pillar-section coaching-context" aria-labelledby="coaching-context-title"><div class="shell section-split"><div><p class="system-label">Specialist coaching depth</p><h2 id="coaching-context-title">Leadership Coaching within the practice.</h2></div><div class="section-copy"><p>Leadership Coaching is delivered through the Nissanka leadership practice, with specialist coaching depth provided through {nissankaCoaching.brand}.</p><p>The specialist practice will also cover mentoring and coaching supervision on its own future website. Those areas are not presented as Nissanka Advisory services.</p><a class="text-link" href="/advisory/leadership/coaching/">Explore Leadership Coaching <span aria-hidden="true">→</span></a></div></div></section>
+
+    <section class="pillar-section" aria-labelledby="connection-title"><div class="shell"><div class="connection-heading"><p class="system-label">This connects to</p><h2 id="connection-title">Direction, evidence and leadership reinforce one another.</h2></div><div class="connection-list"><article><h3>AI & Transformation</h3><p>Set direction for AI and connect adoption to the leadership behaviour that makes change credible.</p><a class="text-link" href="/advisory/ai-strategy/">Explore AI & Transformation <span aria-hidden="true">→</span></a></article><article><h3>Workforce Intelligence</h3><p>Ground leadership decisions in evidence about people, skills, work and capacity.</p><a class="text-link" href="/advisory/workforce-intelligence/">Explore Workforce Intelligence <span aria-hidden="true">→</span></a></article></div></div></section>
+
+    <section class="advisory-final" aria-labelledby="final-title"><div class="shell advisory-final__grid"><div><p class="system-label">Start</p><h2 id="final-title">Change becomes real in the decisions and conversations leaders have.</h2></div><div><p class="advisory-final__copy">Discuss the leadership capability, decision or change that needs attention.</p><a class="cta-inverse" href={contactHref}>Start a Conversation</a></div></div></section>
+</BaseLayout>
+
+<style>
+    .capabilities > .shell > h2{max-width:15ch}.capability-list{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(3rem,7vw,6rem) var(--grid-gap);margin-top:clamp(5rem,9vw,8rem)}.capability-list article{grid-column:1/span 5}.capability-list .offset{grid-column:8/-1}.capability-number{margin:0 0 1.5rem;font-family:var(--font-mono);font-size:.75rem}.capability-list h3{margin:0 0 1rem;font-size:1.45rem;text-transform:uppercase}.capability-list article>p:last-of-type{margin:0}.human-section{background:var(--colour-obsidian);color:white}.coaching-context{background:var(--colour-paper)}
+    @media(max-width:52rem){.capability-list article,.capability-list .offset{grid-column:span 6}}@media(max-width:38rem){.capability-list{grid-template-columns:1fr}.capability-list article,.capability-list .offset{grid-column:1}}
+</style>

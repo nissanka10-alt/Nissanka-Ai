@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import { nissankaCoaching } from "../config/practices";
 ---
 
 <footer class="site-footer">
@@ -9,18 +10,18 @@ import Logo from "./Logo.astro";
             <p class="site-footer__brand-name">Nissanka Advisory</p>
             <p>Nissanka Advisory is a trading name of Nissanka Group Ltd, a private limited company incorporated in England and Wales. Company No. 17486709.</p>
         </div>
-        <div class="site-footer__links">
+        <div class:list={{ "site-footer__links": true, "site-footer__links--single": !nissankaCoaching.url }}>
             <nav aria-label="Footer navigation">
-                <a href="/advisory/">Advisory</a>
+                <a href="/advisory/">What We Do</a>
                 <a href="/ideas/">Ideas</a>
                 <a href="/speaking/">Speaking</a>
                 <a href="/about/">About</a>
                 <a href="/privacy/">Privacy</a>
             </nav>
-            <div class="site-footer__external">
+            {nissankaCoaching.url && <div class="site-footer__external">
                 <p class="site-footer__label">External</p>
-                <a href="https://www.kasianissanka.co.uk/" target="_blank" rel="noopener noreferrer">Kasia Nissanka Coaching <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
-            </div>
+                <a href={nissankaCoaching.url} target="_blank" rel="noopener noreferrer">{nissankaCoaching.brand} <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+            </div>}
             <!-- Social links remain intentionally hidden until verified profile URLs are available. -->
             <div class="site-footer__social" hidden></div>
         </div>
@@ -61,6 +62,10 @@ import Logo from "./Logo.astro";
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 2rem;
+    }
+
+    .site-footer__links--single {
+        grid-template-columns: 1fr;
     }
 
     nav {

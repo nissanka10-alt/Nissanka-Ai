@@ -1,11 +1,12 @@
 ---
 import Logo from "./Logo.astro";
+import { contactHref } from "../config/practices";
 
 const advisoryLinks = [
-    { label: "AI Opportunity & Readiness Review", mobileLabel: "AI Review", href: "/ai-review/" },
-    { label: "AI Strategy & Transformation", mobileLabel: "AI Strategy", href: "/advisory/ai-strategy/" },
+    { label: "AI & Transformation", mobileLabel: "AI & Transformation", href: "/advisory/ai-strategy/" },
     { label: "Workforce Intelligence", href: "/advisory/workforce-intelligence/" },
-    { label: "Leadership Readiness", href: "/advisory/leadership-readiness/" },
+    { label: "Leadership Advisory & Development", mobileLabel: "Leadership Advisory & Development", href: "/advisory/leadership/" },
+    { label: "AI Opportunity & Readiness Review", mobileLabel: "AI Review", href: "/ai-review/" },
 ];
 
 const ideasLinks = [
@@ -20,7 +21,7 @@ const ideasLinks = [
         <Logo />
         <nav aria-label="Primary navigation">
             <details class="nav-group">
-                <summary>Advisory</summary>
+                <summary>What We Do</summary>
                 <ul>
                     {advisoryLinks.map((item) => (
                         <li><a href={item.href}><span class:list={{ "desktop-label": item.mobileLabel }}>{item.label}</span>{item.mobileLabel && <span class="mobile-label">{item.mobileLabel}</span>}</a></li>
@@ -35,7 +36,7 @@ const ideasLinks = [
             </details>
             <a href="/speaking/">Speaking</a>
             <a href="/about/">About</a>
-            <a class="site-header__cta" href="/ai-review/">Start with an AI Review</a>
+            <a class="site-header__cta" href={contactHref}>Start a Conversation</a>
         </nav>
     </div>
 </header>

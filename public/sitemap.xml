@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nissanka.co.uk/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-10-04</lastmod>
   </url>
   <url>
     <loc>https://nissanka.co.uk/services/ai-governance/</loc>
@@ -23,5 +23,33 @@
   <url>
     <loc>https://nissanka.co.uk/insights/safe-ai-at-work/</loc>
     <lastmod>2026-07-31</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/advisory/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/advisory/ai-strategy/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/advisory/workforce-intelligence/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/advisory/leadership/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/advisory/leadership/development/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/advisory/leadership/coaching/</loc>
+    <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/about/</loc>
+    <lastmod>2026-10-04</lastmod>
   </url>
 </urlset>

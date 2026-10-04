@@ -2,17 +2,18 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import paWorldImage from "../assets/editorial/pa-world-2025.jpg";
+import { contactHref } from "../config/practices";
 
-const title = "Nissanka Advisory | AI, Workforce & Leadership Advisory";
-const description = "Nissanka Advisory helps organisations identify valuable AI opportunities, strengthen workforce intelligence and prepare leaders for AI-enabled change.";
+const title = "Nissanka Advisory | AI, Workforce Intelligence & Leadership";
+const description = "Nissanka Advisory helps organisations navigate change through AI transformation, workforce intelligence and leadership development.";
 
 const pillars = [
     {
         number: "01",
-        title: "AI Strategy & Transformation",
-        copy: "Identify where AI can create value, establish practical governance and move from experimentation towards responsible adoption.",
+        title: "AI & Transformation",
+        copy: "Identify where AI can create value, establish the right governance and move from experimentation towards practical adoption.",
         link: "/advisory/ai-strategy/",
-        linkText: "Explore AI Strategy",
+        linkText: "Explore AI & Transformation",
     },
     {
         number: "02",
@@ -23,10 +24,10 @@ const pillars = [
     },
     {
         number: "03",
-        title: "Leadership Readiness",
-        copy: "Prepare leaders for the decisions, conversations and behavioural shifts required in AI-enabled organisations.",
-        link: "/advisory/leadership-readiness/",
-        linkText: "Explore Leadership Readiness",
+        title: "Leadership Advisory & Development",
+        copy: "Build the judgement, confidence and capability leaders need to navigate change and lead people through uncertainty.",
+        link: "/advisory/leadership/",
+        linkText: "Explore Leadership Advisory & Development",
     },
 ];
 
@@ -63,23 +64,32 @@ const events = [
     "People Analytics World",
     "CIPD Annual Conference",
 ];
+const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://nissanka.co.uk/#organisation",
+    name: "Nissanka Advisory",
+    legalName: "Nissanka Group Ltd",
+    url: "https://nissanka.co.uk/",
+    description,
+};
 ---
 
-<BaseLayout {title} {description} path="/">
+<BaseLayout {title} {description} path="/" {structuredData}>
     <section class="home-hero" aria-labelledby="home-title">
         <div class="shell home-hero__grid">
             <div class="home-hero__main">
                 <p class="system-label">Nissanka Advisory</p>
-                <h1 id="home-title">AI can do the task.<br />It cannot own the work.</h1>
-                <p class="home-hero__lede">Nissanka Advisory helps organisations make better decisions about AI, people and work. We identify where AI can create value, strengthen workforce intelligence and prepare leaders for AI-enabled change.</p>
+                <h1 id="home-title">Better decisions about AI, people and leadership.</h1>
+                <p class="home-hero__lede">Nissanka Advisory helps organisations navigate change through AI transformation, workforce intelligence and leadership development.</p>
                 <div class="button-group" aria-label="Homepage introduction actions">
-                    <a class="button button--primary" href="/ai-review/">Start with an AI Review</a>
-                    <a class="text-link" href="/advisory/">Explore Advisory <span aria-hidden="true">→</span></a>
+                    <a class="button button--primary" href={contactHref}>Start a Conversation</a>
+                    <a class="text-link" href="/advisory/">Explore What We Do <span aria-hidden="true">→</span></a>
                 </div>
             </div>
             <aside class="hero-lenses" aria-label="Advisory lenses">
                 <p class="system-label">AI / Workforce / Leadership</p>
-                <p>Three connected lenses for organisations deciding how work should change.</p>
+                <p>Three connected practices for organisations deciding how technology, work and leadership should change.</p>
             </aside>
         </div>
     </section>
@@ -100,10 +110,10 @@ const events = [
 
     <section class="home-section advisory-section" aria-labelledby="advisory-title">
         <div class="shell">
-            <p class="system-label">Advisory</p>
+            <p class="system-label">Three practices</p>
             <div class="section-heading">
-                <h2 id="advisory-title">AI changes more than technology.</h2>
-                <p>The work sits across strategy, workforce decisions and leadership readiness.</p>
+                <h2 id="advisory-title">Change rarely belongs to one function.</h2>
+                <p>Technology changes work. Workforce intelligence helps organisations understand what is changing. Leadership determines what happens next.</p>
             </div>
             <div class="pillar-grid">
                 {pillars.map((pillar) => (
@@ -226,9 +236,9 @@ const events = [
             <div class="editorial-split">
                 <h2 id="about-title">Technology changes.<br />The work still has to make sense.</h2>
                 <div class="prose-block">
-                    <p class="lead-copy">Gishan Nissanka brings experience across people technology, workforce analytics, HR systems, AI adoption and organisational transformation.</p>
-                    <p>His background spans Vodafone, EY, Worldline and Nscale, alongside academic work as a guest and associate lecturer.</p>
-                    <a class="text-link" href="/about/">About Gishan <span aria-hidden="true">→</span></a>
+                    <p class="lead-copy">Nissanka Advisory is a boutique practice bringing together expertise in AI transformation, workforce intelligence and leadership development.</p>
+                    <p>Gishan Nissanka leads work across AI transformation, workforce intelligence, people technology and organisational change. Kasia Nissanka focuses on leadership development and leadership coaching.</p>
+                    <a class="text-link" href="/about/">About Nissanka Advisory <span aria-hidden="true">→</span></a>
                 </div>
             </div>
         </div>
@@ -236,12 +246,12 @@ const events = [
 
     <section class="final-cta" aria-labelledby="final-cta-title">
         <div class="shell final-cta__grid">
-            <h2 id="final-cta-title">Not sure where to start with AI?</h2>
+            <h2 id="final-cta-title">What change does your organisation need to navigate well?</h2>
             <div>
-                <p>Start with a structured conversation about where AI can create value, what needs attention and what makes sense to do next.</p>
+                <p>Start with a conversation about the decision, workforce question or leadership challenge that needs clarity.</p>
                 <div class="button-group">
-                    <a class="button button--inverse" href="/ai-review/">Start with an AI Review</a>
-                    <a class="text-link" href="mailto:gishan@nissanka.co.uk?subject=Advisory%20challenge">Discuss an advisory challenge <span aria-hidden="true">→</span></a>
+                    <a class="button button--inverse" href={contactHref}>Start a Conversation</a>
+                    <a class="text-link" href="/ai-review/">Explore the AI Review <span aria-hidden="true">→</span></a>
                 </div>
             </div>
         </div>
