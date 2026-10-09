@@ -17,6 +17,7 @@ import { nissankaCoaching } from "../config/practices";
                 <a href="/speaking/">Speaking</a>
                 <a href="/about/">About</a>
                 <a href="/buckinghamshire/">Buckinghamshire</a>
+                <a href="/sri-lanka/">Sri Lanka</a>
                 <a href="/privacy/">Privacy</a>
             </nav>
             {nissankaCoaching.url && <div class="site-footer__external">
@@ -31,7 +32,8 @@ import { nissankaCoaching } from "../config/practices";
 
 <style>
     .site-footer {
-        padding-block: 4rem;
+        padding-block: 4.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.28);
         background: var(--colour-obsidian);
         color: var(--colour-white);
     }
@@ -44,13 +46,13 @@ import { nissankaCoaching } from "../config/practices";
 
     .site-footer__identity > p {
         max-width: 44rem;
-        margin: 2rem 0 0;
+        margin: 1.5rem 0 0;
         color: #c7c7c7;
         font-size: 0.875rem;
     }
 
     .site-footer__identity .site-footer__brand-name {
-        margin-top: 2.5rem;
+        margin-top: 2rem;
         color: var(--colour-white);
         font-family: var(--font-mono);
         font-size: 0.75rem;
@@ -113,6 +115,10 @@ import { nissankaCoaching } from "../config/practices";
     }
 
     @media (max-width: 52rem) {
+        .site-footer {
+            padding-block: 4rem;
+        }
+
         .site-footer__grid {
             grid-template-columns: 1fr;
         }
