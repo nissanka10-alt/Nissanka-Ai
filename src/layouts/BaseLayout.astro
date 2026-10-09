@@ -9,10 +9,12 @@ interface Props {
     title: string;
     description: string;
     path: string;
+    type?: "website" | "article";
+    image?: string;
     structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { title, description, path, structuredData } = Astro.props;
+const { title, description, path, type, image, structuredData } = Astro.props;
 const canonical = new URL(path, Astro.site);
 ---
 
@@ -21,7 +23,7 @@ const canonical = new URL(path, Astro.site);
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <SeoHead {title} {description} {canonical} />
+        <SeoHead {title} {description} {canonical} {type} {image} />
         {structuredData && <StructuredData data={structuredData} />}
     </head>
     <body>

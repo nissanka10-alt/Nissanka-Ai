@@ -37,7 +37,7 @@ const structuredData = {
 };
 ---
 
-<BaseLayout {title} {description} path="/insights/safe-ai-at-work/" {structuredData}>
+<BaseLayout {title} {description} path="/insights/safe-ai-at-work/" type="article" {structuredData}>
     <article class="insight-article">
         <header class="article-header"><div class="shell"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Insights", href: "/insights/" }, { label: "Safe AI at Work" }]} /><p class="system-label">{insight.format} / {insight.topic}</p><h1>{insight.title}</h1><p class="summary">{insight.summary}</p><dl class="article-meta"><div><dt>Topic</dt><dd>{insight.topic}</dd></div><div><dt>Geography</dt><dd>{insight.geography}</dd></div><div><dt>Published</dt><dd><time datetime={insight.published}>{formatInsightDate(insight.published)}</time></dd></div>{insight.updated && <div><dt>Updated</dt><dd><time datetime={insight.updated}>{formatInsightDate(insight.updated)}</time></dd></div>}<div><dt>Read time</dt><dd>{insight.readTime}</dd></div></dl><p class="author-line">By <a href="/about/">{insight.author}</a>, People Technology and AI Transformation leader.</p><ArticleUtilities title={insight.title} url="/insights/safe-ai-at-work/" /></div></header>
 

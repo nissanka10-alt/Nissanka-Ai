@@ -132,7 +132,7 @@ export const insightRecords: Insight[] = [
         },
         references: [
             { label: "Personal Data Protection Act, No. 9 of 2022 — Data Protection Authority of Sri Lanka", url: "https://www.dpa.gov.lk/acts/Data%20Protection%20Act%20SL%20-%20English%20(2).pdf" },
-            { label: "Personal Data Protection (Amendment) Act, No. 22 of 2025", url: "https://documents.gov.lk/view/acts/2025/10/22-2025_E.pdf" },
+            { label: "Personal Data Protection (Amendment) Act, No. 22 of 2025", url: "https://www.dpa.gov.lk/acts/22-2025_E_251104_201549%20%281%29.pdf" },
             { label: "Extraordinary Gazette No. 2498/16 — 22 July 2026", url: "https://www.documents.gov.lk/view/egz/egz_2026.html" },
             { label: "Data Protection Authority of Sri Lanka", url: "https://www.dpa.gov.lk/" },
         ],
