@@ -4,30 +4,23 @@ import { Image } from "astro:assets";
 import paWorldImage from "../assets/editorial/pa-world-2025.jpg";
 import { contactHref } from "../config/practices";
 
-const title = "Nissanka Advisory | AI, Workforce Intelligence & Leadership";
-const description = "Nissanka Advisory helps organisations navigate change through AI transformation, workforce intelligence and leadership development.";
+const title = "Nissanka Advisory | AI Transformation & Workforce Intelligence";
+const description = "Nissanka Advisory helps organisations identify valuable AI opportunities, strengthen workforce intelligence and turn new technology into practical organisational change.";
 
-const pillars = [
+const corePractices = [
     {
-        number: "01",
         title: "AI & Transformation",
         copy: "Identify where AI can create value, establish the right governance and move from experimentation towards practical adoption.",
+        capabilities: ["AI Opportunity & Readiness", "Strategy & Governance", "Use-Case Prioritisation", "Adoption & Training"],
         link: "/advisory/ai-strategy/",
         linkText: "Explore AI & Transformation",
     },
     {
-        number: "02",
         title: "Workforce Intelligence",
         copy: "Turn people, skills and workforce data into better decisions about capability, capacity, planning and how work is organised.",
+        capabilities: ["People Data & Analytics", "Skills & Workforce Planning", "Workforce Intelligence", "AI-Enabled Operating Models"],
         link: "/advisory/workforce-intelligence/",
         linkText: "Explore Workforce Intelligence",
-    },
-    {
-        number: "03",
-        title: "Leadership Advisory & Development",
-        copy: "Build the judgement, confidence and capability leaders need to navigate change and lead people through uncertainty.",
-        link: "/advisory/leadership/",
-        linkText: "Explore Leadership Advisory & Development",
     },
 ];
 
@@ -80,16 +73,16 @@ const structuredData = {
         <div class="shell home-hero__grid">
             <div class="home-hero__main">
                 <p class="system-label">Nissanka Advisory</p>
-                <h1 id="home-title">Better decisions about AI, people and leadership.</h1>
-                <p class="home-hero__lede">Nissanka Advisory helps organisations navigate change through AI transformation, workforce intelligence and leadership development.</p>
+                <h1 id="home-title">Better decisions about AI, people and work.</h1>
+                <p class="home-hero__lede">Nissanka Advisory helps organisations identify where AI can create value, strengthen workforce intelligence and turn new technology into practical organisational change.</p>
                 <div class="button-group" aria-label="Homepage introduction actions">
-                    <a class="button button--primary" href={contactHref}>Start a Conversation</a>
+                    <a class="button button--primary" href="/ai-review/">Start with an AI Review</a>
                     <a class="text-link" href="/advisory/">Explore What We Do <span aria-hidden="true">→</span></a>
                 </div>
             </div>
             <aside class="hero-lenses" aria-label="Advisory lenses">
-                <p class="system-label">AI / Workforce / Leadership</p>
-                <p>Three connected practices for organisations deciding how technology, work and leadership should change.</p>
+                <p class="system-label">AI / Workforce Intelligence</p>
+                <p>Two core capabilities for organisations deciding where technology can create value and how work should change.</p>
             </aside>
         </div>
     </section>
@@ -110,17 +103,17 @@ const structuredData = {
 
     <section class="home-section advisory-section" aria-labelledby="advisory-title">
         <div class="shell">
-            <p class="system-label">Three practices</p>
+            <p class="system-label">Core advisory</p>
             <div class="section-heading">
-                <h2 id="advisory-title">Change rarely belongs to one function.</h2>
-                <p>Technology changes work. Workforce intelligence helps organisations understand what is changing. Leadership determines what happens next.</p>
+                <h2 id="advisory-title">AI and workforce decisions belong together.</h2>
+                <p>Technology changes tasks, skills, capacity and decisions. The work connects AI opportunity with the workforce evidence needed to make change practical.</p>
             </div>
             <div class="pillar-grid">
-                {pillars.map((pillar) => (
+                {corePractices.map((pillar) => (
                     <article class="pillar">
-                        <p class="pillar__number">{pillar.number}</p>
                         <h3>{pillar.title}</h3>
                         <p>{pillar.copy}</p>
+                        <ul>{pillar.capabilities.map((capability) => <li>{capability}</li>)}</ul>
                         <a class="text-link" href={pillar.link}>{pillar.linkText} <span aria-hidden="true">→</span></a>
                     </article>
                 ))}
@@ -185,6 +178,23 @@ const structuredData = {
         </div>
     </section>
 
+    <section class="home-section leadership-support" aria-labelledby="leadership-support-title">
+        <div class="shell">
+            <p class="system-label">Leadership &amp; change</p>
+            <div class="editorial-split">
+                <div>
+                    <h2 id="leadership-support-title">The human side of change still matters.</h2>
+                </div>
+                <div class="prose-block">
+                    <p class="lead-copy">Technology may change the work, but leaders still have to make decisions, build confidence and take people through change.</p>
+                    <p>Nissanka Advisory brings leadership development and coaching capability into engagements where it strengthens wider transformation work.</p>
+                    <p><strong>Kasia Nissanka</strong><br />Executive &amp; Leadership Coach<br />ICF Professional Certified Coach (PCC)<br />Coach Supervisor</p>
+                    <a class="text-link" href="/advisory/leadership/">Explore Leadership Advisory &amp; Development <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="home-section ideas-section" aria-labelledby="ideas-title">
         <div class="shell ideas-layout">
             <div>
@@ -236,8 +246,8 @@ const structuredData = {
             <div class="editorial-split">
                 <h2 id="about-title">Technology changes.<br />The work still has to make sense.</h2>
                 <div class="prose-block">
-                    <p class="lead-copy">Nissanka Advisory is a boutique practice bringing together expertise in AI transformation, workforce intelligence and leadership development.</p>
-                    <p>Gishan Nissanka leads work across AI transformation, workforce intelligence, people technology and organisational change. Kasia Nissanka focuses on leadership development and leadership coaching.</p>
+                    <p class="lead-copy">Nissanka Advisory is a boutique practice specialising in AI transformation and workforce intelligence.</p>
+                    <p>Leadership development and coaching strengthen the practice where organisational change depends on the decisions, confidence and capability of leaders.</p>
                     <a class="text-link" href="/about/">About Nissanka Advisory <span aria-hidden="true">→</span></a>
                 </div>
             </div>
@@ -261,10 +271,10 @@ const structuredData = {
         <div class="shell final-cta__grid">
             <h2 id="final-cta-title">What change does your organisation need to navigate well?</h2>
             <div>
-                <p>Start with a conversation about the decision, workforce question or leadership challenge that needs clarity.</p>
+                <p>Begin by identifying where AI can create value, what needs attention and what makes sense to do next.</p>
                 <div class="button-group">
-                    <a class="button button--inverse" href={contactHref}>Start a Conversation</a>
-                    <a class="text-link" href="/ai-review/">Explore the AI Review <span aria-hidden="true">→</span></a>
+                    <a class="button button--inverse" href="/ai-review/">Start with an AI Review</a>
+                    <a class="text-link" href={contactHref}>Start a Conversation <span aria-hidden="true">→</span></a>
                 </div>
             </div>
         </div>
@@ -439,6 +449,10 @@ const structuredData = {
         background: var(--colour-paper);
     }
 
+    .leadership-support {
+        background: var(--colour-paper);
+    }
+
     .section-heading {
         display: grid;
         grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -462,14 +476,14 @@ const structuredData = {
 
     .pillar-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         border-top: var(--border-architectural);
     }
 
     .pillar {
         display: flex;
         min-width: 0;
-        min-height: 24rem;
+        min-height: 26rem;
         flex-direction: column;
         padding: 1.5rem;
     }
@@ -478,7 +492,6 @@ const structuredData = {
         border-left: var(--border-architectural);
     }
 
-    .pillar__number,
     .method-step__label {
         margin: 0;
         font-family: var(--font-mono);
@@ -489,7 +502,7 @@ const structuredData = {
 
     .pillar h3 {
         max-width: 17rem;
-        margin: 4.5rem 0 1.5rem;
+        margin: 1rem 0 1.5rem;
         font-size: 1.45rem;
         font-weight: 600;
         letter-spacing: -0.025em;
@@ -497,8 +510,22 @@ const structuredData = {
         text-transform: uppercase;
     }
 
-    .pillar > p:not(.pillar__number) {
+    .pillar > p {
         margin: 0 0 2rem;
+    }
+
+    .pillar ul {
+        margin: 0 0 2rem;
+        padding: 0;
+        list-style: none;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+    }
+
+    .pillar li {
+        padding-block: 0.55rem;
+        border-top: var(--border-architectural);
     }
 
     .pillar .text-link {

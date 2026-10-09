@@ -5,8 +5,8 @@ import { contactHref } from "../../config/practices";
 import { insights } from "../../data/insights";
 import { toolResources } from "../../data/tools";
 
-const title = "Buckinghamshire Business Advisory | AI, Workforce & Leadership | Nissanka Advisory";
-const description = "Practical AI, workforce intelligence and leadership advice for SMEs and growing businesses across Buckinghamshire.";
+const title = "Buckinghamshire Business Advisory | AI & Workforce | Nissanka Advisory";
+const description = "Practical AI and workforce intelligence advice for SMEs and growing businesses across Buckinghamshire, supported by leadership capability where useful.";
 const publishedLocalInsights = insights.filter((insight) => insight.status === "Published" && insight.geography === "UK" && insight.region === "Buckinghamshire");
 const publishedLocalTools = toolResources.filter((resource) => resource.status === "Published" && resource.geography.includes("UK") && resource.region === "Buckinghamshire");
 
@@ -22,7 +22,7 @@ const questions = [
 const themes = [
     { label: "AI for growing businesses", heading: "Find useful AI opportunities before buying more technology.", copy: "Understand where AI could save time or improve work, then set clear priorities and proportionate governance before investing further.", areas: ["AI Opportunity & Readiness", "Practical automation opportunities", "Proportionate AI governance", "Adoption and training", "Use-case prioritisation"], href: "/ai-review/", cta: "Start with an AI Review" },
     { label: "People & workforce", heading: "Use the workforce information you already have to make better decisions.", copy: "Build a clearer view of people, skills and capacity without assuming a growing business needs an enterprise-scale analytics programme.", areas: ["People data", "Workforce visibility", "Skills and capacity", "Retention and workforce planning", "Reducing spreadsheet dependency"], href: "/advisory/workforce-intelligence/", cta: "Explore Workforce Intelligence" },
-    { label: "Leadership & growth", heading: "Help leaders manage growth, change and difficult decisions.", copy: "Strengthen the judgement and confidence leaders need as roles, expectations and ways of working change.", areas: ["Leadership development", "Leadership coaching", "Leading AI-enabled change", "Critical conversations", "Decision-making"], href: "/advisory/leadership/", cta: "Explore Leadership Advisory & Development" },
+    { label: "Leadership & growth", heading: "Support leaders through growth, change and difficult decisions.", copy: "A supporting capability for situations where practical change depends on leadership judgement, confidence and clear conversations.", areas: ["Leadership development", "Leadership coaching", "Leading AI-enabled change", "Critical conversations", "Decision-making"], href: "/advisory/leadership/", cta: "Explore Leadership Advisory & Development", supporting: true },
 ];
 
 const structuredData = {
@@ -44,7 +44,7 @@ const structuredData = {
             <p class="system-label">Buckinghamshire</p>
             <div class="hero-grid">
                 <h1 id="market-title">Practical change for growing businesses.</h1>
-                <p>AI, workforce intelligence and leadership support for Buckinghamshire organisations that want practical improvement without unnecessary complexity.</p>
+                <p>Practical AI and workforce intelligence support for Buckinghamshire organisations, with leadership capability where change requires it.</p>
             </div>
         </div>
     </section>
@@ -59,10 +59,10 @@ const structuredData = {
 
     <section class="market-themes" aria-labelledby="themes-title">
         <div class="shell">
-            <p class="system-label">Three areas of support</p>
+            <p class="system-label">Core advice and supporting capability</p>
             <h2 id="themes-title">Where practical advice can help.</h2>
             <div class="theme-list">
-                {themes.map((theme) => <article><div class="theme-heading"><p class="system-label">{theme.label}</p><h3>{theme.heading}</h3></div><div class="theme-copy"><p>{theme.copy}</p><ul>{theme.areas.map((area) => <li>{area}</li>)}</ul><a href={theme.href}>{theme.cta} <span aria-hidden="true">→</span></a></div></article>)}
+                {themes.map((theme) => <article class:list={{ supporting: theme.supporting }}><div class="theme-heading"><p class="system-label">{theme.supporting ? "Supporting capability / " : ""}{theme.label}</p><h3>{theme.heading}</h3></div><div class="theme-copy"><p>{theme.copy}</p><ul>{theme.areas.map((area) => <li>{area}</li>)}</ul><a href={theme.href}>{theme.cta} <span aria-hidden="true">→</span></a></div></article>)}
             </div>
         </div>
     </section>
@@ -98,6 +98,7 @@ const structuredData = {
     .market-themes{background:var(--colour-obsidian);color:var(--colour-white)}
     .theme-list{margin-top:clamp(4rem,8vw,7rem)}
     .theme-list article{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap);padding-block:clamp(2.5rem,5vw,4rem);border-top:1px solid #555}
+    .theme-list .supporting{margin-top:clamp(2rem,4vw,4rem);border-top-width:2px}
     .theme-heading{grid-column:1/span 6}.theme-heading h3{max-width:18ch;margin:1.5rem 0 0;font-size:clamp(1.75rem,3vw,2.6rem);line-height:1.06}.theme-copy{grid-column:8/-1}.theme-copy>p{margin-top:0}
     .theme-copy ul{margin:2rem 0;padding:0;list-style:none;font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase}.theme-copy li{padding-block:.55rem;border-top:1px solid #555}
     .theme-copy a,.useful-now a{display:block;width:fit-content;margin-top:1rem;font-weight:700;text-underline-offset:.35em}.useful-now{background:var(--colour-paper)}

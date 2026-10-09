@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nissanka.co.uk/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
   </url>
   <url>
     <loc>https://nissanka.co.uk/services/ai-governance/</loc>
@@ -25,8 +25,20 @@
     <lastmod>2026-07-31</lastmod>
   </url>
   <url>
-    <loc>https://nissanka.co.uk/advisory/</loc>
+    <loc>https://nissanka.co.uk/insights/pdpa-for-chros/</loc>
     <lastmod>2026-10-04</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/ideas/</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/ai-review/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/advisory/</loc>
+    <lastmod>2026-10-09</lastmod>
   </url>
   <url>
     <loc>https://nissanka.co.uk/advisory/ai-strategy/</loc>
@@ -38,7 +50,7 @@
   </url>
   <url>
     <loc>https://nissanka.co.uk/advisory/leadership/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
   </url>
   <url>
     <loc>https://nissanka.co.uk/advisory/leadership/development/</loc>
@@ -46,14 +58,34 @@
   </url>
   <url>
     <loc>https://nissanka.co.uk/advisory/leadership/coaching/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
   </url>
   <url>
     <loc>https://nissanka.co.uk/about/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
   </url>
   <url>
     <loc>https://nissanka.co.uk/buckinghamshire/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/sri-lanka/</loc>
+    <lastmod>2026-10-03</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/tools/</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/speaking/</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/profile/</loc>
+    <lastmod>2026-10-01</lastmod>
+  </url>
+  <url>
+    <loc>https://nissanka.co.uk/privacy/</loc>
+    <lastmod>2026-10-02</lastmod>
   </url>
 </urlset>

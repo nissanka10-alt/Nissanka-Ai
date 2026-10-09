@@ -139,6 +139,7 @@ const advisoryAreas = [
         href: "/advisory/leadership/",
         copy: "Prepare leaders for AI-enabled change, critical conversations and the capability needed to guide progress.",
         linkText: "Explore Leadership Advisory & Development",
+        supporting: true,
     },
 ];
 
@@ -368,7 +369,8 @@ const structuredData = {
             </div>
             <div class="next-grid">
                 {advisoryAreas.map((area) => (
-                    <article class="next-area">
+                    <article class:list={{ "next-area": true, "next-area--supporting": area.supporting }}>
+                        {area.supporting && <p class="system-label">Supporting capability</p>}
                         <h3>{area.title}</h3>
                         <p>{area.copy}</p>
                         <a class="text-link" href={area.href}>{area.linkText} <span aria-hidden="true">→</span></a>
@@ -852,7 +854,7 @@ const structuredData = {
 
     .next-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: clamp(2.5rem, 5vw, 5rem);
         margin-top: 4rem;
     }
@@ -871,6 +873,17 @@ const structuredData = {
     .next-area > p {
         margin: 0 0 2rem;
         line-height: 1.65;
+    }
+
+    .next-area--supporting {
+        grid-column: 1 / -1;
+        width: calc(50% - var(--grid-gap) / 2);
+        margin-top: 1rem;
+        justify-self: end;
+    }
+
+    .next-area--supporting > .system-label {
+        margin-bottom: 1rem;
     }
 
     .faq-layout > :first-child {
@@ -1130,6 +1143,12 @@ const structuredData = {
 
         .next-grid {
             margin-top: 3rem;
+        }
+
+        .next-area--supporting {
+            grid-column: 1;
+            width: 100%;
+            margin-top: 0;
         }
     }
 

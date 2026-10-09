@@ -6,11 +6,10 @@ import "../../styles/advisory-pages.css";
 import { contactHref } from "../../config/practices";
 
 const title = "What We Do | Nissanka Advisory";
-const description = "A boutique advisory practice working across AI transformation, workforce intelligence and leadership advisory and development.";
+const description = "AI transformation and workforce intelligence advisory, supported by leadership capability where organisational change requires it.";
 
-const pathways = [
+const corePathways = [
     {
-        number: "01",
         title: "AI & Transformation",
         copy: "Help organisations identify where AI can create value, establish the right governance and move from experimentation towards practical adoption.",
         href: "/advisory/ai-strategy/",
@@ -18,22 +17,15 @@ const pathways = [
         capabilities: ["AI Opportunity & Readiness", "AI Strategy & Governance", "Use-Case Prioritisation", "Adoption & Training"],
     },
     {
-        number: "02",
         title: "Workforce Intelligence",
         copy: "Connect people, skills, work and capacity so workforce information supports real organisational decisions.",
         href: "/advisory/workforce-intelligence/",
         linkText: "Explore Workforce Intelligence",
         capabilities: ["People Data & Analytics", "Skills & Workforce Planning", "AI-Enabled Operating Models", "Workforce Intelligence"],
     },
-    {
-        number: "03",
-        title: "Leadership Advisory & Development",
-        copy: "Help leaders build the judgement, confidence and capability required to lead through organisational and technological change.",
-        href: "/advisory/leadership/",
-        linkText: "Explore Leadership Advisory & Development",
-        capabilities: ["Leadership Development", "Leadership Coaching", "Critical Conversation Readiness", "Leading AI-Enabled Change", "Leadership Insights & Measurement"],
-    },
 ];
+
+const leadershipCapabilities = ["Leadership Development", "Leadership Coaching", "Critical Conversation Readiness", "Leading AI-Enabled Change", "Leadership Insights & Measurement"];
 
 const structuredData = {
     "@context": "https://schema.org",
@@ -62,11 +54,11 @@ const structuredData = {
             <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "What We Do" }]} />
             <p class="system-label">What We Do</p>
             <div class="advisory-hero__grid">
-                <h1 id="advisory-title">Three practices. One challenge: navigating change well.</h1>
+                <h1 id="advisory-title">AI and workforce decisions, considered together.</h1>
                 <div class="advisory-hero__copy">
-                    <p>Technology, work and leadership change together.</p>
-                    <p>Nissanka Advisory brings together AI & Transformation, Workforce Intelligence and Leadership Advisory & Development.</p>
-                    <Cta href={contactHref}>Start a Conversation</Cta>
+                    <p>Nissanka Advisory specialises in AI &amp; Transformation and Workforce Intelligence.</p>
+                    <p>Leadership capability supports the work where change depends on judgement, confidence and the conversations leaders need to have.</p>
+                    <Cta href="/ai-review/">Start with an AI Review</Cta>
                 </div>
             </div>
         </div>
@@ -75,14 +67,13 @@ const structuredData = {
     <section class="pathway-section" aria-labelledby="pathway-title">
         <div class="shell">
             <div class="pathway-intro">
-                <p class="system-label">Connected practices</p>
-                <h2 id="pathway-title">AI, workforce and leadership considered together.</h2>
-                <p>Each practice addresses a different part of organisational change. The right starting point depends on the decision leaders need to make.</p>
+                <p class="system-label">Primary advisory</p>
+                <h2 id="pathway-title">Two core capabilities for practical organisational change.</h2>
+                <p>The work connects technology opportunity with evidence about people, skills, capacity and how work is organised.</p>
             </div>
-            <ol class="pathway-list">
-                {pathways.map((pathway) => (
+            <ul class="pathway-list">
+                {corePathways.map((pathway) => (
                     <li>
-                        <p class="pathway-number">{pathway.number}</p>
                         <div>
                             <h3>{pathway.title}</h3>
                             <p>{pathway.copy}</p>
@@ -91,7 +82,21 @@ const structuredData = {
                         </div>
                     </li>
                 ))}
-            </ol>
+            </ul>
+        </div>
+    </section>
+
+    <section class="supporting-section" aria-labelledby="supporting-title">
+        <div class="shell supporting-grid">
+            <div>
+                <p class="system-label">Supporting capability</p>
+                <h2 id="supporting-title">Leadership Advisory &amp; Development</h2>
+            </div>
+            <div>
+                <p>Leadership capability can complement AI, workforce and organisational-change engagements, while remaining available as a standalone service where appropriate.</p>
+                <ul>{leadershipCapabilities.map((capability) => <li>{capability}</li>)}</ul>
+                <a class="text-link" href="/advisory/leadership/">Explore Leadership Advisory &amp; Development <span aria-hidden="true">→</span></a>
+            </div>
         </div>
     </section>
 
@@ -102,8 +107,9 @@ const structuredData = {
                 <h2 id="advisory-start-title">Start with the question, not the solution.</h2>
             </div>
             <div>
-                <p class="advisory-final__copy">Begin with the organisational decision, workforce question or leadership challenge that needs attention.</p>
-                <a class="cta-inverse" href={contactHref}>Start a Conversation</a>
+                <p class="advisory-final__copy">Begin by identifying where AI can create value, what needs attention and what makes sense to do next.</p>
+                <a class="cta-inverse" href="/ai-review/">Start with an AI Review</a>
+                <a class="text-link secondary-contact" href={contactHref}>Start a Conversation <span aria-hidden="true">→</span></a>
             </div>
         </div>
     </section>
@@ -160,6 +166,12 @@ const structuredData = {
         border-bottom: var(--border-architectural);
     }
 
+    .supporting-section {
+        padding-block: clamp(5rem, 9vw, 8rem);
+        border-bottom: var(--border-architectural);
+        background: var(--colour-paper);
+    }
+
     .pathway-intro {
         max-width: 52rem;
     }
@@ -178,23 +190,17 @@ const structuredData = {
     }
 
     .pathway-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--grid-gap);
         margin: clamp(4rem, 8vw, 7rem) 0 0;
         padding: 0;
         list-style: none;
     }
 
     .pathway-list li {
-        display: grid;
-        grid-template-columns: minmax(4rem, 2fr) minmax(0, 10fr);
-        gap: var(--grid-gap);
         padding-block: clamp(2rem, 5vw, 4rem);
         border-top: var(--border-architectural);
-    }
-
-    .pathway-number {
-        margin: 0;
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
     }
 
     .pathway-list h3 {
@@ -220,25 +226,78 @@ const structuredData = {
         text-transform: uppercase;
     }
 
+    .supporting-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+    }
+
+    .supporting-grid > div:first-child {
+        grid-column: 1 / span 6;
+    }
+
+    .supporting-grid > div:last-child {
+        grid-column: 8 / -1;
+    }
+
+    .supporting-grid h2 {
+        max-width: 13ch;
+        margin: 1.5rem 0 0;
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
+    }
+
+    .supporting-grid > div:last-child > p {
+        margin-top: 0;
+        font-size: 1.125rem;
+    }
+
+    .supporting-grid ul {
+        margin: 2rem 0 0;
+        padding: 0;
+        list-style: none;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+    }
+
+    .supporting-grid li {
+        padding-block: 0.55rem;
+        border-top: var(--border-architectural);
+    }
+
+    .secondary-contact {
+        margin-left: 1.25rem;
+        color: inherit;
+    }
+
     @media (max-width: 52rem) {
-        .advisory-hero__grid {
+        .advisory-hero__grid,
+        .supporting-grid {
             grid-template-columns: minmax(0, 1fr);
         }
 
         h1,
-        .advisory-hero__copy {
+        .advisory-hero__copy,
+        .supporting-grid > div:first-child,
+        .supporting-grid > div:last-child {
             grid-column: 1;
         }
 
-        .advisory-hero__copy {
+        .advisory-hero__copy,
+        .supporting-grid > div:last-child {
             max-width: 42rem;
             margin-top: 3rem;
         }
     }
 
-    @media (max-width: 32rem) {
-        .pathway-list li {
+    @media (max-width: 42rem) {
+        .pathway-list {
             grid-template-columns: 1fr;
+        }
+
+        .secondary-contact {
+            display: block;
+            margin-left: 0;
         }
     }
 </style>

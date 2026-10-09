@@ -1,12 +1,11 @@
 ---
 import Logo from "./Logo.astro";
-import { contactHref } from "../config/practices";
 
 const advisoryLinks = [
     { label: "AI & Transformation", mobileLabel: "AI & Transformation", href: "/advisory/ai-strategy/" },
     { label: "Workforce Intelligence", href: "/advisory/workforce-intelligence/" },
-    { label: "Leadership Advisory & Development", mobileLabel: "Leadership Advisory & Development", href: "/advisory/leadership/" },
     { label: "AI Opportunity & Readiness Review", mobileLabel: "AI Review", href: "/ai-review/" },
+    { label: "Leadership Advisory & Development", mobileLabel: "Leadership Advisory & Development", href: "/advisory/leadership/", supporting: true },
 ];
 
 const ideasLinks = [
@@ -24,7 +23,7 @@ const ideasLinks = [
                 <summary>What We Do</summary>
                 <ul>
                     {advisoryLinks.map((item) => (
-                        <li><a href={item.href}><span class:list={{ "desktop-label": item.mobileLabel }}>{item.label}</span>{item.mobileLabel && <span class="mobile-label">{item.mobileLabel}</span>}</a></li>
+                        <li class:list={{ "supporting-link": item.supporting }}><a href={item.href}><span class:list={{ "desktop-label": item.mobileLabel }}>{item.label}</span>{item.mobileLabel && <span class="mobile-label">{item.mobileLabel}</span>}</a></li>
                     ))}
                 </ul>
             </details>
@@ -36,7 +35,7 @@ const ideasLinks = [
             </details>
             <a href="/speaking/">Speaking</a>
             <a href="/about/">About</a>
-            <a class="site-header__cta" href={contactHref}>Start a Conversation</a>
+            <a class="site-header__cta" href="/ai-review/">Start with an AI Review</a>
         </nav>
     </div>
 </header>
@@ -122,6 +121,11 @@ const ideasLinks = [
 
     .nav-group li + li {
         border-top: var(--border-architectural);
+    }
+
+    .nav-group .supporting-link {
+        margin-top: 0.4rem;
+        border-top-width: 2px;
     }
 
     .nav-group li a {
