@@ -16,6 +16,10 @@ interface Props {
 
 const { title, description, path, type, image, structuredData } = Astro.props;
 const canonical = new URL(path, Astro.site);
+const defaultSocialImage = "/social/nissanka-advisory-og.png";
+const socialImage = image ?? defaultSocialImage;
+const socialImageWidth = image ? undefined : 1200;
+const socialImageHeight = image ? undefined : 630;
 ---
 
 <!doctype html>
@@ -27,7 +31,15 @@ const canonical = new URL(path, Astro.site);
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <SeoHead {title} {description} {canonical} {type} {image} />
+        <SeoHead
+            {title}
+            {description}
+            {canonical}
+            {type}
+            image={socialImage}
+            imageWidth={socialImageWidth}
+            imageHeight={socialImageHeight}
+        />
         {structuredData && <StructuredData data={structuredData} />}
     </head>
     <body>

@@ -5,9 +5,11 @@ interface Props {
     canonical: URL;
     type?: "website" | "article";
     image?: string;
+    imageWidth?: number;
+    imageHeight?: number;
 }
 
-const { title, description, canonical, type = "website", image } = Astro.props;
+const { title, description, canonical, type = "website", image, imageWidth, imageHeight } = Astro.props;
 ---
 
 <title>{title}</title>
@@ -19,6 +21,8 @@ const { title, description, canonical, type = "website", image } = Astro.props;
 <meta property="og:url" content={canonical} />
 <meta property="og:site_name" content="Nissanka Advisory" />
 {image && <meta property="og:image" content={new URL(image, canonical)} />}
+{image && imageWidth && <meta property="og:image:width" content={String(imageWidth)} />}
+{image && imageHeight && <meta property="og:image:height" content={String(imageHeight)} />}
 <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
