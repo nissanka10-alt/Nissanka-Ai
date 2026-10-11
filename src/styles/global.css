@@ -20,6 +20,9 @@
     --space-6: 3rem;
     --space-8: 4rem;
     --space-12: 6rem;
+    --section-space-compact: clamp(3rem, 5vw, 4.5rem);
+    --section-space-standard: clamp(5rem, 9vw, 8rem);
+    --section-space-editorial: clamp(7rem, 12vw, 11rem);
 }
 
 *,

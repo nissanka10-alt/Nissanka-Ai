@@ -396,7 +396,7 @@ const structuredData = {
 
     .home-section,
     .final-cta {
-        padding-block: clamp(5rem, 9vw, 8rem);
+        padding-block: var(--section-space-standard);
     }
 
     .editorial-split > :first-child {
@@ -483,9 +483,8 @@ const structuredData = {
     .pillar {
         display: flex;
         min-width: 0;
-        min-height: 26rem;
         flex-direction: column;
-        padding: 1.5rem;
+        padding: var(--space-3) var(--space-3) var(--space-4);
     }
 
     .pillar + .pillar {
@@ -502,6 +501,7 @@ const structuredData = {
 
     .pillar h3 {
         max-width: 17rem;
+        min-block-size: 2.3em;
         margin: 1rem 0 1.5rem;
         font-size: 1.45rem;
         font-weight: 600;
@@ -533,8 +533,14 @@ const structuredData = {
     }
 
     .methodology-section {
+        padding-bottom: var(--section-space-compact);
         border-top: var(--border-architectural);
         background: var(--colour-white);
+    }
+
+    .experience-section,
+    .leadership-support {
+        padding-block: var(--section-space-compact);
     }
 
     .method-grid {
@@ -632,7 +638,7 @@ const structuredData = {
     }
 
     .ideas-section {
-        padding-block: clamp(7rem, 12vw, 11rem);
+        padding-block: var(--section-space-editorial);
         background: var(--colour-paper);
     }
 
@@ -883,6 +889,7 @@ const structuredData = {
         }
 
         .pillar h3 {
+            min-block-size: 0;
             margin: 2.5rem 0 1rem;
         }
 
