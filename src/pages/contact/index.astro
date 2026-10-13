@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { contactHref } from "../../config/practices";
+
+const title = "Contact | Nissanka Advisory";
+const description = "Contact Nissanka Advisory to discuss an AI, workforce intelligence or organisational change challenge.";
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ContactPage",
+            "@id": "https://nissanka.co.uk/contact/#webpage",
+            url: "https://nissanka.co.uk/contact/",
+            name: title,
+            description,
+        },
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+                { "@type": "ListItem", position: 2, name: "Contact", item: "https://nissanka.co.uk/contact/" },
+            ],
+        },
+    ],
+};
+---
+
+<BaseLayout {title} {description} path="/contact/" {structuredData}>
+    <header class="contact-hero">
+        <div class="shell">
+            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
+            <p class="system-label">Get in touch</p>
+            <div class="contact-grid">
+                <h1>Start with the question that needs clarity.</h1>
+                <div class="contact-copy">
+                    <p>Tell us what your organisation is working through and where a clearer decision would help.</p>
+                    <a class="contact-action" href={contactHref}>Email Nissanka Advisory <span aria-hidden="true">→</span></a>
+                    <p class="contact-detail">Email enquiries are sent directly to <a href="mailto:gishan@nissanka.co.uk">gishan@nissanka.co.uk</a>.</p>
+                    <p class="privacy-note">Information included in your email will be handled in accordance with our <a href="/privacy/">Privacy &amp; Cookie Policy</a>.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+</BaseLayout>
+
+<style>
+    .contact-hero {
+        padding-block: 2rem clamp(5rem, 9vw, 8rem);
+        border-bottom: var(--border-architectural);
+        background: var(--colour-paper);
+    }
+
+    .contact-hero :global(.breadcrumbs) {
+        margin-bottom: clamp(4rem, 8vw, 7rem);
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+        align-items: end;
+        margin-top: 1.5rem;
+    }
+
+    .contact-grid h1 {
+        grid-column: 1 / span 7;
+        max-width: 12ch;
+        margin: 0;
+        font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
+        font-size: clamp(3.75rem, 6vw, 5.5rem);
+        letter-spacing: normal;
+        line-height: 0.98;
+    }
+
+    .contact-copy {
+        grid-column: 9 / -1;
+    }
+
+    .contact-copy > p:first-child {
+        margin: 0 0 2rem;
+        font-size: 1.125rem;
+        line-height: 1.65;
+    }
+
+    .contact-action {
+        display: inline-flex;
+        min-height: 3.25rem;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem 1.1rem;
+        border: var(--border-architectural);
+        background: var(--colour-black);
+        color: var(--colour-white);
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .contact-action:hover,
+    .contact-action:focus-visible {
+        background: var(--colour-white);
+        color: var(--colour-black);
+    }
+
+    .contact-detail,
+    .privacy-note {
+        max-width: 32rem;
+        margin: 1.5rem 0 0;
+        font-size: 0.875rem;
+    }
+
+    .contact-detail a,
+    .privacy-note a {
+        text-underline-offset: 0.3em;
+    }
+
+    @media (max-width: 68rem) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-grid h1,
+        .contact-copy {
+            grid-column: 1;
+        }
+
+        .contact-copy {
+            max-width: 39rem;
+            margin-top: 3rem;
+        }
+    }
+
+    @media (max-width: 36rem) {
+        .contact-hero {
+            padding-bottom: 4.5rem;
+        }
+
+        .contact-hero :global(.breadcrumbs) {
+            margin-bottom: 3.5rem;
+        }
+
+        .contact-grid h1 {
+            font-size: clamp(2.75rem, 13vw, 3.25rem);
+        }
+
+        .contact-copy {
+            margin-top: 2.5rem;
+        }
+    }
+</style>

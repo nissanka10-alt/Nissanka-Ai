@@ -162,3 +162,9 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 36rem) {
+    .editorial-statement h2 {
+        font-size: clamp(2.25rem, 10vw, 2.75rem);
+    }
+}

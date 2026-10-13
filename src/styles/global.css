@@ -173,6 +173,10 @@ h2 {
 }
 
 @media (max-width: 52rem) {
+    html {
+        scroll-padding-top: 5rem;
+    }
+
     body {
         font-size: 1rem;
     }
@@ -183,5 +187,17 @@ h2 {
 
     .grid > * {
         grid-column: auto;
+    }
+}
+
+@media (max-width: 36rem) {
+    h1,
+    h2,
+    h3,
+    .display {
+        overflow-wrap: normal !important;
+        word-break: normal !important;
+        hyphens: none !important;
+        letter-spacing: normal !important;
     }
 }
