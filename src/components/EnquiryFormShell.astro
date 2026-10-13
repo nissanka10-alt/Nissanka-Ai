@@ -163,6 +163,24 @@ const { heading = "Tell us what you would like to discuss" } = Astro.props;
         text-underline-offset: 0.3em;
     }
 
+    @media (min-width: 68.0625rem) {
+        .enquiry h2 {
+            max-width: 24ch;
+        }
+
+        .required-note {
+            margin-bottom: 1.5rem;
+        }
+
+        form {
+            gap: 1rem;
+        }
+
+        textarea {
+            min-height: 8rem;
+        }
+    }
+
     @media (max-width: 36rem) {
         form {
             gap: 1rem;

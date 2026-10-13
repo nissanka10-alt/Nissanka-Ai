@@ -32,7 +32,7 @@ const structuredData = {
             <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
             <p class="system-label">Get in touch</p>
             <div class="contact-grid">
-                <h1>Start with the question that needs clarity.</h1>
+                <h1>What would you like to work through?</h1>
                 <div class="contact-copy">
                     <p>Tell us what your organisation is working through and where a clearer decision would help.</p>
                     <EnquiryFormShell />
@@ -79,12 +79,19 @@ const structuredData = {
 
     .contact-copy > p:first-child {
         margin: 0 0 2rem;
+        max-width: 34rem;
         font-size: 1.125rem;
         line-height: 1.65;
     }
 
-    .contact-copy > p:first-child {
-        max-width: 34rem;
+    @media (min-width: 68.0625rem) {
+        .contact-hero :global(.breadcrumbs) {
+            margin-bottom: 3.5rem;
+        }
+
+        .contact-grid {
+            margin-top: 1rem;
+        }
     }
 
     @media (max-width: 68rem) {
@@ -113,7 +120,8 @@ const structuredData = {
         }
 
         .contact-grid h1 {
-            font-size: clamp(2.75rem, 13vw, 3.25rem);
+            max-width: 10ch;
+            font-size: clamp(2.5rem, 11vw, 3rem);
         }
 
         .contact-copy {
