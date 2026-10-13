@@ -1,0 +1,23 @@
+---
+import Breadcrumbs from "./Breadcrumbs.astro";
+
+interface Props {
+    label: string;
+    heading: string;
+    intro: string;
+    breadcrumbs?: Array<{ label: string; href?: string }>;
+    display?: boolean;
+}
+
+const { label, heading, intro, breadcrumbs = [], display = false } = Astro.props;
+---
+
+<section class="section">
+    <div class="shell reading-width">
+        {breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} />}
+        <p class="eyebrow">{label}</p>
+        <h1 class:list={{ display }}>{heading}</h1>
+        <p class="lede">{intro}</p>
+        <slot />
+    </div>
+</section>

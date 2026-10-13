@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import PillarHero from "../../../../components/PillarHero.astro";
+import { contactHref } from "../../../../config/practices";
+import "../../../../styles/advisory-pages.css";
+
+const title = "Leadership Development | Nissanka Advisory";
+const description = "Leadership development for organisations building the judgement, confidence and capability to lead through change.";
+const audience = ["CEOs", "CHROs", "People Directors", "L&D leaders", "Leadership teams"];
+const areas = ["Judgement and decision-making", "Leadership confidence", "Navigating change", "Leadership capability", "Team effectiveness"];
+const structuredData = { "@context": "https://schema.org", "@graph": [
+    { "@type": "Service", "@id": "https://nissanka.co.uk/advisory/leadership/development/#service", name: "Leadership Development", description, url: "https://nissanka.co.uk/advisory/leadership/development/", provider: { "@type": "Organization", name: "Nissanka Advisory", url: "https://nissanka.co.uk/" }, audience: { "@type": "Audience", audienceType: audience.join(", ") } },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" }, { "@type": "ListItem", position: 2, name: "What We Do", item: "https://nissanka.co.uk/advisory/" }, { "@type": "ListItem", position: 3, name: "Leadership Advisory & Development", item: "https://nissanka.co.uk/advisory/leadership/" }, { "@type": "ListItem", position: 4, name: "Leadership Development", item: "https://nissanka.co.uk/advisory/leadership/development/" }] },
+] };
+---
+
+<BaseLayout {title} {description} path="/advisory/leadership/development/" {structuredData}>
+    <PillarHero label="Leadership Development" heading="Develop leadership capability for work that keeps changing." breadcrumbs={[{ label: "Home", href: "/" }, { label: "What We Do", href: "/advisory/" }, { label: "Leadership", href: "/advisory/leadership/" }, { label: "Development" }]} primaryHref={contactHref} primaryText="Start a Conversation" secondaryHref="#approach" secondaryText="Explore the approach">
+        <p>Leadership development is not simply training. It creates the conditions for leaders to strengthen judgement, practise difficult work and reflect on how they lead.</p>
+        <p>The work is designed for organisational buyers building capability across leadership teams.</p>
+    </PillarHero>
+
+    <section class="pillar-section editorial-statement" aria-labelledby="statement-title"><div class="shell editorial-statement__grid"><div class="editorial-statement__title"><p class="system-label">The central idea</p><h2 id="statement-title">Leadership capability develops through experience, reflection, challenge and practice.</h2></div><div class="editorial-statement__copy"><p>A workshop can introduce an idea. Development happens when leaders apply it to real decisions, examine their assumptions and practise how they respond.</p></div></div></section>
+
+    <section id="approach" class="pillar-section" aria-labelledby="areas-title"><div class="shell section-split"><div><p class="system-label">Areas of focus</p><h2 id="areas-title">Development shaped around the leadership work.</h2></div><div class="section-copy"><p>The emphasis depends on the organisation, the change underway and the capability leaders need to build.</p><ul class="focus-list">{areas.map((area) => <li>{area}</li>)}</ul></div></div></section>
+
+    <section class="pillar-section audience-section" aria-labelledby="audience-title"><div class="shell"><p class="system-label">For organisational buyers</p><h2 id="audience-title">A shared leadership question, not an off-the-shelf programme.</h2><p class="audience-copy">The work may support CEOs, CHROs, People Directors, L&amp;D leaders and leadership teams. Scope is agreed around the organisational context rather than a fixed programme length or format.</p><ul>{audience.map((item) => <li>{item}</li>)}</ul></div></section>
+
+    <section class="pillar-section" aria-labelledby="related-title"><div class="shell connection-heading"><p class="system-label">Where this leads</p><h2 id="related-title">Development and coaching serve different needs.</h2><p>Leadership development builds shared capability. Leadership coaching creates individual space for a leader to work through their own decisions, patterns and practice.</p><a class="text-link" href="/advisory/leadership/coaching/">Explore Leadership Coaching <span aria-hidden="true">→</span></a></div></section>
+    <section class="advisory-final" aria-labelledby="final-title"><div class="shell advisory-final__grid"><div><p class="system-label">Start</p><h2 id="final-title">What leadership capability does the organisation need next?</h2></div><div><p class="advisory-final__copy">Begin with the change leaders are being asked to make real.</p><a class="cta-inverse" href={contactHref}>Start a Conversation</a></div></div></section>
+</BaseLayout>
+
+<style>
+    .focus-list,.audience-section ul{margin:2rem 0 0;padding:0;list-style:none}.focus-list li,.audience-section li{padding:.9rem 0;border-top:var(--border-architectural);font-weight:700}.audience-section{background:var(--colour-paper)}.audience-section>div>h2{max-width:17ch}.audience-copy{max-width:48rem;font-size:1.125rem}.audience-section ul{display:flex;flex-wrap:wrap;gap:0 2rem}.audience-section li{min-width:12rem}
+</style>

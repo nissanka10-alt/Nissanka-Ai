@@ -1,0 +1,25 @@
+# Nissanka Advisory
+
+> Nissanka Advisory helps organisations identify where AI can create value, strengthen workforce intelligence and turn new technology into practical organisational change.
+
+## Core advisory
+- [AI & Transformation](https://nissanka.co.uk/advisory/ai-strategy/)
+- [Workforce Intelligence](https://nissanka.co.uk/advisory/workforce-intelligence/)
+- [AI Opportunity & Readiness Review](https://nissanka.co.uk/ai-review/)
+
+## Supporting capability
+- [Leadership Advisory & Development](https://nissanka.co.uk/advisory/leadership/)
+
+## Ideas and resources
+- [Ideas](https://nissanka.co.uk/ideas/)
+- [Insights](https://nissanka.co.uk/insights/)
+- [Tools & Frameworks](https://nissanka.co.uk/tools/)
+- [Speaking](https://nissanka.co.uk/speaking/)
+
+## Regional
+- [Buckinghamshire](https://nissanka.co.uk/buckinghamshire/)
+- [Sri Lanka](https://nissanka.co.uk/sri-lanka/)
+
+## Company
+- [About Nissanka Advisory](https://nissanka.co.uk/about/)
+- [Privacy & Cookie Policy](https://nissanka.co.uk/privacy/)

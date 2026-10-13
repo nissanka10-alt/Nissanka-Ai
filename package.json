@@ -1,0 +1,16 @@
+{
+    "name": "nissanka-advisory",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "devDependencies": {
+        "astro": "7.3.5",
+        "wrangler": "4.144.0"
+    }
+}

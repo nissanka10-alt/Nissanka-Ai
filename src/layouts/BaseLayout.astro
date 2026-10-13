@@ -1,0 +1,55 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SeoHead from "../components/SeoHead.astro";
+import StructuredData from "../components/StructuredData.astro";
+import "../styles/global.css";
+
+interface Props {
+    title: string;
+    description: string;
+    path: string;
+    type?: "website" | "article";
+    image?: string;
+    structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+    robots?: string;
+}
+
+const { title, description, path, type, image, structuredData, robots } = Astro.props;
+const canonical = new URL(path, Astro.site);
+const defaultSocialImage = "/social/nissanka-advisory-og.png";
+const socialImage = image ?? defaultSocialImage;
+const socialImageWidth = image ? undefined : 1200;
+const socialImageHeight = image ? undefined : 630;
+---
+
+<!doctype html>
+<html lang="en-GB">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <SeoHead
+            {title}
+            {description}
+            {canonical}
+            {type}
+            image={socialImage}
+            imageWidth={socialImageWidth}
+            imageHeight={socialImageHeight}
+            {robots}
+        />
+        {structuredData && <StructuredData data={structuredData} />}
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">Skip to main content</a>
+        <Header />
+        <main id="main-content">
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>

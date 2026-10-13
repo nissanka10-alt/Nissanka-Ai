@@ -1,0 +1,353 @@
+---
+import Logo from "./Logo.astro";
+
+const advisoryLinks = [
+    { label: "AI & Transformation", mobileLabel: "AI & Transformation", href: "/advisory/ai-strategy/" },
+    { label: "Workforce Intelligence", href: "/advisory/workforce-intelligence/" },
+    { label: "AI Opportunity & Readiness Review", mobileLabel: "AI Review", href: "/ai-review/" },
+    { label: "Leadership Advisory & Development", mobileLabel: "Leadership Advisory & Development", href: "/advisory/leadership/", supporting: true },
+];
+
+const ideasLinks = [
+    { label: "Insights", href: "/insights/", enabled: true },
+    { label: "The Work AI Cannot Do", href: "/ideas/", enabled: true },
+    { label: "Tools & Frameworks", href: "/tools/", enabled: false },
+].filter((item) => item.enabled);
+---
+
+<header class="site-header">
+    <div class="shell site-header__inner">
+        <Logo />
+        <nav class="desktop-nav" aria-label="Primary navigation">
+            <details class="nav-group">
+                <summary>What We Do</summary>
+                <ul>
+                    {advisoryLinks.map((item) => (
+                        <li class:list={{ "supporting-link": item.supporting }}><a href={item.href}><span class:list={{ "desktop-label": item.mobileLabel }}>{item.label}</span>{item.mobileLabel && <span class="mobile-label">{item.mobileLabel}</span>}</a></li>
+                    ))}
+                </ul>
+            </details>
+            <details class="nav-group">
+                <summary>Ideas</summary>
+                <ul>
+                    {ideasLinks.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+                </ul>
+            </details>
+            <a href="/speaking/">Speaking</a>
+            <a href="/about/">About</a>
+            <a class="site-header__cta" href="/contact/">Get in touch</a>
+        </nav>
+        <details class="mobile-nav">
+            <summary>
+                <span class="mobile-nav__closed-label">Menu</span>
+                <span class="mobile-nav__open-label">Close</span>
+            </summary>
+            <nav class="mobile-nav__panel" aria-label="Mobile primary navigation">
+                <details class="mobile-nav__group">
+                    <summary>What We Do</summary>
+                    <ul>
+                        {advisoryLinks.map((item) => (
+                            <li class:list={{ "supporting-link": item.supporting }}><a href={item.href}>{item.mobileLabel ?? item.label}</a></li>
+                        ))}
+                    </ul>
+                </details>
+                <details class="mobile-nav__group">
+                    <summary>Ideas</summary>
+                    <ul>
+                        {ideasLinks.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+                    </ul>
+                </details>
+                <a href="/speaking/">Speaking</a>
+                <a href="/about/">About</a>
+                <a class="mobile-nav__cta" href="/contact/">Get in touch</a>
+            </nav>
+        </details>
+    </div>
+</header>
+
+<style>
+    .site-header {
+        border-bottom: var(--border-architectural);
+        background: var(--colour-white);
+    }
+
+    .site-header__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        min-height: 6rem;
+    }
+
+    .desktop-nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1.35rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    .desktop-nav a,
+    .mobile-nav a {
+        text-decoration: none;
+    }
+
+    .desktop-nav a:hover,
+    .mobile-nav a:hover,
+    .nav-group summary:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.35em;
+    }
+
+    .nav-group {
+        position: relative;
+    }
+
+    .nav-group summary {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .nav-group summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .nav-group summary::after {
+        content: "+";
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 400;
+    }
+
+    .nav-group[open] summary::after {
+        content: "−";
+    }
+
+    .nav-group summary:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 0.35rem;
+    }
+
+    .nav-group ul {
+        position: absolute;
+        z-index: 10;
+        top: calc(100% + 1rem);
+        left: -1rem;
+        width: max-content;
+        min-width: 17rem;
+        margin: 0;
+        padding: 0.5rem 1rem;
+        border: var(--border-architectural);
+        background: var(--colour-white);
+        list-style: none;
+    }
+
+    .nav-group li + li {
+        border-top: var(--border-architectural);
+    }
+
+    .nav-group .supporting-link {
+        margin-top: 0.4rem;
+        border-top-width: 2px;
+    }
+
+    .nav-group li a {
+        display: block;
+        padding-block: 0.8rem;
+    }
+
+    .mobile-label {
+        display: none;
+    }
+
+    .site-header__cta {
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--colour-black);
+        background: var(--colour-black);
+        color: var(--colour-white);
+    }
+
+    .site-header__cta:hover {
+        background: var(--colour-white);
+        color: var(--colour-black);
+        text-decoration: none;
+    }
+
+    .mobile-nav {
+        display: none;
+    }
+
+    @media (max-width: 68rem) {
+        .site-header {
+            position: sticky;
+            z-index: 100;
+            top: 0;
+        }
+
+        .site-header__inner {
+            position: relative;
+            min-height: 4.5rem;
+            padding-block: 0.75rem;
+        }
+
+        .site-header :global(.brand) {
+            gap: 0.6rem;
+        }
+
+        .site-header :global(.brand__stamp) {
+            width: 38px;
+            height: 38px;
+            flex-basis: 38px;
+        }
+
+        .site-header :global(.brand__stamp span) {
+            font-size: 1.7rem;
+        }
+
+        .site-header :global(.brand__wordmark) {
+            padding-inline: 0.35rem 0.1rem;
+            font-size: 1.15rem;
+            letter-spacing: 0.25em;
+        }
+
+        .desktop-nav {
+            display: none;
+        }
+
+        .mobile-nav {
+            display: block;
+        }
+
+        .mobile-nav > summary {
+            display: flex;
+            min-width: 3.75rem;
+            min-height: 3rem;
+            align-items: center;
+            justify-content: flex-end;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            list-style: none;
+            text-transform: uppercase;
+        }
+
+        .mobile-nav > summary::-webkit-details-marker,
+        .mobile-nav__group > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .mobile-nav > summary:focus-visible,
+        .mobile-nav__group > summary:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 0.25rem;
+        }
+
+        .mobile-nav__open-label {
+            display: none;
+        }
+
+        .mobile-nav[open] .mobile-nav__closed-label {
+            display: none;
+        }
+
+        .mobile-nav[open] .mobile-nav__open-label {
+            display: inline;
+        }
+
+        .mobile-nav__panel {
+            position: absolute;
+            top: 100%;
+            right: -1rem;
+            left: -1rem;
+            max-height: calc(100dvh - 4.5rem);
+            overflow-y: auto;
+            border-top: var(--border-architectural);
+            border-bottom: var(--border-architectural);
+            background: var(--colour-white);
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        .mobile-nav__panel > a,
+        .mobile-nav__group > summary {
+            display: flex;
+            min-height: 3.25rem;
+            align-items: center;
+            padding-inline: 1rem;
+            border-bottom: var(--border-architectural);
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            list-style: none;
+            text-transform: uppercase;
+        }
+
+        .mobile-nav__group > summary {
+            justify-content: space-between;
+        }
+
+        .mobile-nav__group > summary::after {
+            content: "+";
+            font-family: var(--font-mono);
+            font-weight: 400;
+        }
+
+        .mobile-nav__group[open] > summary::after {
+            content: "−";
+        }
+
+        .mobile-nav__group ul {
+            margin: 0;
+            padding: 0 1rem;
+            border-bottom: var(--border-architectural);
+            background: var(--colour-paper);
+            list-style: none;
+        }
+
+        .mobile-nav__group li + li {
+            border-top: var(--border-architectural);
+        }
+
+        .mobile-nav__group li a {
+            display: flex;
+            min-height: 3rem;
+            align-items: center;
+            padding-block: 0.65rem;
+        }
+
+        .mobile-nav__group .supporting-link {
+            margin-top: 0.25rem;
+            border-top-width: 2px;
+        }
+
+        .mobile-nav__panel > .mobile-nav__cta {
+            min-height: 3.5rem;
+            justify-content: space-between;
+            border-bottom: 0;
+            background: var(--colour-black);
+            color: var(--colour-white);
+        }
+
+        .mobile-nav__cta::after {
+            content: "→";
+        }
+
+        .mobile-nav__panel a:hover,
+        .mobile-nav__panel summary:hover {
+            text-decoration: underline;
+            text-underline-offset: 0.3em;
+        }
+    }
+
+    @media (max-width: 36rem) {
+        .site-header :global(.brand__wordmark) {
+            font-size: 1.05rem;
+            letter-spacing: 0.22em;
+        }
+    }
+</style>
