@@ -6,47 +6,170 @@ interface Props {
 const { heading = "Tell us what you would like to discuss" } = Astro.props;
 ---
 
-<section aria-labelledby="enquiry-heading">
+<section class="enquiry" aria-labelledby="enquiry-heading">
     <h2 id="enquiry-heading">{heading}</h2>
-    <p>This form structure is prepared for the redesign. It is not connected to a submission service yet.</p>
-    <form data-form-shell>
-        <label for="enquiry-name">Name</label>
-        <input id="enquiry-name" name="name" type="text" autocomplete="name" />
-        <label for="enquiry-email">Work email</label>
-        <input id="enquiry-email" name="email" type="email" autocomplete="email" />
-        <label for="enquiry-type">Enquiry type</label>
-        <select id="enquiry-type" name="enquiry-type">
-            <option value="ai-review">AI Opportunity &amp; Readiness Review</option>
-            <option value="advisory">Advisory challenge</option>
-            <option value="speaking">Speaking enquiry</option>
-        </select>
-        <label for="enquiry-message">What would you like to discuss?</label>
-        <textarea id="enquiry-message" name="message" rows="6"></textarea>
-        <button type="button" disabled>Submission not yet enabled</button>
+    <p class="required-note"><span aria-hidden="true">*</span> Required fields</p>
+
+    <form action="https://formsubmit.co/gishan@nissanka.co.uk" method="POST">
+        <input type="hidden" name="_subject" value="Nissanka Advisory website enquiry" />
+        <input type="hidden" name="_next" value="https://nissanka.co.uk/thank-you/" />
+
+        <div class="honeypot" aria-hidden="true">
+            <label for="enquiry-website">Leave this field empty</label>
+            <input id="enquiry-website" name="_honey" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="field">
+            <label for="enquiry-name">Name <span aria-hidden="true">*</span></label>
+            <input id="enquiry-name" name="name" type="text" autocomplete="name" required />
+        </div>
+
+        <div class="field">
+            <label for="enquiry-email">Work email <span aria-hidden="true">*</span></label>
+            <input id="enquiry-email" name="email" type="email" autocomplete="email" required />
+        </div>
+
+        <div class="field">
+            <label for="enquiry-organisation">Organisation</label>
+            <input id="enquiry-organisation" name="organisation" type="text" autocomplete="organization" />
+        </div>
+
+        <div class="field">
+            <label for="enquiry-type">What would you like to discuss? <span aria-hidden="true">*</span></label>
+            <select id="enquiry-type" name="enquiry_type" required>
+                <option value="" selected disabled>Select an option</option>
+                <option>AI Opportunity &amp; Readiness</option>
+                <option>AI &amp; Transformation</option>
+                <option>Workforce Intelligence</option>
+                <option>Sri Lanka / PDPA</option>
+                <option>Buckinghamshire</option>
+                <option>Leadership</option>
+                <option>Speaking</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="enquiry-message">Message <span aria-hidden="true">*</span></label>
+            <textarea id="enquiry-message" name="message" rows="7" required></textarea>
+        </div>
+
+        <button type="submit">Send enquiry <span aria-hidden="true">→</span></button>
     </form>
+
+    <p class="privacy-note">We'll use the information you provide to respond to your enquiry. See our <a href="/privacy/">Privacy &amp; Cookie Policy</a>.</p>
+    <p class="email-fallback">Prefer email? <a href="mailto:gishan@nissanka.co.uk">gishan@nissanka.co.uk</a></p>
 </section>
 
 <style>
+    .enquiry h2 {
+        max-width: 19ch;
+        margin: 0;
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        line-height: 1.08;
+    }
+
+    .required-note {
+        margin: 0.75rem 0 2rem;
+        color: var(--colour-grey);
+        font-size: 0.75rem;
+    }
+
     form {
         display: grid;
-        gap: 0.75rem;
-        max-width: 40rem;
+        gap: 1.25rem;
+        width: 100%;
+        max-width: 42rem;
+    }
+
+    .field {
+        display: grid;
+        gap: 0.5rem;
     }
 
     label {
+        font-size: 0.875rem;
         font-weight: 700;
+        line-height: 1.4;
     }
 
     input,
     select,
     textarea,
     button {
-        min-height: 3rem;
-        padding: 0.75rem;
+        width: 100%;
+        min-height: 3.25rem;
+        padding: 0.8rem 0.9rem;
         border: var(--border-architectural);
+        border-radius: 0;
         background: var(--colour-white);
         color: var(--colour-black);
         font: inherit;
         box-shadow: none;
+    }
+
+    select {
+        cursor: pointer;
+    }
+
+    textarea {
+        min-height: 10rem;
+        resize: vertical;
+    }
+
+    button {
+        display: inline-flex;
+        width: fit-content;
+        min-width: 10rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        padding-inline: 1.1rem;
+        background: var(--colour-black);
+        color: var(--colour-white);
+        font-size: 0.875rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    button:hover,
+    button:focus-visible {
+        background: var(--colour-white);
+        color: var(--colour-black);
+    }
+
+    .honeypot {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+
+    .privacy-note,
+    .email-fallback {
+        max-width: 38rem;
+        margin: 1.5rem 0 0;
+        font-size: 0.8125rem;
+        line-height: 1.65;
+    }
+
+    .email-fallback {
+        margin-top: 0.75rem;
+    }
+
+    .privacy-note a,
+    .email-fallback a {
+        text-underline-offset: 0.3em;
+    }
+
+    @media (max-width: 36rem) {
+        form {
+            gap: 1rem;
+        }
+
+        button {
+            width: 100%;
+        }
     }
 </style>

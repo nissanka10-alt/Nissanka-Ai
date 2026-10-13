@@ -7,13 +7,15 @@ interface Props {
     image?: string;
     imageWidth?: number;
     imageHeight?: number;
+    robots?: string;
 }
 
-const { title, description, canonical, type = "website", image, imageWidth, imageHeight } = Astro.props;
+const { title, description, canonical, type = "website", image, imageWidth, imageHeight, robots } = Astro.props;
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
+{robots && <meta name="robots" content={robots} />}
 <link rel="canonical" href={canonical} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

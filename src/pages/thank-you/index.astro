@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "Thank You | Nissanka Advisory";
+const description = "Thank you for contacting Nissanka Advisory.";
+---
+
+<BaseLayout {title} {description} path="/thank-you/" robots="noindex, nofollow">
+    <section class="thank-you">
+        <div class="shell thank-you-inner">
+            <p class="system-label">Thank you</p>
+            <h1>Your message is on its way.</h1>
+            <p>Thanks for getting in touch. We'll respond as soon as we can.</p>
+            <nav aria-label="Next steps">
+                <a href="/">Return home <span aria-hidden="true">→</span></a>
+                <a href="/insights/">Explore Insights <span aria-hidden="true">→</span></a>
+            </nav>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .thank-you {
+        min-height: 55vh;
+        padding-block: clamp(5rem, 11vw, 9rem);
+        background: var(--colour-paper);
+    }
+
+    .thank-you-inner {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+    }
+
+    .system-label,
+    h1,
+    .thank-you-inner > p:not(.system-label),
+    nav {
+        grid-column: 2 / span 8;
+    }
+
+    h1 {
+        max-width: 12ch;
+        margin: 1.5rem 0 0;
+        font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
+        font-size: clamp(3.25rem, 7vw, 6rem);
+        letter-spacing: normal;
+        line-height: 0.98;
+    }
+
+    .thank-you-inner > p:not(.system-label) {
+        max-width: 36rem;
+        margin: 2rem 0 0;
+        font-size: 1.125rem;
+        line-height: 1.65;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+        margin-top: 2.5rem;
+    }
+
+    nav a {
+        font-weight: 700;
+        text-underline-offset: 0.35em;
+    }
+
+    @media (max-width: 50rem) {
+        .system-label,
+        h1,
+        .thank-you-inner > p:not(.system-label),
+        nav {
+            grid-column: 1 / -1;
+        }
+    }
+</style>
