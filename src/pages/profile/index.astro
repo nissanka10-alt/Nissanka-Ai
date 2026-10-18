@@ -8,7 +8,6 @@ import "../../styles/editorial-pages.css";
 const title = "Gishan Nissanka | Enterprise AI & Digital Transformation Leader";
 const description = "Executive profile of Gishan Nissanka, Enterprise AI and Digital Transformation Leader, international speaker and Founder of Nissanka Advisory.";
 const linkedInUrl = "https://www.linkedin.com/in/gishan-nissanka-3907645/";
-const profilePdf = "/profile/Gishan-Nissanka-Executive-Profile.pdf";
 const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -57,7 +56,6 @@ const credentials = [
                     <p class="profile-role">Enterprise AI &amp; Digital Transformation Leader</p>
                     <p class="profile-founder">Founder, Nissanka Advisory</p>
                     <nav class="profile-actions" aria-label="Professional profile actions">
-                        <a class="profile-action profile-action--primary" href={profilePdf} download>Download PDF <span aria-hidden="true">→</span></a>
                         <a class="profile-action" href={linkedInUrl} target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span class="visually-hidden">(opens in a new tab)</span> <span aria-hidden="true">→</span></a>
                         <a class="profile-action" href="/contact/">Get in touch <span aria-hidden="true">→</span></a>
                     </nav>
@@ -166,8 +164,6 @@ const credentials = [
     .profile-founder { margin: 0.75rem 0 0; color: var(--colour-black); font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
     .profile-actions { display: flex; flex-wrap: wrap; gap: 1rem 1.75rem; align-items: center; margin-top: clamp(2.5rem, 5vw, 4rem); }
     .profile-action { color: inherit; font-size: 0.88rem; font-weight: 700; text-underline-offset: 0.3em; }
-    .profile-action--primary { padding: 0.95rem 1.25rem; border: 1px solid var(--colour-black); background: var(--colour-black); color: var(--colour-white); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-decoration: none; text-transform: uppercase; }
-    .profile-action--primary:hover { background: transparent; color: var(--colour-black); }
     .profile-portrait { grid-column: 9 / -1; max-width: 25rem; margin: 0 0 0 auto; aspect-ratio: 4 / 5; overflow: hidden; }
     .profile-portrait :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; filter: grayscale(100%); }
     .credential-strip { background: var(--colour-obsidian); color: var(--colour-white); }
