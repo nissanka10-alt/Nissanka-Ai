@@ -13,7 +13,8 @@
     "d1_databases": [
         {
             "binding": "LEADS_DB",
-            "database_name": "nissanka-leads",
+            "database_name": "nissanka-advisory-leads",
+            "database_id": "d97dc6b7-85e7-436e-96b0-19a26114a29f",
             "migrations_dir": "./migrations"
         }
     ],
