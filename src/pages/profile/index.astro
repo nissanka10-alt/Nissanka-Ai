@@ -1,0 +1,218 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import speakingImage from "../../assets/editorial/pa-world-2025.jpg";
+import "../../styles/editorial-pages.css";
+
+const title = "Gishan Nissanka | Enterprise AI & Digital Transformation Leader";
+const description = "Executive profile of Gishan Nissanka, Enterprise AI and Digital Transformation Leader, international speaker and Founder of Nissanka Advisory.";
+const linkedInUrl = "https://www.linkedin.com/in/gishan-nissanka-3907645/";
+const profilePdf = "/profile/Gishan-Nissanka-Executive-Profile.pdf";
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ProfilePage",
+            "@id": "https://nissanka.co.uk/profile/#webpage",
+            url: "https://nissanka.co.uk/profile/",
+            name: title,
+            description,
+            mainEntity: { "@id": "https://nissanka.co.uk/#gishan-nissanka" },
+        },
+        {
+            "@type": "Person",
+            "@id": "https://nissanka.co.uk/#gishan-nissanka",
+            name: "Gishan Nissanka",
+            jobTitle: "Enterprise AI & Digital Transformation Leader",
+            url: "https://nissanka.co.uk/profile/",
+            worksFor: { "@id": "https://nissanka.co.uk/#organisation" },
+        },
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+                { "@type": "ListItem", position: 2, name: "Professional Profile", item: "https://nissanka.co.uk/profile/" },
+            ],
+        },
+    ],
+};
+
+const credentials = [
+    ["20+", "Years of international experience"],
+    ["50+", "Keynotes, presentations and leadership sessions"],
+    ["UCL", "Guest Lecturer"],
+    ["MBA / MSc", "Business and technology education"],
+];
+---
+
+<BaseLayout {title} {description} path="/profile/" robots="noindex, follow" {structuredData}>
+    <section class="profile-hero" aria-labelledby="profile-title">
+        <div class="shell">
+            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Professional Profile" }]} />
+            <div class="profile-hero__grid">
+                <div class="profile-hero__copy">
+                    <p class="system-label">Professional profile</p>
+                    <h1 id="profile-title">Gishan Nissanka</h1>
+                    <p class="profile-role">Enterprise AI &amp; Digital Transformation Leader</p>
+                    <p class="profile-founder">Founder, Nissanka Advisory</p>
+                    <nav class="profile-actions" aria-label="Professional profile actions">
+                        <a class="profile-action profile-action--primary" href={profilePdf} download>Download PDF <span aria-hidden="true">→</span></a>
+                        <a class="profile-action" href={linkedInUrl} target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span class="visually-hidden">(opens in a new tab)</span> <span aria-hidden="true">→</span></a>
+                        <a class="profile-action" href="/contact/">Get in touch <span aria-hidden="true">→</span></a>
+                    </nav>
+                </div>
+                <figure class="profile-portrait">
+                    <Image
+                        src={speakingImage}
+                        alt="Gishan Nissanka speaking at a conference."
+                        widths={[360, 540, 720, 900]}
+                        sizes="(max-width: 52rem) calc(100vw - 2rem), 30vw"
+                        format="webp"
+                        quality={82}
+                    />
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <section class="credential-strip" aria-label="Selected professional credentials">
+        <div class="shell credential-grid">
+            {credentials.map(([value, label]) => (
+                <div class="credential-item">
+                    <p>{value}</p>
+                    <p>{label}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <article class="profile-biography">
+        <section class="profile-section" aria-labelledby="biography-title">
+            <div class="shell profile-split">
+                <div>
+                    <p class="system-label">Executive biography</p>
+                    <h2 id="biography-title">Technology, data and AI made practical.</h2>
+                </div>
+                <div class="profile-prose profile-prose--lead">
+                    <p>Gishan Nissanka is an enterprise AI and digital transformation leader with 20 years of international experience helping large, complex organisations turn technology, data and AI into practical organisational capability. His career spans Vodafone, Ernst &amp; Young, Worldline and Nscale, where he has led work across enterprise platforms, data strategy, analytics, responsible AI, operating models and workforce intelligence.</p>
+                    <p>Gishan is the Founder of Nissanka Advisory, where he advises executive teams on AI readiness, responsible adoption and the redesign of work around human-AI collaboration. He develops practical transformation roadmaps connecting business value, governance, operating models, leadership behaviour and workforce capability. His work increasingly focuses on the organisational and human side of digital transformation, including the leadership, skills and operating-model changes required to translate AI investment into sustainable value. This perspective is particularly relevant to Sri Lanka as it works to build a more inclusive and resilient digital economy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section profile-section--paper" aria-labelledby="experience-title">
+            <div class="shell experience-layout">
+                <div class="experience-intro">
+                    <p class="system-label">Selected leadership experience</p>
+                    <h2 id="experience-title">Experience inside transformation.</h2>
+                </div>
+                <div class="experience-list">
+                    <section aria-labelledby="nscale-worldline-title">
+                        <h3 id="nscale-worldline-title">Nscale / Worldline</h3>
+                        <p>Prior to establishing Nissanka Advisory, Gishan served as Director of People Technology &amp; Analytics at Nscale, where he established the technology, data and governance foundations required to support rapid international growth. Before joining Nscale, he was Head of People Intelligence at Worldline, a global financial technology organisation. There, he led data, analytics, workforce planning and AI transformation for more than 20,000 employees across over 50 countries. His work included establishing a People Analytics Centre of Excellence in India and leading a GenAI adoption programme that achieved full adoption across the leadership population in scope.</p>
+                    </section>
+                    <section aria-labelledby="ey-title">
+                        <h3 id="ey-title">Ernst &amp; Young</h3>
+                        <p>Gishan spent seven years at Ernst &amp; Young Global in leadership roles spanning people analytics consulting, digital talent, data architecture and global transformation. Working across seven regions and a wider organisational footprint of 145 countries, he built virtual centres of excellence and led EY Insights, a global self-service decision platform used by more than 1,000 users. He also led PX360, an AI and machine-learning-enabled platform supporting predictive workforce and risk analysis.</p>
+                    </section>
+                    <section aria-labelledby="vodafone-title">
+                        <h3 id="vodafone-title">Vodafone</h3>
+                        <p>He began his transformation career at Vodafone Group, working across data analytics, HR systems and global reporting. He defined the reporting strategy for a 91,000-employee organisation spanning 21 operating companies and later led the HR technology integration for Vodafone’s EUR 7 billion acquisition of Kabel Deutschland, covering approximately 4,000 employees across 13 locations.</p>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section profile-section--dark" aria-labelledby="speaking-education-title">
+            <div class="shell profile-split">
+                <div>
+                    <p class="system-label">Speaking &amp; executive education</p>
+                    <h2 id="speaking-education-title">Ideas connected to organisational reality.</h2>
+                </div>
+                <div class="profile-prose">
+                    <p>Alongside his corporate and advisory work, Gishan is an experienced international speaker on enterprise AI adoption, AI ethics, workforce intelligence and organisational transformation. He has contributed to conferences, panel discussions and leadership sessions in the UK and internationally. His speaking experience includes the Chief AI Officer Summit UK, TechEx London and Amsterdam, CWI Dubai, CDAO UK, People Analytics World and the CIPD Annual Conference.</p>
+                    <p>Gishan has also contributed to executive education as a Guest Lecturer at University College London and previously worked as an Associate Lecturer on the International MBA programme at Buckinghamshire New University. Through these roles, he has connected academic thinking with the practical realities of enterprise implementation and organisational change.</p>
+                    <a class="profile-inline-link" href="/speaking/">Explore Speaking <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section" aria-labelledby="education-title">
+            <div class="shell education-layout">
+                <div>
+                    <p class="system-label">Education &amp; professional development</p>
+                    <h2 id="education-title">Business, technology and responsible AI.</h2>
+                </div>
+                <div class="profile-prose">
+                    <p>He completed the Artificial Intelligence Programme at the University of Oxford and the Ethics of AI programme at the London School of Economics. He holds an MSc in Business Information Technology from Buckinghamshire New University, an MBA from Buckinghamshire Business School and a Postgraduate Diploma in Marketing from the Chartered Institute of Marketing.</p>
+                    <nav class="profile-next" aria-label="Related profile pages">
+                        <a href="/about/">About Nissanka Advisory <span aria-hidden="true">→</span></a>
+                        <a href="/contact/">Get in touch <span aria-hidden="true">→</span></a>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </article>
+</BaseLayout>
+
+<style>
+    .profile-hero { padding-block: 2rem clamp(4.5rem, 8vw, 8rem); background: var(--colour-paper); border-bottom: var(--border-architectural); }
+    .profile-hero :global(.breadcrumbs) { margin-bottom: clamp(3rem, 7vw, 6rem); }
+    .profile-hero__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--grid-gap); align-items: center; }
+    .profile-hero__copy { grid-column: 1 / span 7; }
+    .profile-hero h1 { max-width: 10ch; margin: 1.75rem 0 1.5rem; font-family: var(--font-display); font-size: clamp(4.25rem, 7vw, 7rem); font-weight: 900; font-kerning: normal; font-feature-settings: "kern" 1; letter-spacing: normal; line-height: 0.96; }
+    .profile-role { max-width: 33rem; margin: 0; font-size: clamp(1.25rem, 2.2vw, 1.75rem); font-weight: 700; line-height: 1.3; }
+    .profile-founder { margin: 0.75rem 0 0; color: var(--colour-black); font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .profile-actions { display: flex; flex-wrap: wrap; gap: 1rem 1.75rem; align-items: center; margin-top: clamp(2.5rem, 5vw, 4rem); }
+    .profile-action { color: inherit; font-size: 0.88rem; font-weight: 700; text-underline-offset: 0.3em; }
+    .profile-action--primary { padding: 0.95rem 1.25rem; border: 1px solid var(--colour-black); background: var(--colour-black); color: var(--colour-white); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-decoration: none; text-transform: uppercase; }
+    .profile-action--primary:hover { background: transparent; color: var(--colour-black); }
+    .profile-portrait { grid-column: 9 / -1; max-width: 25rem; margin: 0 0 0 auto; aspect-ratio: 4 / 5; overflow: hidden; }
+    .profile-portrait :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; filter: grayscale(100%); }
+    .credential-strip { background: var(--colour-obsidian); color: var(--colour-white); }
+    .credential-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .credential-item { min-width: 0; padding: clamp(1.5rem, 3vw, 2.5rem); border-left: 1px solid var(--colour-white); }
+    .credential-item:first-child { border-left: 0; }
+    .credential-item p { margin: 0; }
+    .credential-item p:first-child { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 900; font-kerning: normal; font-feature-settings: "kern" 1; letter-spacing: normal; line-height: 1; }
+    .credential-item p:last-child { max-width: 19rem; margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.04em; line-height: 1.5; text-transform: uppercase; }
+    .profile-section { padding-block: var(--section-space-standard); border-bottom: var(--border-architectural); }
+    .profile-section--paper { background: var(--colour-paper); }
+    .profile-section--dark { background: var(--colour-obsidian); color: var(--colour-white); }
+    .profile-split, .education-layout, .experience-layout { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--grid-gap); }
+    .profile-split > div:first-child, .education-layout > div:first-child, .experience-intro { grid-column: 1 / span 5; }
+    .profile-split > div:last-child, .education-layout > div:last-child, .experience-list { grid-column: 7 / -1; }
+    .profile-section h2 { max-width: 12ch; margin: 1.5rem 0 0; font-family: var(--font-display); font-size: clamp(3rem, 5.5vw, 5.25rem); font-weight: 900; font-kerning: normal; font-feature-settings: "kern" 1; letter-spacing: normal; line-height: 1; }
+    .profile-prose { max-width: 43rem; }
+    .profile-prose p { margin: 0; line-height: 1.8; }
+    .profile-prose p + p { margin-top: 1.5rem; }
+    .profile-prose--lead p:first-child { font-size: clamp(1.15rem, 1.8vw, 1.35rem); line-height: 1.65; }
+    .experience-list section { padding-block: 2rem; border-top: var(--border-architectural); }
+    .experience-list section:first-child { padding-top: 0; border-top: 0; }
+    .experience-list h3 { margin: 0 0 1rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .experience-list p { max-width: 44rem; margin: 0; line-height: 1.8; }
+    .profile-inline-link { display: inline-block; margin-top: 2rem; color: inherit; font-weight: 700; text-underline-offset: 0.3em; }
+    .profile-next { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: var(--border-architectural); }
+    .profile-next a { color: inherit; font-weight: 700; text-underline-offset: 0.3em; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    @media (max-width: 52rem) {
+        .profile-hero__grid, .profile-split, .education-layout, .experience-layout { grid-template-columns: minmax(0, 1fr); }
+        .profile-hero__copy, .profile-portrait, .profile-split > div:first-child, .profile-split > div:last-child, .education-layout > div:first-child, .education-layout > div:last-child, .experience-intro, .experience-list { grid-column: 1; }
+        .profile-portrait { width: min(100%, 32rem); max-width: none; margin: 3rem 0 0; aspect-ratio: 16 / 10; }
+        .credential-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .credential-item:nth-child(3) { border-top: 1px solid var(--colour-white); border-left: 0; }
+        .credential-item:nth-child(4) { border-top: 1px solid var(--colour-white); }
+        .profile-prose, .experience-list { margin-top: 3rem; }
+    }
+    @media (max-width: 38rem) {
+        .profile-hero h1, .profile-section h2 { overflow-wrap: normal; word-break: normal; hyphens: none; }
+        .profile-hero h1 { font-size: clamp(3.3rem, 16vw, 4.5rem); }
+        .profile-actions { display: grid; justify-items: start; }
+        .credential-grid { grid-template-columns: minmax(0, 1fr); }
+        .credential-item, .credential-item:first-child, .credential-item:nth-child(4) { border-top: 1px solid var(--colour-white); border-left: 0; }
+        .credential-item:first-child { border-top: 0; }
+        .profile-section h2 { font-size: clamp(2.3rem, 10vw, 3.5rem); }
+        .profile-next { display: grid; }
+    }
+</style>
