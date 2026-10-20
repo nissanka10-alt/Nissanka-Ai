@@ -4,6 +4,6 @@ export const jkhEvent = Object.freeze({
     downloadPath: "/jkh/download/",
     errorPath: "/jkh/error/",
     slidesPath: "/resources/jkh/jkh-executive-session-slides.pdf",
-    slidesReady: false,
+    slidesReady: true,
     defaultSource: "qr",
 });
