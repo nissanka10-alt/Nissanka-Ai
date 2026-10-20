@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/session-resources.css";
+
+const { session, legacyPath } = Astro.props;
+const pagePath = legacyPath ?? session.downloadPath;
+const title = `${session.organisation} Session Resource | Nissanka Advisory`;
+const description = `Resources from the ${session.organisation} executive session in ${session.location}.`;
+---
+
+<BaseLayout {title} {description} path={pagePath} robots="noindex, nofollow">
+    <section class="resource-ready" aria-labelledby="resource-title">
+        <div class="shell resource-shell">
+            <p class="system-label">Session resource / {session.organisation}</p>
+            <h1 id="resource-title">{session.slidesReady ? "Your slides are ready." : "Thank you for joining us."}</h1>
+            <p class="resource-intro">Thanks for joining the session. Keep the deck as a reference for the ideas and conversations that matter next.</p>
+
+            {
+                session.slidesReady ? (
+                    <a class="primary-action" href={session.deckPath} download>Download the slides <span aria-hidden="true">→</span></a>
+                ) : (
+                    <p class="availability">The session deck will be available here shortly.</p>
+                )
+            }
+
+            {session.feedbackEnabled && (
+                <aside class="feedback-invitation" data-feedback-invitation hidden>
+                    <p class="system-label">Before you go</p>
+                    <h2>One minute of feedback would help shape future executive sessions.</h2>
+                    <a href={session.feedbackPath} data-feedback-link>Share feedback <span aria-hidden="true">→</span></a>
+                </aside>
+            )}
+
+            <p class="feedback-thanks" data-feedback-thanks hidden role="status">Thank you. Your feedback has been received.</p>
+
+            <nav class="resource-links" aria-label="Continue from this resource">
+                <a href="/contact/">Continue the conversation <span aria-hidden="true">→</span></a>
+                <a href="/">Explore Nissanka Advisory <span aria-hidden="true">→</span></a>
+            </nav>
+        </div>
+    </section>
+
+    <script is:inline>
+        (() => {
+            const parameters = new URLSearchParams(window.location.search);
+            const lead = parameters.get("lead");
+            const invitation = document.querySelector("[data-feedback-invitation]");
+            const link = document.querySelector("[data-feedback-link]");
+            if (lead && invitation && link && /^[a-f0-9-]{36}$/i.test(lead)) {
+                const destination = new URL(link.href);
+                destination.searchParams.set("lead", lead);
+                link.href = destination.toString();
+                invitation.hidden = false;
+            }
+
+            if (parameters.get("feedback") === "thanks") {
+                const message = document.querySelector("[data-feedback-thanks]");
+                if (message) message.hidden = false;
+            }
+        })();
+    </script>
+</BaseLayout>

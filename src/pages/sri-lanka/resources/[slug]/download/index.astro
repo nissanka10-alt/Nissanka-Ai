@@ -1,0 +1,12 @@
+---
+import SessionDownload from "../../../../../components/session-resources/SessionDownload.astro";
+import { getActiveSessions } from "../../../../../config/session-resources.js";
+
+export function getStaticPaths() {
+    return getActiveSessions().map((session) => ({ params: { slug: session.slug }, props: { session } }));
+}
+
+const { session } = Astro.props;
+---
+
+<SessionDownload {session} />

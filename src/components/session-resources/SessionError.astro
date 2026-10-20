@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/session-resources.css";
+
+const { session, legacyPath } = Astro.props;
+const pagePath = legacyPath ?? session.errorPath;
+const title = "Please Try Again | Nissanka Advisory";
+const description = `The ${session.organisation} session resource request could not be saved.`;
+---
+
+<BaseLayout {title} {description} path={pagePath} robots="noindex, nofollow">
+    <section class="resource-recovery" aria-labelledby="recovery-title">
+        <div class="shell resource-shell">
+            <p class="system-label">Session resource / {session.organisation}</p>
+            <h1 id="recovery-title">We couldn’t save your details just now.</h1>
+            <p>Please try again.</p>
+            <div class="recovery-links">
+                <a href={session.landingPath}>Try again <span aria-hidden="true">→</span></a>
+                <a href="mailto:gishan@nissanka.co.uk">gishan@nissanka.co.uk</a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

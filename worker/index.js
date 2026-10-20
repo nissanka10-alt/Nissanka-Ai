@@ -1,4 +1,4 @@
-import { jkhEvent } from "../src/config/jkh.js";
+import { getSessionBySlug } from "../src/config/session-resources.js";
 
 const MAX_LENGTHS = Object.freeze({
     name: 120,
@@ -7,7 +7,21 @@ const MAX_LENGTHS = Object.freeze({
     company: 200,
     phone: 50,
     source: 48,
+    sessionSlug: 64,
+    leadId: 36,
+    exploreFurther: 1000,
 });
+
+const MOST_USEFUL_VALUES = new Set([
+    "ai-mindset",
+    "practical-use-cases",
+    "governance-risk",
+    "workforce-impact",
+    "leadership-implications",
+    "other",
+]);
+const FOLLOW_UP_VALUES = new Set(["yes", "maybe", "not-currently"]);
+const TESTIMONIAL_VALUES = new Set(["named", "anonymous", "no"]);
 
 export const upsertLeadSql = `
     INSERT INTO event_leads (
@@ -40,10 +54,36 @@ export const upsertLeadSql = `
             ELSE event_leads.marketing_opt_in_at
         END,
         source = excluded.source
+    RETURNING id
+`;
+
+export const selectLeadSql = `
+    SELECT email
+    FROM event_leads
+    WHERE id = ? AND event_slug = ?
+`;
+
+export const insertFeedbackSql = `
+    INSERT INTO event_feedback (
+        id,
+        event_slug,
+        lead_email,
+        created_at,
+        usefulness_rating,
+        most_useful,
+        explore_further,
+        follow_up_interest,
+        testimonial_permission,
+        feedback_comment
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 function redirect(request, path) {
     return Response.redirect(new URL(path, request.url), 303);
+}
+
+function methodNotAllowed() {
+    return new Response("Method Not Allowed", { status: 405, headers: { Allow: "POST" } });
 }
 
 function readText(formData, field, maxLength) {
@@ -60,45 +100,56 @@ function isValidEmail(value) {
     return value.length <= MAX_LENGTHS.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function normaliseSource(value) {
+function normaliseSource(value, fallback) {
     const candidate = value.toLowerCase();
-    return /^[a-z0-9_-]{1,48}$/.test(candidate) ? candidate : jkhEvent.defaultSource;
+    return /^[a-z0-9_-]{1,48}$/.test(candidate) ? candidate : fallback;
 }
 
-export async function handleJkhLead(request, env) {
+function sessionFromForm(formData, forcedSlug) {
+    const requestedSlug = forcedSlug ?? readText(formData, "session_slug", MAX_LENGTHS.sessionSlug);
+    return getSessionBySlug(requestedSlug);
+}
+
+function pathWithQuery(path, parameters) {
+    const query = new URLSearchParams(parameters);
+    return `${path}?${query.toString()}`;
+}
+
+export async function handleResourceLead(request, env, { forcedSlug } = {}) {
     let formData;
 
     try {
         formData = await request.formData();
     } catch {
-        return redirect(request, `${jkhEvent.landingPath}?error=validation`);
+        return new Response("Invalid request", { status: 400 });
     }
 
+    const session = sessionFromForm(formData, forcedSlug);
+    if (!session) return new Response("Invalid session", { status: 400 });
+
     const honeypot = readText(formData, "_honey", 200);
-    if (honeypot) {
-        return redirect(request, jkhEvent.downloadPath);
-    }
+    if (honeypot) return redirect(request, session.downloadPath);
 
     const name = readText(formData, "name", MAX_LENGTHS.name);
     const email = normaliseEmail(readText(formData, "email", MAX_LENGTHS.email));
     const jobTitle = readText(formData, "job_title", MAX_LENGTHS.jobTitle);
     const company = readText(formData, "company", MAX_LENGTHS.company);
     const phone = readText(formData, "phone", MAX_LENGTHS.phone);
-    const source = normaliseSource(readText(formData, "source", MAX_LENGTHS.source));
+    const source = normaliseSource(readText(formData, "source", MAX_LENGTHS.source), session.defaultSource);
     const marketingOptIn = formData.get("marketing_opt_in") === "1";
 
     if (!name || !email || !jobTitle || !company || !isValidEmail(email)) {
-        return redirect(request, `${jkhEvent.landingPath}?error=validation`);
+        return redirect(request, pathWithQuery(session.landingPath, { error: "validation" }));
     }
 
     try {
         if (!env.LEADS_DB) throw new Error("LEADS_DB binding is unavailable");
 
         const timestamp = new Date().toISOString();
-        const result = await env.LEADS_DB.prepare(upsertLeadSql)
+        const lead = await env.LEADS_DB.prepare(upsertLeadSql)
             .bind(
                 crypto.randomUUID(),
-                jkhEvent.eventSlug,
+                session.eventSlug,
                 timestamp,
                 timestamp,
                 name,
@@ -110,12 +161,77 @@ export async function handleJkhLead(request, env) {
                 marketingOptIn ? timestamp : null,
                 source,
             )
+            .first();
+
+        if (!lead?.id) throw new Error("D1 write did not return a lead identifier");
+        return redirect(request, pathWithQuery(session.downloadPath, { lead: lead.id }));
+    } catch {
+        return redirect(request, session.errorPath);
+    }
+}
+
+export async function handleResourceFeedback(request, env) {
+    let formData;
+
+    try {
+        formData = await request.formData();
+    } catch {
+        return new Response("Invalid request", { status: 400 });
+    }
+
+    const session = sessionFromForm(formData);
+    if (!session || !session.feedbackEnabled) return new Response("Invalid session", { status: 400 });
+
+    const leadId = readText(formData, "lead_id", MAX_LENGTHS.leadId);
+    const honeypot = readText(formData, "_honey", 200);
+    if (honeypot) return redirect(request, session.downloadPath);
+
+    const usefulnessRating = Number.parseInt(readText(formData, "usefulness_rating", 1), 10);
+    const mostUseful = readText(formData, "most_useful", 40);
+    const exploreFurther = readText(formData, "explore_further", MAX_LENGTHS.exploreFurther);
+    const followUpInterest = readText(formData, "follow_up_interest", 20);
+    const testimonialPermission = readText(formData, "testimonial_permission", 20);
+
+    const isValid = /^[a-f0-9-]{36}$/i.test(leadId)
+        && usefulnessRating >= 1
+        && usefulnessRating <= 5
+        && MOST_USEFUL_VALUES.has(mostUseful)
+        && FOLLOW_UP_VALUES.has(followUpInterest)
+        && TESTIMONIAL_VALUES.has(testimonialPermission);
+
+    if (!isValid) {
+        return redirect(request, pathWithQuery(session.feedbackPath, { lead: leadId, error: "validation" }));
+    }
+
+    try {
+        if (!env.LEADS_DB) throw new Error("LEADS_DB binding is unavailable");
+
+        const lead = await env.LEADS_DB.prepare(selectLeadSql)
+            .bind(leadId, session.eventSlug)
+            .first();
+        if (!lead?.email) {
+            return redirect(request, pathWithQuery(session.feedbackPath, { lead: leadId, error: "validation" }));
+        }
+
+        const result = await env.LEADS_DB.prepare(insertFeedbackSql)
+            .bind(
+                crypto.randomUUID(),
+                session.eventSlug,
+                lead.email,
+                new Date().toISOString(),
+                usefulnessRating,
+                mostUseful,
+                exploreFurther || null,
+                followUpInterest,
+                testimonialPermission,
+                null,
+            )
             .run();
 
-        if (!result.success) throw new Error("D1 write did not complete");
-        return redirect(request, jkhEvent.downloadPath);
+        if (!result.success) throw new Error("D1 feedback write did not complete");
+        return redirect(request, pathWithQuery(session.downloadPath, { feedback: "thanks" }));
     } catch {
-        return redirect(request, jkhEvent.errorPath);
+        return redirect(request, pathWithQuery(session.feedbackPath, { lead: leadId, error: "storage" }));
     }
 }
 
@@ -123,15 +239,19 @@ export default {
     async fetch(request, env) {
         const url = new URL(request.url);
 
-        if (url.pathname === "/api/jkh-lead") {
-            if (request.method !== "POST") {
-                return new Response("Method Not Allowed", {
-                    status: 405,
-                    headers: { Allow: "POST" },
-                });
-            }
+        if (url.pathname === "/api/resource-lead") {
+            if (request.method !== "POST") return methodNotAllowed();
+            return handleResourceLead(request, env);
+        }
 
-            return handleJkhLead(request, env);
+        if (url.pathname === "/api/jkh-lead") {
+            if (request.method !== "POST") return methodNotAllowed();
+            return handleResourceLead(request, env, { forcedSlug: "jkh" });
+        }
+
+        if (url.pathname === "/api/resource-feedback") {
+            if (request.method !== "POST") return methodNotAllowed();
+            return handleResourceFeedback(request, env);
         }
 
         return env.ASSETS.fetch(request);

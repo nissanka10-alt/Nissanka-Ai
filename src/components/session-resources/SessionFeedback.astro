@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/session-resources.css";
+
+const { session } = Astro.props;
+const title = `${session.organisation} Session Feedback | Nissanka Advisory`;
+const description = `Optional feedback for the ${session.organisation} executive session.`;
+const prefix = `feedback-${session.slug}`;
+---
+
+<BaseLayout {title} {description} path={session.feedbackPath} robots="noindex, nofollow">
+    <section class="feedback-page" aria-labelledby={`${prefix}-title`}>
+        <div class="shell feedback-shell">
+            <p class="system-label">Session feedback / {session.organisation}</p>
+            <h1 id={`${prefix}-title`}>Help shape the next conversation.</h1>
+            <p class="resource-intro">One minute of optional feedback will help us make future executive sessions more useful.</p>
+
+            <p class="form-error" data-feedback-error hidden role="alert"></p>
+            <p class="feedback-unavailable" data-feedback-unavailable hidden>Feedback is available after requesting the session resource. <a href={session.landingPath}>Return to the session page <span aria-hidden="true">→</span></a></p>
+
+            <form class="feedback-form" action="/api/resource-feedback" method="post" data-feedback-form hidden>
+                <input type="hidden" name="session_slug" value={session.slug} />
+                <input type="hidden" name="lead_id" value="" data-lead-id />
+                <div class="honeypot" aria-hidden="true">
+                    <label for={`${prefix}-website`}>Leave this field empty</label>
+                    <input id={`${prefix}-website`} name="_honey" type="text" tabindex="-1" autocomplete="off" />
+                </div>
+
+                <fieldset>
+                    <legend>How useful was the session?</legend>
+                    <div class="rating-options">
+                        {[1, 2, 3, 4, 5].map((rating) => (
+                            <label><input type="radio" name="usefulness_rating" value={rating} required /><span>{rating}</span></label>
+                        ))}
+                    </div>
+                </fieldset>
+
+                <div class="field">
+                    <label for={`${prefix}-most-useful`}>What was most useful?</label>
+                    <select id={`${prefix}-most-useful`} name="most_useful" required>
+                        <option value="">Select one</option>
+                        <option value="ai-mindset">AI mindset</option>
+                        <option value="practical-use-cases">Practical use cases</option>
+                        <option value="governance-risk">Governance &amp; risk</option>
+                        <option value="workforce-impact">Workforce impact</option>
+                        <option value="leadership-implications">Leadership implications</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for={`${prefix}-explore`}>What would you like to explore further? <span class="optional">Optional</span></label>
+                    <textarea id={`${prefix}-explore`} name="explore_further" rows="4" maxlength="1000"></textarea>
+                </div>
+
+                <fieldset>
+                    <legend>Would a follow-up conversation on AI adoption be useful for your organisation?</legend>
+                    <div class="choice-options">
+                        <label><input type="radio" name="follow_up_interest" value="yes" required /> Yes</label>
+                        <label><input type="radio" name="follow_up_interest" value="maybe" required /> Maybe</label>
+                        <label><input type="radio" name="follow_up_interest" value="not-currently" required /> Not currently</label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>May Nissanka Advisory use your feedback?</legend>
+                    <div class="choice-options">
+                        <label><input type="radio" name="testimonial_permission" value="named" required /> Yes, with my name</label>
+                        <label><input type="radio" name="testimonial_permission" value="anonymous" required /> Yes, anonymously</label>
+                        <label><input type="radio" name="testimonial_permission" value="no" required /> No</label>
+                    </div>
+                </fieldset>
+
+                <button type="submit">Share feedback <span aria-hidden="true">→</span></button>
+                <p class="privacy-copy">Feedback is optional. We’ll use it to improve future executive sessions. <a href="/privacy/">Privacy &amp; Cookie Policy <span aria-hidden="true">→</span></a></p>
+            </form>
+        </div>
+    </section>
+
+    <script is:inline>
+        (() => {
+            const parameters = new URLSearchParams(window.location.search);
+            const lead = parameters.get("lead");
+            const form = document.querySelector("[data-feedback-form]");
+            const leadField = document.querySelector("[data-lead-id]");
+            const unavailable = document.querySelector("[data-feedback-unavailable]");
+            const error = document.querySelector("[data-feedback-error]");
+
+            if (lead && form && leadField && /^[a-f0-9-]{36}$/i.test(lead)) {
+                leadField.value = lead;
+                form.hidden = false;
+            } else if (unavailable) {
+                unavailable.hidden = false;
+            }
+
+            const errorType = parameters.get("error");
+            if (error && errorType) {
+                error.textContent = errorType === "storage"
+                    ? "We couldn’t save your feedback just now. Please try again."
+                    : "Please check the required answers and try again.";
+                error.hidden = false;
+            }
+        })();
+    </script>
+</BaseLayout>

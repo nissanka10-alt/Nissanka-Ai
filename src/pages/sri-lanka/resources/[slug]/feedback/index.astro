@@ -1,0 +1,14 @@
+---
+import SessionFeedback from "../../../../../components/session-resources/SessionFeedback.astro";
+import { getActiveSessions } from "../../../../../config/session-resources.js";
+
+export function getStaticPaths() {
+    return getActiveSessions()
+        .filter((session) => session.feedbackEnabled)
+        .map((session) => ({ params: { slug: session.slug }, props: { session } }));
+}
+
+const { session } = Astro.props;
+---
+
+<SessionFeedback {session} />

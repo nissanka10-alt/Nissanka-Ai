@@ -1,0 +1,12 @@
+---
+import SessionError from "../../../../../components/session-resources/SessionError.astro";
+import { getActiveSessions } from "../../../../../config/session-resources.js";
+
+export function getStaticPaths() {
+    return getActiveSessions().map((session) => ({ params: { slug: session.slug }, props: { session } }));
+}
+
+const { session } = Astro.props;
+---
+
+<SessionError {session} />

@@ -1,0 +1,102 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/session-resources.css";
+
+const { session, legacyPath } = Astro.props;
+const pagePath = legacyPath ?? session.landingPath;
+const title = `${session.organisation} Executive Session | Nissanka Advisory`;
+const description = `Request the slides from the ${session.organisation} executive session in ${session.location}.`;
+const fieldPrefix = `resource-${session.slug}`;
+---
+
+<BaseLayout {title} {description} path={pagePath} robots="noindex, nofollow">
+    <section class="session-landing" aria-labelledby={`${fieldPrefix}-title`}>
+        <div class="shell session-grid">
+            <div class="session-context">
+                <p class="system-label">{session.organisation} / {session.sessionTitle} / {session.location}</p>
+                <h1 id={`${fieldPrefix}-title`}>Take the thinking with you.</h1>
+                <p class="session-intro">Download the slides from the executive session and keep the key ideas, questions and practical actions to revisit with your organisation.</p>
+                <dl class="session-meta">
+                    <div><dt>Date</dt><dd>{session.date}</dd></div>
+                    <div><dt>Location</dt><dd>{session.location}</dd></div>
+                </dl>
+            </div>
+
+            <div class="form-column">
+                <div class="form-intro">
+                    <p class="system-label">Get the slides</p>
+                    <h2>A few details and the deck is yours.</h2>
+                </div>
+
+                <p class="form-error" data-form-error hidden role="alert">Please check the required details and try again.</p>
+
+                <form action="/api/resource-lead" method="post" data-resource-form>
+                    <input type="hidden" name="session_slug" value={session.slug} />
+                    <input type="hidden" name="source" value={session.defaultSource} data-source />
+                    <div class="honeypot" aria-hidden="true">
+                        <label for={`${fieldPrefix}-website`}>Leave this field empty</label>
+                        <input id={`${fieldPrefix}-website`} name="_honey" type="text" tabindex="-1" autocomplete="off" />
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for={`${fieldPrefix}-name`}>Name <span aria-hidden="true">*</span></label>
+                            <input id={`${fieldPrefix}-name`} name="name" type="text" autocomplete="name" maxlength="120" required />
+                        </div>
+                        <div class="field">
+                            <label for={`${fieldPrefix}-email`}>Work email <span aria-hidden="true">*</span></label>
+                            <input id={`${fieldPrefix}-email`} name="email" type="email" autocomplete="email" maxlength="254" required />
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for={`${fieldPrefix}-job-title`}>Position / job title <span aria-hidden="true">*</span></label>
+                            <input id={`${fieldPrefix}-job-title`} name="job_title" type="text" autocomplete="organization-title" maxlength="160" required />
+                        </div>
+                        <div class="field">
+                            <label for={`${fieldPrefix}-company`}>Company / organisation <span aria-hidden="true">*</span></label>
+                            <input id={`${fieldPrefix}-company`} name="company" type="text" autocomplete="organization" maxlength="200" required />
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for={`${fieldPrefix}-phone`}>Mobile / phone number <span class="optional">Optional</span></label>
+                        <input id={`${fieldPrefix}-phone`} name="phone" type="tel" autocomplete="tel" maxlength="50" />
+                    </div>
+
+                    <label class="consent" for={`${fieldPrefix}-updates`}>
+                        <input id={`${fieldPrefix}-updates`} name="marketing_opt_in" type="checkbox" value="1" />
+                        <span>Keep me updated with occasional practical insights on AI, workforce intelligence and transformation.</span>
+                    </label>
+
+                    <button type="submit">Get the slides <span aria-hidden="true">→</span></button>
+
+                    <p class="privacy-copy">
+                        We’ll use your details to provide the requested resource and follow up where relevant to this session. Updates are optional.
+                        <a href="/privacy/">Privacy &amp; Cookie Policy <span aria-hidden="true">→</span></a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script is:inline>
+        (() => {
+            const form = document.querySelector("[data-resource-form]");
+            if (!form) return;
+
+            const parameters = new URLSearchParams(window.location.search);
+            const source = parameters.get("source");
+            const sourceField = form.querySelector("[data-source]");
+            if (source && sourceField && /^[a-z0-9_-]{1,48}$/i.test(source)) {
+                sourceField.value = source.toLowerCase();
+            }
+
+            if (parameters.get("error") === "validation") {
+                const message = document.querySelector("[data-form-error]");
+                if (message) message.hidden = false;
+            }
+        })();
+    </script>
+</BaseLayout>
