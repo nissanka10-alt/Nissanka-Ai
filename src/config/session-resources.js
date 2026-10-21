@@ -58,7 +58,7 @@ export const sessionResources = Object.freeze([
         date: "23 October 2026",
         location: "Colombo",
         deckPath: "/resources/sri-lanka/aitken-spence/session-slides.pdf",
-        slidesReady: false,
+        slidesReady: true,
         feedbackEnabled: true,
         active: true,
     }),
