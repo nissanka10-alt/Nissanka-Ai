@@ -7,8 +7,10 @@ import worker, {
     handleResourceFeedback,
     handleResourceLead,
     insertFeedbackSql,
+    sendSessionResourceEmail,
     upsertLeadSql,
 } from "../worker/index.js";
+import { sessionEmailConfig } from "../src/config/session-email.js";
 
 const LEAD_ID = "11111111-1111-4111-8111-111111111111";
 
@@ -63,6 +65,43 @@ function createDb({ leadId = LEAD_ID, leadEmail = "asha@example.com", feedbackSu
     };
 }
 
+function createEmailHarness({ pdfAvailable = true, sendError = null } = {}) {
+    const messages = [];
+    const assetRequests = [];
+    const promises = [];
+    const pdfBytes = new Uint8Array([0x25, 0x50, 0x44, 0x46, 0x2d, 0x31, 0x2e, 0x37]);
+
+    return {
+        messages,
+        assetRequests,
+        pdfBytes,
+        ctx: {
+            waitUntil(promise) {
+                promises.push(promise);
+            },
+        },
+        async settled() {
+            await Promise.all(promises);
+        },
+        bindings: {
+            ASSETS: {
+                async fetch(request) {
+                    assetRequests.push(request.url);
+                    if (!pdfAvailable) return new Response("Not found", { status: 404 });
+                    return new Response(pdfBytes, { headers: { "content-type": "application/pdf" } });
+                },
+            },
+            EMAIL: {
+                async send(message) {
+                    messages.push(message);
+                    if (sendError) throw sendError;
+                    return { messageId: "test-message-id" };
+                },
+            },
+        },
+    };
+}
+
 test("stores a normalised lead for an approved session and redirects correctly", async () => {
     const { db, captures } = createDb();
     const response = await handleResourceLead(requestFor(validLeadFields), { LEADS_DB: db });
@@ -76,6 +115,110 @@ test("stores a normalised lead for an approved session and redirects correctly",
     assert.equal(capture.values[9], 1);
     assert.equal(capture.values[11], "linkedin");
     assert.match(capture.sql, /ON CONFLICT\(event_slug, email\) DO UPDATE/);
+});
+
+test("successful lead storage triggers the correct transactional resource email", async () => {
+    const { db } = createDb();
+    const email = createEmailHarness();
+    const response = await handleResourceLead(requestFor(validLeadFields), {
+        LEADS_DB: db,
+        ...email.bindings,
+    }, { ctx: email.ctx });
+    await email.settled();
+
+    assert.equal(response.status, 303);
+    assert.equal(email.messages.length, 1);
+    assert.equal(email.messages[0].to, "asha@example.com");
+    assert.deepEqual(email.messages[0].from, sessionEmailConfig.from);
+    assert.equal(email.messages[0].replyTo, "gishan@nissanka.co.uk");
+    assert.match(email.messages[0].text, /union-bank\/feedback\/\?lead=/i);
+    assert.equal(email.assetRequests[0], "https://nissanka.co.uk/resources/sri-lanka/union-bank/session-slides.pdf");
+    assert.equal(email.messages[0].attachments.length, 1);
+    assert.equal(email.messages[0].attachments[0].filename, "nissanka-advisory-union-bank-session-slides.pdf");
+    assert.equal(email.messages[0].attachments[0].type, "application/pdf");
+    assert.deepEqual(new Uint8Array(email.messages[0].attachments[0].content), email.pdfBytes);
+});
+
+test("transactional email is sent even when marketing consent is not selected", async () => {
+    const { db } = createDb();
+    const email = createEmailHarness();
+    await handleResourceLead(requestFor({ ...validLeadFields, marketing_opt_in: "0" }), {
+        LEADS_DB: db,
+        ...email.bindings,
+    }, { ctx: email.ctx });
+    await email.settled();
+
+    assert.equal(email.messages.length, 1);
+});
+
+test("email delivery failure does not block the successful resource redirect", async () => {
+    const { db } = createDb();
+    const email = createEmailHarness({ sendError: Object.assign(new Error("delivery failed"), { code: "E_DELIVERY_FAILED" }) });
+    const originalError = console.error;
+    const diagnostics = [];
+    console.error = (...values) => diagnostics.push(values);
+    try {
+        const response = await handleResourceLead(requestFor(validLeadFields), {
+            LEADS_DB: db,
+            ...email.bindings,
+        }, { ctx: email.ctx });
+        await email.settled();
+
+        assert.equal(response.status, 303);
+        assert.equal(response.headers.get("location"), `https://nissanka.co.uk/sri-lanka/resources/union-bank/download/?lead=${LEAD_ID}`);
+        assert.deepEqual(diagnostics[0], [
+            "session-resource-email-failed",
+            { session: "union-bank", code: "E_DELIVERY_FAILED" },
+        ]);
+    } finally {
+        console.error = originalError;
+    }
+});
+
+test("missing PDF sends the resource email without attachment and with a download link", async () => {
+    const { db } = createDb();
+    const email = createEmailHarness({ pdfAvailable: false });
+    await handleResourceLead(requestFor(validLeadFields), {
+        LEADS_DB: db,
+        ...email.bindings,
+    }, { ctx: email.ctx });
+    await email.settled();
+
+    assert.equal(email.messages.length, 1);
+    assert.equal(email.messages[0].attachments, undefined);
+    assert.doesNotMatch(email.messages[0].text, /I've attached/);
+    assert.match(email.messages[0].text, /https:\/\/nissanka\.co\.uk\/sri-lanka\/resources\/union-bank\/download\/\?lead=/);
+});
+
+test("unknown session cannot trigger a resource email", async () => {
+    const email = createEmailHarness();
+    const response = await handleResourceLead(
+        requestFor({ ...validLeadFields, session_slug: "unknown-client" }),
+        { ...email.bindings },
+        { ctx: email.ctx },
+    );
+    await email.settled();
+
+    assert.equal(response.status, 400);
+    assert.equal(email.messages.length, 0);
+    assert.equal(email.assetRequests.length, 0);
+});
+
+test("email builder supports every allowlisted session with its server-side PDF", async () => {
+    for (const sessionSlug of ["jkh", "union-bank", "aitken-spence", "vidul-lanka"]) {
+        const fields = { ...validLeadFields, session_slug: sessionSlug };
+        const { db } = createDb();
+        const email = createEmailHarness();
+        await handleResourceLead(requestFor(fields), {
+            LEADS_DB: db,
+            ...email.bindings,
+        }, { ctx: email.ctx });
+        await email.settled();
+
+        assert.equal(email.messages.length, 1);
+        assert.match(email.assetRequests[0], /session-slides\.pdf$/);
+        assert.equal(email.messages[0].attachments[0].filename, `nissanka-advisory-${sessionSlug}-session-slides.pdf`);
+    }
 });
 
 test("treats a lead honeypot as successful without writing", async () => {

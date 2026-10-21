@@ -18,5 +18,13 @@
             "migrations_dir": "./migrations"
         }
     ],
+    "send_email": [
+        {
+            "name": "EMAIL",
+            "allowed_sender_addresses": [
+                "gishan@nissanka.co.uk"
+            ]
+        }
+    ],
     "previews": {}
 }

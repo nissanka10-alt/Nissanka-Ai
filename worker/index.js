@@ -1,4 +1,5 @@
 import { getSessionBySlug } from "../src/config/session-resources.js";
+import { sessionAttachmentFilename, sessionEmailConfig } from "../src/config/session-email.js";
 
 const MAX_LENGTHS = Object.freeze({
     name: 120,
@@ -115,7 +116,130 @@ function pathWithQuery(path, parameters) {
     return `${path}?${query.toString()}`;
 }
 
-export async function handleResourceLead(request, env, { forcedSlug } = {}) {
+function absoluteSiteUrl(path, parameters) {
+    const url = new URL(path, sessionEmailConfig.siteUrl);
+    if (parameters) {
+        for (const [key, value] of Object.entries(parameters)) url.searchParams.set(key, value);
+    }
+    return url.toString();
+}
+
+function firstName(name) {
+    return name.split(/\s+/u)[0] || name;
+}
+
+function escapeHtml(value) {
+    return value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+}
+
+async function sessionPdfAttachment(session, env) {
+    if (!session.slidesReady || !env.ASSETS) return null;
+
+    try {
+        const response = await env.ASSETS.fetch(new Request(absoluteSiteUrl(session.deckPath)));
+        if (!response.ok) return null;
+
+        const contentType = response.headers.get("content-type")?.split(";", 1)[0].trim().toLowerCase();
+        if (contentType !== "application/pdf") return null;
+
+        const content = await response.arrayBuffer();
+        if (!content.byteLength || content.byteLength > sessionEmailConfig.attachmentMaxBytes) return null;
+
+        return {
+            content,
+            filename: sessionAttachmentFilename(session),
+            type: "application/pdf",
+            disposition: "attachment",
+        };
+    } catch {
+        return null;
+    }
+}
+
+export async function sendSessionResourceEmail({ env, session, leadId, name, email }) {
+    if (!env.EMAIL) throw Object.assign(new Error("EMAIL binding is unavailable"), { code: "EMAIL_BINDING_UNAVAILABLE" });
+
+    const attachment = await sessionPdfAttachment(session, env);
+    const downloadUrl = absoluteSiteUrl(session.downloadPath, { lead: leadId });
+    const feedbackUrl = absoluteSiteUrl(session.feedbackPath, { lead: leadId });
+    const greetingName = firstName(name);
+    const safeGreetingName = escapeHtml(greetingName);
+    const presentationText = attachment
+        ? "I've attached the presentation for your reference. I hope it helps continue the conversations around AI, work and leadership within your organisation."
+        : "The presentation is available from the link below. I hope it helps continue the conversations around AI, work and leadership within your organisation.";
+    const presentationHtml = escapeHtml(presentationText);
+    const attachmentFallbackText = attachment ? "" : `\n\nDownload the session slides here:\n${downloadUrl}`;
+    const attachmentFallbackHtml = attachment
+        ? ""
+        : `<p>Download the session slides here:<br><a href="${downloadUrl}">${downloadUrl}</a></p>`;
+
+    const message = {
+        to: email,
+        from: sessionEmailConfig.from,
+        replyTo: sessionEmailConfig.replyTo,
+        subject: sessionEmailConfig.subject,
+        text: `Hi ${greetingName},
+
+Thank you for joining the session today.
+
+${presentationText}
+
+If there was a particular area you would like to explore further, simply reply to this email or get in touch through Nissanka Advisory.${attachmentFallbackText}
+
+You can also share one minute of feedback here:
+${feedbackUrl}
+
+Regards,
+
+Gishan Nissanka
+Founder, Nissanka Advisory
+nissanka.co.uk`,
+        html: `<p>Hi ${safeGreetingName},</p>
+<p>Thank you for joining the session today.</p>
+<p>${presentationHtml}</p>
+<p>If there was a particular area you would like to explore further, simply reply to this email or get in touch through Nissanka Advisory.</p>
+${attachmentFallbackHtml}
+<p>You can also share one minute of feedback here:<br><a href="${feedbackUrl}">${feedbackUrl}</a></p>
+<p>Regards,</p>
+<p>Gishan Nissanka<br>Founder, Nissanka Advisory<br><a href="https://nissanka.co.uk/">nissanka.co.uk</a></p>`,
+    };
+
+    if (attachment) message.attachments = [attachment];
+    return env.EMAIL.send(message);
+}
+
+function emailFailureCode(error) {
+    return typeof error?.code === "string" && /^[A-Z0-9_]{1,64}$/.test(error.code)
+        ? error.code
+        : "EMAIL_SEND_FAILED";
+}
+
+function scheduleSessionResourceEmail(ctx, details) {
+    if (typeof ctx?.waitUntil !== "function") return;
+
+    const task = sendSessionResourceEmail(details).catch((error) => {
+        console.error("session-resource-email-failed", {
+            session: details.session.slug,
+            code: emailFailureCode(error),
+        });
+    });
+
+    try {
+        ctx.waitUntil(task);
+    } catch {
+        console.error("session-resource-email-failed", {
+            session: details.session.slug,
+            code: "WAIT_UNTIL_FAILED",
+        });
+    }
+}
+
+export async function handleResourceLead(request, env, { forcedSlug, ctx } = {}) {
     let formData;
 
     try {
@@ -164,6 +288,7 @@ export async function handleResourceLead(request, env, { forcedSlug } = {}) {
             .first();
 
         if (!lead?.id) throw new Error("D1 write did not return a lead identifier");
+        scheduleSessionResourceEmail(ctx, { env, session, leadId: lead.id, name, email });
         return redirect(request, pathWithQuery(session.downloadPath, { lead: lead.id }));
     } catch {
         return redirect(request, session.errorPath);
@@ -236,17 +361,17 @@ export async function handleResourceFeedback(request, env) {
 }
 
 export default {
-    async fetch(request, env) {
+    async fetch(request, env, ctx) {
         const url = new URL(request.url);
 
         if (url.pathname === "/api/resource-lead") {
             if (request.method !== "POST") return methodNotAllowed();
-            return handleResourceLead(request, env);
+            return handleResourceLead(request, env, { ctx });
         }
 
         if (url.pathname === "/api/jkh-lead") {
             if (request.method !== "POST") return methodNotAllowed();
-            return handleResourceLead(request, env, { forcedSlug: "jkh" });
+            return handleResourceLead(request, env, { forcedSlug: "jkh", ctx });
         }
 
         if (url.pathname === "/api/resource-feedback") {
