@@ -39,6 +39,18 @@ export const sessionResources = Object.freeze([
         active: true,
     }),
     createSession({
+        slug: "vidul-lanka",
+        eventSlug: "vidul-lanka-executive-session-2026-10-21",
+        organisation: "Vidul Lanka",
+        sessionTitle: "Executive Session",
+        date: "21 October 2026",
+        location: "Colombo",
+        deckPath: "/resources/sri-lanka/vidul-lanka/session-slides.pdf",
+        slidesReady: true,
+        feedbackEnabled: true,
+        active: true,
+    }),
+    createSession({
         slug: "aitken-spence",
         eventSlug: "aitken-spence-executive-session-2026-10-23",
         organisation: "Aitken Spence",
