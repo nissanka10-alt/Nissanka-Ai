@@ -34,7 +34,7 @@ export const sessionResources = Object.freeze([
         date: "22 October 2026",
         location: "Colombo",
         deckPath: "/resources/sri-lanka/union-bank/session-slides.pdf",
-        slidesReady: false,
+        slidesReady: true,
         feedbackEnabled: true,
         active: true,
     }),
