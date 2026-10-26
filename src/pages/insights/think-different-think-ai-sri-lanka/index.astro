@@ -1,0 +1,198 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import ArticleUtilities from "../../../components/ArticleUtilities.astro";
+import { formatInsightDate, insights } from "../../../data/insights";
+
+const insight = insights.find((item) => item.slug === "think-different-think-ai-sri-lanka")!;
+const title = "Think Different. Think AI. | Nissanka Advisory";
+const description = insight.summary;
+const path = "/insights/think-different-think-ai-sri-lanka/";
+const url = `https://nissanka.co.uk${path}`;
+const framework = [
+    { title: "Start with business priorities", content: "Begin with the problems, customer needs and strategic outcomes that matter most. AI should follow the business problem, not the other way around." },
+    { title: "Examine the work", content: "Break roles and processes into tasks, decisions and information flows. A job title is usually too broad a unit for meaningful AI redesign." },
+    { title: "Decide what AI should and should not do", content: "Some activities can be automated. Others should be augmented. Some should remain primarily human because accountability, empathy, negotiation, contextual judgement or trust matter." },
+    { title: "Set ownership and guardrails", content: "Be clear about who can approve, deploy and monitor AI, and establish boundaries around sensitive data, high-impact decisions and external tools." },
+    { title: "Build capability through use", content: "Awareness sessions have value, but they are not enough. People need to apply AI to real work, question its outputs, experience its limitations and learn when not to trust it." },
+    { title: "Measure outcomes, not activity", content: "Licences, prompts and pilots tell us very little about value.", followUp: "Look instead at decision quality, customer experience, productivity, risk, organisational capability and employee outcomes." },
+];
+const structuredData = { "@context": "https://schema.org", "@graph": [
+    { "@type": "Article", "@id": `${url}#article`, headline: insight.title, alternativeHeadline: insight.subtitle, description, url, datePublished: insight.published, author: { "@type": "Person", "@id": "https://nissanka.co.uk/#gishan-nissanka", name: insight.author, url: "https://nissanka.co.uk/about/" }, publisher: { "@type": "Organization", name: "Nissanka Advisory", url: "https://nissanka.co.uk/" }, about: [insight.topic, insight.geography, insight.theme], contentLocation: { "@type": "Country", name: "Sri Lanka" }, mainEntityOfPage: { "@type": "WebPage", "@id": url } },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" }, { "@type": "ListItem", position: 2, name: "Insights", item: "https://nissanka.co.uk/insights/" }, { "@type": "ListItem", position: 3, name: insight.title, item: url }] },
+] };
+---
+
+<BaseLayout {title} {description} {path} type="article" {structuredData}>
+<article class="think-ai">
+    <header class="hero"><div class="shell">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Insights", href: "/insights/" }, { label: insight.title }]} />
+        <p class="system-label">{insight.geography} / {insight.topic} / {insight.format}</p>
+        <div class="hero-grid"><div><h1>{insight.title}</h1><p class="subtitle">{insight.subtitle}</p></div><p class="hero-summary">Sri Lanka’s AI conversation is changing.</p></div>
+        <dl class="meta"><div><dt>Topic</dt><dd>{insight.topic}</dd></div><div><dt>Geography</dt><dd>{insight.geography}</dd></div><div><dt>Format</dt><dd>{insight.format}</dd></div><div><dt>Published</dt><dd><time datetime={insight.published}>{formatInsightDate(insight.published)}</time></dd></div>{insight.readTime && <div><dt>Read time</dt><dd>{insight.readTime}</dd></div>}</dl>
+        <p class="author">By <a href="/about/">{insight.author}</a></p><ArticleUtilities title={insight.title} url={path} />
+    </div></header>
+
+    <div class="reading prose opening">
+        <p>Most leaders I met have moved past the question of whether AI will affect their business. They accept that it will influence their operating model, their people and the way work gets done.</p>
+        <p>The questions are increasingly <strong>what should we do, and when should we do it?</strong></p>
+        <p>Those questions matter. But during two weeks in Sri Lanka, I found myself spending far more time on two others:</p>
+        <p class="pull"><strong>How will the organisation actually make AI work?</strong></p>
+        <p>And:</p>
+        <p class="pull"><strong>Who will bring the different parts of the business together to make it happen?</strong></p>
+        <p>Across corporate briefings, executive sessions, one-to-one conversations and forums including the CIPM National HR Conference and the Sri Lanka Institute of Directors, I engaged with close to 200 business, HR and technology leaders.</p>
+        <p>This is not a national AI maturity study. It is a field view based on conversations with people working through the opportunities, risks and practical realities inside their organisations.</p>
+        <p>What I saw was encouraging.</p>
+        <p>There is a definite shift towards AI-ready business models and new approaches to work design.</p>
+        <p>But there is also a substantial gap between <strong>interest in AI</strong> and the organisational capability required to use it well.</p>
+    </div>
+
+    <section class="section" aria-labelledby="starting-title"><div class="shell split"><div><p class="system-label">National context</p><h2 id="starting-title">Sri Lanka is not starting from zero</h2></div><div class="prose">
+        <p>There is already meaningful national momentum.</p>
+        <p>Sri Lanka’s proposed national AI strategy covers areas including data governance, AI literacy, public-sector use cases, skills, responsible AI, infrastructure and support for innovation. Its roadmap includes proposals for a National Centre for Artificial Intelligence and a Responsible AI Advisory Council.</p>
+        <p>The 2026 Budget also allocated Rs. 750 million towards selected AI projects, local-language datasets, AI and cloud facilities for research and development, scholarships and related innovation initiatives.</p>
+        <p>Sri Lanka has also begun applying UNESCO’s updated AI Readiness Assessment Methodology. The work is designed to assess strengths, gaps and priorities across the country’s AI ecosystem and contribute practical recommendations for responsible and inclusive AI development.</p>
+        <p>These initiatives provide direction and legitimacy.</p>
+        <p>But national ambition only becomes meaningful when organisations translate it into decisions, capability and execution.</p>
+        <p>That is where most of my conversations happened.</p>
+    </div></div></section>
+
+    <section class="section proposition" aria-labelledby="proposition-title"><div class="shell"><p class="system-label">The proposition</p><h2 id="proposition-title">Think Different. Think AI.</h2><div class="reading prose proposition-copy">
+        <p>This was the idea behind many of my sessions.</p>
+        <p><strong>Think Different</strong> means questioning how work is done today.</p>
+        <p>Many processes were built around old constraints, disconnected systems, manual administration or ways of working that made sense at the time.</p>
+        <p><strong>Think AI</strong> means asking whether technology can help people make better decisions, identify patterns, remove unnecessary effort or create a better experience for customers and employees.</p>
+        <p>It does not mean putting AI on top of every process.</p>
+        <p>If a process is slow, unclear or poorly governed, adding AI may simply help the organisation make the same mistakes faster.</p>
+        <p>So the starting question should not be:</p>
+        <blockquote><p><strong>“Where can we use AI?”</strong></p></blockquote>
+        <p>It should be:</p>
+        <blockquote><p><strong>“What outcome are we trying to improve, and how should the work change to achieve it?”</strong></p></blockquote>
+        <p>That shift changes the conversation.</p>
+        <p>Discussions that begin with tools quickly move towards business problems, decision quality, customer value, data, accountability and work design.</p>
+        <p>That is where AI starts becoming a transformation discussion rather than a technology discussion.</p>
+    </div></div></section>
+
+    <section class="section" aria-labelledby="questions-title"><div class="shell split"><div><p class="system-label">Four questions</p><h2 id="questions-title">What, when, how and who</h2></div><div class="prose">
+        <p>Most organisations naturally begin with two questions.</p>
+        <p><strong>What should we do with AI?</strong></p>
+        <p>That leads to use cases, tools and automation opportunities.</p>
+        <p><strong>When should we act?</strong></p>
+        <p>That reflects a genuine concern about moving too slowly, or investing too early.</p>
+        <p>But the next two questions often determine whether anything meaningful actually happens.</p>
+        <p><strong>How will we make it work?</strong></p>
+        <p>That brings in data, governance, processes, skills, technology, adoption and measurement.</p>
+        <p>And:</p>
+        <p><strong>Who will make it happen?</strong></p>
+        <p>Someone has to identify opportunities, assess risk, decide which use cases deserve investment, redesign workflows, prepare managers, connect functions and determine whether the change actually improved an outcome.</p>
+        <p>If nobody owns that system, AI remains a collection of experiments.</p>
+    </div></div></section>
+
+    <section class="section paper" aria-labelledby="changed-title"><div class="shell split"><div><p class="system-label">From tools to outcomes</p><h2 id="changed-title">How the questions changed</h2></div><div class="prose">
+        <p>In several sessions, the first questions were about technology.</p>
+        <p>Which platform should we use?</p>
+        <p>What can ChatGPT or Copilot do?</p>
+        <p>Which tasks can we automate?</p>
+        <p>By the end, the questions were different.</p>
+        <p>What problem are we actually solving?</p>
+        <p>Where must human judgement remain?</p>
+        <p>What information should never enter a public AI tool?</p>
+        <p>Who is accountable when AI influences an outcome?</p>
+        <p>And what might people stop learning if a task disappears?</p>
+        <p>That change matters.</p>
+        <p>Giving people access to an AI tool is not adoption.</p>
+        <p>Writing an AI policy is not governance.</p>
+        <p>Running a pilot is not transformation.</p>
+        <p>Real adoption changes how work is done, how decisions are made and how value is created.</p>
+        <p>This is not uniquely Sri Lankan. Microsoft and LinkedIn’s 2024 Work Trend Index surveyed 31,000 people across 31 countries and found that 78% of people using AI at work were bringing their own AI tools into the workplace.</p>
+        <p>Informal adoption can move considerably faster than organisational policy and governance.</p>
+    </div></div></section>
+
+    <section class="section ownership" aria-labelledby="ownership-title"><div class="shell"><p class="system-label">Ownership</p><h2 id="ownership-title">Is one person responsible for AI enough?</h2><div class="reading prose ownership-copy">
+        <p>This question came up in several leadership and board-level conversations.</p>
+        <p>Would appointing one person to lead AI be enough?</p>
+        <p>My answer is no.</p>
+        <p>AI cannot become one person’s job.</p>
+        <p>It touches strategy, operations, customers, technology, data, risk, legal, HR and finance.</p>
+        <p>But the opposite creates another problem.</p>
+        <p>If responsibility is distributed so widely that nobody has clear accountability for moving the organisation forward, very little happens.</p>
+        <p>My view is that organisations need a clearly defined <strong>AI transformation role or capability</strong>.</p>
+        <p>This should not be a purely technical role. Nor should it become a help desk for AI questions.</p>
+        <p>Its purpose is to create the organisational mechanism through which AI moves from ideas to business value.</p>
+        <p>That means gathering opportunities from across the organisation, connecting them to real business problems, bringing technology, HR, data, risk and operations together, creating a consistent way to assess opportunities, keeping governance proportionate to risk, and tracking both value and unintended consequences.</p>
+        <p>The person leading this does not need to own every AI idea or make every decision.</p>
+        <p>They need to build the system through which good ideas are discovered, tested, governed and scaled.</p>
+        <p>In practice, I believe a <strong>hub-and-network model</strong> works particularly well.</p>
+        <p>A small central capability provides direction, governance and coordination. Business leaders and local champions then own adoption within their areas.</p>
+        <p>I have seen the effectiveness of this approach first-hand. At Worldline, a small cross-functional squad combined with a network of early adopters helped increase AI adoption by 50% in seven months.</p>
+        <p>The objective is not to create an AI empire.</p>
+        <p>It is to prevent fragmented experimentation and connect AI investment to strategy.</p>
+    </div></div></section>
+
+    <section class="section framework" aria-labelledby="framework-title"><div class="shell"><p class="system-label">A practical framework</p><h2 id="framework-title">Six steps towards an AI-first business</h2><div class="framework-intro prose">
+        <p>An AI-first organisation is not one that uses AI everywhere.</p>
+        <p>It is one that considers AI when it designs work, makes decisions and serves customers.</p>
+        <p>I see six practical steps.</p>
+    </div><ol class="framework-list">{framework.map((step, index) => <li><span class="step-number">{String(index + 1).padStart(2, "0")}</span><div><h3>{step.title}</h3><p>{step.content}</p>{step.followUp && <p>{step.followUp}</p>}</div></li>)}</ol><div class="reading prose governance-note">
+        <p>There is also an important governance deadline approaching.</p>
+        <p>A Gazette issued in July 2026 brings key provisions of Sri Lanka’s Personal Data Protection Act into operation from <strong>1 January 2027</strong>, including Section 2, Section 3, Part I and Part III.</p>
+        <p>For organisations experimenting with AI, that makes questions about data handling, governance and the use of external AI tools increasingly immediate.</p>
+    </div></div></section>
+
+    <section class="section human-edge" aria-labelledby="human-edge-title"><div class="shell split"><div><p class="system-label">People and work</p><h2 id="human-edge-title">The human edge</h2></div><div class="prose">
+        <p>One of the highlights of my visit was attending CIPM Sri Lanka’s National HR Conference, themed <strong>“The Human Edge in the Age of AI.”</strong></p>
+        <p>Dr Hans Wijayasuriya, Chief Adviser to the President on Digital Economy, used his keynote to make an important distinction.</p>
+        <p>As AI takes on more activities traditionally associated with human cognition, organisations need to think beyond technology transformation and towards <strong>human-capital transformation</strong>.</p>
+        <p>He argued for organisations to rethink work, capability development and performance as AI changes the tasks within jobs, while strengthening distinctly human capabilities such as judgement, accountability, empathy, resilience and the ability to navigate uncertainty.</p>
+        <p>That closely reflected what I heard in conversations elsewhere.</p>
+        <p>The objective is not to compete with machines at the things they can do faster.</p>
+        <p>It is to design work so that technology strengthens human contribution.</p>
+        <p>That requires organisations to decide where efficiency matters, where human interaction creates value and where responsibility cannot simply be handed to an algorithm.</p>
+        <p>It also gives HR a much larger role.</p>
+        <p>HR understands roles, capability, learning, leadership and the human consequences of organisational change.</p>
+        <p>AI strategy and workforce strategy can no longer be developed independently.</p>
+    </div></div></section>
+
+    <section class="section" aria-labelledby="where-title"><div class="shell split"><div><p class="system-label">A field view</p><h2 id="where-title">Where Sri Lanka stands</h2></div><div class="prose">
+        <p>Across the conversations I had, several strengths were consistently visible.</p>
+        <p>There is strong interest from senior business and HR leaders. Sri Lanka has a capable technology and professional-services community. The workforce has substantial capacity to learn. National attention to digital infrastructure, skills and responsible AI is increasing. And organisations are willing to experiment with practical use cases.</p>
+        <p>At the same time, several recurring gaps emerged.</p>
+        <p>AI activity is often fragmented across functions. Employee use can move faster than organisational policy. Ownership is not always clear. Data readiness and governance require greater attention. Discussions can remain focused on tools rather than work design. And individual pilots do not always connect to a wider transformation roadmap.</p>
+        <p>None of those are reasons to slow down.</p>
+        <p>They are reasons to become more deliberate.</p>
+    </div></div></section>
+
+    <section class="section closing" aria-labelledby="momentum-title"><div class="shell"><p class="system-label">The next phase</p><h2 id="momentum-title">Momentum is not maturity</h2><div class="reading prose closing-copy">
+        <p>After two weeks, my view is that Sri Lanka has entered a more serious phase of its AI journey.</p>
+        <p>The curiosity is real.</p>
+        <p>Senior attention is increasing.</p>
+        <p>Government, industry, universities and professional bodies are creating stronger signals.</p>
+        <p>Organisations are beginning to move from asking whether AI matters towards asking how they should respond.</p>
+        <p>But <strong>momentum is not maturity</strong>.</p>
+        <p>The next phase will be determined by execution.</p>
+        <p>Choosing the right problems.</p>
+        <p>Creating clear ownership.</p>
+        <p>Preparing people.</p>
+        <p>Strengthening governance.</p>
+        <p>Redesigning work.</p>
+        <p>And measuring whether AI genuinely improves outcomes.</p>
+        <p>The organisations, and ultimately the countries, that benefit most from AI will not necessarily be those that buy the technology first.</p>
+        <p>They will be those that learn to use it with discipline, imagination and responsibility.</p>
+        <p>The conversation may begin with <strong>what</strong> and <strong>when</strong>.</p>
+        <p>It becomes real with <strong>how</strong> and <strong>who</strong>.</p>
+        <p>That is what it means to think differently about AI.</p>
+        <p class="final-line"><strong>Think Different. Think AI.</strong></p>
+    </div></div></section>
+
+    {insight.references && <section class="section references" aria-labelledby="references-title"><div class="reading"><p class="system-label">Sources</p><h2 id="references-title">Sources &amp; further reading</h2><ol>{insight.references.map((reference) => <li><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}<span class="sr-only"> (opens in a new tab)</span></a></li>)}</ol></div></section>}
+    <section class="section author-note"><div class="reading"><p class="system-label">Author</p><h2>Gishan Nissanka</h2><p>Gishan works across AI transformation, workforce intelligence, people technology and organisational decision-making.</p><a href="/about/">About Gishan →</a></div></section>
+    <nav class="pathways" aria-label="Related pathways"><div class="shell"><p class="system-label">Continue exploring</p><a href="/sri-lanka/">Explore Sri Lanka →</a><a href="/advisory/ai-strategy/">AI &amp; Transformation →</a><a href="/insights/">Explore all Insights →</a></div></nav>
+</article>
+</BaseLayout>
+
+<style>
+.hero,.section,.pathways{padding-block:clamp(4.5rem,9vw,8rem);border-bottom:var(--border-architectural)}.hero{padding-top:2rem;background:var(--colour-paper)}.hero :global(.breadcrumbs){margin-bottom:clamp(4rem,8vw,7rem)}.hero-grid,.split{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap);align-items:start;margin-top:1.5rem}.hero-grid>div{grid-column:1/span 8}.hero-summary{grid-column:9/-1;margin:0;font-size:1.125rem}.hero h1{max-width:10ch;margin:0;font-family:var(--font-display);font-feature-settings:"kern" 1;font-kerning:normal;font-size:clamp(4rem,7vw,6.25rem);letter-spacing:normal;line-height:.94;overflow-wrap:normal;word-break:normal;hyphens:none}.subtitle{max-width:34ch;margin:2rem 0 0;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2}.meta{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:4rem;padding:1.25rem 0;border-block:var(--border-architectural)}.meta dt,.step-number{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase}.meta dd{margin:.5rem 0 0;font-size:.85rem}.author a,.references a,.author-note a,.pathways a{text-underline-offset:.3em}.reading{width:min(calc(100% - 2rem),48rem);margin-inline:auto}.prose{font-size:1.0625rem;line-height:1.75}.prose p{margin:1.2rem 0}.opening{padding-block:clamp(5rem,10vw,9rem)}.opening>p:first-child::first-letter{float:left;margin:.1em .13em 0 0;font-family:var(--font-display);font-size:5.5rem;font-weight:900;line-height:.72}.prose .pull,.prose blockquote p{font-size:1.35rem;font-weight:700;line-height:1.4}.prose blockquote{margin:2.5rem 0;padding-left:1.5rem;border-left:2px solid}.split>div:first-child{grid-column:1/span 5}.split>div:last-child{grid-column:7/-1}.section h2{font-family:var(--font-display);font-feature-settings:"kern" 1;font-kerning:normal;font-size:clamp(2.75rem,4.8vw,4.5rem);letter-spacing:normal;line-height:1}.split h2{max-width:12ch;margin:1.5rem 0 0}.paper,.references{background:var(--colour-paper)}.proposition,.framework,.closing,.pathways{background:var(--colour-obsidian);color:var(--colour-white)}.proposition h2,.ownership h2,.framework h2,.closing h2{max-width:16ch;margin:2rem 0 0;font-size:clamp(3.25rem,6vw,5.75rem);line-height:.96}.proposition-copy,.ownership-copy,.closing-copy{margin-top:clamp(3rem,7vw,6rem)}.framework-intro{max-width:48rem;margin-top:3rem}.framework-list{margin:clamp(4rem,8vw,7rem) 0 0;padding:0;list-style:none;border-top:1px solid #555}.framework-list li{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap);padding-block:clamp(2rem,5vw,4rem);border-bottom:1px solid #555}.step-number{grid-column:1/span 2}.framework-list li>div{grid-column:4/span 7}.framework-list h3{margin:0 0 1rem;font-size:clamp(1.75rem,3vw,2.75rem);line-height:1.05}.framework-list p{max-width:42rem;margin:0;font-size:1.0625rem;line-height:1.7}.framework-list p+p{margin-top:1rem}.governance-note{margin-top:clamp(4rem,8vw,7rem)}.human-edge{background:var(--colour-paper)}.final-line{margin-top:3rem!important;font-family:var(--font-display);font-size:clamp(2.75rem,5vw,4.5rem);line-height:1}.references h2,.author-note h2{margin:1.5rem 0 0;font-size:clamp(2.5rem,4vw,3.5rem)}.references ol{margin-top:2.5rem;padding-left:1.4rem}.references li+li{margin-top:1rem}.pathways{border-bottom:0}.pathways .shell{display:flex;flex-wrap:wrap;gap:1.5rem 3rem;align-items:center}.pathways a{font-weight:700}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(max-width:52rem){.hero-grid,.split{grid-template-columns:minmax(0,1fr)}.hero-grid>div,.hero-summary,.split>div:first-child,.split>div:last-child{grid-column:1}.hero-summary,.split>div:last-child{margin-top:3rem}.meta{grid-template-columns:repeat(2,1fr)}.framework-list li{grid-template-columns:minmax(0,1fr)}.step-number,.framework-list li>div{grid-column:1}}
+@media(max-width:30rem){.hero h1{font-size:clamp(3.1rem,15vw,3.65rem)}.meta{grid-template-columns:minmax(0,1fr)}.proposition h2,.ownership h2,.framework h2,.closing h2{font-size:clamp(2.9rem,14vw,3.6rem)}}
+@media print{:global(.site-header),:global(.site-footer),.hero :global(.breadcrumbs),.hero :global(.article-utilities),.pathways{display:none!important}.hero,.paper,.proposition,.framework,.human-edge,.closing,.references{background:white!important;color:black!important}.framework-list li{border-color:#999;break-inside:avoid}.reading{max-width:none;width:100%}@page{margin:18mm}}
+</style>
