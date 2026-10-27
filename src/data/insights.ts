@@ -159,7 +159,7 @@ export const insightRecords: Insight[] = [
         featured: false,
         status: "Published",
         references: [
-            { label: "National AI Strategy for Sri Lanka — Ministry of Digital Economy", url: "https://www.mot.gov.lk/assets/files/National_AI_strategy_for_Sri_Lanka-08a88c78d541a0746aeb8c71ed312231.pdf" },
+            { label: "Sri Lanka National AI Strategy — Ministry of Digital Economy", url: "https://web.archive.org/web/20251023002513id_/https://mode.gov.lk/assets/files/National_AI_strategy_for_Sri_Lanka-08a88c78d541a0746aeb8c71ed312231.pdf" },
             { label: "Sri Lanka Budget Speech 2026", url: "https://www.media.gov.lk/media-gallery/latest-news/3497-full-budget-speech-2026" },
             { label: "Sri Lanka launches UNESCO’s AI Readiness Assessment Methodology", url: "https://www.unesco.org/en/articles/sri-lanka-launches-unescos-ai-readiness-assessment-methodology-ram" },
             { label: "Microsoft and LinkedIn 2024 Work Trend Index", url: "https://news.microsoft.com/source/2024/05/08/microsoft-and-linkedin-release-the-2024-work-trend-index-on-the-state-of-ai-at-work/" },
