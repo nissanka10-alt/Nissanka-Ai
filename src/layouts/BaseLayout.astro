@@ -11,16 +11,18 @@ interface Props {
     path: string;
     type?: "website" | "article";
     image?: string;
+    imageWidth?: number;
+    imageHeight?: number;
     structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
     robots?: string;
 }
 
-const { title, description, path, type, image, structuredData, robots } = Astro.props;
+const { title, description, path, type, image, imageWidth, imageHeight, structuredData, robots } = Astro.props;
 const canonical = new URL(path, Astro.site);
 const defaultSocialImage = "/social/nissanka-advisory-og.png";
 const socialImage = image ?? defaultSocialImage;
-const socialImageWidth = image ? undefined : 1200;
-const socialImageHeight = image ? undefined : 630;
+const socialImageWidth = imageWidth ?? (image ? undefined : 1200);
+const socialImageHeight = imageHeight ?? (image ? undefined : 630);
 ---
 
 <!doctype html>
