@@ -355,7 +355,7 @@ const structuredData = {
         font-family: var(--font-display);
         font-feature-settings: "kern" 1;
         font-kerning: normal;
-        font-size: clamp(4.75rem, 6.4vw, 5.75rem);
+        font-size: clamp(4.25rem, 5.75vw, 5.2rem);
         font-weight: 900;
         letter-spacing: normal;
         line-height: 0.98;
@@ -861,6 +861,22 @@ const structuredData = {
         }
     }
 
+    @media (min-width: 48.01rem) and (max-width: 64rem) {
+        .hero-lenses {
+            grid-column: 8 / -1;
+            margin-top: 2rem;
+            padding-block: 1rem 1.125rem;
+            border-color: rgb(255 255 255 / 40%);
+            color: rgb(255 255 255 / 78%);
+        }
+
+        .hero-lenses p:last-child {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+    }
+
     @media (max-width: 48rem) {
         .home-section,
         .final-cta {
@@ -1030,6 +1046,12 @@ const structuredData = {
 
         .button-group .text-link {
             width: auto;
+        }
+
+        .home-hero .button {
+            width: auto;
+            min-height: 3rem;
+            padding: 0.7rem 0.9rem;
         }
     }
 
