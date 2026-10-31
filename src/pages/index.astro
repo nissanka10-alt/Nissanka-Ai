@@ -70,6 +70,17 @@ const structuredData = {
 
 <BaseLayout {title} {description} path="/" {structuredData}>
     <section class="home-hero" aria-labelledby="home-title">
+        <picture class="home-hero__media" aria-hidden="true">
+            <source media="(max-width: 48rem)" srcset="/images/editorial/home-london-bridge-mobile.jpg" />
+            <img
+                src="/images/editorial/home-london-bridge.jpg"
+                alt=""
+                width="2400"
+                height="1081"
+                fetchpriority="high"
+                decoding="async"
+            />
+        </picture>
         <div class="shell home-hero__grid">
             <div class="home-hero__main">
                 <p class="system-label">Nissanka Advisory</p>
@@ -288,7 +299,34 @@ const structuredData = {
     }
 
     .home-hero {
-        padding-block: clamp(5rem, 10vw, 9rem);
+        position: relative;
+        isolation: isolate;
+        min-height: clamp(42rem, 78svh, 54rem);
+        overflow: hidden;
+        background: var(--colour-obsidian);
+        color: var(--colour-white);
+    }
+
+    .home-hero::after {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background: rgb(0 0 0 / 46%);
+        content: "";
+    }
+
+    .home-hero__media,
+    .home-hero__media img {
+        position: absolute;
+        z-index: -2;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-hero__media img {
+        object-fit: cover;
+        object-position: 50% center;
     }
 
     .home-hero__grid,
@@ -300,25 +338,31 @@ const structuredData = {
         gap: var(--grid-gap);
     }
 
+    .home-hero__grid {
+        min-height: clamp(42rem, 78svh, 54rem);
+        align-content: space-between;
+        padding-block: clamp(4.5rem, 8vh, 6.5rem);
+    }
+
     .home-hero__main {
         grid-column: 1 / span 9;
         min-width: 0;
     }
 
     .home-hero h1 {
-        max-width: 18ch;
+        max-width: 13ch;
         margin: 1.75rem 0 2.25rem;
         font-family: var(--font-display);
         font-feature-settings: "kern" 1;
         font-kerning: normal;
-        font-size: clamp(4.75rem, 6.4vw, 5.125rem);
+        font-size: clamp(4.25rem, 5.75vw, 5.2rem);
         font-weight: 900;
         letter-spacing: normal;
         line-height: 0.98;
     }
 
     .home-hero__lede {
-        max-width: 48rem;
+        max-width: 42rem;
         margin: 0;
         font-size: 1.125rem;
         line-height: 1.65;
@@ -328,7 +372,7 @@ const structuredData = {
         grid-column: 10 / -1;
         align-self: end;
         padding-block: 1.25rem 1.5rem;
-        border-block: var(--border-architectural);
+        border-block: 1px solid rgb(255 255 255 / 65%);
     }
 
     .hero-lenses p:last-child {
@@ -364,6 +408,18 @@ const structuredData = {
 
     .button--primary {
         background: var(--colour-black);
+        color: var(--colour-white);
+    }
+
+    .home-hero .button--primary {
+        border-color: var(--colour-white);
+        background: var(--colour-white);
+        color: var(--colour-black);
+    }
+
+    .home-hero .button--primary:hover,
+    .home-hero .button--primary:focus-visible {
+        background: transparent;
         color: var(--colour-white);
     }
 
@@ -762,7 +818,7 @@ const structuredData = {
         }
 
         .home-hero h1 {
-            font-size: clamp(4rem, 8vw, 4.75rem);
+            font-size: clamp(4rem, 8vw, 5rem);
         }
 
         .hero-lenses {
@@ -805,11 +861,40 @@ const structuredData = {
         }
     }
 
+    @media (min-width: 48.01rem) and (max-width: 64rem) {
+        .hero-lenses {
+            grid-column: 8 / -1;
+            margin-top: 2rem;
+            padding-block: 1rem 1.125rem;
+            border-color: rgb(255 255 255 / 40%);
+            color: rgb(255 255 255 / 78%);
+        }
+
+        .hero-lenses p:last-child {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+    }
+
     @media (max-width: 48rem) {
-        .home-hero,
         .home-section,
         .final-cta {
             padding-block: 4.5rem;
+        }
+
+        .home-hero,
+        .home-hero__grid {
+            min-height: clamp(42rem, 92svh, 48rem);
+        }
+
+        .home-hero::after {
+            background: rgb(0 0 0 / 52%);
+        }
+
+        .home-hero__grid {
+            align-content: start;
+            padding-block: clamp(3rem, 8vh, 4.5rem);
         }
 
         .home-hero__grid,
@@ -836,7 +921,11 @@ const structuredData = {
 
         .home-hero h1 {
             margin-block: 1.5rem 2rem;
-            font-size: clamp(2.75rem, 13vw, 3.125rem);
+            font-size: clamp(3rem, 13vw, 3.75rem);
+            line-height: 0.96;
+            overflow-wrap: normal;
+            word-break: normal;
+            hyphens: none;
         }
 
         .home-hero__lede {
@@ -844,7 +933,7 @@ const structuredData = {
         }
 
         .hero-lenses {
-            margin-top: 3.5rem;
+            display: none;
         }
 
         .hero-lenses p:last-child {
@@ -957,6 +1046,12 @@ const structuredData = {
 
         .button-group .text-link {
             width: auto;
+        }
+
+        .home-hero .button {
+            width: auto;
+            min-height: 3rem;
+            padding: 0.7rem 0.9rem;
         }
     }
 
