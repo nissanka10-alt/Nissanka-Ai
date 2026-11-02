@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import paWorldImage from "../assets/editorial/pa-world-2025.jpg";
 import { contactHref } from "../config/practices";
+import { organisationEntity } from "../config/entities";
 
 const title = "Nissanka Advisory | AI Transformation & Workforce Intelligence";
 const description = "Nissanka Advisory helps organisations identify valuable AI opportunities, strengthen workforce intelligence and turn new technology into practical organisational change.";
@@ -59,11 +60,7 @@ const events = [
 ];
 const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://nissanka.co.uk/#organisation",
-    name: "Nissanka Advisory",
-    legalName: "Nissanka Group Ltd",
-    url: "https://nissanka.co.uk/",
+    ...organisationEntity,
     description,
 };
 ---

@@ -3,6 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import ArticleUtilities from "../../../components/ArticleUtilities.astro";
 import { formatInsightDate, insights } from "../../../data/insights";
+import { gishanEntity, organisationEntity } from "../../../config/entities";
 
 const insight = insights.find((item) => item.slug === "think-different-think-ai-sri-lanka")!;
 const title = "AI in Sri Lanka: From Ambition to Execution | Nissanka Advisory";
@@ -31,22 +32,8 @@ const structuredData = {
             url,
             image: socialImageUrl,
             datePublished: insight.published,
-            author: {
-                "@type": "Person",
-                "@id": "https://nissanka.co.uk/#gishan-nissanka",
-                name: insight.author,
-                url: "https://nissanka.co.uk/about/",
-            },
-            publisher: {
-                "@type": "Organization",
-                "@id": "https://nissanka.co.uk/#organisation",
-                name: "Nissanka Advisory",
-                url: "https://nissanka.co.uk/",
-                logo: {
-                    "@type": "ImageObject",
-                    url: "https://nissanka.co.uk/apple-touch-icon.png",
-                },
-            },
+            author: gishanEntity,
+            publisher: organisationEntity,
             about: [insight.topic, insight.geography, insight.theme],
             contentLocation: { "@type": "Country", name: "Sri Lanka" },
             mainEntityOfPage: { "@type": "WebPage", "@id": url },
@@ -261,7 +248,7 @@ const structuredData = {
     </div></div></section>
 
     {insight.references && <section class="section references" aria-labelledby="references-title"><div class="reading"><p class="system-label">Sources</p><h2 id="references-title">Sources &amp; further reading</h2><ol>{insight.references.map((reference) => <li><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}<span class="sr-only"> (opens in a new tab)</span></a></li>)}</ol></div></section>}
-    <section class="section author-note"><div class="reading"><p class="system-label">Author</p><h2>Gishan Nissanka</h2><p>Gishan works across AI transformation, workforce intelligence, people technology and organisational decision-making.</p><a href="/about/">About Gishan →</a></div></section>
+    <section class="section author-note"><div class="reading"><p class="system-label">Author</p><h2>Gishan Nissanka</h2><p>Gishan works across AI transformation, workforce intelligence, people technology and organisational decision-making.</p><a href="/profile/">View Gishan’s professional profile →</a></div></section>
     <nav class="pathways" aria-label="Related pathways"><div class="shell"><p class="system-label">Continue exploring</p><a href="/sri-lanka/">Explore Sri Lanka →</a><a href="/advisory/ai-strategy/">AI &amp; Transformation →</a><a href="/insights/">Explore all Insights →</a></div></nav>
 </article>
 </BaseLayout>
