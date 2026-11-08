@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import "../../styles/editorial-pages.css";
 import { contactHref } from "../../config/practices";
+import { gishanEntity, organisationEntity } from "../../config/entities";
 
 const title = "About Nissanka Advisory | AI & Workforce Intelligence";
 const description = "Nissanka Advisory combines deep capability in AI transformation, workforce intelligence, people technology and organisational change.";
@@ -16,8 +17,8 @@ const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
         { "@type": "AboutPage", "@id": "https://nissanka.co.uk/about/#webpage", url: "https://nissanka.co.uk/about/", name: title, description, about: { "@id": "https://nissanka.co.uk/#organisation" } },
-        { "@type": "Organization", "@id": "https://nissanka.co.uk/#organisation", name: "Nissanka Advisory", legalName: "Nissanka Group Ltd", url: "https://nissanka.co.uk/", description },
-        { "@type": "Person", "@id": "https://nissanka.co.uk/#gishan-nissanka", name: "Gishan Nissanka", jobTitle: "People Technology and AI Transformation leader", url: "https://nissanka.co.uk/about/" },
+        { ...organisationEntity, description },
+        gishanEntity,
         { "@type": "Person", "@id": "https://nissanka.co.uk/#kasia-nissanka", name: "Kasia Nissanka", jobTitle: "Executive & Leadership Coach", url: "https://nissanka.co.uk/about/", hasCredential: { "@type": "EducationalOccupationalCredential", name: "ICF Professional Certified Coach (PCC)" } },
         { "@type": "BreadcrumbList", itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },

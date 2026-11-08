@@ -11,11 +11,12 @@ interface Props {
 }
 
 const { title, description, canonical, type = "website", image, imageWidth, imageHeight, robots } = Astro.props;
+const robotsContent = robots ?? "index, follow, max-image-preview:large";
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
-{robots && <meta name="robots" content={robots} />}
+<meta name="robots" content={robotsContent} />
 <link rel="canonical" href={canonical} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

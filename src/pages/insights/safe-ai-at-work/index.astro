@@ -3,6 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import ArticleUtilities from "../../../components/ArticleUtilities.astro";
 import { formatInsightDate, insights } from "../../../data/insights";
+import { gishanEntity, organisationEntity } from "../../../config/entities";
 import legacyArticle from "../../../../insights/safe-ai-at-work/index.html?raw";
 
 const insight = insights.find((item) => item.slug === "safe-ai-at-work")!;
@@ -21,8 +22,8 @@ const structuredData = {
             url: "https://nissanka.co.uk/insights/safe-ai-at-work/",
             datePublished: insight.published,
             dateModified: insight.updated,
-            author: { "@type": "Person", "@id": "https://nissanka.co.uk/#gishan-nissanka", name: insight.author, url: "https://nissanka.co.uk/about/" },
-            publisher: { "@type": "Organization", name: "Nissanka Advisory", url: "https://nissanka.co.uk/" },
+            author: gishanEntity,
+            publisher: organisationEntity,
             about: [insight.topic, insight.geography],
         },
         {
@@ -39,13 +40,13 @@ const structuredData = {
 
 <BaseLayout {title} {description} path="/insights/safe-ai-at-work/" type="article" {structuredData}>
     <article class="insight-article">
-        <header class="article-header"><div class="shell"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Insights", href: "/insights/" }, { label: "Safe AI at Work" }]} /><p class="system-label">{insight.format} / {insight.topic}</p><h1>{insight.title}</h1><p class="summary">{insight.summary}</p><dl class="article-meta"><div><dt>Topic</dt><dd>{insight.topic}</dd></div><div><dt>Geography</dt><dd>{insight.geography}</dd></div><div><dt>Published</dt><dd><time datetime={insight.published}>{formatInsightDate(insight.published)}</time></dd></div>{insight.updated && <div><dt>Updated</dt><dd><time datetime={insight.updated}>{formatInsightDate(insight.updated)}</time></dd></div>}<div><dt>Read time</dt><dd>{insight.readTime}</dd></div></dl><p class="author-line">By <a href="/about/">{insight.author}</a>, People Technology and AI Transformation leader.</p><ArticleUtilities title={insight.title} url="/insights/safe-ai-at-work/" /></div></header>
+        <header class="article-header"><div class="shell"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Insights", href: "/insights/" }, { label: "Safe AI at Work" }]} /><p class="system-label">{insight.format} / {insight.topic}</p><h1>{insight.title}</h1><p class="summary">{insight.summary}</p><dl class="article-meta"><div><dt>Topic</dt><dd>{insight.topic}</dd></div><div><dt>Geography</dt><dd>{insight.geography}</dd></div><div><dt>Published</dt><dd><time datetime={insight.published}>{formatInsightDate(insight.published)}</time></dd></div>{insight.updated && <div><dt>Updated</dt><dd><time datetime={insight.updated}>{formatInsightDate(insight.updated)}</time></dd></div>}<div><dt>Read time</dt><dd>{insight.readTime}</dd></div></dl><p class="author-line">By <a href="/profile/">{insight.author}</a>, AI Transformation and Workforce Intelligence leader.</p><ArticleUtilities title={insight.title} url="/insights/safe-ai-at-work/" /></div></header>
 
         <div class="article-body shell" set:html={articleBody}></div>
 
         {insight.references && <section class="references" aria-labelledby="references-title"><div class="reading-shell"><p class="system-label">Sources</p><h2 id="references-title">Sources & References</h2><ol>{insight.references.map((reference) => <li><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}<span class="visually-hidden"> (opens in a new tab)</span></a></li>)}</ol></div></section>}
 
-        <section class="author-note" aria-labelledby="author-title"><div class="reading-shell"><p class="system-label">Author</p><h2 id="author-title">Gishan Nissanka</h2><p>Gishan works across AI transformation, workforce intelligence, people technology and organisational decision-making.</p><a href="/about/">About Gishan <span aria-hidden="true">→</span></a></div></section>
+        <section class="author-note" aria-labelledby="author-title"><div class="reading-shell"><p class="system-label">Author</p><h2 id="author-title">Gishan Nissanka</h2><p>Gishan works across AI transformation, workforce intelligence, people technology and organisational decision-making.</p><a href="/profile/">View Gishan’s professional profile <span aria-hidden="true">→</span></a></div></section>
 
         <section class="article-path" aria-labelledby="path-title"><div class="shell path-grid"><div><p class="system-label">Where this leads</p><h2 id="path-title">Turn safe-use questions into practical organisational decisions.</h2></div><div><p>Explore the connected advisory work or start with a structured review of opportunity, readiness and priorities.</p>{insight.advisoryPath && <a href={insight.advisoryPath.href}>{insight.advisoryPath.label} <span aria-hidden="true">→</span></a>}<a href="/ai-review/">Explore the AI Opportunity & Readiness Review <span aria-hidden="true">→</span></a></div></div></section>
     </article>
