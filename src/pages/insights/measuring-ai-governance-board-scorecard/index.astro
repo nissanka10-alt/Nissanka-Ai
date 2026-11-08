@@ -1,0 +1,382 @@
+---
+import ArticleBody from "../../../content/insights/measuring-ai-governance-board-scorecard.md";
+import ArticleUtilities from "../../../components/ArticleUtilities.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { gishanEntity, organisationEntity } from "../../../config/entities";
+import { formatInsightDate, insights } from "../../../data/insights";
+
+const insight = insights.find((item) => item.slug === "measuring-ai-governance-board-scorecard")!;
+const title = "Measuring AI Governance: A Board Scorecard | Nissanka Advisory";
+const description = "What boards should measure to distinguish an AI governance policy from working control, including oversight evidence, control testing and behavioural signals.";
+const path = "/insights/measuring-ai-governance-board-scorecard/";
+const url = `https://nissanka.co.uk${path}`;
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Article",
+            "@id": `${url}#article`,
+            headline: insight.title,
+            alternativeHeadline: insight.subtitle,
+            description,
+            url,
+            datePublished: insight.published,
+            author: gishanEntity,
+            publisher: organisationEntity,
+            about: [insight.topic, "AI governance", "Board oversight"],
+            mainEntityOfPage: { "@type": "WebPage", "@id": url },
+        },
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://nissanka.co.uk/" },
+                { "@type": "ListItem", position: 2, name: "Insights", item: "https://nissanka.co.uk/insights/" },
+                { "@type": "ListItem", position: 3, name: insight.title, item: url },
+            ],
+        },
+    ],
+};
+---
+
+<BaseLayout {title} {description} {path} type="article" robots="index, follow, max-image-preview:large" {structuredData}>
+    <article class="governance-article">
+        <header class="hero">
+            <div class="shell">
+                <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Insights", href: "/insights/" }, { label: insight.title }]} />
+                <p class="system-label">{insight.topic} / {insight.geography} / {insight.format}</p>
+                <div class="hero-grid">
+                    <div>
+                        <h1>{insight.title}</h1>
+                        <p class="subtitle">{insight.subtitle}</p>
+                    </div>
+                    <p class="standfirst">{insight.summary}</p>
+                </div>
+                <dl class="meta">
+                    <div><dt>Author</dt><dd><a href="/profile/">{insight.author}</a></dd></div>
+                    <div><dt>Published</dt><dd><time datetime={insight.published}>{formatInsightDate(insight.published)}</time></dd></div>
+                    <div><dt>Topic</dt><dd>{insight.topic}</dd></div>
+                    <div><dt>Geography</dt><dd>{insight.geography}</dd></div>
+                    {insight.readTime && <div><dt>Read time</dt><dd>{insight.readTime}</dd></div>}
+                </dl>
+                <ArticleUtilities title={insight.title} url={path} />
+            </div>
+        </header>
+
+        <div class="reading prose article-body">
+            <ArticleBody />
+        </div>
+
+        {insight.references && (
+            <section class="references" aria-labelledby="sources-title">
+                <div class="reading">
+                    <p class="system-label">Sources</p>
+                    <h2 id="sources-title">Sources &amp; further reading</h2>
+                    <ol>
+                        {insight.references.map((reference) => (
+                            <li>
+                                <a href={reference.url} target="_blank" rel="noopener noreferrer">
+                                    {reference.label}<span class="sr-only"> (opens in a new tab)</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+            </section>
+        )}
+
+        <section class="author-note" aria-labelledby="author-title">
+            <div class="reading">
+                <p class="system-label">Author</p>
+                <h2 id="author-title">Gishan Nissanka</h2>
+                <p>Gishan works across AI transformation, workforce intelligence, people technology and organisational decision-making.</p>
+                <a href="/profile/">View Gishan’s professional profile <span aria-hidden="true">→</span></a>
+            </div>
+        </section>
+
+        <nav class="pathways" aria-label="Related pathways">
+            <div class="shell">
+                <p class="system-label">Continue exploring</p>
+                <a href="/advisory/ai-strategy/">AI &amp; Transformation <span aria-hidden="true">→</span></a>
+                <a href="/insights/">Explore all Insights <span aria-hidden="true">→</span></a>
+            </div>
+        </nav>
+    </article>
+</BaseLayout>
+
+<style>
+    .hero,
+    .references,
+    .author-note,
+    .pathways {
+        border-bottom: var(--border-architectural);
+        padding-block: clamp(4.5rem, 9vw, 8rem);
+    }
+
+    .hero {
+        padding-top: 2rem;
+        background: var(--colour-paper);
+    }
+
+    .hero :global(.breadcrumbs) {
+        margin-bottom: clamp(4rem, 8vw, 7rem);
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+        align-items: end;
+        margin-top: 1.5rem;
+    }
+
+    .hero-grid > div {
+        grid-column: 1 / span 8;
+    }
+
+    .hero h1 {
+        max-width: 14ch;
+        margin: 0;
+        font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
+        font-size: clamp(3.75rem, 6.8vw, 6.25rem);
+        font-weight: 900;
+        letter-spacing: normal;
+        line-height: .94;
+    }
+
+    .subtitle {
+        max-width: 34ch;
+        margin: 2rem 0 0;
+        font-size: clamp(1.35rem, 2.4vw, 2rem);
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .standfirst {
+        grid-column: 9 / -1;
+        margin: 0;
+        font-size: 1.125rem;
+        line-height: 1.6;
+    }
+
+    .meta {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 4rem 0 2rem;
+        padding-block: 1.25rem;
+        border-block: var(--border-architectural);
+    }
+
+    .meta dt {
+        font-family: var(--font-mono);
+        font-size: .7rem;
+        text-transform: uppercase;
+    }
+
+    .meta dd {
+        margin: .5rem 0 0;
+        font-size: .85rem;
+    }
+
+    .meta a,
+    .references a,
+    .author-note a,
+    .pathways a {
+        text-underline-offset: .3em;
+    }
+
+    .reading {
+        width: min(calc(100% - 2rem), 48rem);
+        margin-inline: auto;
+    }
+
+    .article-body {
+        padding-block: clamp(5rem, 10vw, 9rem);
+    }
+
+    .prose {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+    }
+
+    .prose :global(> p:first-child::first-letter) {
+        float: left;
+        margin: .1em .13em 0 0;
+        font-family: var(--font-display);
+        font-size: 5.5rem;
+        font-weight: 900;
+        line-height: .72;
+    }
+
+    .prose :global(h2) {
+        margin: clamp(5rem, 9vw, 8rem) 0 2rem;
+        font-family: var(--font-display);
+        font-feature-settings: "kern" 1;
+        font-kerning: normal;
+        font-size: clamp(2.5rem, 5vw, 4.25rem);
+        font-weight: 900;
+        letter-spacing: normal;
+        line-height: 1;
+    }
+
+    .prose :global(h3) {
+        margin: 3.5rem 0 1.25rem;
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        line-height: 1.1;
+    }
+
+    .prose :global(p) {
+        margin: 1.25rem 0;
+    }
+
+    .prose :global(ul),
+    .prose :global(ol) {
+        margin: 2rem 0;
+        padding-left: 1.4rem;
+    }
+
+    .prose :global(li + li) {
+        margin-top: 1rem;
+    }
+
+    .prose :global(table) {
+        display: block;
+        width: 100%;
+        margin: 3rem 0;
+        overflow-x: auto;
+        border-collapse: collapse;
+        font-size: .9rem;
+        line-height: 1.5;
+    }
+
+    .prose :global(th),
+    .prose :global(td) {
+        min-width: 13rem;
+        padding: 1rem;
+        border: var(--border-architectural);
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .prose :global(th) {
+        font-family: var(--font-mono);
+        font-size: .7rem;
+        text-transform: uppercase;
+    }
+
+    .references {
+        background: var(--colour-paper);
+    }
+
+    .references h2,
+    .author-note h2 {
+        margin: 1.5rem 0 2rem;
+        font-size: clamp(2.25rem, 4vw, 3.5rem);
+        line-height: 1;
+    }
+
+    .references ol {
+        padding-left: 1.4rem;
+    }
+
+    .references li + li {
+        margin-top: 1rem;
+    }
+
+    .author-note p:not(.system-label) {
+        max-width: 42rem;
+    }
+
+    .pathways {
+        border-bottom: 0;
+        background: var(--colour-obsidian);
+        color: white;
+    }
+
+    .pathways .shell {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem 3rem;
+        align-items: center;
+    }
+
+    .pathways a {
+        font-weight: 700;
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
+
+    @media (max-width: 52rem) {
+        .hero-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-grid > div,
+        .standfirst {
+            grid-column: 1;
+        }
+
+        .standfirst {
+            margin-top: 3rem;
+        }
+
+        .meta {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 30rem) {
+        .hero h1 {
+            font-size: clamp(3rem, 15vw, 3.75rem);
+            word-break: normal;
+            overflow-wrap: normal;
+            hyphens: none;
+        }
+
+        .meta {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media print {
+        :global(.site-header),
+        :global(.site-footer),
+        .hero :global(.breadcrumbs),
+        .hero :global(.article-utilities),
+        .pathways {
+            display: none !important;
+        }
+
+        .hero,
+        .references,
+        .pathways {
+            background: white !important;
+            color: black !important;
+        }
+
+        .reading {
+            width: 100%;
+            max-width: none;
+        }
+
+        .prose :global(table) {
+            display: table;
+            overflow: visible;
+            font-size: 8pt;
+        }
+
+        @page {
+            margin: 18mm;
+        }
+    }
+</style>
