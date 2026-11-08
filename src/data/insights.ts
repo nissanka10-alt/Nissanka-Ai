@@ -193,6 +193,7 @@ export const insightRecords: Insight[] = [
             { label: "Overriding of Drug Safety Alerts in Computerized Physician Order Entry", url: "https://doi.org/10.1016/j.ijmedinf.2005.08.008" },
             { label: "EU AI Act — Regulation (EU) 2024/1689", url: "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" },
             { label: "Digital Omnibus on AI — Regulation (EU) 2026/1744", url: "https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng" },
+            { label: "European Commission — First harmonised standard supporting the AI Act", url: "https://digital-strategy.ec.europa.eu/en/library/first-harmonised-standard-supporting-ai-act-published-official-journal" },
             { label: "ISO/IEC 42001:2023 — AI management systems", url: "https://www.iso.org/standard/42001" },
             { label: "Sri Lanka Personal Data Protection Act, No. 9 of 2022", url: "https://www.dpa.gov.lk/acts/Data%20Protection%20Act%20SL%20-%20English%20%282%29.pdf" },
             { label: "Data Protection Authority of Sri Lanka — commencement notice", url: "https://www.dpa.gov.lk/notice.php" },
