@@ -10,10 +10,7 @@ const { heading = "Tell us what you would like to discuss" } = Astro.props;
     <h2 id="enquiry-heading">{heading}</h2>
     <p class="required-note"><span aria-hidden="true">*</span> Required fields</p>
 
-    <form action="https://formsubmit.co/gishan@nissanka.co.uk" method="POST">
-        <input type="hidden" name="_subject" value="Nissanka Advisory website enquiry" />
-        <input type="hidden" name="_next" value="https://nissanka.co.uk/thank-you/" />
-
+    <form action="/api/contact" method="POST">
         <div class="honeypot" aria-hidden="true">
             <label for="enquiry-website">Leave this field empty</label>
             <input id="enquiry-website" name="_honey" type="text" tabindex="-1" autocomplete="off" />
@@ -21,17 +18,17 @@ const { heading = "Tell us what you would like to discuss" } = Astro.props;
 
         <div class="field">
             <label for="enquiry-name">Name <span aria-hidden="true">*</span></label>
-            <input id="enquiry-name" name="name" type="text" autocomplete="name" required />
+            <input id="enquiry-name" name="name" type="text" autocomplete="name" maxlength="120" required />
         </div>
 
         <div class="field">
             <label for="enquiry-email">Work email <span aria-hidden="true">*</span></label>
-            <input id="enquiry-email" name="email" type="email" autocomplete="email" required />
+            <input id="enquiry-email" name="email" type="email" autocomplete="email" maxlength="254" required />
         </div>
 
         <div class="field">
             <label for="enquiry-organisation">Organisation</label>
-            <input id="enquiry-organisation" name="organisation" type="text" autocomplete="organization" />
+            <input id="enquiry-organisation" name="organisation" type="text" autocomplete="organization" maxlength="200" />
         </div>
 
         <div class="field">
@@ -51,7 +48,7 @@ const { heading = "Tell us what you would like to discuss" } = Astro.props;
 
         <div class="field">
             <label for="enquiry-message">Message <span aria-hidden="true">*</span></label>
-            <textarea id="enquiry-message" name="message" rows="7" required></textarea>
+            <textarea id="enquiry-message" name="message" rows="7" maxlength="5000" required></textarea>
         </div>
 
         <button type="submit">Send enquiry <span aria-hidden="true">→</span></button>
