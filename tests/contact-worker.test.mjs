@@ -9,10 +9,10 @@ import worker, {
     sendFormSubmitNotification,
 } from "../worker/index.js";
 
-const requestFor = (fields) => {
+const requestFor = (fields, url = "https://nissanka.co.uk/api/contact") => {
     const body = new FormData();
     for (const [key, value] of Object.entries(fields)) body.set(key, value);
-    return new Request("https://nissanka.co.uk/api/contact", { method: "POST", body });
+    return new Request(url, { method: "POST", body });
 };
 
 const validFields = {
@@ -37,8 +37,14 @@ function createDb({ insertSuccess = true, notificationUpdateSuccess = true } = {
                         capture.values = values;
                         return {
                             run: async () => sql.includes("INSERT INTO contact_submissions")
-                                ? { success: insertSuccess, meta: { last_row_id: 17 } }
-                                : { success: notificationUpdateSuccess },
+                                ? { success: insertSuccess, meta: { changes: insertSuccess ? 1 : 0, last_row_id: 17 } }
+                                : {
+                                    success: notificationUpdateSuccess,
+                                    meta: { changes: notificationUpdateSuccess ? 1 : 0 },
+                                },
+                            first: async () => sql.includes("INSERT INTO contact_submissions") && insertSuccess
+                                ? { id: 17 }
+                                : null,
                         };
                     },
                 };
@@ -57,7 +63,7 @@ function createExecutionContext() {
     };
 }
 
-test("stores a valid contact enquiry before redirecting", async () => {
+test("stores a valid contact enquiry using the real D1 first-row shape before redirecting", async () => {
     const { db, captures } = createDb();
     const response = await handleContactSubmission(requestFor(validFields), { LEADS_DB: db });
 
@@ -196,6 +202,63 @@ test("FormSubmit timeout marks notification failed without changing the success 
     assert.equal(captures[1].values[0], "failed");
 });
 
+test("FormSubmit HTTP 200 with explicit JSON failure marks notification failed", async () => {
+    const { db, captures } = createDb();
+    const context = createExecutionContext();
+    const response = await handleContactSubmission(
+        requestFor(validFields),
+        { LEADS_DB: db },
+        {
+            sendNotification: (submission) => sendFormSubmitNotification(submission, {
+                fetchImpl: async () => new Response(JSON.stringify({ success: "false" }), { status: 200 }),
+            }),
+            waitUntil: context.waitUntil,
+        },
+    );
+
+    assert.equal(response.status, 303);
+    await context.tasks[0];
+    assert.equal(captures[1].values[0], "failed");
+});
+
+test("malformed FormSubmit JSON marks notification failed", async () => {
+    const { db, captures } = createDb();
+    const context = createExecutionContext();
+    const response = await handleContactSubmission(
+        requestFor(validFields),
+        { LEADS_DB: db },
+        {
+            sendNotification: (submission) => sendFormSubmitNotification(submission, {
+                fetchImpl: async () => new Response("not-json", { status: 200 }),
+            }),
+            waitUntil: context.waitUntil,
+        },
+    );
+
+    assert.equal(response.status, 303);
+    await context.tasks[0];
+    assert.equal(captures[1].values[0], "failed");
+});
+
+test("FormSubmit fetch exception marks notification failed", async () => {
+    const { db, captures } = createDb();
+    const context = createExecutionContext();
+    const response = await handleContactSubmission(
+        requestFor(validFields),
+        { LEADS_DB: db },
+        {
+            sendNotification: (submission) => sendFormSubmitNotification(submission, {
+                fetchImpl: async () => { throw new Error("network unavailable"); },
+            }),
+            waitUntil: context.waitUntil,
+        },
+    );
+
+    assert.equal(response.status, 303);
+    await context.tasks[0];
+    assert.equal(captures[1].values[0], "failed");
+});
+
 test("D1 failure does not attempt notification", async () => {
     const { db } = createDb({ insertSuccess: false });
     const context = createExecutionContext();
@@ -248,6 +311,51 @@ test("invalid submission does not attempt notification", async () => {
     assert.equal(context.tasks.length, 0);
 });
 
+test("notification-status update failure does not lose the stored enquiry", async () => {
+    const { db, captures } = createDb({ notificationUpdateSuccess: false });
+    const context = createExecutionContext();
+    const response = await handleContactSubmission(
+        requestFor(validFields),
+        { LEADS_DB: db },
+        {
+            sendNotification: async () => {},
+            waitUntil: context.waitUntil,
+        },
+    );
+
+    assert.equal(response.status, 303);
+    assert.equal(response.headers.get("location"), "https://nissanka.co.uk/thank-you/");
+    await context.tasks[0];
+    assert.match(captures[0].sql, /INSERT INTO contact_submissions/);
+    assert.equal(captures[1].values[0], "sent");
+    assert.equal(captures[2].values[0], "failed");
+});
+
+test("contact redirect preserves the production request origin", async () => {
+    const { db } = createDb();
+    const response = await handleContactSubmission(
+        requestFor(validFields, "https://nissanka.co.uk/api/contact"),
+        { LEADS_DB: db },
+    );
+
+    assert.equal(response.status, 303);
+    assert.equal(response.headers.get("location"), "https://nissanka.co.uk/thank-you/");
+});
+
+test("contact redirect preserves a Cloudflare preview request origin", async () => {
+    const { db } = createDb();
+    const response = await handleContactSubmission(
+        requestFor(validFields, "https://contact-preview.nissankaai.workers.dev/api/contact"),
+        { LEADS_DB: db },
+    );
+
+    assert.equal(response.status, 303);
+    assert.equal(
+        response.headers.get("location"),
+        "https://contact-preview.nissankaai.workers.dev/thank-you/",
+    );
+});
+
 test("FormSubmit receives the approved JSON payload and subject", async () => {
     let request;
     await sendFormSubmitNotification(
@@ -261,7 +369,7 @@ test("FormSubmit receives the approved JSON payload and subject", async () => {
         {
             fetchImpl: async (url, options) => {
                 request = { url, options };
-                return new Response(JSON.stringify({ success: true }), { status: 200 });
+                return new Response(JSON.stringify({ success: "true" }), { status: 200 });
             },
         },
     );
@@ -302,7 +410,7 @@ test("the Worker exposes POST /api/contact and rejects other methods", async () 
     let response;
 
     try {
-        globalThis.fetch = async () => new Response(JSON.stringify({ success: true }), { status: 200 });
+        globalThis.fetch = async () => new Response(JSON.stringify({ success: "true" }), { status: 200 });
         response = await worker.fetch(requestFor(validFields), { LEADS_DB: db }, context);
         await context.tasks[0];
     } finally {
@@ -320,7 +428,7 @@ test("the contact migration accepts the stored enquiry shape", () => {
     const database = new DatabaseSync(":memory:");
     database.exec(readFileSync(new URL("../migrations/0003_create_contact_submissions.sql", import.meta.url), "utf8"));
 
-    database.prepare(insertContactSubmissionSql).run(
+    const inserted = database.prepare(insertContactSubmissionSql).get(
         "2026-11-10T10:00:00.000Z",
         "Asha Perera",
         "asha@example.com",
@@ -331,6 +439,7 @@ test("the contact migration accepts the stored enquiry shape", () => {
     );
 
     const row = database.prepare("SELECT * FROM contact_submissions").get();
+    assert.equal(inserted.id, row.id);
     assert.equal(row.status, "new");
     assert.equal(row.notification_status, "pending");
     assert.equal(row.email, "asha@example.com");

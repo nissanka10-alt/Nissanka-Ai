@@ -108,6 +108,7 @@ export const insertContactSubmissionSql = `
         status,
         notification_status
     ) VALUES (?, ?, ?, ?, ?, ?, ?, 'new', 'pending')
+    RETURNING id
 `;
 
 export const updateContactNotificationSql = `
@@ -144,8 +145,30 @@ export async function sendFormSubmitNotification(
         if (!response.ok) {
             throw new Error(`FormSubmit returned HTTP ${response.status}`);
         }
+
+        let payload;
+        try {
+            payload = await response.json();
+        } catch {
+            throw new Error("FormSubmit returned invalid JSON");
+        }
+
+        const explicitlySuccessful = payload?.success === true || payload?.success === "true";
+        if (!explicitlySuccessful) {
+            throw new Error("FormSubmit did not confirm success");
+        }
     } finally {
         clearTimeout(timeout);
+    }
+}
+
+async function updateContactNotificationStatus(env, submissionId, status) {
+    const result = await env.LEADS_DB.prepare(updateContactNotificationSql)
+        .bind(status, submissionId)
+        .run();
+
+    if (!result.success || result.meta?.changes !== 1) {
+        throw new Error("D1 notification status update did not affect the stored enquiry");
     }
 }
 
@@ -161,11 +184,15 @@ async function attemptContactNotification(env, submissionId, submission, sendNot
     if (submissionId === undefined || submissionId === null) return;
 
     try {
-        await env.LEADS_DB.prepare(updateContactNotificationSql)
-            .bind(notificationStatus, submissionId)
-            .run();
+        await updateContactNotificationStatus(env, submissionId, notificationStatus);
     } catch {
-        // The enquiry is already stored. Notification status updates must not undo success.
+        if (notificationStatus !== "failed") {
+            try {
+                await updateContactNotificationStatus(env, submissionId, "failed");
+            } catch {
+                // The enquiry is already stored. Status update failure must not undo success.
+            }
+        }
     }
 }
 
@@ -254,7 +281,7 @@ export async function handleContactSubmission(request, env, { sendNotification, 
     try {
         if (!env.LEADS_DB) throw new Error("LEADS_DB binding is unavailable");
 
-        const result = await env.LEADS_DB.prepare(insertContactSubmissionSql)
+        const inserted = await env.LEADS_DB.prepare(insertContactSubmissionSql)
             .bind(
                 timestamp,
                 name.value,
@@ -264,10 +291,12 @@ export async function handleContactSubmission(request, env, { sendNotification, 
                 message.value,
                 "website-contact",
             )
-            .run();
+            .first();
 
-        if (!result.success) throw new Error("D1 contact write did not complete");
-        submissionId = result.meta?.last_row_id;
+        if (!Number.isInteger(inserted?.id) || inserted.id < 1) {
+            throw new Error("D1 contact write did not return a valid enquiry identifier");
+        }
+        submissionId = inserted.id;
     } catch {
         return new Response("We couldn't save your enquiry just now. Please try again.", { status: 503 });
     }
@@ -289,7 +318,10 @@ export async function handleContactSubmission(request, env, { sendNotification, 
         waitUntil(notificationTask);
     }
 
-    return redirect(request, "/thank-you/");
+    return new Response(null, {
+        status: 303,
+        headers: { Location: new URL("/thank-you/", request.url).toString() },
+    });
 }
 
 export async function handleResourceLead(request, env, { forcedSlug } = {}) {
