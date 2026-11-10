@@ -138,6 +138,7 @@ export async function sendFormSubmitNotification(
                 enquiry_type: submission.enquiryType,
                 message: submission.message,
                 _subject: CONTACT_NOTIFICATION_SUBJECT,
+                _url: "https://nissanka.co.uk/contact/",
             }),
             signal: controller.signal,
         });
