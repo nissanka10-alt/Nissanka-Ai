@@ -8,6 +8,7 @@
         "build": "astro build",
         "preview": "astro preview",
         "test:jkh": "node --test tests/jkh-worker.test.mjs",
+        "test:contact": "node --test tests/contact-worker.test.mjs",
         "astro": "astro"
     },
     "devDependencies": {

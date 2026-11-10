@@ -3,6 +3,9 @@ import { getSessionBySlug } from "../src/config/session-resources.js";
 const MAX_LENGTHS = Object.freeze({
     name: 120,
     email: 254,
+    organisation: 200,
+    enquiryType: 80,
+    message: 5000,
     jobTitle: 160,
     company: 200,
     phone: 50,
@@ -11,6 +14,17 @@ const MAX_LENGTHS = Object.freeze({
     leadId: 36,
     exploreFurther: 1000,
 });
+
+const CONTACT_ENQUIRY_TYPES = new Set([
+    "AI Opportunity & Readiness",
+    "AI & Transformation",
+    "Workforce Intelligence",
+    "Sri Lanka / PDPA",
+    "Buckinghamshire",
+    "Leadership",
+    "Speaking",
+    "Other",
+]);
 
 const MOST_USEFUL_VALUES = new Set([
     "ai-mindset",
@@ -78,6 +92,26 @@ export const insertFeedbackSql = `
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
+export const insertContactSubmissionSql = `
+    INSERT INTO contact_submissions (
+        created_at,
+        name,
+        email,
+        organisation,
+        enquiry_type,
+        message,
+        source,
+        status,
+        notification_status
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, 'new', 'pending')
+`;
+
+export const updateContactNotificationSql = `
+    UPDATE contact_submissions
+    SET notification_status = ?
+    WHERE id = ?
+`;
+
 function redirect(request, path) {
     return Response.redirect(new URL(path, request.url), 303);
 }
@@ -90,6 +124,17 @@ function readText(formData, field, maxLength) {
     const value = formData.get(field);
     if (typeof value !== "string") return "";
     return value.trim().slice(0, maxLength);
+}
+
+function readValidatedText(formData, field, maxLength) {
+    const value = formData.get(field);
+    if (typeof value !== "string") return { value: "", valid: true };
+
+    const trimmed = value.trim();
+    return {
+        value: trimmed,
+        valid: trimmed.length <= maxLength,
+    };
 }
 
 function normaliseEmail(value) {
@@ -113,6 +158,91 @@ function sessionFromForm(formData, forcedSlug) {
 function pathWithQuery(path, parameters) {
     const query = new URLSearchParams(parameters);
     return `${path}?${query.toString()}`;
+}
+
+export async function handleContactSubmission(request, env, { sendNotification } = {}) {
+    let formData;
+
+    try {
+        formData = await request.formData();
+    } catch {
+        return new Response("Invalid request", { status: 400 });
+    }
+
+    const honeypot = readValidatedText(formData, "_honey", 200);
+    if (!honeypot.valid || honeypot.value) {
+        return new Response("Invalid submission", { status: 400 });
+    }
+
+    const name = readValidatedText(formData, "name", MAX_LENGTHS.name);
+    const email = readValidatedText(formData, "email", MAX_LENGTHS.email);
+    const organisation = readValidatedText(formData, "organisation", MAX_LENGTHS.organisation);
+    const enquiryType = readValidatedText(formData, "enquiry_type", MAX_LENGTHS.enquiryType);
+    const message = readValidatedText(formData, "message", MAX_LENGTHS.message);
+    const normalisedEmail = normaliseEmail(email.value);
+
+    const fieldsAreValid = [name, email, organisation, enquiryType, message].every((field) => field.valid)
+        && Boolean(name.value)
+        && isValidEmail(normalisedEmail)
+        && CONTACT_ENQUIRY_TYPES.has(enquiryType.value)
+        && Boolean(message.value);
+
+    if (!fieldsAreValid) {
+        return new Response("Please check the required fields and try again.", { status: 400 });
+    }
+
+    let submissionId;
+    const timestamp = new Date().toISOString();
+
+    try {
+        if (!env.LEADS_DB) throw new Error("LEADS_DB binding is unavailable");
+
+        const result = await env.LEADS_DB.prepare(insertContactSubmissionSql)
+            .bind(
+                timestamp,
+                name.value,
+                normalisedEmail,
+                organisation.value || null,
+                enquiryType.value,
+                message.value,
+                "website-contact",
+            )
+            .run();
+
+        if (!result.success) throw new Error("D1 contact write did not complete");
+        submissionId = result.meta?.last_row_id;
+    } catch {
+        return new Response("We couldn't save your enquiry just now. Please try again.", { status: 503 });
+    }
+
+    if (typeof sendNotification === "function") {
+        let notificationStatus = "sent";
+
+        try {
+            await sendNotification({
+                name: name.value,
+                email: normalisedEmail,
+                organisation: organisation.value,
+                enquiryType: enquiryType.value,
+                message: message.value,
+                timestamp,
+            });
+        } catch {
+            notificationStatus = "failed";
+        }
+
+        if (submissionId !== undefined && submissionId !== null) {
+            try {
+                await env.LEADS_DB.prepare(updateContactNotificationSql)
+                    .bind(notificationStatus, submissionId)
+                    .run();
+            } catch {
+                // The enquiry is already stored. Notification status updates must not undo success.
+            }
+        }
+    }
+
+    return redirect(request, "/thank-you/");
 }
 
 export async function handleResourceLead(request, env, { forcedSlug } = {}) {
@@ -252,6 +382,11 @@ export default {
         if (url.pathname === "/api/resource-feedback") {
             if (request.method !== "POST") return methodNotAllowed();
             return handleResourceFeedback(request, env);
+        }
+
+        if (url.pathname === "/api/contact") {
+            if (request.method !== "POST") return methodNotAllowed();
+            return handleContactSubmission(request, env);
         }
 
         return env.ASSETS.fetch(request);
