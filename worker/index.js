@@ -1,5 +1,9 @@
 import { getSessionBySlug } from "../src/config/session-resources.js";
 
+const CONTACT_NOTIFICATION_URL = "https://formsubmit.co/ajax/gishan@nissanka.co.uk";
+const CONTACT_NOTIFICATION_SUBJECT = "Nissanka Advisory website enquiry";
+const CONTACT_NOTIFICATION_TIMEOUT_MS = 8000;
+
 const MAX_LENGTHS = Object.freeze({
     name: 120,
     email: 254,
@@ -112,6 +116,59 @@ export const updateContactNotificationSql = `
     WHERE id = ?
 `;
 
+export async function sendFormSubmitNotification(
+    submission,
+    { fetchImpl = fetch, timeoutMs = CONTACT_NOTIFICATION_TIMEOUT_MS } = {},
+) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+        const response = await fetchImpl(CONTACT_NOTIFICATION_URL, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: submission.name,
+                email: submission.email,
+                organisation: submission.organisation,
+                enquiry_type: submission.enquiryType,
+                message: submission.message,
+                _subject: CONTACT_NOTIFICATION_SUBJECT,
+            }),
+            signal: controller.signal,
+        });
+
+        if (!response.ok) {
+            throw new Error(`FormSubmit returned HTTP ${response.status}`);
+        }
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
+async function attemptContactNotification(env, submissionId, submission, sendNotification) {
+    let notificationStatus = "sent";
+
+    try {
+        await sendNotification(submission);
+    } catch {
+        notificationStatus = "failed";
+    }
+
+    if (submissionId === undefined || submissionId === null) return;
+
+    try {
+        await env.LEADS_DB.prepare(updateContactNotificationSql)
+            .bind(notificationStatus, submissionId)
+            .run();
+    } catch {
+        // The enquiry is already stored. Notification status updates must not undo success.
+    }
+}
+
 function redirect(request, path) {
     return Response.redirect(new URL(path, request.url), 303);
 }
@@ -160,7 +217,7 @@ function pathWithQuery(path, parameters) {
     return `${path}?${query.toString()}`;
 }
 
-export async function handleContactSubmission(request, env, { sendNotification } = {}) {
+export async function handleContactSubmission(request, env, { sendNotification, waitUntil } = {}) {
     let formData;
 
     try {
@@ -215,31 +272,21 @@ export async function handleContactSubmission(request, env, { sendNotification }
         return new Response("We couldn't save your enquiry just now. Please try again.", { status: 503 });
     }
 
-    if (typeof sendNotification === "function") {
-        let notificationStatus = "sent";
-
-        try {
-            await sendNotification({
+    if (typeof sendNotification === "function" && typeof waitUntil === "function") {
+        const notificationTask = attemptContactNotification(
+            env,
+            submissionId,
+            {
                 name: name.value,
                 email: normalisedEmail,
                 organisation: organisation.value,
                 enquiryType: enquiryType.value,
                 message: message.value,
                 timestamp,
-            });
-        } catch {
-            notificationStatus = "failed";
-        }
-
-        if (submissionId !== undefined && submissionId !== null) {
-            try {
-                await env.LEADS_DB.prepare(updateContactNotificationSql)
-                    .bind(notificationStatus, submissionId)
-                    .run();
-            } catch {
-                // The enquiry is already stored. Notification status updates must not undo success.
-            }
-        }
+            },
+            sendNotification,
+        );
+        waitUntil(notificationTask);
     }
 
     return redirect(request, "/thank-you/");
@@ -366,7 +413,7 @@ export async function handleResourceFeedback(request, env) {
 }
 
 export default {
-    async fetch(request, env) {
+    async fetch(request, env, ctx) {
         const url = new URL(request.url);
 
         if (url.pathname === "/api/resource-lead") {
@@ -386,7 +433,10 @@ export default {
 
         if (url.pathname === "/api/contact") {
             if (request.method !== "POST") return methodNotAllowed();
-            return handleContactSubmission(request, env);
+            return handleContactSubmission(request, env, {
+                sendNotification: sendFormSubmitNotification,
+                waitUntil: ctx.waitUntil.bind(ctx),
+            });
         }
 
         return env.ASSETS.fetch(request);

@@ -6,6 +6,7 @@ import test from "node:test";
 import worker, {
     handleContactSubmission,
     insertContactSubmissionSql,
+    sendFormSubmitNotification,
 } from "../worker/index.js";
 
 const requestFor = (fields) => {
@@ -42,6 +43,16 @@ function createDb({ insertSuccess = true, notificationUpdateSuccess = true } = {
                     },
                 };
             },
+        },
+    };
+}
+
+function createExecutionContext() {
+    const tasks = [];
+    return {
+        tasks,
+        waitUntil(task) {
+            tasks.push(task);
         },
     };
 }
@@ -110,28 +121,197 @@ test("does not show success when the D1 insert fails", async () => {
     assert.equal(response.headers.get("location"), null);
 });
 
-test("email notification failure still succeeds after D1 storage", async () => {
+test("a successful FormSubmit notification marks the stored enquiry as sent", async () => {
     const { db, captures } = createDb();
+    const context = createExecutionContext();
+    let notification;
+    let captureCountWhenNotified;
     const response = await handleContactSubmission(
         requestFor(validFields),
         { LEADS_DB: db },
-        { sendNotification: async () => { throw new Error("Email unavailable"); } },
+        {
+            sendNotification: async (submission) => {
+                captureCountWhenNotified = captures.length;
+                notification = submission;
+            },
+            waitUntil: context.waitUntil,
+        },
+    );
+
+    assert.equal(response.status, 303);
+    assert.equal(response.headers.get("location"), "https://nissanka.co.uk/thank-you/");
+    assert.equal(context.tasks.length, 1);
+    await context.tasks[0];
+
+    assert.equal(captureCountWhenNotified, 1);
+    assert.equal(notification.email, "asha@example.com");
+    assert.equal(notification.enquiryType, "AI & Transformation");
+    assert.match(captures[0].sql, /INSERT INTO contact_submissions/);
+    assert.match(captures[1].sql, /UPDATE contact_submissions/);
+    assert.equal(captures[1].values[0], "sent");
+    assert.equal(captures[1].values[1], 17);
+});
+
+test("FormSubmit failure marks notification failed but preserves the success redirect", async () => {
+    const { db, captures } = createDb();
+    const context = createExecutionContext();
+    const response = await handleContactSubmission(
+        requestFor(validFields),
+        { LEADS_DB: db },
+        {
+            sendNotification: async () => { throw new Error("Email unavailable"); },
+            waitUntil: context.waitUntil,
+        },
     );
 
     assert.equal(response.status, 303);
     assert.equal(response.headers.get("location"), "https://nissanka.co.uk/thank-you/");
     assert.match(captures[0].sql, /INSERT INTO contact_submissions/);
-    assert.match(captures[1].sql, /UPDATE contact_submissions/);
+    await context.tasks[0];
+
     assert.equal(captures[1].values[0], "failed");
     assert.equal(captures[1].values[1], 17);
 });
 
+test("FormSubmit timeout marks notification failed without changing the success redirect", async () => {
+    const { db, captures } = createDb();
+    const context = createExecutionContext();
+    const fetchImpl = (_url, options) => new Promise((_resolve, reject) => {
+        options.signal.addEventListener("abort", () => reject(options.signal.reason));
+    });
+    const response = await handleContactSubmission(
+        requestFor(validFields),
+        { LEADS_DB: db },
+        {
+            sendNotification: (submission) => sendFormSubmitNotification(submission, {
+                fetchImpl,
+                timeoutMs: 5,
+            }),
+            waitUntil: context.waitUntil,
+        },
+    );
+
+    assert.equal(response.status, 303);
+    await context.tasks[0];
+    assert.equal(captures[1].values[0], "failed");
+});
+
+test("D1 failure does not attempt notification", async () => {
+    const { db } = createDb({ insertSuccess: false });
+    const context = createExecutionContext();
+    let notified = false;
+    const response = await handleContactSubmission(
+        requestFor(validFields),
+        { LEADS_DB: db },
+        {
+            sendNotification: async () => { notified = true; },
+            waitUntil: context.waitUntil,
+        },
+    );
+
+    assert.equal(response.status, 503);
+    assert.equal(notified, false);
+    assert.equal(context.tasks.length, 0);
+});
+
+test("honeypot submission does not attempt notification", async () => {
+    const context = createExecutionContext();
+    let notified = false;
+    const response = await handleContactSubmission(
+        requestFor({ ...validFields, _honey: "bot content" }),
+        { LEADS_DB: { prepare: () => { throw new Error("should not write"); } } },
+        {
+            sendNotification: async () => { notified = true; },
+            waitUntil: context.waitUntil,
+        },
+    );
+
+    assert.equal(response.status, 400);
+    assert.equal(notified, false);
+    assert.equal(context.tasks.length, 0);
+});
+
+test("invalid submission does not attempt notification", async () => {
+    const context = createExecutionContext();
+    let notified = false;
+    const response = await handleContactSubmission(
+        requestFor({ ...validFields, email: "invalid" }),
+        { LEADS_DB: { prepare: () => { throw new Error("should not write"); } } },
+        {
+            sendNotification: async () => { notified = true; },
+            waitUntil: context.waitUntil,
+        },
+    );
+
+    assert.equal(response.status, 400);
+    assert.equal(notified, false);
+    assert.equal(context.tasks.length, 0);
+});
+
+test("FormSubmit receives the approved JSON payload and subject", async () => {
+    let request;
+    await sendFormSubmitNotification(
+        {
+            name: "Asha Perera",
+            email: "asha@example.com",
+            organisation: "Example PLC",
+            enquiryType: "AI & Transformation",
+            message: "AI priorities",
+        },
+        {
+            fetchImpl: async (url, options) => {
+                request = { url, options };
+                return new Response(JSON.stringify({ success: true }), { status: 200 });
+            },
+        },
+    );
+
+    assert.equal(request.url, "https://formsubmit.co/ajax/gishan@nissanka.co.uk");
+    assert.equal(request.options.method, "POST");
+    assert.equal(request.options.headers["Content-Type"], "application/json");
+    assert.deepEqual(JSON.parse(request.options.body), {
+        name: "Asha Perera",
+        email: "asha@example.com",
+        organisation: "Example PLC",
+        enquiry_type: "AI & Transformation",
+        message: "AI priorities",
+        _subject: "Nissanka Advisory website enquiry",
+    });
+});
+
+test("FormSubmit rejects a non-success HTTP response", async () => {
+    await assert.rejects(
+        sendFormSubmitNotification(
+            {
+                name: "Asha Perera",
+                email: "asha@example.com",
+                organisation: "Example PLC",
+                enquiryType: "AI & Transformation",
+                message: "AI priorities",
+            },
+            { fetchImpl: async () => new Response("Unavailable", { status: 503 }) },
+        ),
+        /FormSubmit returned HTTP 503/,
+    );
+});
+
 test("the Worker exposes POST /api/contact and rejects other methods", async () => {
     const { db } = createDb();
-    const response = await worker.fetch(requestFor(validFields), { LEADS_DB: db });
+    const context = createExecutionContext();
+    const originalFetch = globalThis.fetch;
+    let response;
+
+    try {
+        globalThis.fetch = async () => new Response(JSON.stringify({ success: true }), { status: 200 });
+        response = await worker.fetch(requestFor(validFields), { LEADS_DB: db }, context);
+        await context.tasks[0];
+    } finally {
+        globalThis.fetch = originalFetch;
+    }
+
     assert.equal(response.status, 303);
 
-    const getResponse = await worker.fetch(new Request("https://nissanka.co.uk/api/contact"), {});
+    const getResponse = await worker.fetch(new Request("https://nissanka.co.uk/api/contact"), {}, context);
     assert.equal(getResponse.status, 405);
     assert.equal(getResponse.headers.get("allow"), "POST");
 });
