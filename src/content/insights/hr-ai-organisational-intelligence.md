@@ -28,7 +28,7 @@ In practice, I see three kinds of cost.
 
 **Missed retention signals.** When engagement, learning and workforce data sit in one place and manager guidance sits somewhere else, HR teams can spot emerging retention pressures too late. Oxford Economics and Unum estimated in 2014 that replacing an employee earning £25,000 or more costs an average of £30,614. Most of that is lost output while the new person gets up to speed, which takes around 28 weeks. That study is more than a decade old, so today's cost is likely higher.
 
-I have seen what fixing the data foundation does. At Worldline, raising core data accuracy from 70 to 98 percent, through stronger governance and reconciliation between HR and Finance, removed about €262,000 a year of manual validation. That was before we added any AI.
+I have seen what fixing the data foundation does. At Worldline, improving core data accuracy from around 70% to 98%, through stronger governance and reconciliation between HR and Finance, materially reduced manual validation effort. That was before we added any AI.
 
 ## Building organisational intelligence
 
