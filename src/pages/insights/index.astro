@@ -3,7 +3,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { featuredInsight, formatInsightDate, insightGeographies, insights, insightTopics } from "../../data/insights";
 
-const libraryInsights = insights.filter((insight) => insight.slug !== featuredInsight.slug);
+const libraryInsights = insights
+    .filter((insight) => insight.slug !== featuredInsight.slug)
+    .sort((a, b) => Date.parse(`${b.published}T00:00:00Z`) - Date.parse(`${a.published}T00:00:00Z`));
 
 const title = "Insights | Nissanka Advisory";
 const description = "Research, frameworks and practical perspectives on AI adoption, workforce intelligence, leadership, governance and the future of work.";
