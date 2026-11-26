@@ -29,7 +29,19 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
 
     <section id="capabilities" class="pillar-section capabilities" aria-labelledby="capabilities-title"><div class="shell"><p class="system-label">Capabilities</p><h2 id="capabilities-title">Build capability around consequential work.</h2><div class="capability-list">{capabilities.map((capability, index) => <article class:list={{ offset: index % 2 === 1 }}><p class="capability-number">{String(index + 1).padStart(2, "0")}</p><h3>{capability.title}</h3><p>{capability.copy}</p>{capability.href && <a class="text-link" href={capability.href}>{capability.link} <span aria-hidden="true">→</span></a>}</article>)}</div></div></section>
 
-    <section class="pillar-section human-section" aria-labelledby="conversation-title"><div class="shell section-split"><div><p class="system-label">Critical conversations</p><h2 id="conversation-title">The difficult part often happens after the announcement.</h2></div><div class="section-copy"><p>Leadership judgement matters when organisational direction becomes a conversation about changing roles, expectations, skills, performance, adoption or uncertainty.</p><p>Preparing for those moments helps leaders combine clarity with empathy without avoiding difficult decisions.</p></div></div></section>
+    <section class="pillar-section human-section" aria-labelledby="conversation-title">
+        <div class="shell section-split">
+            <div>
+                <p class="system-label">Critical conversations</p>
+                <h2 id="conversation-title">The difficult part often happens after the announcement.</h2>
+            </div>
+            <div class="section-copy">
+                <p>Leadership judgement matters when organisational direction becomes a conversation about changing roles, expectations, skills, performance, adoption or uncertainty.</p>
+                <p>Preparing for those moments helps leaders combine clarity with empathy without avoiding difficult decisions.</p>
+                <a class="text-link" href="/insights/difficult-conversations-deliberate-practice/">Read why leaders need practice for difficult conversations</a>
+            </div>
+        </div>
+    </section>
 
     <section class="pillar-section coaching-context" aria-labelledby="coaching-context-title"><div class="shell section-split"><div><p class="system-label">Specialist coaching depth</p><h2 id="coaching-context-title">Leadership Coaching within the practice.</h2></div><div class="section-copy"><p>Kasia Nissanka brings specialist leadership and coaching capability to the practice. She is an Executive &amp; Leadership Coach, ICF Professional Certified Coach and Coach Supervisor.</p><p>Her experience includes coaching senior and emerging leaders in NHS Trusts and contributing to leadership and coaching development through the Buckinghamshire Coaching &amp; Mentoring Academy.</p><a class="text-link" href="/advisory/leadership/coaching/">Explore Leadership Coaching <span aria-hidden="true">→</span></a></div></div></section>
 
