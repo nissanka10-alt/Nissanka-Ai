@@ -224,8 +224,8 @@ export const insightRecords: Insight[] = [
         advisoryPath: { label: "Explore Workforce Intelligence", href: "/advisory/workforce-intelligence/" },
     },
     {
-        title: "Why experience alone does not prepare leaders for difficult conversations",
-        subtitle: "The real conversation should not be the first rehearsal.",
+        title: "Why Experience Alone Does Not Prepare Leaders for Difficult Conversations",
+        subtitle: "Deliberate practice can help leaders move from knowing what to say to being ready for what happens next.",
         slug: "difficult-conversations-deliberate-practice",
         summary: "Why leadership experience alone is not enough. How deliberate practice and AI-enabled rehearsal can help leaders prepare for difficult conversations.",
         published: "2026-11-26",
