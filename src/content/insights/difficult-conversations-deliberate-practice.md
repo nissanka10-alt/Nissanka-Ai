@@ -1,312 +1,150 @@
 A leader knows what needs to be said.
 
-A role is changing. Performance has fallen below expectations. A transformation will affect jobs.
-
-The policy has been reviewed. The key messages are prepared. The opening sentence has probably been rehearsed.
+A role is changing. Performance has fallen below expectations. A transformation will affect jobs. The leader has reviewed the policy, prepared the key messages and thought carefully about the opening sentence.
 
 Then the other person responds:
 
-**“So this has already been decided. Why are we even having this conversation?”**
+> “So this has already been decided. Why are we even having this conversation?”
 
-Suddenly, the prepared message is no longer the difficult part.
-
-The leader has to listen.
-
-Manage their own reaction.
-
-Respond without becoming defensive.
-
-Remain clear about the decision.
-
-And treat the other person with dignity.
+The planned message is no longer the hardest part. The leader must listen, regulate their own reaction, respond without becoming defensive, remain clear about what has been decided, what remains open for discussion, and treat the other person with dignity.
 
 This is where leadership becomes visible.
 
-Most experienced leaders have handled difficult conversations before. Many have attended training on feedback, conflict, performance or change.
+Most leaders have attended training on feedback, change or conflict. Many have also handled similar situations before. Yet experience alone does not guarantee improvement. A person can repeat the same behaviour for years and become more fluent without becoming more effective.
 
-But experience alone does not necessarily make us better.
+The distinction between repetition and deliberate practice helps explain why.
 
-We can repeat the same behaviour for years and become more comfortable without becoming more effective.
+## Repetition creates experience. It does not always create improvement
 
-That distinction matters.
+Simple repetition means performing the whole task again and trusting that experience will gradually make us better. A leader conducts another performance review, chairs another difficult meeting or presents another change announcement.
 
-## Experience is not the same as practice
+Some learning will happen. Familiarity increases. Anxiety may reduce. The task may feel easier.
 
-There is a difference between repeating something and deliberately practising it.
+But ease can also hide a problem. Once behaviour becomes automatic, people often stop examining the smaller decisions inside it. They repeat familiar phrases, listen for familiar responses and rely on techniques that previously seemed to work. The experience reinforces the existing pattern, including any weaknesses within it.
 
-Repetition gives us experience.
+This produces a comfortable plateau. The person remains competent, but additional repetition brings little meaningful improvement.
 
-A leader conducts another performance review, chairs another difficult meeting or communicates another organisational change.
+Deliberate practice is different.
 
-Some learning happens naturally. Familiarity increases. Anxiety may reduce.
+In their influential 1993 research, K. Anders Ericsson, Ralf Krampe and Clemens Tesch-Römer described practice designed specifically to improve performance. It focuses attention on a defined capability, operates at an appropriate level of difficulty, provides informative feedback and creates an opportunity to try again with an adjustment.
 
-But familiarity can also hide weaknesses.
+The objective is not to accumulate more repetitions. It is to make each repetition more informative.
 
-Once behaviour becomes automatic, we stop noticing some of the smaller decisions inside it.
+## What deliberate practice looks like
 
-The phrase we always use.
+Effective deliberate practice has several connected features.
 
-The moment we interrupt.
+**It targets a specific capability.** A complex activity is broken into smaller elements. A leader might focus on asking one clear question and allowing space for the answer, rather than trying to “be better at difficult conversations” as a whole.
 
-The question we avoid asking.
+**It creates useful difficulty.** The exercise sits just beyond what the person can currently do comfortably. The challenge must be demanding enough to expose a gap without becoming so overwhelming that meaningful practice stops. This is related to Vygotsky’s (1978) concept of the zone of proximal development, where progress becomes possible with appropriate guidance or support. The theories are not identical, but both point towards development at the edge of current capability.
 
-The point at which we become defensive.
+**It requires concentration.** The learner pays attention to choices that normally happen automatically: tone, timing, assumptions, emotional reactions and the effect of a particular response.
 
-The reassurance we give because silence feels uncomfortable.
+**It provides useful feedback.** The learner needs more than a score or a general observation such as “be more empathetic”. Good feedback identifies what happened, why it mattered and what could be tested in the next attempt.
 
-Experience can reinforce good habits.
+**It allows immediate refinement.** The person repeats the situation while changing something specific. Practice becomes a cycle of preparation, action, feedback and adjustment.
 
-It can reinforce poor ones too.
+Because this work demands attention, it is better suited to focused sessions than long periods of passive repetition.
 
-Research led by K. Anders Ericsson helped establish the idea of **deliberate practice**: practice designed specifically to improve performance rather than simply accumulate experience.
+## Leadership conversations are unusually difficult to practise
 
-The objective is not more repetition.
+Much of the research on deliberate practice has focused on areas such as music, sport and chess. These domains often contain stable rules, observable outcomes and established standards of expert performance.
 
-It is to make each repetition more useful.
+Leadership conversations are less tidy.
 
-In practical terms, that means narrowing the focus.
+There is rarely one correct sentence. A response that builds trust with one employee may feel evasive to another. Organisational history, culture, identity, power and emotion all influence what happens in the room.
 
-Instead of asking someone to “get better at difficult conversations”, we might ask them to practise one capability:
+This makes it dangerous to reduce leadership to a script. It also makes practice more important.
 
-Can you ask a clear question and genuinely wait for the answer?
+The capability is not simply remembering what to say. It is responding intelligently when the conversation departs from the plan. Leaders may need to:
 
-Can you acknowledge emotion without immediately trying to fix it?
+- remain clear when the other person becomes emotional;
+- listen without surrendering responsibility for a difficult decision;
+- distinguish empathy from agreement;
+- recognise when their own defensiveness is shaping the exchange;
+- challenge someone more senior without making the conversation personal; or
+- respond to uncertainty without offering reassurance they cannot support.
 
-Can you remain clear about a decision when somebody challenges your motives?
+These are judgement calls made under pressure. Building critical conversation readiness requires rehearsal, reflection and repeated exposure to different responses.
 
-Can you listen without surrendering responsibility?
+## Practice is important, but it is not magic
 
-Then give useful feedback, adjust something and try again.
+The popular version of deliberate practice is sometimes reduced to the idea that enough hours will produce expertise. The evidence is more nuanced.
 
-That cycle matters:
+A large 2014 meta-analysis by Brooke Macnamara, David Hambrick and Frederick Oswald found that deliberate practice explained part of the variation in performance, but its contribution differed considerably across domains. It explained more in games, music and sport than in education or professional work.
 
-**Prepare. Practise. Reflect. Adjust. Repeat.**
+The findings are not uncontested. Ericsson and other researchers have argued that the analysis counted many kinds of practice that did not meet a strict definition of deliberate practice, which may understate its effect. The debate is unresolved, and it is a reminder to treat any single estimate with caution.
 
-## Difficult conversations are unusually hard to practise
+Either way, the finding matters for leadership development.
 
-Much of the original research on deliberate practice came from areas such as music, sport and chess.
+Leadership performance depends on more than practice. It is shaped by knowledge, motivation, personality, organisational authority, team dynamics, culture and the situation itself. No rehearsal method can remove those influences.
 
-Leadership conversations are much less tidy.
+The right conclusion is not that deliberate practice is irrelevant. It is that practice must be designed with humility. It should improve defined behaviours while leaving room for context, human judgement and more than one credible response.
 
-There is rarely one perfect response.
+Evidence from other high-consequence settings is encouraging. A meta-analysis of simulation-based medical education found that simulation combined with deliberate practice produced stronger results for specific clinical skills than traditional clinical education alone. A leadership conversation is not a clinical procedure, but the learning design is relevant: create a realistic situation, focus on a specific capability, provide feedback and repeat until performance improves.
 
-A sentence that builds trust with one person might feel evasive to another.
-
-Culture matters.
-
-Power matters.
-
-History matters.
-
-Emotion matters.
-
-And the other person has agency. They may respond in a way the leader did not anticipate.
-
-That is why I am cautious about leadership models that become scripts.
-
-The objective is not to teach leaders the perfect sentence.
-
-It is to help them build the judgement to respond when the sentence they prepared no longer fits the situation.
-
-A difficult conversation may require a leader to remain clear while the other person becomes emotional.
-
-To distinguish empathy from agreement.
-
-To recognise when their own defensiveness is influencing the exchange.
-
-To challenge someone more senior without making the disagreement personal.
-
-Or to respond to uncertainty without offering reassurance they cannot support.
-
-These are not simply communication techniques.
-
-They are judgement calls made under pressure.
-
-And judgement under pressure benefits from rehearsal.
-
-## What the evidence tells us
-
-Deliberate practice should not be treated as magic.
-
-The popular interpretation is sometimes reduced to the idea that enough hours of focused practice will eventually create expertise.
-
-The evidence is more nuanced.
-
-A large 2014 meta-analysis by Brooke Macnamara, David Hambrick and Frederick Oswald found that deliberate practice explained part of the variation in performance, but the contribution differed considerably between domains.
-
-It explained more variation in areas such as games, music and sport, and much less in education and professional work.
-
-That finding has itself been debated. Ericsson and other researchers argued that some studies included in these analyses did not meet the stricter definition of deliberate practice.
-
-The important point for leadership development is not which side wins that debate.
-
-It is that **practice matters, but practice alone is not enough**.
-
-Leadership performance is shaped by knowledge, motivation, personality, organisational authority, team dynamics, culture and the situation itself.
-
-No rehearsal method removes those factors.
-
-But evidence from other high-consequence environments gives us useful clues about how practice can be designed.
-
-A 2011 meta-analysis of simulation-based medical education found that simulation combined with deliberate practice produced stronger outcomes for specific clinical skill acquisition than traditional clinical education alone.
-
-Leadership conversations are clearly not clinical procedures.
-
-But the learning principle is relevant:
-
-Create a realistic situation.
-
-Focus on a defined capability.
-
-Observe what happens.
-
-Give useful feedback.
-
-Try again.
-
-More recent leadership research points in a similar direction.
-
-In 2026, James Detert and Stephanie McKee published *Pedagogy of Practice: Toward Better Understanding of the Development of Leadership Skills* in the Academy of Management Learning & Education.
-
-Their argument is important.
-
-Leadership development has traditionally been much better at transferring knowledge than demonstrating that leaders can reliably use new skills in the situations where they actually matter.
-
-They call for greater attention to how leaders practise, including the level of difficulty, realism, feedback and stress involved.
+Recent leadership scholarship points in the same direction. James R. Detert and Stephanie E. McKee, writing in the Academy of Management Learning & Education, argue that leadership development needs more practice-based approaches, including experiences that stretch leaders beyond their current abilities without overwhelming them. Their argument helps explain why leadership programmes often struggle to produce observable changes in workplace behaviour.
 
 Knowing a model and being able to use it under pressure are different achievements.
 
 ## AI changes the economics of rehearsal
 
-This is where AI creates an interesting opportunity.
+If practice matters, the practical question is how to provide enough of it. Historically, realistic conversation practice has been difficult to scale.
 
-Historically, realistic conversation practice has been difficult to scale.
+Role-play requires facilitators, actors or willing colleagues. Participants may feel self-conscious in front of peers. Time often allows only one attempt, followed by general feedback. The person who most needs another rehearsal may have to wait until the next workshop.
 
-Role-play requires facilitators, actors, coaches or willing colleagues.
+AI-enabled conversation simulation creates another option.
 
-Some participants feel uncomfortable practising in front of peers.
+A leader can practise privately with a responsive persona, encounter a range of emotional reactions, receive structured feedback and repeat the conversation. Scenarios can reflect real organisational situations without using real employee data. Practice can continue between workshops or coaching sessions, rather than being confined to a training event.
 
-A workshop might allow one attempt followed by feedback before the programme moves on.
+Used well, the technology supports deliberate practice by making rehearsal:
 
-And the person who most needs another attempt may not get one.
+- **specific**, through scenarios designed around a defined leadership challenge;
+- **repeatable**, allowing another attempt while the learning remains fresh;
+- **variable**, because the simulated person can respond in different ways;
+- **observable**, revealing patterns across attempts; and
+- **scalable**, giving more leaders access to practice without requiring a facilitator for every repetition.
 
-AI-enabled conversation simulation changes some of those constraints.
+These benefits follow from how the technology works and from the principles of deliberate practice. They are not yet backed by a large body of research on AI conversation simulation for leaders, which is still emerging. Organisations should treat early results with the same caution as any new learning method and evaluate whether behaviour actually changes.
 
-A leader can practise privately with a responsive simulated persona.
+The technology should also have clear limits.
 
-The scenario can introduce disagreement, emotion or an unexpected response.
+An AI system should not become the final judge of whether someone is empathetic, suitable for promotion or competent to lead. Its feedback can contain gaps or bias. It may miss important organisational context. Sensitive employee information should never be placed into a practice scenario without an appropriate legal, security and ethical basis.
 
-The leader can receive structured observations and then try again while the experience is still fresh.
-
-The scenario can change.
-
-The response can change.
-
-The leader has another opportunity to make a different choice.
-
-That makes something possible that is difficult to achieve in a conventional workshop:
-
-**more repetitions without simply repeating the same experience.**
-
-Used well, AI can make rehearsal more:
-
-**Specific**, by focusing on a particular leadership challenge.
-
-**Repeatable**, by allowing another attempt immediately.
-
-**Variable**, by exposing the leader to different reactions.
-
-**Observable**, by making patterns across attempts easier to see.
-
-**Scalable**, by allowing more people to practise without requiring a facilitator for every conversation.
-
-But we should be careful about what we claim.
-
-There is not yet a large body of evidence showing that AI conversation simulation produces better leadership behaviour in the workplace.
-
-The technology is developing faster than the research.
-
-Organisations using it should therefore evaluate what actually changes.
-
-Does the leader respond differently after several attempts?
-
-Do they become better at listening rather than simply more fluent?
-
-Can they remain clear when challenged?
-
-Does learning transfer into the real conversation?
-
-Those are more useful questions than whether somebody enjoyed the simulation.
-
-## AI should be the rehearsal partner, not the judge
-
-There is another boundary I think matters.
-
-An AI system should not become the final judge of whether someone is empathetic, competent to lead or suitable for promotion.
-
-Its feedback may contain gaps.
-
-It can reflect bias.
-
-It may miss organisational context.
-
-And sensitive employee information should not simply be copied into a simulation because the technology makes it possible.
-
-AI is most useful here as a rehearsal partner and a source of evidence for reflection.
-
-Human coaches, facilitators and organisational leaders still provide context, challenge assumptions and decide what good leadership looks like in that environment.
-
-The technology can support the task.
-
-It cannot own the judgement.
+AI is most useful here as a rehearsal partner and a source of evidence for reflection. Human coaches, facilitators and organisational leaders still provide context, challenge assumptions and decide what good leadership means in that environment.
 
 ## From training completion to leadership readiness
 
-Many organisations still measure leadership development through attendance, participant satisfaction or confidence.
+Many organisations measure leadership development through attendance, satisfaction or confidence. These indicators are easy to collect, but they do not show whether someone can handle a difficult moment more effectively.
 
-Those measures are useful.
+A readiness-based approach asks different questions:
 
-But they do not tell us whether somebody is ready for the moment that matters.
+- Can the leader remain clear when the other person reacts unexpectedly?
+- Do they listen and adapt, or simply repeat the prepared message?
+- Can they combine empathy with appropriate boundaries?
+- Does their performance improve after feedback and another attempt?
+- Where do repeated patterns suggest a need for coaching or further support?
 
-A readiness-based approach asks different questions.
+The aim is not a perfectly scripted leader. It is a better-prepared one.
 
-Can the leader remain clear when the other person reacts unexpectedly?
-
-Do they listen and adapt, or simply repeat the prepared message?
-
-Can they combine empathy with appropriate boundaries?
-
-Can they recognise when their own reaction is influencing the conversation?
-
-Does their performance improve after feedback and another attempt?
-
-Where do repeated patterns suggest a need for coaching or further support?
-
-The objective is not to produce a perfectly scripted leader.
-
-It is to produce a better-prepared one.
-
-Because clarity matters.
-
-Judgement matters.
-
-Empathy matters.
-
-But the real test is whether those capabilities are still available when the conversation becomes uncomfortable and the response cannot be predicted.
+Clarity matters. Judgement matters. Empathy matters. The real test is whether those capabilities remain available when the conversation becomes uncomfortable and the response cannot be predicted.
 
 **The real conversation should not be the first rehearsal.**
 
 ## Research referenced
 
-- Detert, J. R. & McKee, S. E. (2026). [*Pedagogy of Practice: Toward Better Understanding of the Development of Leadership Skills*](https://doi.org/10.5465/amle.2025.0286). Academy of Management Learning & Education.
-- Ericsson, K. A., Krampe, R. T. & Tesch-Römer, C. (1993). [*The Role of Deliberate Practice in the Acquisition of Expert Performance*](https://doi.org/10.1037/0033-295X.100.3.363). Psychological Review, 100(3), 363–406.
-- Macnamara, B. N., Hambrick, D. Z. & Oswald, F. L. (2014). [*Deliberate Practice and Performance in Music, Games, Sports, Education, and Professions*](https://doi.org/10.1177/0956797614535810). Psychological Science, 25(8), 1608–1618.
-- McGaghie, W. C., Issenberg, S. B., Cohen, E. R., Barsuk, J. H. & Wayne, D. B. (2011). [*Does Simulation-Based Medical Education with Deliberate Practice Yield Better Results than Traditional Clinical Education?*](https://pubmed.ncbi.nlm.nih.gov/21512370/) Academic Medicine, 86(6), 706–711.
+Detert, J. R. and McKee, S. E. (2026). [Pedagogy of Practice: Toward Better Understanding of the Development of Leadership Skills](https://doi.org/10.5465/amle.2025.0286). *Academy of Management Learning & Education*.
+
+Ericsson, K. A., Krampe, R. T. and Tesch-Römer, C. (1993). [The Role of Deliberate Practice in the Acquisition of Expert Performance](https://doi.org/10.1037/0033-295X.100.3.363). *Psychological Review*, 100(3), 363–406.
+
+Macnamara, B. N., Hambrick, D. Z. and Oswald, F. L. (2014). [Deliberate Practice and Performance in Music, Games, Sports, Education, and Professions](https://doi.org/10.1177/0956797614535810). *Psychological Science*, 25(8), 1608–1618.
+
+McGaghie, W. C., Issenberg, S. B., Cohen, E. R., Barsuk, J. H. and Wayne, D. B. (2011). [Does Simulation-Based Medical Education with Deliberate Practice Yield Better Results than Traditional Clinical Education?](https://pubmed.ncbi.nlm.nih.gov/21512370/) *Academic Medicine*, 86(6), 706–711.
+
+Vygotsky, L. S. (1978). [*Mind in Society: The Development of Higher Psychological Processes*](https://doi.org/10.2307/j.ctvjf9vz4). Harvard University Press.
 
 ## Building critical conversation readiness
 
-Nissanka Advisory helps organisations [prepare leaders for difficult, high-stakes conversations](/advisory/leadership/#conversation-title) where judgement, clarity and empathy matter.
-
-Our approach can combine realistic scenario design, AI-enabled rehearsal, structured feedback and [human coaching](/advisory/leadership/coaching/), with appropriate governance around how the technology and evidence are used.
+Nissanka Advisory helps organisations [prepare leaders for difficult, high-stakes conversations](/advisory/leadership/#conversation-title) where judgement, clarity and empathy matter. Our approach can combine realistic scenario design, AI-enabled rehearsal, structured feedback and [human coaching](/advisory/leadership/coaching/), with appropriate governance around how the technology and evidence are used.
 
 [Explore Leadership Advisory & Development](/advisory/leadership/) or [start a conversation](/contact/) about the leadership moments your organisation needs to prepare for.
