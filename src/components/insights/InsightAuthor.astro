@@ -1,0 +1,17 @@
+---
+interface Props {
+    headingId?: string;
+    hideArrowFromAssistiveTech?: boolean;
+}
+
+const { headingId, hideArrowFromAssistiveTech = true } = Astro.props;
+---
+
+<section class="author-note nk-author-note" aria-labelledby={headingId} aria-label={headingId ? undefined : "Author"}>
+    <div class="nk-reading">
+        <p class="system-label">Author</p>
+        <h2 id={headingId}>Gishan Nissanka</h2>
+        <p>Gishan works across AI transformation, workforce intelligence, people technology and organisational decision-making.</p>
+        <a href="/profile/">View Gishan’s professional profile <span aria-hidden={hideArrowFromAssistiveTech ? "true" : undefined}>→</span></a>
+    </div>
+</section>

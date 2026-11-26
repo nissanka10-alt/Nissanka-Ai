@@ -1,0 +1,106 @@
+---
+import ArticleUtilities from "../ArticleUtilities.astro";
+import Breadcrumbs from "../Breadcrumbs.astro";
+import InsightPrintMasthead from "./InsightPrintMasthead.astro";
+import { formatInsightDate, type PublishedInsight } from "../../data/insights";
+import "../../styles/insights.css";
+
+interface Feature {
+    image: string;
+    alt: string;
+    width: number;
+    height: number;
+    headlineLines: [string, ...string[]];
+}
+
+interface Props {
+    insight: PublishedInsight;
+    path: string;
+    eyebrow?: string;
+    breadcrumbTitle?: string;
+    openingTreatment?: "drop-cap" | "plain";
+    standfirst?: string;
+    subtitle?: string;
+    authorHref?: string;
+    authorDetail?: string;
+    feature?: Feature;
+}
+
+const {
+    insight,
+    path,
+    eyebrow = `${insight.topic} · ${insight.published.slice(0, 4)}`,
+    breadcrumbTitle = insight.title,
+    openingTreatment = "drop-cap",
+    standfirst = insight.summary,
+    subtitle,
+    authorHref = "/profile/",
+    authorDetail,
+    feature,
+} = Astro.props;
+---
+
+<article class:list={["nk-insights", feature ? "nk-flagship" : "nk-standard"]} data-opening={openingTreatment}>
+    <InsightPrintMasthead />
+    <header class="nk-article-header">
+        <div class="shell nk-breadcrumb">
+            <Breadcrumbs items={[
+                { label: "Home", href: "/" },
+                { label: "Insights", href: "/insights/" },
+                { label: breadcrumbTitle },
+            ]} />
+        </div>
+        {feature ? (
+            <div class="nk-feature">
+                <img class="nk-feature-image" src={feature.image} alt={feature.alt} width={feature.width} height={feature.height} loading="eager" fetchpriority="high" decoding="async" />
+                <div class="shell nk-feature-inner">
+                    <p class="nk-eyebrow">{eyebrow}</p>
+                    <div class="nk-hero-split">
+                        <div>
+                            <h1>{feature.headlineLines.map((line, index) => <span>{index > 0 ? ` ${line}` : line}</span>)}</h1>
+                            {subtitle && <p class="nk-subtitle">{subtitle}</p>}
+                        </div>
+                        <p class="nk-standfirst">{standfirst}</p>
+                    </div>
+                </div>
+            </div>
+        ) : (
+            <div class="shell nk-hero">
+                <p class="nk-eyebrow">{eyebrow}</p>
+                <div class="nk-hero-split">
+                    <div>
+                        <h1>{insight.displayTitle ?? insight.title}</h1>
+                        {subtitle && <p class="nk-subtitle">{subtitle}</p>}
+                    </div>
+                    <p class="nk-standfirst">{standfirst}</p>
+                </div>
+                <slot name="header-note" />
+            </div>
+        )}
+
+        <div class="shell nk-article-details">
+            <dl class="nk-meta" aria-label="Article information">
+                <div>
+                    <dt>Author</dt>
+                    <dd><a href={authorHref} rel="author">{insight.author}</a>{authorDetail && <span class="nk-meta-detail">{authorDetail}</span>}</dd>
+                </div>
+                <div><dt>Published</dt><dd><time datetime={insight.published}>{formatInsightDate(insight.published)}</time></dd></div>
+                <div><dt>Topic</dt><dd>{insight.topic}</dd></div>
+                <div><dt>Geography</dt><dd>{insight.geography}</dd></div>
+                <div><dt>Format</dt><dd>{insight.format}</dd></div>
+            </dl>
+            {(insight.updated || insight.readTime) && (
+                <dl class="nk-meta nk-meta-extra" aria-label="Additional article information">
+                    {insight.updated && <div><dt>Updated</dt><dd><time datetime={insight.updated}>{formatInsightDate(insight.updated)}</time></dd></div>}
+                    {insight.readTime && <div><dt>Read time</dt><dd>{insight.readTime}</dd></div>}
+                </dl>
+            )}
+            <ArticleUtilities title={insight.title} url={path} />
+        </div>
+    </header>
+
+    <div class="nk-article-content">
+        <slot />
+    </div>
+    <slot name="closing" />
+</article>
