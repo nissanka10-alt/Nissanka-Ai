@@ -48,6 +48,7 @@ export interface InsightRegulatoryMetadata {
 
 interface InsightBase {
     title: string;
+    displayTitle?: string;
     slug: string;
     subtitle?: string;
     summary?: string;
@@ -225,6 +226,7 @@ export const insightRecords: Insight[] = [
     },
     {
         title: "Why Experience Alone Does Not Prepare Leaders for Difficult Conversations",
+        displayTitle: "Why experience alone does not prepare leaders for difficult conversations",
         subtitle: "Deliberate practice can help leaders move from knowing what to say to being ready for what happens next.",
         slug: "difficult-conversations-deliberate-practice",
         summary: "Why leadership experience alone is not enough. How deliberate practice and AI-enabled rehearsal can help leaders prepare for difficult conversations.",

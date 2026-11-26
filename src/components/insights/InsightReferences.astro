@@ -1,0 +1,27 @@
+---
+import type { InsightReference } from "../../data/insights";
+
+interface Props {
+    references?: InsightReference[];
+    heading: string;
+    headingId?: string;
+}
+
+const { references, heading, headingId } = Astro.props;
+---
+
+{references && references.length > 0 && (
+    <section class="references nk-references" aria-labelledby={headingId} aria-label={headingId ? undefined : heading}>
+        <div class="nk-reading">
+            <p class="system-label">Sources</p>
+            <h2 id={headingId}>{heading}</h2>
+            <ol>
+                {references.map((reference) => (
+                    <li>
+                        <a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}<span class="nk-visually-hidden"> (opens in a new tab)</span></a>
+                    </li>
+                ))}
+            </ol>
+        </div>
+    </section>
+)}
